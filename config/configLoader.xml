@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<listeChemins>
+	<chemin>./core</chemin>
+	<chemin>./classes</chemin>
+	<chemin>./config</chemin>
+	<chemin>./application/services</chemin>
+	<chemin>./application/scripts</chemin>
+	<chemin>./application/objets</chemin>
+</listeChemins>

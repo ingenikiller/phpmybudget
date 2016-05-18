@@ -1,0 +1,386 @@
+
+/************************************************
+ * Balises de contenu
+ ************************************************/
+p
+{
+	font-family: Verdana, Arial, Times, Serif;
+	font-size: 12px;
+	margin-left: 15px;
+	width:90%;
+	text-align:justify;
+}
+
+p.titrePage
+{
+	font-family: Verdana, Arial, Times, Serif;
+	font-size: 15px;
+	width:90%;
+	text-align:center;
+	font-weight: bold;
+}
+
+p.message
+{
+	color:red;
+	text-align:center;
+	font-weight:bold;
+}
+
+ul
+{
+    font-family: Verdana, Arial, Times, Serif;
+    font-size: 12px;
+	list-style-type:square;
+}
+
+li
+{
+    font-family: Verdana, Arial, Times, Serif;
+    font-size: 12px;
+	width:90%;
+	text-align:justify;
+	list-style-type:square;
+}
+
+/************************************************
+ * Balises de navigation
+ ************************************************/
+a, a:visited, a:hover
+{
+	font-family:Verdana, Arial, Times, Serif;
+	font-size:12px;
+	font-weight:normal;
+	text-decoration:none;
+	color: #000000;
+}
+
+a.lienMenu, a.lienMenu:visited, a.lienMenu:hover
+{
+	font-family:Verdana, Arial, Times, Serif;
+	font-size:12px;
+	font-weight:bold;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+ 
+a.lienNavigation, a.lienNavigation:visited
+{
+    font-family:Verdana, Arial, Times, Serif;
+	font-size:12px;
+	font-weight:bold;
+	color:#000000;
+	text-decoration:underline;
+}
+
+a.lienAjax, a.lienAjax:visited
+{
+    font-family:Verdana, Arial, Times, Serif;
+	font-size:12px;
+	font-weight:bold;
+	color:#000000;
+	text-decoration:underline;
+}
+
+a.lienNavigation:hover
+{
+    font-family:Verdana, Arial, Times, Serif;
+	font-size:12px;
+	font-weight:normal;
+	color:#000000;
+	text-decoration:none;
+}
+
+/************************************************
+ * Balises de tableau
+ ************************************************/
+td, tr
+{
+	font-family:Verdana, Arial, Times, Serif;
+	font-size:12px;
+}
+
+td.positif
+{
+	font-family:Verdana, Arial, Times, Serif;
+	font-size:12px;
+	color:green;
+	text-align:right;
+}
+
+td.negatif
+{
+	font-family:Verdana, Arial, Times, Serif;
+	font-size:12px;
+	color:red;
+	text-align:right;
+}
+
+td.montant
+{
+	text-align:right;
+}
+
+.cumul
+{
+	background-color:#20ff80;
+	display:none;
+}
+
+
+.entetecumul
+{
+	background-color: #FFFFFF;
+}
+
+h1
+{
+    font-family: Verdana, Arial, Times, Serif;
+	font-size: 25px;
+	text-align:center;
+}
+
+h2
+{
+    font-family: Verdana, Arial, Times, Serif;
+	font-size: 25px;
+	text-align:center;
+}
+
+h3
+{
+    font-family: Verdana, Arial, Times, Serif;
+	font-size: 18px;
+	margin-left: 50px;
+	text-align:left;
+}
+
+
+
+
+h5
+{
+    font-family: Verdana, Arial, Times, Serif;
+	font-size: 15px;
+	margin-left: 20px;
+}
+
+
+
+table
+{
+    font-family: Verdana, Arial, Times, Serif;
+}
+
+.gras
+{
+  font-weight:bold;
+}
+
+img {
+	border:0;
+}
+
+
+/************************************************
+ * Balises d'affichage d'une recherche
+ ************************************************/
+.tabLigneRecherche
+{
+	width:150px;
+}
+
+/************************************************
+ * tableau
+ ************************************************/
+th
+{
+	background-color: #babac5;
+	font-size : 8pt;
+	font-family: verdana;
+	font-style: normal;
+	font-weight: bold;
+	white-space: nowrap;
+	text-align:center;
+	/*width:266px;*/
+}
+ 
+ table.liste
+{
+	background-color :#D2DBE9;
+	/*border-width:1px;*/
+	/*border-style:solid;*/
+	border-color:#7e7e89;
+	width:95%;
+}
+
+tr.entete {
+	color : #000000;
+	background-color: #babac5;
+	font-style: normal;
+	font-weight: bold;
+	text-align: left;
+	font-family: verdana,arial,sans-serif;
+	font-size: 8pt;
+	border-width: 0px;
+}
+
+tr
+{
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	margin-top: 0px;
+	padding-bottom: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+/* Lignes entête de tableau */
+tr.entete
+{
+	background-color: #babac5;
+	font-size : 8pt;
+	font-family: verdana;
+	font-style: normal;
+	font-weight: bold;
+}
+
+td.lienImage {
+	text-align:center;
+}
+
+.l0 
+{
+	background-color: #b1bfd5;
+}
+tr.l0:hover
+{
+	background-color: #FFFFFF;
+}
+
+.l1 
+{
+	background-color: #d2dbe9;
+}
+tr.l1:hover
+{
+	background-color: #FFFFFF;
+}
+
+tr.creation
+{
+	background-color: green;
+}
+
+th.noStyle {
+}
+
+/************************************************
+ * formulaire
+ ************************************************/
+table.formulaire {
+	background-color :#D2DBE9;
+	border-width:1px;
+	border-style:solid;
+	border-color:#7e7e89;
+}
+
+table.recherche {
+	background-color :#D2DBE9;
+	border-width:1px;
+	border-style:solid;
+	border-color:#7e7e89;
+	width:auto;
+}
+
+
+td.diffNegative {
+	color:red;
+	font-weight: bold;
+	text-align:right;
+}
+
+td.diffPositive{
+	color:green;
+	font-weight: bold;
+	text-align:right;
+}
+
+td.negative {
+	color:red;
+	/*font-weight: bold;*/
+	text-align:right;
+}
+
+td.positive{
+	color:green;
+	/*font-weight: bold;*/
+	text-align:right;
+}
+
+td.recap{
+	background-color: #babac5;
+	text-align:right;
+	font-weight: bold;
+}
+/*
+input.bouton, input.quitter {
+	color: #ffffff;
+	font-family: verdana,arial,sans-serif;
+	text-align: center;
+	font-size: 7pt;
+	background-color: #92929d;
+	border-color: #9FA0AA #525252 #525252 #9FA0AA;
+	border-width: 2px;
+	border-style:solid;
+}*/
+
+/*input.obligatoire {
+	color: #000000;
+	background-color: #fac98f;
+	text-align: left;
+	font-family: verdana,arial,sans-serif;
+	font-size: 8pt;
+	border-color: #7e7e8a;
+	border-style: solid;
+	border-width: 1px;
+}*/
+
+select.obligatoire {
+	color: #000000;
+	background-color: #fac98f;
+	text-align: left;
+	font-family: verdana,arial,sans-serif;
+	font-size: 8pt;
+	border-color: #7e7e8a;
+	border-style: solid;
+	border-width: 1px;
+}
+
+/*input.numerique {
+	color: #000000;*/
+	/*background-color: #fac98f;*/
+	/*text-align: right;
+	font-family: verdana,arial,sans-serif;
+	font-size: 8pt;
+	border-color: #7e7e8a;
+	border-style: solid;
+}
+
+input.numerique_obligatoire {
+	color: #000000;
+	background-color: #fac98f;
+	text-align: right;
+	font-family: verdana,arial,sans-serif;
+	font-size: 8pt;
+	border-color: #7e7e8a;
+	border-style: solid;
+	border-width: 1px;
+}*/
+
+.ui-autocomplete {
+	z-index: 1500;
+}
