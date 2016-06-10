@@ -21,6 +21,11 @@
 			<br/>
 			<br/>
 			<p>
+		Pour afficher lles statistiques cumulatives, cliquer <a href="index.php?domaine=statistique&amp;service=affformcumul&amp;type=tabTotauxAnnuels&amp;numeroCompte={$NUMEROCOMPTE}">ici</a>
+			</p>
+			<br/>
+			<br/>
+			<p>
 		Pour afficher les comptes, cliquer <a href="index.php?domaine=statistique">ici</a>
 			</p>
 			<br/>

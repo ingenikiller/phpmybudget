@@ -76,8 +76,8 @@
 		</form>
 		<input type="button" class="bouton" id="" name="" value="{$LBL.CREER}" onclick="editerOperation('{$NUMEROCOMPTE}','');"/>
 		<table class="liste" name="tableauResultat" id="tableauResultat">
-			<tr>
-				<th align="center" width="10%">
+			<tr class="entete">
+				<th>
 					<xsl:value-of select="$LBL.NUMERORELEVE"/>
 				</th>
 				<th>
@@ -86,13 +86,13 @@
 				<th>
 					<xsl:value-of select="$LBL.LIBELLE"/>
 				</th>
-				<th align="center">
+				<th>
 					<xsl:value-of select="$LBL.MONTANT"/>
 				</th>
-				<th align="center">
+				<th>
 					<xsl:value-of select="$LBL.FLUX"/>
 				</th>
-				<th align="center">
+				<th>
 					<xsl:value-of select="$LBL.VERIFICATION"/>
 				</th>
 				<th>

@@ -6,7 +6,7 @@
 		<xsl:value-of select="/root/request/type"/>
 	</xsl:param>
 	<xsl:template match="/">
-		<tr>
+		<tr class="enteteLigneStat">
 			<th/>
 			<th>
 				<xsl:value-of select="$LBL.FLUX"/>
@@ -19,7 +19,7 @@
 		</tr>
 		<xsl:for-each select="/root/data/ListeFlux/Dynamic">
 			<xsl:variable name="fluxId" select="fluxId"/>
-			<tr class="l{@index mod 2}">
+			<tr class="enteteLigneStat l{@index mod 2}">
 				<th>
 					<xsl:if test="fluxMaitre='O'">
 						<a onclick="javascript:deplieDetail(this);" replie="O" fluxid="{$fluxId}">

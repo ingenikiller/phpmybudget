@@ -294,4 +294,27 @@ class GestionStatistiquesService extends ServiceStub {
         $p_contexte->addDataBlockRow($listeFlux);
         
      }
+	 
+	 /*************************************************************/
+	//
+	// gestion des cumul
+	//
+	/*************************************************************/
+	
+	public function affFormCumul(ContextExecution $p_contexte) {
+        $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
+        
+        $listReleves = new ListDynamicObject();
+        $listReleves->name = 'ListeAnnee';
+        $listReleves->request("SELECT DISTINCT substr( date, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee asc");
+        $p_contexte->addDataBlockRow($listReleves);
+		
+		$lisFlux = new ListDynamicObject();
+        $lisFlux->name = 'ListeFlux';
+        $lisFlux->request("select distinct fluxid, flux from flux where compteId='$numeroCompte' order by flux ASC");
+        $p_contexte->addDataBlockRow($lisFlux);
+		
+    }
+	 
+	 
 }
