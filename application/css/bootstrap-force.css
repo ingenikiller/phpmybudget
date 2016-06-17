@@ -1,0 +1,32 @@
+
+
+body {
+	font-size : 12px;
+}
+
+.form-control {
+	font-size : 12px;
+	height: 24px;
+	padding: 0px 0px 0px 12px;
+}
+
+.form-group {
+	margin-bottom : 5px;
+}
+
+.btn {
+	font-size : 12px;
+}
+
+label {
+	padding-top: 5px;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+	padding: 2px;
+}

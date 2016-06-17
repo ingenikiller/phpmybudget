@@ -178,9 +178,27 @@ function parseListeJson(json) {
 	var tabJson = json[0].tabResult;
 	var i=0;
 	for(i=0; i<nb; i++) {
-		var row = tab.insertRow(i+1);
+		var row = $('<tr typetr="operation"/>');
+		row.append($("<td/>").text(tabJson[i].noReleve));
+		row.append($("<td/>").text(tabJson[i].date));
+		row.append($("<td/>").text(tabJson[i].libelle));
+		row.append($("<td/>").text(tabJson[i].montant.replace(',','')));
+		row.append($("<td/>").text(tabJson[i].flux));
+		
+		var image='';
+		if(tabJson[i].verif=='checked') {
+			image='checked';
+		} else {
+			image='unchecked';
+		}
+		//cell6.innerHTML='<img src="./application/images/'+image+'.jpg">';
+		
+		row.append($("<td/>").append('<img src="./application/images/'+image+'.jpg">'));
+		row.append($("<td/>").append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')">Editer</a>'));
+		$("#tbodyResultat").append(row);
+		/*var row = tab.insertRow(i+1);
 		row.setAttribute('typetr', "operation")
-		row.setAttribute('class', 'l'+i%2);
+		//row.setAttribute('class', 'l'+i%2);
 		
 		var cell1=row.insertCell(0)
 		cell1.innerHTML=tabJson[i].noReleve;
@@ -221,7 +239,7 @@ function parseListeJson(json) {
 		
 		var cell7 = row.insertCell(6);
 		cell7.innerHTML='<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')">Editer</a>';
-		cell7.setAttribute('align', "center");
+		cell7.setAttribute('align', "center");*/
 	}
 }
 

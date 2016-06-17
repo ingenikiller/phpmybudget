@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-	afficheFluxSelect('multiselect', $('#numeroCompte').val(), '');
+	afficheFluxSelect('multiselect', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 	//afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 	//getSoldeCompte($('#numeroCompte').val(), 'solde');
 	//listerObjects();
@@ -11,16 +11,27 @@ $(document).ready(function() {
 
 
 
-function soumettreRelevesAnnee(form) {
+function soumettreCumul(form) {
 	if(!validForm(form)) {
 		return false;
 	}
 	
+	var tabFlux = $('#multiselect_to')[0];
+	var listeFlux='';
+	for(var i=0; i<tabFlux.length; i++){
+		if(i>0){
+			listeFlux+=',';
+		}
+		listeFlux+="'"+tabFlux[i].value+"'";
+	}
+	
+	
 	$.ajax({ 
-    url: "index.php?domaine=statistique&service=statannees",
+    url: "index.php?domaine=statistique&service=statcumul",
     data: { "numeroCompte": form.numeroCompte.value,
 			"premiereAnnee": form.premiereAnnee.value,
-			"derniereAnnee": form.derniereAnnee.value
+			"derniereAnnee": form.derniereAnnee.value,
+			"listeFlux": listeFlux
 	}, 
     async: false, 
     success: function(retour) { 
@@ -31,3 +42,5 @@ function soumettreRelevesAnnee(form) {
 	return false;
 }
 
+//,
+			//"listeFlux": $('multiselect_to').val()

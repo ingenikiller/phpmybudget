@@ -38,7 +38,7 @@ li
 {
     font-family: Verdana, Arial, Times, Serif;
     font-size: 12px;
-	width:90%;
+	/*width:90%;*/
 	text-align:justify;
 	list-style-type:square;
 }
@@ -167,10 +167,10 @@ h5
 
 
 
-table
+/*table
 {
     font-family: Verdana, Arial, Times, Serif;
-}
+}*/
 
 .gras
 {

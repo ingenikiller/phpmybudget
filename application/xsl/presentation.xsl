@@ -10,26 +10,18 @@
 				<xsl:attribute name="onload">
 					<xsl:call-template name="onLoadTemplate"/>
 				</xsl:attribute>
+				<xsl:call-template name="banniere"/>
+				
 				<div id="message" class="message"/>
-				<div id="general">
-					<xsl:call-template name="entete"/>
-					<div id="contenu">
-						<xsl:variable name="affMenu">
-							<xsl:call-template name="controleMenu"/>
-						</xsl:variable>
-						<xsl:choose>
-							<xsl:when test="$affMenu='O'">
-								<xsl:attribute name="id">contenu</xsl:attribute>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:attribute name="id">contenuPleinePage</xsl:attribute>
-							</xsl:otherwise>
-						</xsl:choose>
-						<xsl:call-template name="Contenu"/>
-					</div>
-					<div id="pied">
+				<div class="container contenu">
+					<div class="row">
 						<br/>
 						<br/>
+						<br/>
+						<br/>
+						<div class="col-lg-offset-1 col-lg-10">
+							<xsl:call-template name="Contenu"/>
+						</div>
 					</div>
 				</div>
 			</body>
@@ -82,64 +74,51 @@
 			
 			<link href="application/css/principal.css" rel="stylesheet" type="text/css"/>
 			<link href="application/css/style.css" rel="stylesheet" type="text/css"/>
+			
+			<link href="application/css/bootstrap-force.css" rel="stylesheet" type="text/css"/>
 			<xsl:call-template name="js.module.sheet"/>
 		</head>
 	</xsl:template>
 	<!-- banniere -->
 	<xsl:template name="banniere">
-		<div id="titre">
-			<center>
-				<br/>
-				<!--img src="application/images/banniere.gif" alt="banniere"/>
-				<br/-->
-				<br/>
-			</center>
-		</div>
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+		                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		                    <span class="sr-only">Toggle navigation</span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                </button>
+		                <a class="navbar-brand" href="#">PhpMybudget</a>
+		            </div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		                <ul class="nav navbar-nav navbar-right">
+		                    <li>
+		                        <a href="index.php?domaine=compte&amp;service=getpage">
+									<xsl:value-of select="$LBL.COMPTES"/>
+								</a>
+		                    </li>
+		                    <li>
+		                        <a href="index.php?domaine=flux&amp;service=getpage">
+									<xsl:value-of select="$LBL.FLUX"/>
+								</a>
+		                    </li>
+		                    <li>
+		                    	<a href="index.php?domaine=segment">
+									<xsl:value-of select="$LBL.PARAMETRAGE"/>
+								</a>
+							</li>
+							<li>
+								<a href="index.php?domaine=periode">
+									<xsl:value-of select="$LBL.PERIODE"/>
+								</a>
+							</li>
+		                </ul>
+		            </div>
+		        </div>
+            </nav>
 	</xsl:template>
-	<!-- menu -->
-	<xsl:template name="controleMenu">O</xsl:template>
-	<xsl:template name="menu">
-		<div id="menu">
-			<br/>
-			<br/>
-			<br/>
-			<a href="index.php?domaine=compte&amp;service=getpage">
-				<xsl:value-of select="$LBL.COMPTES"/>
-			</a>
-			<br/>
-			<br/>
-			<a href="index.php?domaine=flux&amp;service=getpage">
-				<xsl:value-of select="$LBL.FLUX"/>
-			</a>
-			<br/>
-			<br/>
-			<a href="index.php?domaine=segment">
-				<xsl:value-of select="$LBL.PARAMETRAGE"/>
-			</a>
-			<br/>
-			<br/>
-			<a href="index.php?domaine=periode">
-				<xsl:value-of select="$LBL.PERIODE"/>
-			</a>
-			<br/>
-			<br/>
-			<!--a href="index.php?domaine=INTEGRATION">
-				<xsl:value-of select="$LBL.INTEGRATION"/>
-			</a>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<a href="index.php?domaine=INTERPRETEURSQL">
-				<xsl:value-of select="$LBL.INTERPRETEURSQL"/>
-			</a-->
-			<br/>
-			<br/>
-			<a href="index.php?domaine=DECONNEXION">
-				<xsl:value-of select="$LBL.DECONNEXION"/>
-			</a>
-			<br/>
-		</div>
-	</xsl:template>
+
 	<xsl:template name="onLoadTemplate"/>
 </xsl:stylesheet>

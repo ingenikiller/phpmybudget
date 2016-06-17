@@ -50,8 +50,8 @@
 					<form class="form-group row"  method="POST" action="#" onsubmit="return soumettreRelevesAnnee(this);" name="formulaire" id="formulaire">
 						<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
 						<div class="form-group row">
-							<label for="premiereAnnee" class="col-sm-4 form-control-label"><xsl:value-of select="$LBL.PREMIEREANNEE"/></label>
-							<div class="col-sm-8">
+							<label for="premiereAnnee" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.PREMIEREANNEE"/></label>
+							<div class="col-sm-3">
 								<xsl:apply-templates select="/root/data/ListeAnnee">
 									<xsl:with-param name="name" select="'premiereAnnee'"/>
 									<xsl:with-param name="obligatoire" select="'O'"/>
@@ -60,8 +60,8 @@
 						</div>
 						
 						<div class="form-group row">
-							<label for="derniereAnnee" class="col-sm-4 form-control-label"><xsl:value-of select="$LBL.DERNIEREANNEE"/></label>
-							<div class="col-sm-8">
+							<label for="derniereAnnee" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.DERNIEREANNEE"/></label>
+							<div class="col-sm-3">
 								<xsl:apply-templates select="/root/data/ListeAnnee">
 									<xsl:with-param name="name" select="'derniereAnnee'"/>
 								</xsl:apply-templates>
