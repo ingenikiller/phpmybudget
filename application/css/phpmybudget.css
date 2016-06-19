@@ -1,0 +1,33 @@
+
+.contenu {
+    /*margin : 0px 0px 0px 150px;/
+    /*background-repeat : repeat;*/
+    /*width : auto;
+	min-height:300px;*/
+	/*float:right;*/
+	background-color:#FFFFFF;
+	/*border-left:2px  solid  #6B6FB3;
+	border-top:2px  solid  #6B6FB3;
+	border-bottom:2px  solid  #6B6FB3;*/
+}
+
+.obligatoire {
+	background-color: #fac98f;
+}
+
+.numerique {
+	text-align : right;
+}
+
+
+.popup_operation {
+    width: 600px;
+}
+
+
+/************************************************
+ * bug jquery
+ ************************************************/
+.ui-autocomplete {
+	z-index: 1500;
+}

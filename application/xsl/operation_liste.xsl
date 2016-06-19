@@ -19,6 +19,9 @@
 		</xsl:call-template>
 		
 		<form method="POST" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
+			<fieldset>
+				<!--legend>Recherche</legend-->
+			
 			<xsl:call-template name="formulaireJson"/>
 			<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
 			<div class="row">
@@ -83,73 +86,16 @@
 				</div>
 			</div>
 			<div class="row">
-					<div class="col-xs-4"/>
-					<div class="form-group row">
-						<div class="col-sm-offset-5 col-sm-5">
-							<button type="submit" class="btn btn-primary">Rechercher</button>
-						</div>
+				<div class="col-xs-4"/>
+				<div class="form-group row">
+					<div class="col-sm-offset-5 col-sm-5">
+						<button type="submit" class="btn btn-primary">Rechercher</button>
 					</div>
 				</div>
+			</div>
+			</fieldset>
 		</form>
-		
-		<!--form method="POST" name="recherche" id="recherche" onsubmit="return rechercherOperations(this);">
-			<xsl:call-template name="formulaireJson"/>
-			<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
-			<table class="recherche" name="tableauRecherche" id="tableauRecherche">
-				<tr>
-					<th>
-						<xsl:value-of select="$LBL.NUMEROCOMPTE"/>
-					</th>
-					<td>
-						<xsl:value-of select="$NUMEROCOMPTE"/>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						<xsl:value-of select="$LBL.DESCRIPTION"/>
-					</th>
-					<td>
-						<xsl:value-of select="/root/data/Comptes/libelle"/>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						<xsl:value-of select="$LBL.SOLDE"/>
-					</th>
-					<td>
-						<input type="text" id="solde" name="solde" readonly="readonly" size="8" class="numerique" />
-					</td>
-				</tr>
-				<tr>
-					<th>
-						<xsl:value-of select="$LBL.NORELEVE"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.MONTANT"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.FLUX"/>
-					</th>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" id="recNoReleve" name="recNoReleve" size="6" maxlength="6" value="{$RECRELEVE}"/>
-					</td>
-					<td>
-						<input type="text" id="recMontant" name="recMontant" value="{recMontant}" onchange="isDouble(this);"/>
-					</td>
-					<td>
-						<select name="recFlux" id="recFlux"/>						
-					</td>
-				</tr>
-				<tr>
-					<td colspan="5" align="center">
-						<input type="submit" class="bouton" value="Rechercher"/>
-					</td>
-				</tr>
-			</table>
-		</form-->
-		<input type="button" class="bouton" id="" name="" value="{$LBL.CREER}" onclick="editerOperation('{$NUMEROCOMPTE}','');"/>
+		<input type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerOperation('{$NUMEROCOMPTE}','');"/>
 		<table class="table table-striped" name="tableauResultat" id="tableauResultat">
 			<thead>
 				<tr>

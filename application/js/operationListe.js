@@ -71,6 +71,9 @@ function editerOperation(numeroCompte, operationId){
 	
 	var params = "numeroCompte="+numeroCompte;
 	
+	var hauteur = 360;
+	var largeur = 620;
+	
 	if(operationId!='') {
 		params+="&operationId="+operationId;
 	
@@ -90,8 +93,8 @@ function editerOperation(numeroCompte, operationId){
 				
 				$("div#boiteOperation").dialog({
 					resizable: false,
-					height:270,
-					width:520,
+					height:hauteur,
+					width:largeur,
 					modal: true
 				});
 			}
@@ -108,8 +111,8 @@ function editerOperation(numeroCompte, operationId){
 		
 		$("div#boiteOperation").dialog({
 			resizable: false,
-			height:300,
-			width:500,
+			height:hauteur,
+			width:largeur,
 			modal: true
 		});
 	}
@@ -182,8 +185,8 @@ function parseListeJson(json) {
 		row.append($("<td/>").text(tabJson[i].noReleve));
 		row.append($("<td/>").text(tabJson[i].date));
 		row.append($("<td/>").text(tabJson[i].libelle));
-		row.append($("<td/>").text(tabJson[i].montant.replace(',','')));
-		row.append($("<td/>").text(tabJson[i].flux));
+		row.append($('<td class="text-right"/>').text(tabJson[i].montant.replace(',','')));
+		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		
 		var image='';
 		if(tabJson[i].verif=='checked') {
@@ -196,50 +199,6 @@ function parseListeJson(json) {
 		row.append($("<td/>").append('<img src="./application/images/'+image+'.jpg">'));
 		row.append($("<td/>").append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')">Editer</a>'));
 		$("#tbodyResultat").append(row);
-		/*var row = tab.insertRow(i+1);
-		row.setAttribute('typetr', "operation")
-		//row.setAttribute('class', 'l'+i%2);
-		
-		var cell1=row.insertCell(0)
-		cell1.innerHTML=tabJson[i].noReleve;
-		cell1.setAttribute('align', "center")
-		
-		var cell2 = row.insertCell(1);
-		cell2.innerHTML=tabJson[i].date;
-		cell2.setAttribute('align', "center");
-		
-		var cell3 = row.insertCell(2);
-		cell3.innerHTML=tabJson[i].libelle;
-		
-		var cell4 = row.insertCell(3);
-		var montant = Number(tabJson[i].montant);
-		montant=tabJson[i].montant.replace(',','')
-		cell4.innerHTML=montant;
-		cell4.setAttribute('align', "center");
-		if(montant>0){
-			cell4.className='positive';
-		} else {
-			cell4.className='negative';
-		}
-		
-		
-		var cell5 = row.insertCell(4);
-		cell5.innerHTML=tabJson[i].flux;
-		cell5.setAttribute('align', "center");
-		
-		var cell6 = row.insertCell(5);
-		var image='';
-		if(tabJson[i].verif=='checked') {
-			image='checked';
-		} else {
-			image='unchecked';
-		}
-		cell6.innerHTML='<img src="./application/images/'+image+'.jpg">';
-		cell6.setAttribute('align', "center");
-		
-		var cell7 = row.insertCell(6);
-		cell7.innerHTML='<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')">Editer</a>';
-		cell7.setAttribute('align', "center");*/
 	}
 }
 

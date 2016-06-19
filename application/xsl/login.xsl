@@ -9,46 +9,58 @@
 	</xsl:template>
 		
 	<xsl:template name="Contenu">
-		<center>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<xsl:if test="/root/dial/messages/erreur!=''">
-				<p class="erreur">
-					<xsl:value-of select="/root/dial/messages/erreur"/>
-				</p>
-			</xsl:if>
-			<form method="post" action="index.php?domaine=technique&amp;service=connexion">
-				<table class="formulaire">
-					<tbody>
-						<tr>
-							<th align="left">
-								<xsl:value-of select="$LBL.LOGIN"/>
-							</th>
-							<td colspan="1" rowspan="1">
-								<input name="nom"/>
-							</td>
-						</tr>
-						<tr>
-							<th align="left">
-								<xsl:value-of select="$LBL.MOTDEPASSE"/>
-							</th>
-							<td colspan="1" rowspan="1">
-								<input name="motDePasse" type="password"/>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2" rowspan="1" align="center">
-								<input class="bouton" type="submit" value="Connexion" name="valider"/>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<xsl:if test="/root/dial/messages/erreur!=''">
+			<p class="erreur">
+				<xsl:value-of select="/root/dial/messages/erreur"/>
+			</p>
+		</xsl:if>
+		<form method="post" action="index.php?domaine=technique&amp;service=connexion">
+
+			<fieldset>
+				<lengend>Login</lengend>
+				<br/>
+				<br/>
+				<div class="row">
+					<div class="col-xs-4"/>
+					<div class="col-xs-4">
+						<div class="form-group row">
+							<label for="nom" class="col-sm-6 form-control-label"><xsl:value-of select="$LBL.LOGIN"/></label>
+							<div class="col-sm-6">
+								<input class="form-control" type="text" name="nom" id="nom"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4"/>
+					<div class="col-xs-4">
+						<div class="form-group row">
+							<label for="motDePasse" class="col-sm-5 form-control-label"><xsl:value-of select="$LBL.MOTDEPASSE"/></label>
+							<div class="col-sm-7">
+								<input class="form-control" id="motDePasse" name="motDePasse" type="password" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-8"/>
+					<div class="form-group row">
+						<div class="col-sm-offset-5 col-sm-5">
+							<button type="submit" class="btn btn-primary">Envoyer</button>
+						</div>
+					</div>
+				</div>
 				<br/>
 				<br/>
 				<br/>
-			</form>
-		</center>
+			</fieldset>
+			<br/>
+			<br/>
+			<br/>
+		</form>
 	</xsl:template>
 </xsl:stylesheet>

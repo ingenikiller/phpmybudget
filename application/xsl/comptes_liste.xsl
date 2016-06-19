@@ -17,7 +17,7 @@
 				<xsl:call-template name="formulaireJson"/>
 			</form>
 		
-			<table class="liste" name="tableauResultat" id="tableauResultat">
+			<table class="table table-striped" name="tableauResultat" id="tableauResultat">
 				<tr>
 					<th>
 						<xsl:value-of select="$LBL.COMPTE"/>
@@ -44,6 +44,7 @@
 						<xsl:value-of select="$LBL.PREVISIONS"/>
 					</th>
 				</tr>
+				<tbody id="tbodyResultat"/>
 			</table>
 			<xsl:call-template name="paginationJson">
 				<xsl:with-param name="formulairePrincipal" select="'recComptes'"/>

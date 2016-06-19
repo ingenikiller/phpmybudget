@@ -10,7 +10,14 @@
 				<xsl:attribute name="onload">
 					<xsl:call-template name="onLoadTemplate"/>
 				</xsl:attribute>
-				<xsl:call-template name="banniere"/>
+				
+				<xsl:variable name="affMenu">
+					<xsl:call-template name="controleMenu"/>
+				</xsl:variable>
+				<xsl:if test="$affMenu='O'">
+					<xsl:call-template name="menu"/>
+						<!--xsl:call-template name="banniere"/-->
+				</xsl:if>
 				
 				<div id="message" class="message"/>
 				<div class="container contenu">
@@ -72,15 +79,16 @@
 			<!--link href="application/jquery/multiselect-master/js/style.css" rel="stylesheet" type="text/css"/>
 			<link href="application/jquery/multiselect-master/lib/google-code-prettify/prettify.css" rel="stylesheet" type="text/css"/-->
 			
-			<link href="application/css/principal.css" rel="stylesheet" type="text/css"/>
-			<link href="application/css/style.css" rel="stylesheet" type="text/css"/>
+			<!--link href="application/css/principal.css" rel="stylesheet" type="text/css"/>
+			<link href="application/css/style.css" rel="stylesheet" type="text/css"/-->
 			
+			<link href="application/css/phpmybudget.css" rel="stylesheet" type="text/css"/>
 			<link href="application/css/bootstrap-force.css" rel="stylesheet" type="text/css"/>
 			<xsl:call-template name="js.module.sheet"/>
 		</head>
 	</xsl:template>
 	<!-- banniere -->
-	<xsl:template name="banniere">
+	<xsl:template name="menu">
 			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				<div class="container">
 					<div class="navbar-header">
@@ -119,6 +127,6 @@
 		        </div>
             </nav>
 	</xsl:template>
-
+	<xsl:template name="controleMenu">O</xsl:template>
 	<xsl:template name="onLoadTemplate"/>
 </xsl:stylesheet>
