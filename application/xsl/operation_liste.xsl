@@ -86,11 +86,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4"/>
-				<div class="form-group row">
-					<div class="col-sm-offset-5 col-sm-5">
-						<button type="submit" class="btn btn-primary">Rechercher</button>
-					</div>
+				<div class="form-group row text-center">
+					<button type="submit" class="btn btn-primary">Rechercher</button>
 				</div>
 			</div>
 			</fieldset>
@@ -125,11 +122,11 @@
 			<tbody id="tbodyResultat"/>
 		</table>
 		<br/>
-		<center>
-			<xsl:call-template name="paginationJson">
-				<xsl:with-param name="formulairePrincipal" select="'recherche'"/>
-			</xsl:call-template>
-		</center>
+		
+		<xsl:call-template name="paginationJson">
+			<xsl:with-param name="formulairePrincipal" select="'recherche'"/>
+		</xsl:call-template>
+	
 		<br/>
 	</xsl:template>
 </xsl:stylesheet>

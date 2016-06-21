@@ -18,32 +18,34 @@
 			</form>
 		
 			<table class="table table-striped" name="tableauResultat" id="tableauResultat">
-				<tr>
-					<th>
-						<xsl:value-of select="$LBL.COMPTE"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.DESCRIPTION"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.SOLDEBASE"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.SOLDE"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.OPERATIONS"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.EDITER"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.STATISTIQUES"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.PREVISIONS"/>
-					</th>
-				</tr>
+				<thead>
+					<tr>
+						<th>
+							<xsl:value-of select="$LBL.COMPTE"/>
+						</th>
+						<th>
+							<xsl:value-of select="$LBL.DESCRIPTION"/>
+						</th>
+						<th>
+							<xsl:value-of select="$LBL.SOLDEBASE"/>
+						</th>
+						<th>
+							<xsl:value-of select="$LBL.SOLDE"/>
+						</th>
+						<th>
+							<xsl:value-of select="$LBL.OPERATIONS"/>
+						</th>
+						<th>
+							<xsl:value-of select="$LBL.EDITER"/>
+						</th>
+						<th>
+							<xsl:value-of select="$LBL.STATISTIQUES"/>
+						</th>
+						<th>
+							<xsl:value-of select="$LBL.PREVISIONS"/>
+						</th>
+					</tr>
+				</thead>
 				<tbody id="tbodyResultat"/>
 			</table>
 			<xsl:call-template name="paginationJson">
