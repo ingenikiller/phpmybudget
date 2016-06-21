@@ -21,15 +21,15 @@
 				
 				<div id="message" class="message"/>
 				<div class="container contenu">
-					<div class="row">
+					<!--div class="row"-->
 						<br/>
 						<br/>
 						<br/>
 						<br/>
-						<div class="col-lg-offset-1 col-lg-10">
+						<!--div class="col-lg-10"-->
 							<xsl:call-template name="Contenu"/>
-						</div>
-					</div>
+						<!--/div-->
+					<!--/div-->
 				</div>
 			</body>
 		</html>

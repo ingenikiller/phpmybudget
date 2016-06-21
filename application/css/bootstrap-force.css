@@ -5,11 +5,14 @@ body {
 	background-color: #E6E6E6;
 }
 
-row {
+.row {
 	font-size : 12px;
-	background-color: #000000;
+	background-color: #FFFFFF;
 }
 
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+	background-color: #BFBEBE;
+}
 
 .form-control {
 	font-size : 12px;
