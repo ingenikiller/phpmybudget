@@ -15,3 +15,6 @@ prévisions
 	edition unitaire ->
 	edition liste ->
 
+stats annuellles
+	liste -> OK
+	Détail ->

@@ -69,8 +69,8 @@ function afficheDetail(params){
 	listerObjects();
 	$("div#boiteDetail").dialog({
 					resizable: false,
-					height:600,
-					width:500,
+					height:750,
+					width:700,
 					modal: true
 				});
 }

@@ -9,8 +9,9 @@
 	<xsl:template name="controleMenu">N</xsl:template>
 	<xsl:template name="Contenu">
 		<xsl:call-template name="boiteDetail"/>
-			<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
-			
+			<div class="row">
+				<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
+			</div>
 			<div class="row">
 				<div class="col-xs-4"/>
 				<div class="col-xs-4">
@@ -36,8 +37,8 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<div class="col-sm-offset-2 col-sm-10">
-									<button type="submit" class="btn btn-secondary">Valider</button>
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary">Valider</button>
 								</div>
 							</div>
 						</fieldset>
@@ -45,7 +46,7 @@
 				</div>
 			</div>
 		<center>
-			<table id="tableResultat" name="tableResultat" class="table table-bordered table-striped table-hover"/>
+			<table id="tableResultat" name="tableResultat" class="table table-bordered table-hover"/>
 		</center>
 	</xsl:template>
 	<xsl:template match="ListeAnnee">

@@ -2,11 +2,11 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:template name="boiteDetail">
 		<div id="boiteDetail" title="{$LBL.LISTEOPERATION}" style="display: none;">
-			<form method="post" action="" name="recherche" id="recherche">
+			<form method="post" action="" name="recherche" id="recherche" onsubmit="listerObjects();">
 				<xsl:call-template name="formulaireJson"/>
 				<input type="hidden" id="params" name="params"/>
 			</form>
-			<table class="liste" id="tableauResultat">
+			<table class="table table-striped table-bordered" id="tableauResultat">
 				<tr>
 					<th>
 						<xsl:value-of select="$LBL.DATE"/>
@@ -24,11 +24,11 @@
 				<xsl:apply-templates select="/root/data/ListeOperations/Operation"/>
 			</table>
 			
-			<center>
-				<xsl:call-template name="paginationJson">
-					<xsl:with-param name="formulairePrincipal" select="'recherche'"/>
-				</xsl:call-template>
-			</center>
+			
+			<xsl:call-template name="paginationJson">
+				<xsl:with-param name="formulairePrincipal" select="'recherche'"/>
+			</xsl:call-template>
+			
 		</div>
 	</xsl:template>
 </xsl:stylesheet>

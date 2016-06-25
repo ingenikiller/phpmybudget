@@ -133,10 +133,10 @@
 				<td class="text-right">
 					<xsl:choose>
 						<xsl:when test="$difference&gt;0">
-							<xsl:attribute name="class">diffPositive</xsl:attribute>
+							<xsl:attribute name="class">text-right diffPositive</xsl:attribute>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:attribute name="class">diffNegative</xsl:attribute>
+							<xsl:attribute name="class">text-right diffNegative</xsl:attribute>
 						</xsl:otherwise>
 					</xsl:choose>
 					<xsl:value-of select="format-number($difference, $FORMAT_MNT)"/>

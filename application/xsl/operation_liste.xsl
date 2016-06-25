@@ -117,38 +117,38 @@
 
                     </form>
                 </fieldset>
-                <input type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}"
-                       onclick="editerOperation('{$NUMEROCOMPTE}','');"/>
-                <table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
-                    <thead>
-                        <tr>
-                            <th>
-                                <xsl:value-of select="$LBL.NUMERORELEVE"/>
-                            </th>
-                            <th>
-                                <xsl:value-of select="$LBL.DATE"/>
-                            </th>
-                            <th>
-                                <xsl:value-of select="$LBL.LIBELLE"/>
-                            </th>
-                            <th>
-                                <xsl:value-of select="$LBL.MONTANT"/>
-                            </th>
-                            <th>
-                                <xsl:value-of select="$LBL.FLUX"/>
-                            </th>
-                            <th>
-                                <xsl:value-of select="$LBL.VERIFICATION"/>
-                            </th>
-                            <th>
-                                <xsl:value-of select="$LBL.EDITER"/>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyResultat"/>
-                </table>
             </div>
         </div>
+		<input type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}"
+			   onclick="editerOperation('{$NUMEROCOMPTE}','');"/>
+		<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
+			<thead>
+				<tr>
+					<th>
+						<xsl:value-of select="$LBL.NUMERORELEVE"/>
+					</th>
+					<th>
+						<xsl:value-of select="$LBL.DATE"/>
+					</th>
+					<th>
+						<xsl:value-of select="$LBL.LIBELLE"/>
+					</th>
+					<th>
+						<xsl:value-of select="$LBL.MONTANT"/>
+					</th>
+					<th>
+						<xsl:value-of select="$LBL.FLUX"/>
+					</th>
+					<th>
+						<xsl:value-of select="$LBL.VERIFICATION"/>
+					</th>
+					<th>
+						<xsl:value-of select="$LBL.EDITER"/>
+					</th>
+				</tr>
+			</thead>
+			<tbody id="tbodyResultat"/>
+		</table>
         <br/>
 
         <xsl:call-template name="paginationJson">
