@@ -25,7 +25,6 @@
 
         <div class="row">
             <div class="col-lg-offset-4 col-lg-4">
-                <!--center-->
                 <table class="table table-striped">
                     <tr>
                         <td>
@@ -53,13 +52,13 @@
                 </table>
             </div>
         </div>
-                <br/>
-                <br/>
-                <h1>
-                    <xsl:value-of select="concat($LBL.PREVISIONSCOMPTE, ' ', $NUMEROCOMPTE)"/>
-                </h1>
-        <div class="row">
-            <div class="col-lg-offset-4 col-lg-4">
+        <br/>
+        <br/>
+        <h1>
+            <xsl:value-of select="concat($LBL.PREVISIONSCOMPTE, ' ', $NUMEROCOMPTE)"/>
+        </h1>
+        <div class="row text-center">
+            <div class="col-lg-4">
                 <table class="table table-striped">
                     <tr>
                         <td>Solde</td>
@@ -79,11 +78,8 @@
         </div>
         <table class="table table-striped table-bordered" name="liste" id="liste"/>
         <form method="post" action="" name="formEntete" id="formEntete">
-        <table id="tableEntete" name="tableEntete"/>
-    </form>
-                <!--/center-->
-
-
+            <table id="tableEntete" name="tableEntete"/>
+        </form>
     </xsl:template>
     <xsl:template name="boiteUnitaire">
         <div id="boite" title="{$LBL.EDITIONPREVISION}" style="display: none;">

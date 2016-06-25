@@ -21,7 +21,11 @@
 
 
 .popup_operation {
-    width: 600px;
+    width: 580px;
+}
+
+.titre {
+	background-color: #FFFFFF;
 }
 
 
@@ -30,4 +34,11 @@
  ************************************************/
 .ui-autocomplete {
 	z-index: 1500;
+}
+
+
+.cumul
+{
+	/*background-color:#20ff80;*/
+	display:none;
 }

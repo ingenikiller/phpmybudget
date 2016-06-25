@@ -104,8 +104,8 @@ function editerCompte(numeroCompte){
 	
 	$("div#boiteCompte").dialog({
 		resizable: false,
-		height:250,
-		width:400,
+		height:200,
+		width:600,
 		modal: true
 	});
 }
