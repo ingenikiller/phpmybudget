@@ -16,14 +16,22 @@
 				</xsl:variable>
 				<xsl:if test="$affMenu='O'">
 					<xsl:call-template name="menu"/>
+					<!--br/>
 					<br/>
 					<br/>
-					<br/>
-					<br/>
+					<br/-->
 				</xsl:if>
 				
-				<div id="message" class="message"/>
+				<!--div id="message" class="message"/-->
 				<div class="container contenu">
+					<xsl:choose>
+						<xsl:when test="$affMenu='O'">
+							<xsl:attribute name="class">container contenu marge</xsl:attribute>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:attribute name="class">container contenu</xsl:attribute>
+						</xsl:otherwise>
+					</xsl:choose>
 					<xsl:call-template name="Contenu"/>
 				</div>
 			</body>
@@ -84,7 +92,7 @@
 	</xsl:template>
 	<!-- banniere -->
 	<xsl:template name="menu">
-			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 				<div class="container">
 					<div class="navbar-header">
 		                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
