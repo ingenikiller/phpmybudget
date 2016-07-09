@@ -64,7 +64,7 @@ function afficheUnitaire(compte, idLigne){
 	$("div#boite").dialog({
             resizable: false,
             height:190,
-            width:400,
+            width:620,
             modal: true
             });
 }
@@ -229,7 +229,15 @@ function parseListePrevisionJson(json) {
 	var tabJson = json[0].tabResult;
 	var i=0;
 	for(i=0; i<nb; i++) {
-		var row = tab.insertRow(i+1);
+		var row = $('<tr typetr="prevision"/>');
+		row.append($('<td/>').text(tabJson[i].mois));
+		row.append($('<td/>').append('<input type="text" id="montant-'+(i+1)+'" ligneid="'+tabJson[i].ligneId+'" onblur="return isDouble(this);" value="'+tabJson[i].montant+'" />'));
+		row.append($('<td/>').append('<input type="button" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);" />'));
+
+
+		$("#tbodylisteentete").append(row);
+
+		/*var row = tab.insertRow(i+1);
 		row.setAttribute('typetr', "prevision")
 		row.setAttribute('class', 'l'+i%2);
 		
@@ -254,7 +262,7 @@ function parseListePrevisionJson(json) {
 		btnpropag.type='button';
 		btnpropag.className='bouton';
 		btnpropag.onclick=function(){propagerMontant(this);};
-		cell3.appendChild(btnpropag);
+		cell3.appendChild(btnpropag);*/
 	}
 }
 

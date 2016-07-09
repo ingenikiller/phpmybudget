@@ -13,7 +13,7 @@
         <xsl:param name="valeurVide" select="'O'"/>
         <xsl:param name="tabindex" select="''"/>
         <xsl:param name="onchange" select="''"/>
-        <select name="{$champ}" id="{$champ}" class="{$class}">
+        <select name="{$champ}" id="{$champ}" class="form-control {$class}">
             <xsl:if test="$obligatoire='true'">
                 <xsl:attribute name="class">obligatoire</xsl:attribute>
             </xsl:if>
@@ -106,7 +106,7 @@
             <xsl:if test="$obligatoire='O'">
                 <xsl:attribute name="class">obligatoire</xsl:attribute>
             </xsl:if>
-            <option></option>
+            <option/>
             <option value="01">Janvier</option>
             <option value="02">Février</option>
             <option value="03">Mars</option>

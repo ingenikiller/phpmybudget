@@ -89,7 +89,59 @@
                 <input type="hidden" id="typenr" name="typenr" value="L"/>
                 <input type="hidden" id="ligneId" name="ligneId" value=""/>
                 <input type="hidden" id="service" name="service"/>
-                <table>
+                <div class="container popup_operation">
+                    <div class="col-lg-12">
+                        <div class="form-group row">
+                            <label for="noReleve" class="col-sm-6 form-control-label">
+                                <xsl:value-of select="$LBL.FLUX"/>
+                            </label>
+                            <div class="col-sm-6">
+                                <xsl:call-template name="ListeFlux">
+                                    <xsl:with-param name="liste" select="/root/data/ListeFlux"/>
+                                    <xsl:with-param name="champ" select="'fluxId'"/>
+                                    <xsl:with-param name="valeur" select="/root/data/Operation/fluxId"/>
+                                    <xsl:with-param name="class" select="'obligatoire'"/>
+                                    <xsl:with-param name="tabindex" select="'5'"/>
+                                </xsl:call-template>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-6 form-control-label">
+                                <xsl:value-of select="$LBL.PERIODE"/>
+                            </label>
+                            <div class="col-sm-6">
+                                <select name="mois" id="mois" tabindex="10" class="form-control">
+                                    <option/>
+                                    <xsl:for-each select="/root/data/ListePeriodes/Periode">
+                                        <option value="{periode}">
+                                            <xsl:value-of select="periode"/>
+                                        </option>
+                                    </xsl:for-each>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fluxId" class="col-sm-6 form-control-label">
+                                <xsl:value-of select="$LBL.MONTANT"/>
+                            </label>
+                            <div class="col-sm-6">
+                                <input size="7" name="montant" id="montant" class="form-control obligatoire"
+                                       onblur="return isDouble(this);" tabindex="15"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4"/>
+                            <div class="form-group row">
+                                <div class="col-sm-offset-5 col-sm-5">
+                                    <button type="submit" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--table>
                     <tr>
                         <td>
                             <xsl:value-of select="$LBL.FLUX"/>
@@ -133,7 +185,7 @@
                             <input type="submit" id="" name="" value="{$LBL.MODIFIER}"/>
                         </td>
                     </tr>
-                </table>
+                </table-->
             </form>
         </div>
         <div id="boiteEntete" title="Edition" style="display: none;">
@@ -207,19 +259,25 @@
             <form method="post" action="" onsubmit="return enregistreListeLignes(this);">
                 <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
                 <table id="tabListeEntete" name="tabListeEntete" width="80%" align="center">
+                    <thead>
                     <tr>
                         <th>Mois</th>
                         <th>Montant</th>
                         <th>Actions</th>
                     </tr>
+                    </thead>
+                    <tbody id="tbodylisteentete"/>
+                    <tfoot>
+                        <tr>
+                            <td style="text-align:center;">
+                                <input type="submit" class="bouton" id="" name="" value="{$LBL.MODIFIER}"/>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
-                <table width="80%" align="center">
-                    <tr>
-                        <td style="text-align:center;">
-                            <input type="submit" class="bouton" id="" name="" value="{$LBL.MODIFIER}"/>
-                        </td>
-                    </tr>
-                </table>
+                <!--table width="80%" align="center">
+
+                </table-->
             </form>
         </div>
     </xsl:template>
