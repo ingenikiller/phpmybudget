@@ -69,7 +69,7 @@
 					</div>
 				</div>
 			</form>
-			<table id="tableResultat" name="tableResultat" class="formulaire"/>
+			<table id="tableResultat" name="tableResultat" class="table table-bordered table-hover"/>
 			<br/>
 		</center>
 	</xsl:template>
@@ -77,9 +77,14 @@
 		<xsl:param name="name"/>
 		<xsl:param name="obligatoire"/>
 		<select name="{$name}" id="{$name}">
-			<xsl:if test="$obligatoire='O'">
-				<xsl:attribute name="class">obligatoire</xsl:attribute>
-			</xsl:if>
+			<xsl:choose>
+				<xsl:when test="$obligatoire='O'">
+					<xsl:attribute name="class">form-control obligatoire</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="class">form-control</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
 			<option/>
 			<xsl:apply-templates select="Dynamic"/>
 		</select>

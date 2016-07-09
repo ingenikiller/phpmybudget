@@ -5,7 +5,11 @@ login -> OK
 comptes
 	liste -> OK
 	edition -> OK
-	
+
+flux
+	liste -> 
+	edition ->
+
 operation
 	liste -> OK
 	edition -> OK
@@ -15,6 +19,20 @@ prévisions
 	edition unitaire ->
 	edition liste ->
 
-stats annuellles
-	liste -> OK
+stats accueil ->
+
+stats cumul ->
+	liste -> 
 	Détail ->
+
+stats relevés ->
+	liste ->  OK
+	Détail -> OK
+
+stats annuellles -> 
+	liste -> OK
+	Détail -> OK
+	
+Paramétrage->
+
+Periode ->

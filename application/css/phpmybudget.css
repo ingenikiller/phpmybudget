@@ -11,6 +11,10 @@
 	border-bottom:2px  solid  #6B6FB3;*/
 }
 
+.marge {
+	margin-top: 50px;
+}
+
 .obligatoire {
 	background-color: #fac98f;
 }

@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:import href="commun.xsl"/>
 	<xsl:template name="Contenu">
-		<center>
+		
 			<br/>
 			<br/>
 			<p>
@@ -30,6 +30,6 @@
 			</p>
 			<br/>
 			<br/>
-		</center>
+		
 	</xsl:template>
 </xsl:stylesheet>

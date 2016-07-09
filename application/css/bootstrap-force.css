@@ -2,7 +2,23 @@
 
 body {
 	font-size : 10px;
-	background-color: #E6E6E6;
+	background-color: #DADADA;
+}
+
+/*.navbar-brand */
+.navbar-default {
+	background-color: #3474f6;
+	/*color: #FFFFFFF;*/
+}
+
+.nav.navbar-nav.navbar-right li a {
+    color: white;
+	font-size : 12px;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+	font-size : 18px;
 }
 
 .row {

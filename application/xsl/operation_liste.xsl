@@ -133,17 +133,17 @@
 					<th>
 						<xsl:value-of select="$LBL.LIBELLE"/>
 					</th>
-					<th>
+					<th class="text-center">
 						<xsl:value-of select="$LBL.MONTANT"/>
 					</th>
-					<th>
+					<th class="text-center">
 						<xsl:value-of select="$LBL.FLUX"/>
 					</th>
-					<th>
+					<th class="text-center">
 						<xsl:value-of select="$LBL.VERIFICATION"/>
 					</th>
-					<th>
-						<xsl:value-of select="$LBL.EDITER"/>
+					<th class="text-center">
+						<xsl:value-of select="$LBL.ACTION"/>
 					</th>
 				</tr>
 			</thead>

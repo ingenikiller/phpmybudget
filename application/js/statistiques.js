@@ -115,25 +115,12 @@ function parseListeJson(json) {
 	var tabJson = json[0].tabResult;
 	var i=0;
 	for(i=0; i<nb; i++) {
-		var row = tab.insertRow(i+1);
-		row.setAttribute('typetr', "operation")
-		row.setAttribute('class', 'l'+i%2);
-		
-		var cell2 = row.insertCell(0);
-		cell2.innerHTML=tabJson[i].date;
-		cell2.setAttribute('align', "center");
-		
-		var cell3 = row.insertCell(1);
-		cell3.innerHTML=tabJson[i].libelle;
-		
-		var cell4 = row.insertCell(2);
-		var montant = Number(tabJson[i].montant);
-		cell4.innerHTML=tabJson[i].montant.replace(',','');
-		cell4.setAttribute('align', "center");
-		
-		var cell5 = row.insertCell(3);
-		cell5.innerHTML=tabJson[i].flux;
-		cell5.setAttribute('align', "center");
+		var row = $('<tr typetr="operation"/>');
+		row.append($('<td/>').text(tabJson[i].date));
+		row.append($('<td/>').text(tabJson[i].date));
+		row.append($('<td class="text-right"/>').text(tabJson[i].montant.replace(',','')));
+		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
+		$("#tbodylisteoperation").append(row);
 	}
 }
 

@@ -64,6 +64,7 @@ function parseListeJson(json) {
 					+'</a>'));
 		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerCompte(\''+ tabJson[i].numeroCompte +'\')"><img border="0" src="./application/images/editer.gif" alt="Editer" title="Editer""/></a>'));
+		//row.append($('<td class="text-center"/>').append('<span class="ui-icon ui-icon-pencil" onclick="alert(\'toto\')"/>'));
 		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=statistique&amp;service=menu&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
 					+'<img border="0" src="./application/images/statistiques.gif" alt="Visualiser" title="Visualiser"/>'
 					+'</a>'));

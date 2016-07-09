@@ -7,21 +7,24 @@
 				<input type="hidden" id="params" name="params"/>
 			</form>
 			<table class="table table-striped table-bordered" id="tableauResultat">
-				<tr>
-					<th>
-						<xsl:value-of select="$LBL.DATE"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.LIBELLE"/>
-					</th>
-					<th align="center">
-						<xsl:value-of select="$LBL.MONTANT"/>
-					</th>
-					<th>
-						<xsl:value-of select="$LBL.FLUX"/>
-					</th>
-				</tr>
-				<xsl:apply-templates select="/root/data/ListeOperations/Operation"/>
+				<thead>
+					<tr>
+						<th>
+							<xsl:value-of select="$LBL.DATE"/>
+						</th>
+						<th>
+							<xsl:value-of select="$LBL.LIBELLE"/>
+						</th>
+						<th class="text-center">
+							<xsl:value-of select="$LBL.MONTANT"/>
+						</th>
+						<th class="text-center">
+							<xsl:value-of select="$LBL.FLUX"/>
+						</th>
+					</tr>
+				</thead>
+				<tbody id="tbodylisteoperation"/>
+				<!--xsl:apply-templates select="/root/data/ListeOperations/Operation"/-->
 			</table>
 			
 			
