@@ -46,3 +46,24 @@
 	background-color:#CBC1DB;
 	display:none;
 }
+
+.recap {
+	background-color:#CBC1DB;
+}
+
+
+
+td.positif
+{
+	color:green;
+}
+
+td.negatif
+{
+	color:red;
+}
+
+/************************************************
+ * colonne hover
+ ************************************************/
+.hover { background-color: #eee; }

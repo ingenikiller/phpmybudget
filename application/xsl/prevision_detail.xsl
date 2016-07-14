@@ -12,6 +12,20 @@
     <xsl:output indent="no" encoding="UTF-8" method="xml"/>
     <xsl:template match="/">
         <data>
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
             <thead>
                 <tr>
                     <th>
@@ -39,7 +53,7 @@
                                 select="format-number(sum(associatedObjet/Previsions/Prevision[fluxId=/root/data/ListeFlux/Dynamic[depense='O']/fluxId]/montant),$FORMAT_MNT)"/>
                     </td>
                 </xsl:for-each>
-                <th>
+                <th class="text-right recap">
                     <xsl:value-of
                             select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/Previsions/Prevision[fluxId=/root/data/ListeFlux/Dynamic[depense='O']/fluxId]/montant),$FORMAT_MNT)"/>
                 </th>
@@ -54,7 +68,7 @@
                                 select="format-number(sum(associatedObjet/ListeMontantFlux/Dynamic[fluxId=/root/data/ListeFlux/Dynamic[depense='O']/fluxId]/total),$FORMAT_MNT)"/>
                     </td>
                 </xsl:for-each>
-                <th class="text-right">
+                <th class="text-right recap">
                     <xsl:value-of
                             select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/ListeMontantFlux/Dynamic[fluxId=/root/data/ListeFlux/Dynamic[depense='O']/fluxId]/total),$FORMAT_MNT)"/>
                 </th>
@@ -85,7 +99,7 @@
                                 select="format-number(sum(associatedObjet/Previsions/Prevision[fluxId=/root/data/ListeFlux/Dynamic[depense!='O']/fluxId]/montant),$FORMAT_MNT)"/>
                     </td>
                 </xsl:for-each>
-                <th class="text-right">
+                <th class="text-right recap">
                     <xsl:value-of
                             select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/Previsions/Prevision[fluxId=/root/data/ListeFlux/Dynamic[depense!='O']/fluxId]/montant),$FORMAT_MNT)"/>
                 </th>
@@ -100,7 +114,7 @@
                                 select="format-number(sum(associatedObjet/Previsions/Prevision[fluxId=/root/data/ListeFlux/Dynamic[depense!='O']/fluxId]/montant),$FORMAT_MNT)"/>
                     </td>
                 </xsl:for-each>
-                <th class="text-right">
+                <th class="text-right recap">
                     <xsl:value-of
                             select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/ListeMontantFlux/Dynamic[fluxId=/root/data/ListeFlux/Dynamic[depense!='O']/fluxId]/total),$FORMAT_MNT)"/>
                 </th>
@@ -130,10 +144,10 @@
                     <td>
                         <xsl:choose>
                             <xsl:when test="$somme &gt;= 0">
-                                <xsl:attribute name="class">text-right positif</xsl:attribute>
+                                <xsl:attribute name="class">text-right positif recap</xsl:attribute>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:attribute name="class">text-right negatif</xsl:attribute>
+                                <xsl:attribute name="class">text-right negatif recap</xsl:attribute>
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:value-of select="$somme"/>
@@ -151,21 +165,22 @@
         <xsl:variable name="fluxId" select="fluxId"/>
         <tr class="l{@index mod 2}">
             <!-- libelle du flux -->
-            <th rowspan="2" class="titre">
+            <th rowspan="1" class="titre">
                 <xsl:value-of select="flux"/>
             </th>
             <!-- chaque noreleve -->
             <xsl:call-template name="case">
                 <xsl:with-param name="fluxId" select="$fluxId"/>
             </xsl:call-template>
-            <td class="text-right">
+            <td class="text-right recap">
                 <xsl:value-of
                         select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/Previsions/Prevision[fluxId=$fluxId]/montant),$FORMAT_MNT)"/>
             </td>
         </tr>
         <tr class="l{@index mod 2}">
+			<td/>
             <xsl:for-each select="/root/data/Periodes/Periode">
-                <td class="text-right">
+				<td class="text-right">
                     <xsl:if test="associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total">
                         <a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=mois&amp;recDate={periode}&amp;recFlux={$fluxId}')">
                             <xsl:value-of
@@ -174,7 +189,7 @@
                     </xsl:if>
                 </td>
             </xsl:for-each>
-            <td class="text-right">
+            <td class="text-right recap">
                 <xsl:value-of
                         select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total),$FORMAT_MNT)"/>
             </td>

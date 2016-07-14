@@ -6,7 +6,7 @@
 				<xsl:call-template name="formulaireJson"/>
 				<input type="hidden" id="params" name="params"/>
 			</form>
-			<table class="table table-striped table-bordered" id="tableauResultat">
+			<table class="table table-bordered"  table-striped="" id="tableauResultat">
 				<thead>
 					<tr>
 						<th>

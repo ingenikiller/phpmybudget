@@ -25,8 +25,16 @@
 
         <div class="row">
             <div class="col-lg-offset-4 col-lg-4">
-                <table class="table table-striped">
+                <table class="table table-bordered">
+					<tr>
+						<th colspan="2" class="text-center">
+							<xsl:value-of select="concat($LBL.PREVISIONSCOMPTE, ' ', $NUMEROCOMPTE)"/>
+						</th>
+					</tr>
                     <tr>
+						<th>
+							<xsl:value-of select="$LBL.ANNEE"/>
+						</th>
                         <td>
                             <select name="annee" id="annee" onchange="refreshWindow()">
                                 <xsl:apply-templates select="/root/data/ListeAnnees/Dynamic">
@@ -36,17 +44,40 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <th>
+							<xsl:value-of select="$LBL.ENTETE"/>
+						</th>
+						<td>
                             <input type="button" id="" name="" value="Entete"
                                    onclick="afficheEntete('{$NUMEROCOMPTE}');"/>
                             <select name="listeEntete" id="listeEntete" onchange="afficheListeGroupe(this.value)"/>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <th>
+							<xsl:value-of select="$LBL.CREER"/>
+						</th>
+						<td>
                             <input type="button" id="" name="" value="Unitaire"
                                    onclick="afficheUnitaire('{$NUMEROCOMPTE}','');"/>
 
+                        </td>
+                    </tr>
+					<tr>
+                        <th>
+							<xsl:value-of select="$LBL.SOLDE"/>
+						</th>
+                        <td>
+                            <xsl:value-of
+                                    select="format-number(number(/root/data/SommeOperations/Dynamic/total) + number(/root/data/Comptes/solde), $FORMAT_MNT)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+							<xsl:value-of select="$LBL.ESTIMATION"/>
+						</th>
+                        <td>
+                            <span id="estimation" name="estimation" disabled="disabled"/>
                         </td>
                     </tr>
                 </table>
@@ -54,10 +85,10 @@
         </div>
         <br/>
         <br/>
-        <h1>
+        <!--h1>
             <xsl:value-of select="concat($LBL.PREVISIONSCOMPTE, ' ', $NUMEROCOMPTE)"/>
-        </h1>
-        <div class="row text-center">
+        </h1-->
+        <!--div class="row text-center">
             <div class="col-lg-4">
                 <table class="table table-striped">
                     <tr>
@@ -75,8 +106,8 @@
                     </tr>
                 </table>
             </div>
-        </div>
-        <table class="table table-striped table-bordered" name="liste" id="liste"/>
+        </div-->
+        <table class="table table-bordered " table-hover="" name="liste" id="liste"/>
         <form method="post" action="" name="formEntete" id="formEntete">
             <table id="tableEntete" name="tableEntete"/>
         </form>

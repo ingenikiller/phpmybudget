@@ -6,6 +6,12 @@
 		<xsl:value-of select="/root/request/type"/>
 	</xsl:param>
 	<xsl:template match="/">
+		<colgroup />
+		<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
+			<colgroup />
+		</xsl:for-each>
+		<colgroup />
+	
 		<thead>
 		<tr class="enteteLigneStat">
 			<th/>

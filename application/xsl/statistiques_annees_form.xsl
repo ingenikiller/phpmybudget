@@ -46,7 +46,7 @@
 				</div>
 			</div>
 		<center>
-			<table id="tableResultat" name="tableResultat" class="table table-bordered table-hover"/>
+			<table id="tableResultat" name="tableResultat" class="table table-bordered"  table-hover=""/>
 		</center>
 	</xsl:template>
 	<xsl:template match="ListeAnnee">
