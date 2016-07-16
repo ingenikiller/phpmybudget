@@ -64,7 +64,7 @@ function listerObjects(){
  *********************************************************/
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
-	$('tr[typetr=operation]').remove();
+	$('tr[typetr=flux]').remove();
 	
 	var total = json[0].nbLineTotal;
 	var nbpage = Math.ceil(total/json[0].nbLine);
@@ -77,28 +77,14 @@ function parseListeJson(json) {
 	var tabJson = json[0].tabResult;
 	var i=0;
 	for(i=0; i<nb; i++) {
-		var row = tab.insertRow(i+1);
-		row.setAttribute('typetr', "operation")
-		row.setAttribute('class', 'l'+i%2);
+		var row = $('<tr typetr="flux"/>');
+		row.append($('<td/>').text(tabJson[i].flux));
+		row.append($('<td/>').text(tabJson[i].description));
+		row.append($('<td class="text-center"/>').text(tabJson[i].compteId));
+		row.append($('<td class="text-center"/>').text(tabJson[i].compteDest));
 		
-		var cell1=row.insertCell(0)
-		cell1.innerHTML=tabJson[i].flux;
-		
-		var cell2 = row.insertCell(1);
-		cell2.innerHTML=tabJson[i].description;
-		
-		var cell3 = row.insertCell(2);
-		cell3.innerHTML=tabJson[i].compteId;
-		cell3.setAttribute('align', "center");
-		
-		var cell4 = row.insertCell(3);
-		var montant = Number(tabJson[i].montant);
-		cell4.innerHTML=tabJson[i].compteDest;
-		cell4.setAttribute('align', "center");
-		
-		var cell7 = row.insertCell(4);
-		cell7.innerHTML='<a href="#" onclick="editerFlux(\''+ tabJson[i].fluxId +'\')">Editer</a>';
-		cell7.setAttribute('align', "center");		
+		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerFlux(\''+ tabJson[i].fluxId +'\')">Editer</a>'));
+		$("#tbodyResultat").append(row);
 	}
 }
 
@@ -161,8 +147,8 @@ function editerFlux(fluxId){
 	
 	$("div#boiteFlux").dialog({
 			resizable: false,
-			height:340,
-			width:500,
+			height:450,
+			width:620,
 			modal: true
 		});
 }

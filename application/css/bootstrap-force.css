@@ -1,0 +1,77 @@
+
+
+body {
+	font-size : 10px;
+	background-color: #DADADA;
+}
+
+/*.navbar-brand */
+.navbar-default {
+	background-color: #3474f6;
+	/*color: #FFFFFFF;*/
+}
+
+.nav.navbar-nav.navbar-right li a {
+    color: white;
+	font-size : 12px;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+	font-size : 18px;
+}
+
+.row {
+	font-size : 10px;
+	/*background-color: #FFFFFF;*/
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+	background-color: #BFBEBE;
+}
+
+.form-control {
+	font-size : 10px;
+	height: 24px;
+	padding: 0px 0px 0px 12px;
+}
+
+.form-group {
+	margin-bottom : 5px;
+}
+
+.form-control-checkbox {
+	width : 0%;
+}
+
+
+.btn {
+	font-size : 12px;
+}
+
+label {
+	padding-top: 5px;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+	padding: 2px;
+}
+
+fieldset {
+	/*border: 1px solid #c0c0c0;*/
+	/*margin: 0 2px;
+	padding: 0.35em 0.625em 0.75em;*/
+	background-color : #E6E6E6;
+}
+
+legend {
+	/*border: 1px solid #c0c0c0;*/
+	/*margin: 0 2px;
+	padding: 0.35em 0.625em 0.75em;*/
+	background-color : #E6E6E6;
+}
