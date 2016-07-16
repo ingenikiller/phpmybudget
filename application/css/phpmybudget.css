@@ -1,0 +1,78 @@
+
+.contenu {
+    /*margin : 0px 0px 0px 150px;/
+    /*background-repeat : repeat;*/
+    /*width : auto;
+	min-height:300px;*/
+	/*float:right;*/
+	background-color:#FFFFFF;
+	/*border-left:2px  solid  #6B6FB3;
+	border-top:2px  solid  #6B6FB3;
+	border-bottom:2px  solid  #6B6FB3;*/
+}
+
+.marge {
+	margin-top: 50px;
+}
+
+.obligatoire {
+	background-color: #fac98f;
+}
+
+.numerique {
+	text-align : right;
+}
+
+
+.popup_operation {
+    width: 580px;
+}
+
+.titre {
+	background-color: #FFFFFF;
+}
+
+
+/************************************************
+ * bug jquery
+ ************************************************/
+.ui-autocomplete {
+	z-index: 1500;
+}
+
+
+.cumul
+{
+	background-color:#CBC1DB;
+	display:none;
+}
+
+.recap {
+	background-color:#CBC1DB;
+}
+
+
+
+td.positif
+{
+	color:green;
+}
+
+td.negatif
+{
+	color:red;
+}
+
+/************************************************
+ * colonne hover
+ ************************************************/
+.hover { background-color: #eee; }
+
+/************************************************
+ * colonne hover
+ ************************************************/
+legend {
+	padding-left: 5px;
+	background-color: #3474f6;
+	color: white;
+}

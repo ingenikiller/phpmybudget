@@ -1,0 +1,38 @@
+
+
+login -> OK
+
+comptes
+	liste -> OK
+	edition -> OK
+
+flux
+	liste -> 
+	edition ->
+
+operation
+	liste -> OK
+	edition -> OK
+	
+prévisions
+	liste ->
+	edition unitaire ->
+	edition liste ->
+
+stats accueil ->
+
+stats cumul ->
+	liste -> 
+	Détail ->
+
+stats relevés ->
+	liste ->  OK
+	Détail -> OK
+
+stats annuellles -> 
+	liste -> OK
+	Détail -> OK
+	
+Paramétrage->
+
+Periode ->

@@ -50,54 +50,29 @@ function parseListeJson(json) {
 	var tabJson = json[0].tabResult;
 	var i=0;
 	for(i=0; i<nb; i++) {
-		var row = tab.insertRow(i+1);
-		row.setAttribute('typetr', "compte")
-		row.setAttribute('class', 'l'+i%2);
-		
-		var cell1=row.insertCell(0)
-		cell1.innerHTML=tabJson[i].numeroCompte;
-		cell1.setAttribute('align', "center")
-		
-		var cell2 = row.insertCell(1);
-		cell2.innerHTML=tabJson[i].libelle;
-		cell2.setAttribute('align', "center");
-		
-		var cell3 = row.insertCell(2);
-		cell3.setAttribute('align', "right");
-		cell3.innerHTML=Number(tabJson[i].solde).toFixed(2).replace(',','');
+		var row = $('<tr typetr="compte"/>');
+		row.append($("<td/>").text(tabJson[i].numeroCompte));
+		row.append($("<td/>").text(tabJson[i].libelle));
+		row.append($('<td class="text-right"/>').text(Number(tabJson[i].solde).toFixed(2).replace(',','')));
 		var solde = tabJson[i].solde;
-		
-		var cell4 = row.insertCell(3);
-		var montant = Number(tabJson[i].montant);
-		//montant=tabJson[i].montant.replace(',','');
-		//cell4.innerHTML=montant;
-		cell4.setAttribute('align', "right");
 		var sommeOpe  = tabJson[i].associatedObjet[0].tabResult[0].somme;
 		var calcul = Number(solde) + Number(sommeOpe);
-		cell4.innerHTML=calcul.toFixed(2);//.replace(',','');
+		row.append($('<td class="text-right"/>').text(calcul.toFixed(2)));
 		
-		
-		var cell5 = row.insertCell(4);
-		cell5.setAttribute('align', "center");
-		cell5.innerHTML='<a href="index.php?domaine=operation&amp;service=getpage&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
+		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=operation&amp;service=getpage&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
 					+'<img border="0" src="./application/images/operations.gif" alt="Visualiser" title="Visualiser"/>'
-					+'</a>';
+					+'</a>'));
 		
-		var cell6 = row.insertCell(5);
-		cell6.setAttribute('align', "center");
-		cell6.innerHTML='<a href="#" onclick="editerCompte(\''+ tabJson[i].numeroCompte +'\')"><img border="0" src="./application/images/editer.gif" alt="Editer" title="Editer""/></a>';
-		
-		var cell7 = row.insertCell(6);
-		cell7.setAttribute('align', "center");
-		cell7.innerHTML='<a href="index.php?domaine=statistique&amp;service=menu&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
+		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerCompte(\''+ tabJson[i].numeroCompte +'\')"><img border="0" src="./application/images/editer.gif" alt="Editer" title="Editer""/></a>'));
+		//row.append($('<td class="text-center"/>').append('<span class="ui-icon ui-icon-pencil" onclick="alert(\'toto\')"/>'));
+		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=statistique&amp;service=menu&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
 					+'<img border="0" src="./application/images/statistiques.gif" alt="Visualiser" title="Visualiser"/>'
-					+'</a>';
-		
-		var cell8 = row.insertCell(7);
-		cell8.setAttribute('align', "center");
-		cell8.innerHTML='<a href="index.php?domaine=prevision&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
+					+'</a>'));
+		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=prevision&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
 					+'<img border="0" src="./application/images/statistiques.gif" alt="Visualiser" title="Visualiser"/>'
-					+'</a>';
+					+'</a>'));
+		
+		$("#tbodyResultat").append(row);
 	}
 }
 
@@ -130,8 +105,8 @@ function editerCompte(numeroCompte){
 	
 	$("div#boiteCompte").dialog({
 		resizable: false,
-		height:250,
-		width:400,
+		height:200,
+		width:600,
 		modal: true
 	});
 }

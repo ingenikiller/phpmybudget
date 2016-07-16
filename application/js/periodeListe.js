@@ -94,7 +94,7 @@ function listerObjects(){
 */
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
-	$('tr[typetr=annee]').remove();
+	$('tr[typetr=periode]').remove();
 	
 	var total = json[0].nbLineTotal;
 	var nbpage = Math.ceil(total/json[0].nbLine);
@@ -107,7 +107,12 @@ function parseListeJson(json) {
 	var tabJson = json[0].tabResult;
 	var i=0;
 	for(i=0; i<nb; i++) {
-		var row = tab.insertRow(i+1);
+		var row = $('<tr typetr="periode"/>');
+		row.append($('<td/>').text(tabJson[i].annee));
+		row.append($('<td  class="text-center"/>').text(tabJson[i].nbmois));
+		$("#tbodyResultat").append(row);
+
+		/*var row = tab.insertRow(i+1);
 		row.setAttribute('typetr', "annee")
 		row.setAttribute('class', 'l'+i%2);
 		
@@ -117,7 +122,7 @@ function parseListeJson(json) {
 		
 		var cell2 = row.insertCell(1);
 		cell2.innerHTML=tabJson[i].nbmois;
-		cell2.setAttribute('align', "center");
+		cell2.setAttribute('align', "center");*/
 	}
 }
 

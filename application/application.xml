@@ -60,6 +60,8 @@
 			<service name="statmois" classe="GestionStatistiquesService" methode="statMois" isPrivee="true"  xsl="xsl/statistiques_mois.xsl" />
 			<service name="affformannees" classe="GestionStatistiquesService" methode="affFormMois" isPrivee="true"  xsl="xsl/statistiques_annees_form.xsl" />
 			<service name="statannees" classe="GestionStatistiquesService" methode="statAnnees" isPrivee="true"  xsl="xsl/statistiques_annees.xsl" />
+			<service name="affformcumul" classe="GestionStatistiquesService" methode="affFormCumul" isPrivee="true"  xsl="xsl/statistiques_cumul_form.xsl" />
+			<service name="statcumul" classe="GestionStatistiquesService" methode="statCumul" isPrivee="true"  xsl="xsl/statistiques_cumul.xsl" />
 		</domaine>
 		<domaine name="technique">
 			<service name="login" classe="Login" methode="fictive" isPrivee="false"  xsl="xsl/login.xsl" privee="false"/>

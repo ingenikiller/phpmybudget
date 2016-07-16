@@ -1,7 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9f62212-d2ca-46db-b48c-48e88115e8e9" name="Default" comment="" />
+    <list default="true" id="e9f62212-d2ca-46db-b48c-48e88115e8e9" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-bg_glass_45_0078ae_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-bg_glass_55_f8da4e_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-bg_glass_75_79c9ec_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-bg_gloss-wave_75_3474f6_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-icons_0078ae_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-icons_056b93_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-icons_d8e7f3_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-icons_e0fdff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-icons_f5e175_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-icons_f7a50d_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/images/ui-icons_fcd113_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/phpmybudget.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/css/bootstrap-theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/css/bootstrap-theme.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/bootstrap/bootstrap-3.3.5-dist/js/npm.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/css/bootstrap-force.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/css/phpmybudget.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/AUTHORS.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/LICENSE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/external/jquery/jquery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/jquery-ui.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/jquery-ui.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/jquery-ui.structure.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/jquery-ui.structure.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/jquery-ui.theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/jquery-ui.theme.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/jquery-ui-1.12.0.custom/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/multiselect-master/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/multiselect-master/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/multiselect-master/bower.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/multiselect-master/css/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/multiselect-master/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/multiselect-master/js/multiselect.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/multiselect-master/js/multiselect.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/multiselect-master/lib/google-code-prettify/prettify.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/jquery/multiselect-master/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/js/statistiquesCumul.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/xsl/statistiques_cumul.xsl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/xsl/statistiques_cumul_form.xsl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/suivi.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testmysql.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/application.xml" afterPath="$PROJECT_DIR$/application/application.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/css/principal.css" afterPath="$PROJECT_DIR$/application/css/principal.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/css/style.css" afterPath="$PROJECT_DIR$/application/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/js/commun.js" afterPath="$PROJECT_DIR$/application/js/commun.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/js/compteEdition.js" afterPath="$PROJECT_DIR$/application/js/compteEdition.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/js/fluxListe.js" afterPath="$PROJECT_DIR$/application/js/fluxListe.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/js/jquery_opertation_edition.js" afterPath="$PROJECT_DIR$/application/js/jquery_opertation_edition.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/js/operationListe.js" afterPath="$PROJECT_DIR$/application/js/operationListe.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/js/periodeListe.js" afterPath="$PROJECT_DIR$/application/js/periodeListe.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/js/previsions.js" afterPath="$PROJECT_DIR$/application/js/previsions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/js/statistiques.js" afterPath="$PROJECT_DIR$/application/js/statistiques.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/GestionStatistiquesService.php" afterPath="$PROJECT_DIR$/application/services/GestionStatistiquesService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/comptes_liste.xsl" afterPath="$PROJECT_DIR$/application/xsl/comptes_liste.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/flux_liste.xsl" afterPath="$PROJECT_DIR$/application/xsl/flux_liste.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/libelles.xsl" afterPath="$PROJECT_DIR$/application/xsl/libelles.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/login.xsl" afterPath="$PROJECT_DIR$/application/xsl/login.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/operation_liste.xsl" afterPath="$PROJECT_DIR$/application/xsl/operation_liste.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/pagination.xsl" afterPath="$PROJECT_DIR$/application/xsl/pagination.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/periode_liste.xsl" afterPath="$PROJECT_DIR$/application/xsl/periode_liste.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/presentation.xsl" afterPath="$PROJECT_DIR$/application/xsl/presentation.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/prevision_detail.xsl" afterPath="$PROJECT_DIR$/application/xsl/prevision_detail.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/previsions_liste.xsl" afterPath="$PROJECT_DIR$/application/xsl/previsions_liste.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/statistiques_annees.xsl" afterPath="$PROJECT_DIR$/application/xsl/statistiques_annees.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/statistiques_annees_form.xsl" afterPath="$PROJECT_DIR$/application/xsl/statistiques_annees_form.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/statistiques_commun.xsl" afterPath="$PROJECT_DIR$/application/xsl/statistiques_commun.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/statistiques_menu.xsl" afterPath="$PROJECT_DIR$/application/xsl/statistiques_menu.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/statistiques_releves.xsl" afterPath="$PROJECT_DIR$/application/xsl/statistiques_releves.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/statistiques_releves_form.xsl" afterPath="$PROJECT_DIR$/application/xsl/statistiques_releves_form.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/template_name.xsl" afterPath="$PROJECT_DIR$/application/xsl/template_name.xsl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/xsl/variables.xsl" afterPath="$PROJECT_DIR$/application/xsl/variables.xsl" />
+    </list>
     <ignored path="dev_phpmybudget.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -21,7 +115,48 @@
     <favorites_list name="dev_phpmybudget" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="bootstrap-force.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/css/bootstrap-force.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.846153">
+              <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="periode_liste.xsl" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/xsl/periode_liste.xsl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.36480686">
+              <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="variables.xsl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/xsl/variables.xsl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.6153846">
+              <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.xsl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/xsl/login.xsl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.307693">
+              <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,16 +170,17 @@
         <option value="$PROJECT_DIR$/application/xsl/comptes_liste.xsl" />
         <option value="$PROJECT_DIR$/application/js/operationListe.js" />
         <option value="$PROJECT_DIR$/application/xsl/operation_liste.xsl" />
-        <option value="$PROJECT_DIR$/application/css/phpmybudget.css" />
         <option value="$PROJECT_DIR$/application/xsl/prevision_detail.xsl" />
-        <option value="$PROJECT_DIR$/application/xsl/login.xsl" />
         <option value="$PROJECT_DIR$/application/js/compteEdition.js" />
         <option value="$PROJECT_DIR$/application/xsl/statistiques_annees_form.xsl" />
         <option value="$PROJECT_DIR$/application/xsl/template_name.xsl" />
         <option value="$PROJECT_DIR$/application/xsl/previsions_liste.xsl" />
         <option value="$PROJECT_DIR$/application/js/previsions.js" />
-        <option value="$PROJECT_DIR$/application/css/bootstrap-force.css" />
         <option value="$PROJECT_DIR$/application/js/periodeListe.js" />
+        <option value="$PROJECT_DIR$/application/xsl/variables.xsl" />
+        <option value="$PROJECT_DIR$/application/xsl/login.xsl" />
+        <option value="$PROJECT_DIR$/application/css/phpmybudget.css" />
+        <option value="$PROJECT_DIR$/application/css/bootstrap-force.css" />
         <option value="$PROJECT_DIR$/application/xsl/periode_liste.xsl" />
       </list>
     </option>
@@ -92,18 +228,78 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dev_phpmybudget" />
+              <option name="myItemId" value="phpmybudget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phpmybudget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dev_phpmybudget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phpmybudget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dev_phpmybudget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phpmybudget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dev_phpmybudget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xsl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phpmybudget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dev_phpmybudget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -111,6 +307,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="js.eslint.eslintPackage" value="" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -173,12 +370,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18020834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18020834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928064" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286004" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -213,22 +410,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/xsl/template_name.xsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="312" column="14" selection-start-line="312" selection-start-column="14" selection-end-line="312" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/xsl/flux_liste.xsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="19" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/xsl/periode_liste.xsl">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -241,9 +422,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="106" column="36" selection-start-line="106" selection-start-column="36" selection-end-line="106" selection-end-column="36" />
-          <folding>
-            <marker date="1468505182145" expanded="true" signature="3020:3023" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -251,9 +429,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="94" column="49" selection-start-line="94" selection-start-column="49" selection-end-line="94" selection-end-column="49" />
-          <folding>
-            <marker date="1468505182139" expanded="true" signature="2287:2354" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -324,9 +499,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1468505182208" expanded="true" signature="592:594" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -389,9 +562,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1468505182208" expanded="true" signature="592:594" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -474,14 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/xsl/login.xsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58092177">
-          <caret line="43" column="48" selection-start-line="43" selection-start-column="48" selection-end-line="43" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/xsl/comptes_liste.xsl">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -494,11 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.8888888">
           <caret line="108" column="17" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="17" />
-          <folding>
-            <marker date="1468505182137" expanded="true" signature="2101:2218" placeholder="..." />
-            <marker date="1468505182137" expanded="true" signature="2720:2839" placeholder="..." />
-            <marker date="1468505182137" expanded="true" signature="2981:3100" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -514,16 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-          <folding>
-            <marker date="1468505182208" expanded="true" signature="592:594" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/xsl/variables.xsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -566,7 +714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37421384">
           <caret line="246" column="8" selection-start-line="246" selection-start-column="8" selection-end-line="246" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -589,7 +736,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.1356993">
           <caret line="193" column="16" selection-start-line="193" selection-start-column="16" selection-end-line="193" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -609,21 +755,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/xsl/periode_liste.xsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8358369">
-          <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/js/periodeListe.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23695198">
           <caret line="106" column="36" selection-start-line="106" selection-start-column="36" selection-end-line="106" selection-end-column="36" />
-          <folding>
-            <marker date="1468505182145" expanded="true" signature="3020:3023" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -631,9 +766,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.017745303">
           <caret line="94" column="49" selection-start-line="94" selection-start-column="49" selection-end-line="94" selection-end-column="49" />
-          <folding>
-            <marker date="1468505182139" expanded="true" signature="2287:2354" placeholder="{...}" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/xsl/variables.xsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6153846">
+          <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/xsl/login.xsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.307693">
+          <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/css/phpmybudget.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1276824">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/css/bootstrap-force.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.846153">
+          <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/xsl/periode_liste.xsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36480686">
+          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -1,16 +1,20 @@
 
-html {
+/*html {
 
     margin : 0px auto 0px auto;
     padding : 0;
+}*/
     /*background-image: url(images/fond.gif);*/
     /*background-color : #FFFFFF;*/
-}
-body {
+/*body {
     margin : auto;
     padding : auto;
+	font-size : 12px;
+}*/
     /*background-color:#AACCDD;*/
-}
+
+
+
 
 body#popup {
     margin : auto;
@@ -68,7 +72,7 @@ tr.entete {
 	border-width: 0px;
 }
 
-tr
+/*tr
 {
 	margin-bottom: 0px;
 	margin-right: 0px;
@@ -79,17 +83,17 @@ tr
 	padding-left: 0px;
 	padding-top: 0px;
 	padding-bottom: 0px;
-}
+}*/
 
 /* Lignes entête de tableau */
-tr.entete
+/*tr.entete
 {
 	background-color: #babac5;
 	font-size : 8pt;
 	font-family: verdana;
 	font-style: normal;
 	font-weight: bold;
-}
+}*/
 
 td.lienImage {
 	text-align:center;
@@ -177,16 +181,16 @@ div#popup {
 	
 }
 
-#contenu {
-    margin : 0px 0px 0px 150px;
+.contenu {
+    /*margin : 0px 0px 0px 150px;/
     /*background-repeat : repeat;*/
-    width : auto;
-	min-height:300px;
+    /*width : auto;
+	min-height:300px;*/
 	/*float:right;*/
-	background-color:#AACCEE;
-	border-left:2px  solid  #6B6FB3;
+	background-color:#FFFFFF;
+	/*border-left:2px  solid  #6B6FB3;
 	border-top:2px  solid  #6B6FB3;
-	border-bottom:2px  solid  #6B6FB3;
+	border-bottom:2px  solid  #6B6FB3;*/
 }
 
 #contenuPleinePage {

@@ -70,8 +70,8 @@ function soumettre(form) {
 	}
 	
 	//maj de la liste des opérations
-	pagination('recherche')
-	
+	pagination('recherche');
+
 	return false;
 }
 

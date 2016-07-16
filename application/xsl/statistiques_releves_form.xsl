@@ -8,9 +8,42 @@
 	<xsl:template name="controleMenu">N</xsl:template>
 	<xsl:template name="Contenu">
 		<xsl:call-template name="boiteDetail"/>
-		<center>
+		
+		
 			<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
-			<form method="POST" action="#" onsubmit="return soumettreRelevesMois(this);" name="formulaire" id="formulaire">
+			<div class="row">
+				<div class="col-xs-4"/>
+				<div class="col-xs-4">
+					<form class="form-group row"  method="POST" action="#" onsubmit="return soumettreRelevesMois(this);" name="formulaire" id="formulaire">
+						<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
+						<fieldset>
+							<div class="form-group row">
+								<label for="premierReleve" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.PREMIERRELEVE"/></label>
+								<div class="col-sm-3">
+									<xsl:apply-templates select="/root/data/ListeReleves">
+								<xsl:with-param name="name" select="'premierReleve'"/>
+							</xsl:apply-templates>
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label for="dernierReleve" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.DERNIERRELEVE"/></label>
+								<div class="col-sm-3">
+									<xsl:apply-templates select="/root/data/ListeReleves">
+								<xsl:with-param name="name" select="'dernierReleve'"/>
+							</xsl:apply-templates>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary">Valider</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			<!--form method="POST" action="#" onsubmit="return soumettreRelevesMois(this);" name="formulaire" id="formulaire">
 				<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
 				<table class="formulaire">
 					<tr>
@@ -41,14 +74,22 @@
 						</td>
 					</tr>
 				</table>
-				<!--<iframe name="frame_resultat" id="frame_resultat" src="" width="100%" height="500"/>-->
-				<table id="tableResultat" name="tableResultat" class="formulaire"/>
-			</form>
-		</center>
+				
+			</form-->
+			<table id="tableResultat" name="tableResultat" class="table table-bordered table-hover"/>
 	</xsl:template>
 	<xsl:template match="ListeReleves">
 		<xsl:param name="name"/>
+		<xsl:param name="obligatoire"/>
 		<select name="{$name}" id="{$name}">
+			<xsl:choose>
+				<xsl:when test="$obligatoire='O'">
+					<xsl:attribute name="class">form-control obligatoire</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="class">form-control</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
 			<option/>
 			<xsl:apply-templates select="Dynamic"/>
 		</select>
