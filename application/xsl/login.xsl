@@ -23,7 +23,9 @@
                 <div class="col-xs-4"/>
                 <div class="col-xs-4">
                     <fieldset>
-                        <lengend>Login</lengend>
+                        <legend>
+                            <xsl:value-of select="$LBL.LOGIN"/>
+                        </legend>
                         <br/>
                         <br/>
 

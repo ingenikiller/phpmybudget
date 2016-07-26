@@ -67,3 +67,12 @@ td.negatif
  * colonne hover
  ************************************************/
 .hover { background-color: #eee; }
+
+/************************************************
+ * colonne hover
+ ************************************************/
+legend {
+	padding-left: 5px;
+	background-color: #3474f6;
+	color: white;
+}

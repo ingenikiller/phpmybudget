@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <!-- version de jQuery -->
-<xsl:variable name="JQUERY-VERSION" select="'1.11.4'"/>
+<xsl:variable name="JQUERY-VERSION" select="'1.12.0'"/>
 
 <!-- version de Bootstrap -->
 <xsl:variable name="BOOTSTRAP-VERSION" select="'3.3.5'"/>
