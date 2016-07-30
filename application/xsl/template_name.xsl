@@ -102,9 +102,9 @@
     <xsl:template name="SelectMois">
         <xsl:param name="name"/>
         <xsl:param name="obligatoire" select="'N'"/>
-        <select name="{$name}" id="{$name}">
+        <select name="{$name}" id="{$name}" class="form-control">
             <xsl:if test="$obligatoire='O'">
-                <xsl:attribute name="class">obligatoire</xsl:attribute>
+                <xsl:attribute name="class">form-control obligatoire</xsl:attribute>
             </xsl:if>
             <option/>
             <option value="01">Janvier</option>

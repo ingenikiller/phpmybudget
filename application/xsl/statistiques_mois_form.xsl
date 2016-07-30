@@ -11,56 +11,61 @@
 		<xsl:call-template name="boiteDetail"/>
 		<center>
 			<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
-			<form method="POST" action="#" onsubmit="return soumettreMois(this);" name="formulaire" id="formulaire">
-				<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
-				<table class="formulaire">
-					<tr>
-						<td>
-							<xsl:value-of select="$LBL.PREMIERMOIS"/>
-						</td>
-						<td>
-							<xsl:apply-templates select="/root/data/ListeAnnee">
-								<xsl:with-param name="name" select="'premiereAnnee'"/>
-								<xsl:with-param name="obligatoire" select="'O'"/>
-							</xsl:apply-templates>
-							<xsl:call-template name="SelectMois">
-								<xsl:with-param name="name" select="'premierMois'"/>
-								<xsl:with-param name="obligatoire" select="'O'"/>
-							</xsl:call-template>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<xsl:value-of select="$LBL.DERNIERMOIS"/>
-						</td>
-						<td>
-							<xsl:apply-templates select="/root/data/ListeAnnee">
-								<xsl:with-param name="name" select="'derniereAnnee'"/>
-							</xsl:apply-templates>
-							<xsl:call-template name="SelectMois">
-								<xsl:with-param name="name" select="'dernierMois'"/>
-							</xsl:call-template>
-						</td>
-					</tr>
-				</table>
-				<table>
-					<tr>
-						<td colspan="2" rowspan="1">
-							<input name="valider" value="Valider" type="submit"/>
-						</td>
-					</tr>
-				</table>
-				<!--<iframe name="frame_resultat" id="frame_resultat" src="" width="100%" height="500"/>-->
-				<table id="tableResultat" name="tableResultat" class="formulaire"/>
-			</form>
+			<div class="row">
+				<div class="col-xs-4"/>
+				<div class="col-xs-4">
+					<form class="form-group row"  method="POST" action="#" onsubmit="return soumettreMois(this);" name="formulaire" id="formulaire">
+						<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
+						<fieldset>
+							<div class="form-group row">
+								<label for="premiereAnnee" class="col-sm-4 form-control-label"><xsl:value-of select="$LBL.PREMIERMOIS"/></label>
+								<div class="col-sm-3">
+									<xsl:call-template name="SelectMois">
+										<xsl:with-param name="name" select="'premierMois'"/>
+										<xsl:with-param name="obligatoire" select="'O'"/>
+									</xsl:call-template>
+									</div>
+								<div class="col-sm-3">
+									<xsl:apply-templates select="/root/data/ListeAnnee">
+										<xsl:with-param name="name" select="'premiereAnnee'"/>
+										<xsl:with-param name="obligatoire" select="'O'"/>
+									</xsl:apply-templates>
+
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="derniereAnnee" class="col-sm-4 form-control-label"><xsl:value-of select="$LBL.DERNIERMOIS"/></label>
+								<div class="col-sm-3">
+									<xsl:call-template name="SelectMois">
+										<xsl:with-param name="name" select="'dernierMois'"/>
+									</xsl:call-template>
+								</div>
+								<div class="col-sm-3">
+									<xsl:apply-templates select="/root/data/ListeAnnee">
+										<xsl:with-param name="name" select="'derniereAnnee'"/>
+									</xsl:apply-templates>
+								</div>
+
+							</div>
+							<div class="form-group row">
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary">Valider</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			<table id="tableResultat" name="tableResultat" class="table table-bordered"  table-hover=""/>
 		</center>
 	</xsl:template>
 	<xsl:template match="ListeAnnee">
 		<xsl:param name="name"/>
 		<xsl:param name="obligatoire"/>
-		<select name="{$name}" id="{$name}">
+		<select name="{$name}" id="{$name}" class="form-control">
 			<xsl:if test="$obligatoire='O'">
-				<xsl:attribute name="class">obligatoire</xsl:attribute>
+				<xsl:attribute name="class">form-control obligatoire</xsl:attribute>
 			</xsl:if>
 			<option/>
 			<xsl:apply-templates select="Dynamic"/>
