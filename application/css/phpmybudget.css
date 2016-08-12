@@ -32,6 +32,9 @@
 	background-color: #FFFFFF;
 }
 
+p {
+	font-size: 12px;
+}
 
 /************************************************
  * bug jquery
@@ -75,4 +78,8 @@ legend {
 	padding-left: 5px;
 	background-color: #3474f6;
 	color: white;
+}
+
+.colonnemoisencours {
+	background-color: #A9D0F5;
 }

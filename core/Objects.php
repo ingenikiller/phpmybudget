@@ -35,9 +35,10 @@ abstract class Objects
     
     protected function _init() { }
 
-    final public function fetchPublicMembers()
-    {
-        if ($this->_props) { return $this->_props; }
+    final public function fetchPublicMembers() {
+        if ($this->_props) {
+			return $this->_props;
+		}
         $reflect = new ReflectionObject($this);
         foreach ($reflect->getProperties(ReflectionProperty::IS_PUBLIC) as $var) {
             $this->_props[$var->getName()] = $this->{$var->getName()};
@@ -45,19 +46,8 @@ abstract class Objects
         return $this->_props;
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         return implode(' - ', $this->_props);
-    }
-    
-    /*public static function setPk($pk)
-    {
-        static::$_pk = (string)$pk;
-    }*/
-    
-//     public function lastInsertId() {
-//        return self::$_pdo->lastInsertId();
-//    }
-    
+    }    
 }
 ?>

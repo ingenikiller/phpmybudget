@@ -3,16 +3,7 @@
 class AuthentificateurStandard {
 
 	public function __construct() {
-	
 	}
-
-	/*public function getLoginSession() {
-		if(isset($_SESSION['login'])) {
-			return $_SESSION['login'];
-		}
-		
-		return null;;
-	}*/
 	
 	public function authenticate($p_contexte){
 		if(!isset($_SESSION['userid'])){
@@ -29,5 +20,4 @@ class AuthentificateurStandard {
 		$p_contexte->setUser($user);
 	}
 }
-
 ?>

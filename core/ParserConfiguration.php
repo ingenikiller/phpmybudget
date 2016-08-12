@@ -18,7 +18,6 @@ class ParserConfiguration {
 			die("Domaine/service $p_domaine/$p_service introuvable!!!");
 		}
 		
-		
 		if (isset($result[0]['render'])) {
 			$page->setRender((string) $result[0]['render']);
 		}
