@@ -39,7 +39,7 @@
 		</div>
 		<input type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerFlux('');"/>
 		
-		<table class="table table-striped" name="tableauResultat" id="tableauResultat">
+		<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
 			<thead>
 				<tr class="entete">
 					<th>
@@ -48,13 +48,13 @@
 					<th>
 						<xsl:value-of select="$LBL.DESCRIPTION"/>
 					</th>
-					<th>
+					<th class="text-center">
 						<xsl:value-of select="$LBL.COMPTEPRINCIPAL"/>
 					</th>
-					<th>
+					<th class="text-center">
 						<xsl:value-of select="$LBL.COMPTEDESTINATION"/>
 					</th>
-					<th colspan="2">
+					<th colspan="2" class="text-center">
 						<xsl:value-of select="$LBL.ACTIONS"/>
 					</th>
 				</tr>
