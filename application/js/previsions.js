@@ -231,8 +231,9 @@ function parseListePrevisionJson(json) {
 	for(i=0; i<nb; i++) {
 		var row = $('<tr typetr="prevision"/>');
 		row.append($('<td/>').text(tabJson[i].mois));
-		row.append($('<td/>').append('<input type="text" id="montant-'+(i+1)+'" ligneid="'+tabJson[i].ligneId+'" onblur="return isDouble(this);" value="'+tabJson[i].montant+'" />'));
-		row.append($('<td/>').append('<input type="button" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);" />'));
+		row.append($('<td/>').append('<input class="text-right" type="text" id="montant-'+(i+1)+'" ligneid="'+tabJson[i].ligneId+'" onblur="return isDouble(this);" value="'+tabJson[i].montant+'" size="10" />'));
+		//row.append($('<td/>').append('<input type="button" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);"></input>'));
+		row.append($('<td class="text-center"/>').append('<button class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);"><span class="ui-icon ui-icon-arrowthick-1-s"></span></button>'));
 
 
 		$("#tbodylisteentete").append(row);
@@ -275,6 +276,7 @@ function propagerMontant(btn){
 		$('#montant-'+i).val(montant);
 		i+=1;
 	}
+	return false;
 }
 
 
