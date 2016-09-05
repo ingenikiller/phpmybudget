@@ -13,19 +13,25 @@
     <xsl:template match="/">
         <data>
 			<colgroup />
+			<xsl:for-each select="/root/data/Periodes/Periode">
+				<colgroup>
+					<xsl:if test="periode=substring(/root/date, 0, 8)">
+						<xsl:attribute name="class">colonnemoisencours</xsl:attribute>
+					</xsl:if>
+				</colgroup>
+			</xsl:for-each>
+			<colgroup />
+			<!--colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup style="background-color: #A9D0F5;"/>
 			<colgroup />
 			<colgroup />
 			<colgroup />
 			<colgroup />
 			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
+			<colgroup /-->
             <thead>
                 <tr>
                     <th>

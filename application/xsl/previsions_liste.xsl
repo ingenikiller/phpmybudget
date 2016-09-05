@@ -289,18 +289,18 @@
         <div id="boiteListeEntete" title="{$LBL.EDITIONLISTEPREVISION}" style="display: none;">
             <form method="post" action="" onsubmit="return enregistreListeLignes(this);">
                 <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
-                <table id="tabListeEntete" name="tabListeEntete" width="80%" align="center">
+                <table id="tabListeEntete" name="tabListeEntete" width="80%" align="center" class="table table-striped table-bordered">
                     <thead>
-                    <tr>
-                        <th>Mois</th>
-                        <th>Montant</th>
-                        <th>Actions</th>
-                    </tr>
+						<tr>
+							<th><xsl:value-of select="$LBL.MOIS"/></th>
+							<th><xsl:value-of select="$LBL.MONTANT"/></th>
+							<th><xsl:value-of select="$LBL.PROPAGER"/></th>
+						</tr>
                     </thead>
                     <tbody id="tbodylisteentete"/>
                     <tfoot>
                         <tr>
-                            <td style="text-align:center;">
+                            <td style="text-align:center;" colspan="3">
                                 <input type="submit" class="bouton" id="" name="" value="{$LBL.MODIFIER}"/>
                             </td>
                         </tr>

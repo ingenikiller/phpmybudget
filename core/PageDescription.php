@@ -4,11 +4,7 @@ class PageDescription {
 
     private $m_nomClasse = '';
     private $m_privee;
-    /*private $m_createService = null;
-    private $m_updateService = null;
-    private $m_displayService = null;
-    private $m_deleteService = null;*/
-	
+    
 	private $m_domaine = null;
 	private $m_service = null;
 	
@@ -76,25 +72,7 @@ class PageDescription {
         }
         if($this->m_render=='json'){
             echo json_encode($p_contexte->m_dataResponse);
-            
         }
-        
-    }
-
-    public function setCreateService($p_service) {
-        $this->m_createService = $p_service;
-    }
-
-    public function setUpdateService($p_service) {
-        $this->m_updateService = $p_service;
-    }
-
-    public function setDisplayService($p_service) {
-        $this->m_displayService = $p_service;
-    }
-
-    public function setDeleteService($p_service) {
-        $this->m_deleteService = $p_service;
     }
 
     public function setXslFile($p_xslFile) {
@@ -110,7 +88,6 @@ class PageDescription {
                     foreach($value as $key2 => $data) {
                         $this->parseListObject($asso, $data);
                     }
-                    
                 }
             } else if (is_array($value)){
                 Logger::$instance->addLogMessage('addBlock tableau');
@@ -160,7 +137,6 @@ class PageDescription {
                 Logger::$instance->addLogMessage('parse ligne');
                 $ligne = $p_noeud->addChild($key, $dataRow);
             }
-            
         }
     }
 
@@ -289,7 +265,5 @@ class PageDescription {
         //echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">';
         echo $proc->transformToXML($doc);
     }
-
 }
-
 ?>

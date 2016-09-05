@@ -54,6 +54,7 @@
 	<xsl:variable name="LBL.MODEDEPAIEMENT">Mode de règlement</xsl:variable>
 	<xsl:variable name="LBL.MODEDEPAIEMENTDEF">Mode de paiement par défaut</xsl:variable>
 	<xsl:variable name="LBL.MODIFIER">Modifier</xsl:variable>
+	<xsl:variable name="LBL.MOIS">Mois</xsl:variable>
 	<xsl:variable name="LBL.MONTANT">Montant</xsl:variable>
 	<xsl:variable name="LBL.MOTDEPASSE">Mot de passe</xsl:variable>
 	<xsl:variable name="LBL.NBMOIS">Nombre mois</xsl:variable>
@@ -75,6 +76,7 @@
 	<xsl:variable name="LBL.PRENOM">Prénom</xsl:variable>
 	<xsl:variable name="LBL.PREVISIONS">Prévisions</xsl:variable>
 	<xsl:variable name="LBL.PREVISIONSCOMPTE">Prévisions du compte</xsl:variable>
+	<xsl:variable name="LBL.PROPAGER">Propager</xsl:variable>
 	<xsl:variable name="LBL.RECETTE">Recette</xsl:variable>
 	<xsl:variable name="LBL.RECETTES">Recettes</xsl:variable>
 	<xsl:variable name="LBL.RETOURALALISTE">Retour à la liste</xsl:variable>

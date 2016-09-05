@@ -26,13 +26,12 @@ class JPDO extends PDO
  */
 class ConnexionPDO {
     static private $instance=null;
-    //static public $instance=new JPDO($dsn, $username = '', $password = '', $driver_options = array());
-     public static function getInstance(){
+    
+    public static function getInstance(){
         if(self::$instance==null){
-            $arrExtraParam= array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");//utf8
+            $arrExtraParam= array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
             self::$instance = new JPDO('mysql:host='.HOST.';dbname='.DATABASE,USER,PASSWD,$arrExtraParam);
             self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //self::$instance  = new JPDO($dsn, $username = '', $password = '', $driver_options = array());
         }
         return self::$instance;
     }
