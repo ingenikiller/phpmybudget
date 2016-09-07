@@ -22,7 +22,7 @@ abstract class Objects
 	 * constructeur
 	 * 
 	 */
-    final public function __construct(){
+    public function __construct(){
         if(self::$_pdo==null){
             //$arrExtraParam= array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
             //self::$_pdo = new JPDO('mysql:host=localhost;dbname=appli_migration','root','',$arrExtraParam);

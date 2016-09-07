@@ -33,18 +33,15 @@ class SegmentsService {
         Logger::getInstance()->addLogMessage("cleseg-$indice:".$p_contexte->m_dataRequest->getData('cleseg-'.$indice));
         
         while($p_contexte->m_dataRequest->getData('cleseg-'.$indice)!=null) {
-            
             $codseg = '';
             $segment= new Segment();
             $segment->codseg=$p_contexte->m_dataRequest->getData('codseg-'.$indice);
             $segment->cleseg=$p_contexte->m_dataRequest->getData('cleseg-'.$indice);
             $segment->load();
             $segment->fieldObject($p_contexte->m_dataRequest,'', '-', $indice);
-            $segment->save();
+            $segment->update();
             $indice++;
         }
-        
-        
     }
 
     /**
@@ -59,7 +56,7 @@ class SegmentsService {
         //$segment->libCourt=$p_contexte->m_dataRequest->getData('Nlibcourt');
         //$segment->libLong=$p_contexte->m_dataRequest->getData('Nliblong');
         $segment->numord=$p_contexte->m_dataRequest->getData('Nnumord');
-        $segment->save();
+        $segment->create();
 //        $liste = new ListObject();
 //        $liste->name ='Segments';
 //        $liste->request('Segment', "cleseg='".$p_contexte->m_dataRequest->getData('NCleseg')."'");

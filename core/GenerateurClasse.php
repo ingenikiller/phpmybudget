@@ -55,7 +55,7 @@ class GenerateurClasse {
 			else
 				$this->tabChamps [$l_champs ['Field']] = $l_champs;
 		}
-		;
+		
 	}
 	
 	/**

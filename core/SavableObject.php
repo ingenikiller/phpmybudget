@@ -9,10 +9,34 @@ abstract class SavableObject extends Objects {
     public $associatedObjet = array();
     private $isLoaded = false;
 
+	private $champsDef;
+	
+	final public function __construct(){
+		parent::__construct();
+		$this->champsDef = $this->getChamps();
+	}
+	
     public function isLoaded() {
         return $this->isLoaded;
     }
 
+	/**
+	 * renvoie la liste des champs de la table et leurs caractéristiques
+	 */
+	private function getChamps(){
+		$table=array();
+		$pdo = ConnexionPDO::getInstance ();
+		$l_requete = 'SHOW COLUMNS FROM ' . $this->_tableName;
+		$l_result = $pdo->query ( $l_requete );
+		while ( $l_champs = $l_result->fetch ( PDO::FETCH_ASSOC ) ) {
+			Logger::getInstance()->addLogMessage($l_champs ['Field']);
+			$table[$l_champs ['Field']] = $l_champs;
+		}
+		return $table;
+	}
+	
+	
+	
     /**
      * retourne les éléments de la clé primaire valorisée pour requete
      * @return type tableau
@@ -61,60 +85,26 @@ abstract class SavableObject extends Objects {
         $stmt->setFetchMode(PDO::FETCH_INTO, $this);
         $stmt->fetch(PDO::FETCH_INTO);
     }
-
-    public function save() {
-        //echo 'pk1 '. $this->getPrimaryKey() .'<br>';
-        //self::setPk($this->getPrimaryKey());
-//        if (self::$_pk == null || !property_exists($this, self::$_pk)) {
-//            throw new Exception("Primary key must exist before saving");
-//        }
-        $primaryKey = implode(' AND ', $this->getPrimaryKeyValorisee());
-        $set = null;
-        $champs = null;
-        $values = null;
-        $tabKey = explode(',', $this->getPrimaryKey());
-        foreach ($this->fetchPublicMembers() as $col => $val) {
-            //echo $col.'->';
-            if ($col != 'associatedObjet') {
-                //echo 'col tr<br>';
-                //if (stripos($col, 'date') === 0) {
-                    //
-                //} else {
-                    $champs[] = $col;
-                    $values[] = trim(self::$_pdo->quote($val));
-                //}
-                if (array_search($col, $tabKey) === false) {
-                    $set[] = sprintf("%s=%s", $col, self::$_pdo->quote($val));
-                }
-            }
-        }
-        //$query = 'INSERT INTO '.$this->_tableName. '(' . implode(',', $champs) . ') VALUES (' . implode(',',$values) . ') ON DUPLICATE KEY ';
-        $query = sprintf("INSERT INTO %s (%s) VALUES (%s) ON DUPLICATE KEY ", $this->_tableName, implode(',', $champs), implode(',', $values));
-        $query .= sprintf("UPDATE %s "//WHERE %s",
-                , implode(',', $set));
-        //$primaryKey);
-//        $query .= sprintf("UPDATE %s SET %s WHERE %s",
-//                         $this->_tableName,
-//                         implode(',', $set),
-//                         $primaryKey);
-        try {
-            Logger::getInstance()->addLogMessage('requete save:' . $query);
-            $stmt = self::$_pdo->exec($query);
-//            if($stmt==FALSE) {
-//                throw new TechnicalException(self::$_pdo->errorCode(),self::$_pdo->errorInfo() );
-//            }
-        } catch (PDOException $e) {
-            throw new Exception("Error occured while saving your object", null, $e);
-        }
-    }
 	
+	/**
+     * fonction de création en base d'un objet
+     */
 	public function create(){
 		$champs = null;
         $values = null;
         foreach ($this->fetchPublicMembers() as $col => $val) {
             if ($col != 'associatedObjet') {
-                    $champs[] = $col;
-                    $values[] = trim(self::$_pdo->quote($val));
+				$champDefinition = $this->champsDef[$col];
+				if($champDefinition['Extra']=='auto_increment'){
+					
+				} else {
+					$champs[] = $col;
+					if(stripos($champDefinition['Type'], 'date') === 0 || stripos($champDefinition['Type'], 'varchar') === 0) {
+						$values[] = trim(self::$_pdo->quote($val));
+					} else{
+						$values[] = $val=='' ? 0 : $val;
+					}
+				}
             }
         }
 		$query = sprintf("INSERT INTO %s (%s) VALUES (%s)", $this->_tableName, implode(',', $champs), implode(',', $values));
@@ -127,6 +117,9 @@ abstract class SavableObject extends Objects {
         }
 	}
 	
+	/**
+     * fonction de mise à jour en base d'un objet
+     */
 	public function update(){
 		$primaryKey = implode(' AND ', $this->getPrimaryKeyValorisee());
 		$set = null;
@@ -134,7 +127,12 @@ abstract class SavableObject extends Objects {
         foreach ($this->fetchPublicMembers() as $col => $val) {
             if ($col != 'associatedObjet') {
 				if (array_search($col, $tabKey) === false) {
-                    $set[] = sprintf("%s=%s", $col, self::$_pdo->quote($val));
+                    $champDefinition = $this->champsDef[$col];
+					if(stripos($champDefinition['Type'], 'date') === 0 || stripos($champDefinition['Type'], 'varchar') === 0) {
+						$set[] = sprintf("%s=%s", $col, trim(self::$_pdo->quote($val)));
+					} else{
+						$set[] = sprintf("%s=%s", $col, $val=='' ? 0 : $val);
+					}
                 }
             }
         }
@@ -149,7 +147,7 @@ abstract class SavableObject extends Objects {
 	}
 
     /**
-     * 
+     * fonction de suppression en base d'un objet
      */
     public function delete() {
         $requete = "DELETE FROM $this->_tableName WHERE " . implode(' AND ', $this->getPrimaryKeyValorisee());
