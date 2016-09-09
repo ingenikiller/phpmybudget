@@ -14,15 +14,11 @@
 				<xsl:variable name="affMenu">
 					<xsl:call-template name="controleMenu"/>
 				</xsl:variable>
+				<!-- affichage barre de navigation -->
 				<xsl:if test="$affMenu='O'">
 					<xsl:call-template name="menu"/>
-					<!--br/>
-					<br/>
-					<br/>
-					<br/-->
 				</xsl:if>
-				
-				<!--div id="message" class="message"/-->
+				<!-- affichage deu contenu -->
 				<div class="container contenu">
 					<xsl:choose>
 						<xsl:when test="$affMenu='O'">

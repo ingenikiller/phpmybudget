@@ -102,9 +102,9 @@
     <xsl:template name="SelectMois">
         <xsl:param name="name"/>
         <xsl:param name="obligatoire" select="'N'"/>
-        <select name="{$name}" id="{$name}">
+        <select name="{$name}" id="{$name}" class="form-control">
             <xsl:if test="$obligatoire='O'">
-                <xsl:attribute name="class">obligatoire</xsl:attribute>
+                <xsl:attribute name="class">form-control obligatoire</xsl:attribute>
             </xsl:if>
             <option/>
             <option value="01">Janvier</option>
@@ -284,45 +284,52 @@
                 <form method="POST" action="#" onsubmit="return soumettreDetail(this, 'formulaireDetail');"
                       name="segmentDetailForm" id="segmentDetailForm">
                     <input type="hidden" name="service" id="service"/>
-                    <table class="formulaireDetail">
-                        <tr>
-                            <th>
-                                <xsl:value-of select="$LBL.SEGMENT"/>
-                            </th>
-                            <td>
-                                <input type="text" name="cleseg" id="cleseg" readonly="readonly"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <xsl:value-of select="$LBL.CLE"/>
-                            </th>
-                            <td>
-                                <input type="text" name="codseg" id="codseg" readonly="readonly"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <xsl:value-of select="$LBL.LIBCOURT"/>
-                            </th>
-                            <td>
-                                <input type="text" name="libcourt" id="libcourt" size="12"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <xsl:value-of select="$LBL.LIBLONG"/>
-                            </th>
-                            <td>
-                                <input type="text" name="liblong" id="liblong" size="40"/>
-                            </td>
-                        </tr>
-                        <tr align="center">
-                            <td colspan="2">
-                                <input class="bouton" type="submit" name="valider" value="{$LBL.VALIDER}"/>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="container popup_operation">
+                        <div class="col-lg-12">
+                            <div class="form-group row">
+                                <label for="numeroCompte" class="col-sm-6 form-control-label">
+                                    <xsl:value-of select="$LBL.SEGMENT"/>
+                                </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" size="12" name="cleseg" id="cleseg" tabindex="10"
+                                           readonly="readonly"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="libelle" class="col-sm-6 form-control-label">
+                                    <xsl:value-of select="$LBL.CLE"/>
+                                </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="codseg" id="codseg" size="11"
+                                           readonly="readonly"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="solde" class="col-sm-6 form-control-label">
+                                    <xsl:value-of select="$LBL.LIBCOURT"/>
+                                </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" name="libcourt" id="libcourt" size="12"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="solde" class="col-sm-6 form-control-label">
+                                    <xsl:value-of select="$LBL.LIBLONG"/>
+                                </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" name="liblong" id="liblong" size="40"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4"/>
+                                <div class="form-group row">
+                                    <div class="col-sm-offset-5 col-sm-5">
+                                        <button type="submit" class="btn btn-primary">Valider</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </center>
         </div>

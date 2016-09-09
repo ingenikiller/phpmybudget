@@ -22,28 +22,28 @@
                 <table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
                     <thead>
                         <tr>
-                            <th>
+                            <th class="text-center">
                                 <xsl:value-of select="$LBL.COMPTE"/>
                             </th>
-                            <th>
+                            <th class="text-center">
                                 <xsl:value-of select="$LBL.DESCRIPTION"/>
                             </th>
-                            <th>
+                            <th class="text-center">
                                 <xsl:value-of select="$LBL.SOLDEBASE"/>
                             </th>
-                            <th>
+                            <th class="text-center">
                                 <xsl:value-of select="$LBL.SOLDE"/>
                             </th>
-                            <th>
-                                <xsl:value-of select="$LBL.OPERATIONS"/>
-                            </th>
-                            <th>
+                            <th class="text-center">
                                 <xsl:value-of select="$LBL.EDITER"/>
                             </th>
-                            <th>
+                            <th class="text-center">
+                                <xsl:value-of select="$LBL.OPERATIONS"/>
+                            </th>
+                            <th class="text-center">
                                 <xsl:value-of select="$LBL.STATISTIQUES"/>
                             </th>
-                            <th>
+                            <th class="text-center">
                                 <xsl:value-of select="$LBL.PREVISIONS"/>
                             </th>
                         </tr>

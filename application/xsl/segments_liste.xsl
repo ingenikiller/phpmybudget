@@ -10,7 +10,9 @@
 		<center>
 			<xsl:call-template name="segmentDetailEdition"/>
 			<br/>
-			<table class="formulaire" name="tableSegments" id="tableSegments">
+			<table class="table table-stripedtable-bordered" name="tableSegments" id="tableSegments">
+				<thead>
+
 				<tr>
 					<th>
 						<xsl:value-of select="$LBL.CLE"/>
@@ -28,11 +30,14 @@
 						<xsl:value-of select="$LBL.EDITER"/>
 					</th>
 				</tr>
+				</thead>
+				<tbody id="tableSegmentsListe"/>
 			</table>
 			<br/>
 			<br/>
-			<table class="formulaire" name="detail_segment" id="detail_segment">
-				<tr>
+			<table class="table table-stripedtable-bordered" name="detail_segment" id="detail_segment">
+			<thead>
+			<tr>
 					<th>
 						<xsl:value-of select="$LBL.CLE"/>
 					</th>
@@ -46,6 +51,8 @@
 						<xsl:value-of select="$LBL.EDITER"/>
 					</th>
 				</tr>
+			</thead>
+				<tbody id="detail_segmentListe"/>
 			</table>
 			<br/>
 		</center>

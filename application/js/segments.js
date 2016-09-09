@@ -66,34 +66,19 @@ function parseListeJson(json, cleseg, idTableau) {
 	var tabJson = json[0].tabResult;
 	var i=0;
 	for(i=0; i<nb; i++) {
-		var row = tab.insertRow(i+1);
-		row.setAttribute('typetr', idTableau)
-		row.setAttribute('class', 'l'+i%2);
-		
-		var cell1=row.insertCell(0)
-		cell1.innerHTML=tabJson[i].codseg;
-		cell1.setAttribute('align', "center")
-		
-		var cell2 = row.insertCell(1);
-		cell2.innerHTML=tabJson[i].libcourt;
-		cell2.setAttribute('align', "center");
-		
-		var cell3 = row.insertCell(2);
-		cell3.innerHTML=tabJson[i].liblong;
-		
-		
-		
-		var cell4 = row.insertCell(3);
+
+		var row = $('<tr typetr="'+idTableau+'"/>');
+		row.append($('<td/>').text(tabJson[i].codseg));
+		row.append($('<td/>').text(tabJson[i].libcourt));
+		row.append($('<td/>').text(tabJson[i].liblong));
+
 		if (cleseg!='CONF') {
-			cell4.innerHTML='<a href="#" onclick="editionDetail(\''+tabJson[i].cleseg+'\', \''+tabJson[i].codseg+'\')">Editer</a>';
+			row.append($('<td class="text-center"/>').append('<a href="#" onclick="editionDetail(\''+tabJson[i].cleseg+'\', \''+tabJson[i].codseg+'\')">Editer</a>'));
 		} else {
-			cell4.innerHTML='<a href="#" onclick="afficheListe(\''+tabJson[i].codseg+'\', \'detail_segment\')">Lister</a>';
-			var cell5=row.insertCell(4);
-			cell5.innerHTML='<a href="#" onclick="editionDetail(\''+tabJson[i].cleseg+'\', \''+tabJson[i].codseg+'\')">Editer</a>';
-			cell5.setAttribute('align', "center");
+			row.append($('<td class="text-center"/>').append('<a href="#" onclick="afficheListe(\''+tabJson[i].codseg+'\', \'detail_segment\')">Lister</a>'));
+			row.append($('<td class="text-center"/>').append('<a href="#" onclick="editionDetail(\''+tabJson[i].cleseg+'\', \''+tabJson[i].codseg+'\')">Editer</a>'));
 		}
-		cell4.setAttribute('align', "center");
-		
+		$('#'+idTableau+'Liste').append(row);
 	}
 }
 
@@ -200,8 +185,8 @@ function contitueParams(formulaire, tabElement) {
 	
  *************************************/
 function editionDetail(cleseg, codseg){
-	var largeur=420;
-	var hauteur=240;
+	var hauteur = 300;
+	var largeur = 620;
 
 	if(codseg!='') {
 		var params="&cleseg="+cleseg+"&codseg="+codseg;

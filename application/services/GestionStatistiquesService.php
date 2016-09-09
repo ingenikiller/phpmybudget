@@ -25,7 +25,7 @@ class GestionStatistiquesService extends ServiceStub {
         /*$requeteAsso = 'SELECT SUM( montant) AS total , fluxId
 					FROM operation 
 					WHERE nocompte='.$numeroCompte.' and noReleve=\'$parent->noreleve\' GROUP BY fluxid';*/
-        $requeteAsso = 'SELECT total, fluxId
+        $requeteAsso = 'SELECT fluxId, sum(total) as total
 					FROM stat_flux_releve
 					WHERE nocompte=' . $numeroCompte . ' and noreleve = \'$parent->noreleve\' GROUP BY fluxid';
         $listMontantFlux= new ListDynamicObject();
@@ -41,7 +41,7 @@ class GestionStatistiquesService extends ServiceStub {
         $l_requete.=" AND noreleve between '$premierReleve' AND '$dernierReleve' order by noreleve ASC";
         
         //requete de calcul des totaux crédit
-        $requeteCredit = 'SELECT SUM( montant) AS total, noReleve
+        $requeteCredit = 'SELECT noReleve, SUM( montant) AS total
 					FROM operation 
 					WHERE nocompte='.$numeroCompte.' and noReleve=\'$parent->noreleve\' and montant > 0 GROUP BY noReleve';
         $totalCredit= new ListDynamicObject();
@@ -49,7 +49,7 @@ class GestionStatistiquesService extends ServiceStub {
         $totalCredit->setAssociatedRequest(null, $requeteCredit);
         
         //requete de calcul des totaux débit
-        $requeteDebit = 'SELECT SUM( montant) AS total, noReleve
+        $requeteDebit = 'SELECT noReleve, SUM( montant) AS total
 					FROM operation 
 					WHERE nocompte='.$numeroCompte.' and noReleve=\'$parent->noreleve\' and montant < 0 GROUP BY noReleve';
         $totalDebit= new ListDynamicObject();
@@ -68,7 +68,7 @@ class GestionStatistiquesService extends ServiceStub {
 		$requeteMontantFils='SELECT sum(montant) AS total, noreleve, fluxId
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
-						AND noreleve  between \''.$premierReleve.'\' and \''.$dernierReleve.'\' group by substr(date, 1, 7)';
+						AND noreleve  between \''.$premierReleve.'\' and \''.$dernierReleve.'\' group by noreleve, fluxId, substr(date, 1, 7)';
 		$montantFluxFils = new ListDynamicObject();
 		$montantFluxFils->name='MontantFluxFils';
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
@@ -116,7 +116,7 @@ class GestionStatistiquesService extends ServiceStub {
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
 
         //requête des montants par flux/mois
-        $requeteAsso = 'SELECT total, fluxId
+        $requeteAsso = 'SELECT fluxId, sum(total) as total
 					FROM stat_flux 
 					WHERE nocompte=' . $numeroCompte . ' and mois like concat(\'$parent->mois\',\'%\') GROUP BY fluxid';
 
@@ -215,7 +215,7 @@ class GestionStatistiquesService extends ServiceStub {
 					WHERE nocompte=' . $numeroCompte . ' and date like concat(\'$parent->annee\',\'%\') GROUP BY fluxid';*/
         $requeteAsso = 'SELECT fluxId, substr(mois, 1, 4 ) AS periode, fluxMaitre, sum(total) as total
 					FROM stat_flux
-					WHERE nocompte=\'' . $numeroCompte . '\' and mois like concat(\'$parent->annee\',\'%\') GROUP BY fluxid';
+					WHERE nocompte=\'' . $numeroCompte . '\' and mois like concat(\'$parent->annee\',\'%\') GROUP BY fluxid, substr(mois, 1, 4 ), fluxMaitre';
 					
         $listMontantFlux = new ListDynamicObject();
         $listMontantFlux->name = 'ListeMontantFlux';

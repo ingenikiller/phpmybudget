@@ -27,8 +27,6 @@
                             <xsl:value-of select="$LBL.LOGIN"/>
                         </legend>
                         <br/>
-                        <br/>
-
                         <div class="form-group row">
                             <label for="nom" class="col-sm-6 form-control-label">
                                 <xsl:value-of select="$LBL.LOGIN"/>
@@ -37,8 +35,6 @@
                                 <input class="form-control" type="text" name="nom" id="nom"/>
                             </div>
                         </div>
-
-
                         <div class="form-group row">
                             <label for="motDePasse" class="col-sm-6 form-control-label">
                                 <xsl:value-of select="$LBL.MOTDEPASSE"/>
@@ -47,17 +43,15 @@
                                 <input class="form-control" id="motDePasse" name="motDePasse" type="password"/>
                             </div>
                         </div>
-
-
+						<br/>
                         <div class="form-group row">
                             <div class="col-sm-offset-5 col-sm-5">
                                 <button type="submit" class="btn btn-primary">Envoyer</button>
                             </div>
                         </div>
-
+                        <br/>
                     </fieldset>
                 </div>
-
             </div>
         </form>
         <br/>

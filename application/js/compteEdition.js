@@ -59,17 +59,19 @@ function parseListeJson(json) {
 		var calcul = Number(solde) + Number(sommeOpe);
 		row.append($('<td class="text-right"/>').text(calcul.toFixed(2)));
 		
+		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerCompte(\''+ tabJson[i].numeroCompte +'\')"><img border="0" src="./application/images/edition.gif" alt="Editer" title="Editer" width="24"/></a>'));
+		
 		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=operation&amp;service=getpage&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
-					+'<img border="0" src="./application/images/operations.gif" alt="Visualiser" title="Visualiser"/>'
+					+'<img border="0" src="./application/images/loupe.gif" alt="Visualiser" title="Visualiser les opérations" width="24"/>'
 					+'</a>'));
 		
-		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerCompte(\''+ tabJson[i].numeroCompte +'\')"><img border="0" src="./application/images/editer.gif" alt="Editer" title="Editer""/></a>'));
+		
 		//row.append($('<td class="text-center"/>').append('<span class="ui-icon ui-icon-pencil" onclick="alert(\'toto\')"/>'));
 		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=statistique&amp;service=menu&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
-					+'<img border="0" src="./application/images/statistiques.gif" alt="Visualiser" title="Visualiser"/>'
+					+'<img border="0" src="./application/images/statistiques2.gif" alt="Visualiser" title="Visualiser" width="24"/>'
 					+'</a>'));
 		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=prevision&amp;numeroCompte='+ tabJson[i].numeroCompte +'">'
-					+'<img border="0" src="./application/images/statistiques.gif" alt="Visualiser" title="Visualiser"/>'
+					+'<img border="0" src="./application/images/previsions.gif" alt="Visualiser" title="Visualiser les prévisions" width="24"/>'
 					+'</a>'));
 		
 		$("#tbodyResultat").append(row);
