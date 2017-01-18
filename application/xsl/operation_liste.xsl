@@ -21,11 +21,7 @@
                     <xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
                 </xsl:call-template>
                 <fieldset>
-                    <form method="POST" action="#" onsubmit="return rechercherOperations(this);" name="recherche"
-                          id="recherche">
-
-                        <!--legend>Recherche</legend-->
-
+                    <form method="POST" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
                         <xsl:call-template name="formulaireJson"/>
                         <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
                         <div class="row">
@@ -84,6 +80,16 @@
                                                    class="form-control numerique" size="8"/>
                                         </div>
                                     </div>
+                                    
+                                    <div class="col-xs-4">
+                                        <label for="recDate" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="recDate" name="recDate"
+                                                   class="form-control numerique" size="10"/>
+                                        </div>
+                                    </div>
 
                                     <div class="col-xs-3">
                                         <label for="recMontant" class="col-sm-5 form-control-label">
@@ -114,13 +120,75 @@
                                 </div>
                             </div>
                         </div>
-
                     </form>
                 </fieldset>
             </div>
         </div>
-		<input type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}"
-			   onclick="editerOperation('{$NUMEROCOMPTE}','');"/>
+        <!--br/>
+        <div class="row">
+            <input type="hidden" id="retour" name="retour"/>
+            <xsl:call-template name="operationEdition">
+                <xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
+            </xsl:call-template>
+            
+            <form method="POST" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
+                <xsl:call-template name="formulaireJson"/>
+                <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
+                <div class="col-lg-offset-1 col-lg-10">
+                    <div class="row">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerOperation('{$NUMEROCOMPTE}','');">
+                                <span class="glyphicon glyphicon-plus"/>
+                            </button>
+                        </div>
+                        <div class="btn-group">
+                                
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action <span class="caret"></span>
+                            </button>
+                            <div class="dropdown-menu dropdown-zone" role="zone" aria-labelledby="zone1">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <label for="recDate" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
+                                        </label>
+                                        <input type="text" id="recDate" name="recDate" class="form-control" size="10" length="10"/>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label for="recNoReleve" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.NORELEVE"/>
+                                        </label>
+                                   
+                                        <input type="text" id="recNoReleve" name="recNoReleve" class="form-control numerique" size="8"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <label for="recMontant" class="col-sm-5 form-control-label">
+                                            <xsl:value-of select="$LBL.MONTANT"/>
+                                        </label>
+                                        <input type="text" id="recMontant" name="recMontant"
+                                                   class="form-control numerique" size="8"/>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label for="recFlux" class="col-sm-3 form-control-label">
+                                            <xsl:value-of select="$LBL.FLUX"/>
+                                        </label>
+                                        <select name="recFlux" id="recFlux" class="form-control"/>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+        <br/-->
+
+        <button type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerOperation('{$NUMEROCOMPTE}','');">
+            <span class="glyphicon glyphicon-plus"/>
+        </button>
+
 		<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
 			<thead>
 				<tr>

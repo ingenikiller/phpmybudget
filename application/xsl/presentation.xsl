@@ -4,7 +4,7 @@
 	<xsl:template match="/">
 		<html>
 			<xsl:call-template name="Header">
-				<xsl:with-param name="HeadTitre">PhpMyBudget</xsl:with-param>
+				<xsl:with-param name="HeadTitre"><xsl:value-of select="/root/titre"/></xsl:with-param>
 			</xsl:call-template>
 			<body>
 				<xsl:attribute name="onload">
@@ -60,14 +60,19 @@
 				<xsl:value-of select="$HeadTitre"/>
 			</title>
 			<!--link href="application/css/dhtmlgoodies_calendar.css" rel="stylesheet" type="text/css"/-->
-			<link href="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+			
 			
 			<link href="application/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/css/bootstrap.min.css" rel="stylesheet"/>
 			
+			<link href="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 			
 			<!--script type="text/javascript" src="application/js/dhtmlgoodies_calendar.js" charset="iso-8859-1">&#160;</script-->
 			<script type="text/javascript" src="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/external/jquery/jquery.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.js" charset="iso-8859-1">&#160;</script>
+
+			<!--bug sur fermeture de popin-->
+			<!--script type="text/javascript" src="application/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/js/bootstrap.min.js" charset="iso-8859-1">&#160;</script-->
+
 			<script type="text/javascript" src="application/js/commun.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="application/js/communFormulaire.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="application/js/dateFormat.js" charset="iso-8859-1">&#160;</script>

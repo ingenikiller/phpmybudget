@@ -59,7 +59,7 @@
 				<form  class="form-inline" method="post" onsubmit="return pagination('{$formulairePrincipal}')" name="{$formPagination}" id="{$formPagination}">
 					<div class="form-group">
 						<a href="#" onclick="javascript:changePage('{$formulairePrincipal}', '-1')"  id="lienPrecedant">
-							<img border="0" alt="precedent" src="{$IMG_ROOT}previous.gif"/>
+							<span class="glyphicon glyphicon-triangle-left"/>
 						</a>
 					</div>
 					<div class="form-group">
@@ -70,7 +70,7 @@
 					</div>
 					<div class="form-group">
 						<a href="#" onclick="changePage('{$formulairePrincipal}', '1')" disabled="" id="lienSuivant">
-							<img border="0" alt="suivant" src="{$IMG_ROOT}next.gif"/>
+							<span class="glyphicon glyphicon-triangle-right"/>
 						</a>
 					</div>
 				</form>

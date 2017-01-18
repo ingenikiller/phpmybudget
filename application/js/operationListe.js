@@ -143,6 +143,9 @@ function listerObjects(){
 	if($('#recNoReleve').val()!='') {
 		params+="&recNoReleve="+$('#recNoReleve').val();
 	}
+	if($('#recDate').val()!='') {
+		params+="&recDate="+$('#recDate').val();
+	}
 	if($('#recMontant').val()!='') {
 		params+="&recMontant="+$('#recMontant').val();
 	}
@@ -197,7 +200,7 @@ function parseListeJson(json) {
 		//cell6.innerHTML='<img src="./application/images/'+image+'.jpg">';
 		
 		row.append($('<td class="text-center"/>').append('<img src="./application/images/'+image+'.jpg">'));
-		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')">Editer</a>'));
+		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="glyphicon glyphicon-pencil"/></a>'));
 		$("#tbodyResultat").append(row);
 	}
 }

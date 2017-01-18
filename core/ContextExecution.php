@@ -12,6 +12,9 @@ class ContextExecution {
 	
 	private $m_user=null;
 	
+	//titre de la page
+	private $m_titrePage;
+
 	public $m_messages = null;
 	public $m_erreurs = null;
 	
@@ -19,7 +22,9 @@ class ContextExecution {
 	 * constructeur
 	 */
 	public function __construct(){
-		$this->m_dataRequest = new DataRequest;
+		$this->m_dataRequest = new DataRequest();
+		//titre par défaut
+		$this->m_titrePage = "PhpMyBudget";
 	}
 	
 	/**
@@ -54,5 +59,17 @@ class ContextExecution {
 	public function addDataBlockRow($p_blockRow) {
 		$this->m_dataResponse[] = $p_blockRow;
 	}
+
+	/**
+	 * Accès au titre de la page
+	 */
+	public function getTitrePage(){
+		return $this->m_titrePage;
+	}
+
+	public function setTitrePage($p_titrePage){
+		$this->m_titrePage = $p_titrePage;
+	}
+
 }
 ?>

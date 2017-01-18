@@ -37,7 +37,9 @@
 			</fieldset>
 			</div>
 		</div>
-		<input type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerFlux('');"/>
+		<button type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerFlux('');">
+			<span class="glyphicon glyphicon-plus"/>
+		</button>
 		
 		<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
 			<thead>

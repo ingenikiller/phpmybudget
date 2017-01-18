@@ -90,6 +90,7 @@ class GestionOperationervice extends ServiceStub{
 		$compte->numeroCompte = $numeroCompte;
 		$compte->load();
 		$p_contexte->addDataBlockRow($compte);
+        $p_contexte->setTitrePage("Opérations sur compte " . $numeroCompte);
 	}
 }
 

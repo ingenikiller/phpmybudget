@@ -226,6 +226,9 @@ class PageDescription {
         //date
         $baliseDate = $doc->addChild('date', date('Y-m-d'));
 
+        //titre
+        $doc->addChild('titre', $p_contexte->getTitrePage());
+
         //traitement des messages et erreurs
         $dial = $doc->addChild('dial');
         $messages = $dial->addChild('messages');

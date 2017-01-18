@@ -18,7 +18,10 @@
                 <form name="recComptes" id="recComptes">
                     <xsl:call-template name="formulaireJson"/>
                 </form>
-                <input type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerCompte('');"/>
+                <button type="button" class="btn btn-primary" id="" name="" onclick="editerCompte('');">
+                    <span class="glyphicon glyphicon-plus"/>
+                </button>
+                <br/>
                 <table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
                     <thead>
                         <tr>
