@@ -1,11 +1,14 @@
 /*
 	chargement de la page
-*/	
+*/
 $(document).ready(function() {
 	afficheFluxSelect('recFlux', $('#numeroCompte').val(), '');
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 	getSoldeCompte($('#numeroCompte').val(), 'solde');
 	listerObjects();
+
+	$("#recFlux").customselect();
+
 });
 
 /**
@@ -16,13 +19,13 @@ $(document).ready(function() {
 	//$( "#date" ).datepicker( "option", "dateFormat", "yyyy-mm-dd" );
 	$.datepicker.regional['fr'] = {
 			closeText: 'Fermer',
-			prevText: '&#x3c;Préc',
+			prevText: '&#x3c;Prï¿½c',
 			nextText: 'Suiv&#x3e;',
 			currentText: 'Courant',
 			monthNames: ['Janvier','F&eacute;vrier','Mars','Avril','Mai','Juin',
-			'Juillet','Août','Septembre','Octobre','Novembre','D&eacute;cembre'],
-			monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
-			'Jul','Aoû','Sep','Oct','Nov','Déc'],
+			'Juillet','Aoï¿½t','Septembre','Octobre','Novembre','D&eacute;cembre'],
+			monthNamesShort: ['Jan','Fï¿½v','Mar','Avr','Mai','Jun',
+			'Jul','Aoï¿½','Sep','Oct','Nov','Dï¿½c'],
 			dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
 			dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
 			dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
@@ -34,24 +37,26 @@ $(document).ready(function() {
 			yearSuffix: ''};
 	$.datepicker.setDefaults($.datepicker.regional['fr']);
 	$( "#date" ).datepicker();
+	$( "#date" ).datepicker();
+	$( "#recDate" ).datepicker();
 });
 
 /**
-	
+
 */
 $(function() {
 	$('#libelle').autocomplete({
-		source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
+		source : function(requete, reponse){ // les deux arguments reprï¿½sentent les donnï¿½es nï¿½cessaires au plugin
 		$.ajax({
 			url : 'index.php?domaine=operation&service=reclibelle', // on appelle le script JSON
-			dataType : 'json', // on spécifie bien que le type de données est en JSON
+			dataType : 'json', // on spï¿½cifie bien que le type de donnï¿½es est en JSON
 			data : {
-			debLibelle : $('#libelle').val(), // on donne la chaîne de caractère tapée dans le champ de recherche
+			debLibelle : $('#libelle').val(), // on donne la chaï¿½ne de caractï¿½re tapï¿½e dans le champ de recherche
 			mode : 'libelleOperation',
 			numeroCompte : document.getElementById('numeroCompte').value,
 			maxRows : 15
 		},
-	
+
 			success : function(donnee){
 				reponse($.map(donnee[0].tabResult, function(objet){
 					return objet.libelle; // on retourne cette forme de suggestion
@@ -65,19 +70,19 @@ $(function() {
 
 
 /*
-	édition d'une opération
+	ï¿½dition d'une opï¿½ration
 */
 function editerOperation(numeroCompte, operationId){
-	
+
 	var params = "numeroCompte="+numeroCompte;
-	
-	var hauteur = 300;
+
+	var hauteur = 370;
 	var largeur = 620;
-	
+
 	if(operationId!='') {
 		params+="&operationId="+operationId;
-	
-	
+
+
 		$.getJSON(
 			"index.php?domaine=operation&service=getone",
 			data=params,
@@ -90,7 +95,7 @@ function editerOperation(numeroCompte, operationId){
 				document.operation.fluxId.value=json[0].tabResult[0].fluxId;
 				document.operation.modePaiementId.value=json[0].tabResult[0].modePaiementId;
 				document.operation.date.value=json[0].tabResult[0].date;
-				
+
 				$("div#boiteOperation").dialog({
 					resizable: false,
 					height:hauteur,
@@ -108,7 +113,7 @@ function editerOperation(numeroCompte, operationId){
 		document.operation.fluxId.value='';
 		document.operation.modePaiementId.value='';
 		//document.operation.date.value=;
-		
+
 		$("div#boiteOperation").dialog({
 			resizable: false,
 			height:hauteur,
@@ -121,7 +126,7 @@ function editerOperation(numeroCompte, operationId){
 }
 
 /*
-	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
+	rï¿½initialise le formulaire de recherche pour lancer une nouvelle recherche
 */
 function rechercherOperations(form){
 	//$('#numeroPage').val(1);
@@ -131,15 +136,15 @@ function rechercherOperations(form){
 }
 
 /*
-	exécute une requete Json et alimente le tableau des tésultats
+	exï¿½cute une requete Json et alimente le tableau des tï¿½sultats
 */
 function listerObjects(){
-	
+
 	var params = "numeroCompte="+$('#numeroCompte').val()+'&numeroPage='+$('#numeroPage').val();
 	if($('#recFlux').val()!='') {
 		params+="&recFlux="+$('#recFlux').val();
 	}
-	
+
 	if($('#recNoReleve').val()!='') {
 		params+="&recNoReleve="+$('#recNoReleve').val();
 	}
@@ -149,7 +154,7 @@ function listerObjects(){
 	if($('#recMontant').val()!='') {
 		params+="&recMontant="+$('#recMontant').val();
 	}
-	
+
 	//appel synchrone de l'ajax
 	var jsonObjectInstance = $.parseJSON(
 	    $.ajax({
@@ -160,26 +165,26 @@ function listerObjects(){
 	        }
 	    ).responseText
 	);
-	
+
 	//alert(jsonObjectInstance);
 	parseListeJson(jsonObjectInstance);
 	return false;
 }
 
 /*
-	parse le tableau Json et génère le tableau
+	parse le tableau Json et gï¿½nï¿½re le tableau
 */
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
 	$('tr[typetr=operation]').remove();
-	
+
 	var total = json[0].nbLineTotal;
 	var nbpage = Math.ceil(total/json[0].nbLine);
 	document.getElementById('numeroPage').value=json[0].page;
 	document.getElementById('rch_page').value=json[0].page;
 	document.getElementById('max_page').value=json[0].totalPage;
-	
-	
+
+
 	var nb=json[0].nbLine;
 	var tabJson = json[0].tabResult;
 	var i=0;
@@ -190,7 +195,7 @@ function parseListeJson(json) {
 		row.append($('<td/>').text(tabJson[i].libelle));
 		row.append($('<td class="text-right"/>').text(tabJson[i].montant.replace(',','')));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
-		
+
 		var image='';
 		if(tabJson[i].verif=='checked') {
 			image='checked';
@@ -198,10 +203,9 @@ function parseListeJson(json) {
 			image='unchecked';
 		}
 		//cell6.innerHTML='<img src="./application/images/'+image+'.jpg">';
-		
+
 		row.append($('<td class="text-center"/>').append('<img src="./application/images/'+image+'.jpg">'));
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="glyphicon glyphicon-pencil"/></a>'));
 		$("#tbodyResultat").append(row);
 	}
 }
-

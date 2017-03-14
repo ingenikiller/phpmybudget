@@ -8,7 +8,8 @@ body {
 /*.navbar-brand */
 .navbar-default {
 	background-color: #3474f6;
-	/*color: #FFFFFFF;*/
+	/*color: #FFFFFF;*/
+	background-image: -webkit-linear-gradient(top,#3474f6 0,#3474f6 100%);
 }
 
 .nav.navbar-nav.navbar-right li a {
@@ -32,7 +33,7 @@ body {
 
 .form-control {
 	font-size : 10px;
-	height: 24px;
+	/*height: 24px;*/
 	padding: 0px 0px 0px 12px;
 }
 
@@ -46,7 +47,7 @@ body {
 
 
 .btn {
-	font-size : 12px;
+	/*font-size : 12px;*/
 }
 
 label {
@@ -85,3 +86,11 @@ classes dropdown
 	background-color : #E6E6E6;
 	padding: 5px;
 }*/
+
+.barre_recherche_element {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.barre_recherche_input {
+	border-radius: 0px;
+}

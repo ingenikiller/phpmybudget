@@ -13,6 +13,9 @@
         <script language="JavaScript" src="application/js/jquery_opertation_edition.js" type="text/javascript"/>
     </xsl:template>
     <xsl:template name="Contenu">
+      <br/>
+
+
         <div class="row">
             <div class="col-lg-offset-1 col-lg-10">
 
@@ -20,11 +23,109 @@
                 <xsl:call-template name="operationEdition">
                     <xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
                 </xsl:call-template>
-                <fieldset>
-                    <form method="POST" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
+                <br/>
+                <!--fieldset-->
+                    <form method="POST" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche" class="inline-form">
                         <xsl:call-template name="formulaireJson"/>
                         <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
-                        <div class="row">
+                        <div class="search">
+
+                                <div class="search">
+                                        <div class="container">
+                                          <div class="row">
+                                            <div class="col-md-10 col-md-offset-1">
+                                              <div class="form-section">
+                                                <div class="row">
+                                                    <form role="form">
+                                                      <div class="col-md-2 barre_recherche_element">
+
+                                                          <input type="text" id="recNoReleve" name="recNoReleve" class="form-control numerique barre_recherche_input" size="8" placeholder="N° rélévé"/>
+
+                                                      </div>
+                                                      <div class="col-md-4 barre_recherche_element">
+
+                                                          <!--div class="input-group"-->
+                                                            <select name="recFlux" id="recFlux" class="custom-select form-control barre_recherche_input" placeholder="Flux">
+                                                            </select>
+                                                          <!--/div-->
+
+                                                      </div>
+                                                      <div class="col-md-1 barre_recherche_element">
+
+                                                          <div class="input-group">
+                                                            <!--input type="text" class="form-control" id="checkout" placeholder="Check out"/>
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span-->
+                                                            <input class="form-control" type="text" name="recDate" id="recDate" size="11" maxlength="10" placeholder="Date"/>
+                                                          </div>
+
+                                                      </div>
+                                                      <div class="col-md-2 barre_recherche_element">
+
+                                                          <input type="text" id="recMontant" name="recMontant" class="form-control numerique barre_recherche_input" size="8" placeholder="{$LBL.MONTANT}"/>
+
+                                                      </div>
+                                                      <div class="col-md-2 barre_recherche_element">
+
+                                                        <!--span class="input-group-btn"-->
+                                                        <button type="submit" class="btn btn-primary right-rounded">Rechercher</button>
+                                                      <!--/span-->
+
+                                                      </div>
+                                                    </form>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+
+
+                                <!--div class="container">
+                                  <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                      <div class="form-section">
+                                        <div class="row">
+                                            <form role="form">
+                                              <div class="col-md-2 barre_recherche_element">
+                                                <div class="form-group text-left">
+                                                  <input type="text" id="recNoReleve" name="recNoReleve" class="form-control numerique barre_recherche_input" size="8" placeholder="N° rélévé"/>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-2 barre_recherche_element">
+                                                <div class="form-group">
+                                                  <div class="input-group">
+                                                    <select name="recFlux" id="recFlux" class="form-control barre_recherche_input" placeholder="Flux">
+                                                    </select>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-1 barre_recherche_element">
+                                                <div class="form-group">
+                                                  <div class="input-group">
+                                                    <input class="form-control" type="text" name="recDate" id="recDate" size="11" maxlength="10" placeholder="Date"/>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-2 barre_recherche_element">
+                                                <div class="form-group">
+                                                  <input type="text" id="recMontant" name="recMontant" class="form-control numerique barre_recherche_input" size="8" placeholder="{$LBL.MONTANT}"/>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-2 barre_recherche_element">
+                                                <div class="form-group">
+                                                <button type="submit" class="btn btn-primary right-rounded">Rechercher</button>
+                                              </div>
+                                              </div>
+                                            </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div-->
+                              </div>
+                        <!--div class="row">
                             <div class="col-xs-4"/>
                             <div class="col-xs-4">
                                 <div class="form-group row">
@@ -80,13 +181,13 @@
                                                    class="form-control numerique" size="8"/>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-xs-4">
                                         <label for="recDate" class="col-sm-6 form-control-label">
                                             <xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
                                         </label>
                                         <div class="col-sm-6">
-                                            <input type="text" id="recDate" name="recDate"
+                                            <input type="text" id="recDateOld" name="recDateOld"
                                                    class="form-control numerique" size="10"/>
                                         </div>
                                     </div>
@@ -106,7 +207,7 @@
                                             <xsl:value-of select="$LBL.FLUX"/>
                                         </label>
                                         <div class="col-sm-9">
-                                            <select name="recFlux" id="recFlux" class="form-control"/>
+                                            <select name="recFluxOld" id="recFluxOld" class="form-control"/>
                                         </div>
                                     </div>
                                 </div>
@@ -119,18 +220,46 @@
                                     <button type="submit" class="btn btn-primary">Rechercher</button>
                                 </div>
                             </div>
-                        </div>
+                        </div-->
                     </form>
-                </fieldset>
+                <!--/fieldset-->
             </div>
         </div>
+        <!--div class="row">
+        <div class="col-sm-8">
+          <div class="form-group">
+          <div class="input-group">
+          <input type="text" class="form-control left-rounded"/>
+          <input type="text" class="form-control" placeholder="date"/>
+          <div class="input-group-btn">
+            <button class="btn btn-inverse" type="submit">Rechercher</button>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div-->
+      <!--div class="row">
+        <div class="col-sm-8">
+      <div class="form-group">
+          <div class="input-group input-group-lg icon-addon addon-lg">
+              <input type="text" placeholder="Texte" name="" id="schbox" class="form-control input-lg"/>
+              <input type="text" placeholder="Texte" name="" id="schbox" class="form-control"/>
+
+              <span class="input-group-btn">
+                  <button type="submit" class="btn btn-inverse">Rechercher</button>
+              </span>
+          </div>
+      </div>
+    </div>
+  </div-->
+
         <!--br/>
         <div class="row">
             <input type="hidden" id="retour" name="retour"/>
             <xsl:call-template name="operationEdition">
                 <xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
             </xsl:call-template>
-            
+
             <form method="POST" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
                 <xsl:call-template name="formulaireJson"/>
                 <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
@@ -142,7 +271,7 @@
                             </button>
                         </div>
                         <div class="btn-group">
-                                
+
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Action <span class="caret"></span>
                             </button>
@@ -158,7 +287,7 @@
                                         <label for="recNoReleve" class="col-sm-6 form-control-label">
                                             <xsl:value-of select="$LBL.NORELEVE"/>
                                         </label>
-                                   
+
                                         <input type="text" id="recNoReleve" name="recNoReleve" class="form-control numerique" size="8"/>
                                     </div>
                                 </div>
