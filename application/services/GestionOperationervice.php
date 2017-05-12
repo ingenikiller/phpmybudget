@@ -21,7 +21,7 @@ class GestionOperationervice extends ServiceStub{
         }
         $recFlux = $p_contexte->m_dataRequest->getData('recFlux');
 		if($recFlux!=null){
-			$requete.=" AND (operation.fluxId=$recFlux OR flux.fluxMaitreId=$recFlux)";
+			$requete.=" AND (operation.fluxId IN ($recFlux) OR flux.fluxMaitreId IN ($recFlux))";
         }
 
 		$recDate = $p_contexte->m_dataRequest->getData('recDate');

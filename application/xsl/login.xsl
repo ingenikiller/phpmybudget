@@ -46,7 +46,9 @@
 						<br/>
                         <div class="form-group row">
                             <div class="col-sm-offset-5 col-sm-5">
-                                <button type="submit" class="btn btn-primary">Envoyer</button>
+                                <button type="submit" class="btn btn-primary">
+									<xsl:value-of select="$LBL.SECONNECTER"/>
+								</button>
                             </div>
                         </div>
                         <br/>

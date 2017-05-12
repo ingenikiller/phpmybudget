@@ -82,6 +82,7 @@
 	<xsl:variable name="LBL.RETOURALALISTE">Retour à la liste</xsl:variable>
 	<xsl:variable name="LBL.RETOURCOMPTE">Retour au compte</xsl:variable>
 	<xsl:variable name="LBL.SAISIEAUTRE">Saisie autre opération</xsl:variable>
+	<xsl:variable name="LBL.SECONNECTER">Se connecter</xsl:variable>
 	<xsl:variable name="LBL.SEGMENT">Segment</xsl:variable>
 	<xsl:variable name="LBL.SOLDEBASE">Solde de base</xsl:variable>
 	<xsl:variable name="LBL.SORTIEEPARGNE">Sortie épargne</xsl:variable>

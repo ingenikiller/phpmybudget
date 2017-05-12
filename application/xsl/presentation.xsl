@@ -59,7 +59,6 @@
 			<title>
 				<xsl:value-of select="$HeadTitre"/>
 			</title>
-			<!--link href="application/css/dhtmlgoodies_calendar.css" rel="stylesheet" type="text/css"/-->
 
 
 			<link href="application/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -67,7 +66,6 @@
 
 			<link href="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 
-			<!--script type="text/javascript" src="application/js/dhtmlgoodies_calendar.js" charset="iso-8859-1">&#160;</script-->
 			<script type="text/javascript" src="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/external/jquery/jquery.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="application/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/js/bootstrap.min.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.js" charset="iso-8859-1">&#160;</script>
@@ -80,13 +78,8 @@
 			<!-- plugins -->
 			<script type="text/javascript" src="application/jquery/multiselect-master/js/multiselect.min.js" charset="iso-8859-1">&#160;</script>
 
-			<link href="application/css/jquery-customselect-1.9.1.css" rel="stylesheet" type="text/css"/>
-			<script type="text/javascript" src="application//js/jquery-customselect-1.9.1.min.js" charset="iso-8859-1">&#160;</script>
-			<!--link href="application/jquery/multiselect-master/js/style.css" rel="stylesheet" type="text/css"/>
-			<link href="application/jquery/multiselect-master/lib/google-code-prettify/prettify.css" rel="stylesheet" type="text/css"/-->
-
-			<!--link href="application/css/principal.css" rel="stylesheet" type="text/css"/>
-			<link href="application/css/style.css" rel="stylesheet" type="text/css"/-->
+			<link href="application/css/magicsuggest.css" rel="stylesheet" type="text/css"/>
+			<script type="text/javascript" src="application/js/magicsuggest.js" charset="iso-8859-1">&#160;</script>
 
 			<link href="application/css/bootstrap-force.css" rel="stylesheet" type="text/css"/>
 			<link href="application/css/phpmybudget.css" rel="stylesheet" type="text/css"/>

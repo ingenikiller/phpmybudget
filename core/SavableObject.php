@@ -29,7 +29,7 @@ abstract class SavableObject extends Objects {
 		$l_requete = 'SHOW COLUMNS FROM ' . $this->_tableName;
 		$l_result = $pdo->query ( $l_requete );
 		while ( $l_champs = $l_result->fetch ( PDO::FETCH_ASSOC ) ) {
-			Logger::getInstance()->addLogMessage($l_champs ['Field']);
+			//Logger::getInstance()->addLogMessage($l_champs ['Field']);
 			$table[$l_champs ['Field']] = $l_champs;
 		}
 		return $table;
@@ -187,5 +187,4 @@ abstract class SavableObject extends Objects {
         return self::$_pdo->lastInsertId();
     }
 }
-
 ?>

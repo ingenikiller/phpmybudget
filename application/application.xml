@@ -29,7 +29,7 @@
 			<service name="create" classe="GestionPeriodeService" render="json" methode="create" isPrivee="true"/>
 			<service name="getliste" classe="GestionPeriodeService" render="json" methode="getListe" isPrivee="true"/>
 		</domaine>
-		
+
 		<domaine name="previsionentete">
 			<service name="getone" classe="GestionPrevisionEnteteService" methode="getOne" render="json" isPrivee="true"/>
 			<service name="getlisteentete" classe="GestionPrevisionEnteteService" methode="getListeEntete" render="json" isPrivee="true"/>
@@ -62,6 +62,7 @@
 			<service name="statannees" classe="GestionStatistiquesService" methode="statAnnees" isPrivee="true"  xsl="xsl/statistiques_annees.xsl" />
 			<service name="affformcumul" classe="GestionStatistiquesService" methode="affFormCumul" isPrivee="true"  xsl="xsl/statistiques_cumul_form.xsl" />
 			<service name="statcumul" classe="GestionStatistiquesService" methode="statCumul" isPrivee="true"  xsl="xsl/statistiques_cumul.xsl" />
+			<service name="affformperiode" classe="GestionStatistiquesService" methode="fictive" isPrivee="true"  xsl="xsl/statistiques_periode_form.xsl" />
 		</domaine>
 		<domaine name="technique">
 			<service name="login" classe="Login" methode="fictive" isPrivee="false"  xsl="xsl/login.xsl" privee="false"/>

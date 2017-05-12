@@ -24,7 +24,7 @@ function initFormCreation() {
 		var date = new Date();
 		jour = date.getDate();
 		champDate.value = date.dateFormat('Y-m-d');
-		
+
 		if(jour>7) {
 			date.setMonth((date.getMonth()+1));
 		}
@@ -32,15 +32,15 @@ function initFormCreation() {
 	}
 }
 /*********************************************************
-	soumission du formulaire des opérations
+	soumission du formulaire des opÃ©rations
  *********************************************************/
 function soumettre(form) {
 	if(!validForm(form)) {
 		return false;
 	}
-	
+
 	var service = form.service.value;
-	$.ajax({ 
+	$.ajax({
 		url: "index.php?domaine=operation&service="+service,
 		data: { "noCompte": form.noCompte.value,
 				"operationId": form.operationId.value,
@@ -51,14 +51,14 @@ function soumettre(form) {
 				'modePaiementId': form.modePaiementId.value,
 				'montant': form.montant.value,
 				'verif': form.verif.checked?'checked':''
-		}, 
-		async: false, 
-		success: function(retour) { 
+		},
+		async: false,
+		success: function(retour) {
 			return false;
-		} 
+		}
 	});
 	getSoldeCompte(form.noCompte.value, 'solde');
-	//si on est en création, on garde la popup ouverte, sinon, on la ferme
+	//si on est en crÃ©ation, on garde la popup ouverte, sinon, on la ferme
 	if(service=='create') {
 	 	form.libelle.value='';
 	 	form.fluxId.value='';
@@ -68,8 +68,8 @@ function soumettre(form) {
 	} else {
 		$("div#boiteOperation").dialog('close');
 	}
-	
-	//maj de la liste des opérations
+
+	//maj de la liste des opï¿½rations
 	pagination('recherche');
 
 	return false;
@@ -82,8 +82,8 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
 	var params = "noCompte="+ numeroCompte;
 	$.getJSON(
 	   "index.php?domaine=compte&service=soldecompte",
-	    data=params, 
-		function(json) { 
+	    data=params,
+		function(json) {
 			compte=json[0].solde;
 			somme=json[1].tabResult[0].total;
 			total=Number(compte)+Number(somme);
@@ -93,7 +93,7 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
 }
 
 /*********************************************************
-	recherche le mode de règlement par défaut d'un flux
+	recherche le mode de rÃ¨glement par dÃ©faut d'un flux
  *********************************************************/
 function getModeReglementDefaut(flux, modePaiement){
 	var params = '&fluxId='+flux.value;

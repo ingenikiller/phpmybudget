@@ -1,13 +1,68 @@
 /*
 	chargement de la page
 */
+
+var listeRecFlux='';
+
 $(document).ready(function() {
-	afficheFluxSelect('recFlux', $('#numeroCompte').val(), '');
+	//afficheFluxSelect('recFlux', $('#numeroCompte').val(), '');
+	var ms = $('#recFlux').magicSuggest({
+				placeholder:'Liste des flux',
+				id:'testFluxId',
+				data: function(q){
+    var e = q || '', r=[], c = ['Paris', 'New York', 'Gotham'];
+
+		var retour = getListeFlux('flux='+q);
+
+    /*for(var i=0; i<c.length; i++){
+      if(c[i].toLowerCase().indexOf(e.toLowerCase()) > -1)
+        r.push({id: i, name: c[i]});
+    }*/
+    return retour[0].tabResult;
+  },
+				//'index.php?domaine=flux&service=getliste',
+				allowFreeEntries: false,
+				valueField: 'fluxId',
+				displayField: 'flux'
+
+		});
+
+		/*$(ms).on('load', function(e,m){
+  		alert('finished loading!');
+			//this.setData(data[0].tabResult);
+		});*/
+		
+	/*$(ms).on('selectionchange', function(){
+		var json = this.getSelection();
+		for (var i = 0; i<json.length; i++){
+			if(i==0){
+				listeRecFlux = json[i].fluxId;
+			} else {
+				listeRecFlux += ',' + json[i].fluxId;
+			}
+		}
+		//alert(JSON.stringify(this.getSelection()));
+		alert(listeRecFlux);
+		
+	});*/
+
+	$(ms).on('selectionchange', function(e,m){
+		listeRecFlux= this.getValue();
+	});
+	
+	
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 	getSoldeCompte($('#numeroCompte').val(), 'solde');
 	listerObjects();
 
-	$("#recFlux").customselect();
+	//$("#recFlux").customselect();
+	//$("#recFlux").chosen({max_selected_options: 1});
+
+		/*$('#recFlux').magicSuggest({
+	        data: 'get_countries.php',
+	        valueField: 'idCountry',
+	        displayField: 'countryName'
+	    });*/
 
 });
 
@@ -70,7 +125,7 @@ $(function() {
 
 
 /*
-	�dition d'une op�ration
+	Edition d'une opération
 */
 function editerOperation(numeroCompte, operationId){
 
@@ -136,14 +191,19 @@ function rechercherOperations(form){
 }
 
 /*
-	ex�cute une requete Json et alimente le tableau des t�sultats
+	exécute une requete Json et alimente le tableau des t�sultats
 */
 function listerObjects(){
 
 	var params = "numeroCompte="+$('#numeroCompte').val()+'&numeroPage='+$('#numeroPage').val();
-	if($('#recFlux').val()!='') {
-		params+="&recFlux="+$('#recFlux').val();
+	if(listeRecFlux!='') {
+		params+="&recFlux="+listeRecFlux;
 	}
+	//$($('#testFluxId').magicSuggest())
+	//$($('#testFluxId').magicSuggest()).getSelection();
+	/*if( $('#recFlux').getSelection() != null){
+			params+="&recFlux="+($('#recFlux').getSelection())[0].fluxId;
+	}*/
 
 	if($('#recNoReleve').val()!='') {
 		params+="&recNoReleve="+$('#recNoReleve').val();

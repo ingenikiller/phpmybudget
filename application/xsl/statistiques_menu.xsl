@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:import href="commun.xsl"/>
 	<xsl:template name="Contenu">
-		
+
 			<br/>
 			<br/>
 			<p>
@@ -26,10 +26,15 @@
 			<br/>
 			<br/>
 			<p>
+		Pour afficher lles statistiques par période, cliquer <a href="index.php?domaine=statistique&amp;service=affformperiode&amp;type=tabTotauxAnnuels&amp;numeroCompte={$NUMEROCOMPTE}">ici</a>
+			</p>
+			<br/>
+			<br/>
+			<p>
 		Pour afficher les comptes, cliquer <a href="index.php?domaine=statistique">ici</a>
 			</p>
 			<br/>
 			<br/>
-		
+
 	</xsl:template>
 </xsl:stylesheet>

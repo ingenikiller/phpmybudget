@@ -76,7 +76,7 @@
 								<xsl:variable name="valeur" select="/root/data/ListeFlux/Dynamic[fluxId=$fluxId]/associatedObjet/ListeFluxFils/Dynamic[fluxId=$fluxFils]/associatedObjet/MontantFluxFils/Dynamic[date=$annee]/total"/>
 								<td class="montant">
 									<xsl:if test="$valeur!=''">
-										<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=annee&amp;recFlux={$fluxFils}&amp;recDate={annee}')">
+										<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=cumul&amp;recFlux={$fluxFils}&amp;recDate={annee}')">
 										<xsl:value-of select="format-number($valeur,$FORMAT_MNT)"/>
 										</a>
 									</xsl:if>
