@@ -10,60 +10,21 @@ $(document).ready(function() {
 				placeholder:'Liste des flux',
 				id:'testFluxId',
 				data: function(q){
-    var e = q || '', r=[], c = ['Paris', 'New York', 'Gotham'];
-
-		var retour = getListeFlux('flux='+q);
-
-    /*for(var i=0; i<c.length; i++){
-      if(c[i].toLowerCase().indexOf(e.toLowerCase()) > -1)
-        r.push({id: i, name: c[i]});
-    }*/
-    return retour[0].tabResult;
-  },
-				//'index.php?domaine=flux&service=getliste',
+						var retour = getListeFlux('comptePrincipal='+$('#numeroCompte').val()+'&fluxMaitre=N&flux='+q);
+						return retour[0].tabResult;
+				},
 				allowFreeEntries: false,
 				valueField: 'fluxId',
 				displayField: 'flux'
-
-		});
-
-		/*$(ms).on('load', function(e,m){
-  		alert('finished loading!');
-			//this.setData(data[0].tabResult);
-		});*/
-		
-	/*$(ms).on('selectionchange', function(){
-		var json = this.getSelection();
-		for (var i = 0; i<json.length; i++){
-			if(i==0){
-				listeRecFlux = json[i].fluxId;
-			} else {
-				listeRecFlux += ',' + json[i].fluxId;
-			}
-		}
-		//alert(JSON.stringify(this.getSelection()));
-		alert(listeRecFlux);
-		
-	});*/
+	});
 
 	$(ms).on('selectionchange', function(e,m){
 		listeRecFlux= this.getValue();
 	});
 	
-	
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 	getSoldeCompte($('#numeroCompte').val(), 'solde');
 	listerObjects();
-
-	//$("#recFlux").customselect();
-	//$("#recFlux").chosen({max_selected_options: 1});
-
-		/*$('#recFlux').magicSuggest({
-	        data: 'get_countries.php',
-	        valueField: 'idCountry',
-	        displayField: 'countryName'
-	    });*/
-
 });
 
 /**
@@ -101,12 +62,12 @@ $(document).ready(function() {
 */
 $(function() {
 	$('#libelle').autocomplete({
-		source : function(requete, reponse){ // les deux arguments repr�sentent les donn�es n�cessaires au plugin
+		source : function(requete, reponse){ // les deux arguments représentent les donn�es n�cessaires au plugin
 		$.ajax({
 			url : 'index.php?domaine=operation&service=reclibelle', // on appelle le script JSON
-			dataType : 'json', // on sp�cifie bien que le type de donn�es est en JSON
+			dataType : 'json', // on spécifie bien que le type de données est en JSON
 			data : {
-			debLibelle : $('#libelle').val(), // on donne la cha�ne de caract�re tap�e dans le champ de recherche
+			debLibelle : $('#libelle').val(), // on donne la cha�ne de caractère tapée dans le champ de recherche
 			mode : 'libelleOperation',
 			numeroCompte : document.getElementById('numeroCompte').value,
 			maxRows : 15
@@ -199,12 +160,7 @@ function listerObjects(){
 	if(listeRecFlux!='') {
 		params+="&recFlux="+listeRecFlux;
 	}
-	//$($('#testFluxId').magicSuggest())
-	//$($('#testFluxId').magicSuggest()).getSelection();
-	/*if( $('#recFlux').getSelection() != null){
-			params+="&recFlux="+($('#recFlux').getSelection())[0].fluxId;
-	}*/
-
+	
 	if($('#recNoReleve').val()!='') {
 		params+="&recNoReleve="+$('#recNoReleve').val();
 	}
