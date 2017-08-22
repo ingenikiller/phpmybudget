@@ -81,6 +81,10 @@
 			<link href="application/css/magicsuggest.css" rel="stylesheet" type="text/css"/>
 			<script type="text/javascript" src="application/js/magicsuggest.js" charset="iso-8859-1">&#160;</script>
 
+			<link href="application/css/sumoselect.min.css" rel="stylesheet" type="text/css"/>
+			<script type="text/javascript" src="application/js/jquery.sumoselect.min.js" charset="iso-8859-1">&#160;</script>
+
+			
 			<link href="application/css/bootstrap-force.css" rel="stylesheet" type="text/css"/>
 			<link href="application/css/phpmybudget.css" rel="stylesheet" type="text/css"/>
 			<xsl:call-template name="js.module.sheet"/>

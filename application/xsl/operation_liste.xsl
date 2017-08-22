@@ -58,9 +58,19 @@
 				</form>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerOperation('{$NUMEROCOMPTE}','');">
-            <span class="glyphicon glyphicon-plus"/>
-        </button>
+		<div class="row">
+			<div class="col-md-1">
+				<button type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerOperation('{$NUMEROCOMPTE}','');">
+					<span class="glyphicon glyphicon-plus"/>
+				</button>
+			</div>
+			<div class="col-md-1">
+			<label>Solde:<span id="solde"/></label>
+			</div>
+			<!--div class="col-md-1">
+				<input class="form-control" type="text" id="solde" readonly="readonly"/>
+			</div-->
+		</div>
 		<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
 			<thead>
 				<tr>

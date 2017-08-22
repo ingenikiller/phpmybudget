@@ -5,7 +5,6 @@ function initFormOperation() {
 	if(service=='create'){
 		initFormCreation();
 	}
-
 	if(document.getElementById('dateOperation')!= null){
 		document.getElementById('dateOperation').setAttribute('readonly', 'readonly');
 	}
@@ -52,26 +51,24 @@ function soumettre(form) {
 				'montant': form.montant.value,
 				'verif': form.verif.checked?'checked':''
 		},
-		async: false,
 		success: function(retour) {
+			getSoldeCompte(form.noCompte.value, 'solde');
+			//si on est en création, on garde la popup ouverte, sinon, on la ferme
+			if(service=='create') {
+				form.libelle.value='';
+				form.fluxId.value='';
+				form.modePaiementId.value='';
+				form.montant.value='';
+				form.libelle.focus();
+			} else {
+				$("div#boiteOperation").dialog('close');
+			}
+
+			//maj de la liste des op�rations
+			pagination('recherche');
 			return false;
 		}
 	});
-	getSoldeCompte(form.noCompte.value, 'solde');
-	//si on est en création, on garde la popup ouverte, sinon, on la ferme
-	if(service=='create') {
-	 	form.libelle.value='';
-	 	form.fluxId.value='';
-	 	form.modePaiementId.value='';
-	 	form.montant.value='';
-	 	form.libelle.focus();
-	} else {
-		$("div#boiteOperation").dialog('close');
-	}
-
-	//maj de la liste des op�rations
-	pagination('recherche');
-
 	return false;
 }
 
@@ -80,16 +77,17 @@ function soumettre(form) {
  *********************************************************/
 function getSoldeCompte(numeroCompte, nomChampSolde){
 	var params = "noCompte="+ numeroCompte;
-	$.getJSON(
-	   "index.php?domaine=compte&service=soldecompte",
-	    data=params,
-		function(json) {
-			compte=json[0].solde;
-			somme=json[1].tabResult[0].total;
+	$.ajax({
+		url: "index.php?domaine=compte&service=soldecompte",
+		dataType: 'json',
+	    data: params,
+		success: function(resultat, statut, erreur){
+			compte=resultat[0].solde;
+			somme=resultat[1].tabResult[0].total;
 			total=Number(compte)+Number(somme);
-			$('#'+nomChampSolde).val(total.toFixed(2));
+			$('#'+nomChampSolde).text(total.toFixed(2));
 		}
-	);
+	});
 }
 
 /*********************************************************
@@ -97,6 +95,8 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
  *********************************************************/
 function getModeReglementDefaut(flux, modePaiement){
 	var params = '&fluxId='+flux.value;
-	var jsonObjectInstance = getFlux(params);
-	modePaiement.value = jsonObjectInstance[0].modePaiementId;
+	var fonctionSuccess = function(resultat) {
+		modePaiement.value = resultat[0].modePaiementId;	
+	}
+	getFlux(params, fonctionSuccess);
 }

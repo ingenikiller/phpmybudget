@@ -73,7 +73,7 @@
 							-->
 							<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
 								<xsl:variable name="annee" select="annee"/>
-								<xsl:variable name="valeur" select="/root/data/ListeFlux/Dynamic[fluxId=$fluxId]/associatedObjet/ListeFluxFils/Dynamic[fluxId=$fluxFils]/associatedObjet/MontantFluxFils/Dynamic[date=$annee]/total"/>
+								<xsl:variable name="valeur" select="/root/data/ListeFlux/Dynamic[fluxId=$fluxId]/associatedObjet/ListeFluxFils/Dynamic[fluxId=$fluxFils]/associatedObjet/MontantFluxFils/Dynamic/total"/>
 								<td class="montant">
 									<xsl:if test="$valeur!=''">
 										<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=cumul&amp;recFlux={$fluxFils}&amp;recDate={annee}')">

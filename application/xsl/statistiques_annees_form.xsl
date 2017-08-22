@@ -37,6 +37,14 @@
 								</div>
 							</div>
 							<div class="form-group row">
+								<label for="derniereAnnee" class="col-sm-4 form-control-label"><xsl:value-of select="$LBL.DERNIEREANNEE"/></label>
+								<div class="col-sm-8 text-right">
+									<select name="listeAnnees" multiple="multiple" class="search-box">
+										<xsl:apply-templates select="/root/data/ListeAnnee/Dynamic"/>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
 								<div class="text-center">
 									<button type="submit" class="btn btn-primary">Valider</button>
 								</div>

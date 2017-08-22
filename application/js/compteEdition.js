@@ -17,24 +17,20 @@ function listerObjects(){
 	var params = 'numeroPage='+$('#numeroPage').val();
 		
 	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=compte&service=getliste",
-	         async: false,
-	         dataType: 'json',
-	         data: params
-	        }
-	    ).responseText
-	);
-	
-	//alert(jsonObjectInstance);
-	parseListeJson(jsonObjectInstance);
+	$.ajax({
+		url: "index.php?domaine=compte&service=getliste",
+		dataType: 'json',
+		data: params,
+		success: function(data){
+			parseListeJson(data);
+		}
+	});
 	return false;
 }
 
-/*
+/*********************************************************
 	parse le tableau Json et génère le tableau
-*/
+ *********************************************************/
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
 	$('tr[typetr=compte]').remove();
@@ -123,18 +119,16 @@ function soumettre(form) {
 	}
 	
 	$.ajax({ 
-    url: "index.php?domaine=compte&service="+$('#service').val(),
-    data: { "numeroCompte": form.numeroCompte.value,
+		url: "index.php?domaine=compte&service="+$('#service').val(),
+		data: { "numeroCompte": form.numeroCompte.value,
 			"libelle": form.libelle.value,
 			"solde": form.solde.value
-	}, 
-    async: false, 
-    success: function(retour) { 
-		//alert('OK');
-		return false;
-    }
+		}, 
+		success: function(retour) { 
+			$("div#boiteCompte").dialog('close');
+			listerObjects();
+			return false;
+		}
 	});
-	$("div#boiteCompte").dialog('close');
-	listerObjects()
 	return false;
 }

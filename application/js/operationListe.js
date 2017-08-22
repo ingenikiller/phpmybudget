@@ -5,14 +5,13 @@
 var listeRecFlux='';
 
 $(document).ready(function() {
-	//afficheFluxSelect('recFlux', $('#numeroCompte').val(), '');
 	var ms = $('#recFlux').magicSuggest({
 				placeholder:'Liste des flux',
 				id:'testFluxId',
-				data: function(q){
-						var retour = getListeFlux('comptePrincipal='+$('#numeroCompte').val()+'&fluxMaitre=N&flux='+q);
-						return retour[0].tabResult;
-				},
+				/*data: function(q){
+						//var retour = getListeFlux('comptePrincipal='+$('#numeroCompte').val()+'&fluxMaitre=N&flux='+q);
+						//return retour[0].tabResult;
+				},*/
 				allowFreeEntries: false,
 				valueField: 'fluxId',
 				displayField: 'flux'
@@ -32,7 +31,6 @@ $(document).ready(function() {
 */
  $(function() {
 	$( "#date" ).datepicker();
-	//$( "#date" ).datepicker( "option", "dateFormat", "yyyy-mm-dd" );
 	$.datepicker.regional['fr'] = {
 			closeText: 'Fermer',
 			prevText: '&#x3c;Pr�c',
@@ -142,11 +140,9 @@ function editerOperation(numeroCompte, operationId){
 }
 
 /*
-	r�initialise le formulaire de recherche pour lancer une nouvelle recherche
+	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
 */
 function rechercherOperations(form){
-	//$('#numeroPage').val(1);
-	//alert('toto');
 	listerObjects();
 	return false;
 }
@@ -171,19 +167,15 @@ function listerObjects(){
 		params+="&recMontant="+$('#recMontant').val();
 	}
 
-	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=operation&service=getliste",
-	         async: false,
-	         dataType: 'json',
-	         data: params
-	        }
-	    ).responseText
-	);
-
-	//alert(jsonObjectInstance);
-	parseListeJson(jsonObjectInstance);
+	//appel de l'ajax de recherche
+	$.ajax({
+		url: "index.php?domaine=operation&service=getliste",
+		dataType: 'json',
+		data: params,
+		success: function(resultat, statut, erreur){
+			parseListeJson(resultat);
+		}
+	});
 	return false;
 }
 
@@ -199,7 +191,6 @@ function parseListeJson(json) {
 	document.getElementById('numeroPage').value=json[0].page;
 	document.getElementById('rch_page').value=json[0].page;
 	document.getElementById('max_page').value=json[0].totalPage;
-
 
 	var nb=json[0].nbLine;
 	var tabJson = json[0].tabResult;
@@ -218,9 +209,8 @@ function parseListeJson(json) {
 		} else {
 			image='unchecked';
 		}
-		//cell6.innerHTML='<img src="./application/images/'+image+'.jpg">';
-
 		row.append($('<td class="text-center"/>').append('<img src="./application/images/'+image+'.jpg">'));
+		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="glyphicon glyphicon-pencil"/></a>'));
 		$("#tbodyResultat").append(row);
 	}

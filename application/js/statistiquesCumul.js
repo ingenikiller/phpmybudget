@@ -25,22 +25,17 @@ function soumettreCumul(form) {
 		listeFlux+="'"+tabFlux[i].value+"'";
 	}
 	
-	
 	$.ajax({ 
-    url: "index.php?domaine=statistique&service=statcumul",
-    data: { "numeroCompte": form.numeroCompte.value,
+		url: "index.php?domaine=statistique&service=statcumul",
+		data: { "numeroCompte": form.numeroCompte.value,
 			"premiereAnnee": form.premiereAnnee.value,
 			"derniereAnnee": form.derniereAnnee.value,
 			"listeFlux": listeFlux
-	}, 
-    async: false, 
-    success: function(retour) { 
-      $('table#tableResultat').html(retour);
-      return false;
-    } 
+		},
+		success: function(retour) { 
+			$('table#tableResultat').html(retour);
+			return false;
+		} 
 	});
 	return false;
 }
-
-//,
-			//"listeFlux": $('multiselect_to').val()

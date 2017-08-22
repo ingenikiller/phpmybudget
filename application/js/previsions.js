@@ -21,14 +21,12 @@ function affichePrevisions(idTableau, periode, numeroCompte) {
 	    	"periode":periode,
 	    	"numeroCompte": numeroCompte
 		}, 
-	    async: false, 
 	    success: function(retour) { 
 			var xml = $.parseXML(retour)
 			$('table#'+idTableau).html(retour);
 			return false;
 	    }
 	});
-	
 }
 
 /*********************************************************
@@ -81,27 +79,22 @@ function modifierPrevision(form) {
 	var service = form.service.value;
 	
 	$.ajax({ 
-    url: "index.php?domaine=prevision&service="+service,
-    data: { "ligneId": form.ligneId.value,
-	    	"noCompte": form.numeroCompte.value,
-			"fluxId": form.fluxId.value,
-			"mois": form.mois.value,
-			"typenr": form.typenr.value,
-			'montant': form.montant.value,
-			'annee': document.getElementById('annee').value
-	}, 
-    async: false, 
-    success: function(retour) { 
-      //alert('OK');
-      return false;
-    } 
+		url: "index.php?domaine=prevision&service="+service,
+		data: { "ligneId": form.ligneId.value,
+				"noCompte": form.numeroCompte.value,
+				"fluxId": form.fluxId.value,
+				"mois": form.mois.value,
+				"typenr": form.typenr.value,
+				'montant': form.montant.value,
+				'annee': document.getElementById('annee').value
+		}, 
+		success: function(retour) { 
+			affichePrevisions('liste',document.getElementById('annee').value, form.numeroCompte.value);
+			$("div#boite").dialog('close');
+			afficheEstimation('estimation', $('#numeroCompte').val());
+			return false;
+		} 
 	});
-
-	affichePrevisions('liste',document.getElementById('annee').value, form.numeroCompte.value);
-	$("div#boite").dialog('close');
-	
-	afficheEstimation('estimation', $('#numeroCompte').val());
-	
 	return false;
 }
 
@@ -111,14 +104,12 @@ function modifierPrevision(form) {
 	-compte: numéro de compte
  ***********************************************************************/
 function afficheEntete(compte) {
-	
 	document.editionEnteteUnitaire.service.value='create';
 	document.editionEnteteUnitaire.fluxId.value='';
 	document.editionEnteteUnitaire.periodicite.value='';
 	document.editionEnteteUnitaire.nomEntete.value='';
 	document.editionEnteteUnitaire.montant.value='';
 	document.editionEnteteUnitaire.ligneId.value='';
-
 	$("div#boiteEntete").dialog({
 		resizable: false,
 		width:400,
@@ -138,26 +129,25 @@ function creerEntete(form) {
 	
 	$.ajax({ 
 		url: "index.php?domaine=previsionentete&service="+form.service.value,
-		data: { "ligneId": form.ligneId.value,
-				"noCompte": form.numeroCompte.value,
-				"fluxId": form.fluxId.value,
-				"typenr": form.typenr.value,
-				'nomEntete': form.nomEntete.value,
-				'annee': $('#annee').val(),
-				'periodicite': $('#periodicite').val(),
-				'montant': form.montant.value,
-				'annee': $('#annee').val()
+		data:{
+			"ligneId": form.ligneId.value,
+			"noCompte": form.numeroCompte.value,
+			"fluxId": form.fluxId.value,
+			"typenr": form.typenr.value,
+			'nomEntete': form.nomEntete.value,
+			'annee': $('#annee').val(),
+			'periodicite': $('#periodicite').val(),
+			'montant': form.montant.value,
+			'annee': $('#annee').val()
 		}, 
-		async: false, 
 		success: function(retour) { 
-		  //alert('OK');
-		  form.ligneId.value = retour[0].ligneId;
-		  return false;
+			form.ligneId.value = retour[0].ligneId;
+			$("div#boiteEntete").dialog('close');
+			affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
+			recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
+			return false;
 		} 
 	});
-	$("div#boiteEntete").dialog('close');
-	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
-	recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
 	return false;
 }
 
@@ -194,27 +184,23 @@ function afficheListeGroupe(fluxId){
 	var params = "noCompte="+numeroCompte+"&annee="+annee+"&fluxId="+fluxId;
 	
 	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=previsionentete&service=getone",
-	         async: false,
-	         dataType: 'json',
-	         data: params
-	        }
-	    ).responseText
-	);
-	
-	parseListePrevisionJson(jsonObjectInstance);
-	
-	$("div#boiteListeEntete").dialog({
-		resizable: false,
-		width:400,
-		modal: true,
-		title : 'Edition prévision pour '+$("#listeEntete").find("option:selected").text()
+	$.ajax({
+		url: "index.php?domaine=previsionentete&service=getone",
+		dataType: 'json',
+		data: params,
+		success: function(resultat) {
+			parseListePrevisionJson(resultat);
+
+			$("div#boiteListeEntete").dialog({
+				resizable: false,
+				width:400,
+				modal: true,
+				title : 'Edition prévision pour '+$("#listeEntete").find("option:selected").text()
+			});
+
+			$('#listeEntete').val('');
+		}
 	});
-    
-    $('#listeEntete').val('');
-    
 	return false;
 }
 
@@ -234,36 +220,7 @@ function parseListePrevisionJson(json) {
 		row.append($('<td/>').append('<input class="text-right" type="text" id="montant-'+(i+1)+'" ligneid="'+tabJson[i].ligneId+'" onblur="return isDouble(this);" value="'+tabJson[i].montant+'" size="10" />'));
 		//row.append($('<td/>').append('<input type="button" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);"></input>'));
 		row.append($('<td class="text-center"/>').append('<button class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);"><span class="ui-icon ui-icon-arrowthick-1-s"></span></button>'));
-
-
 		$("#tbodylisteentete").append(row);
-
-		/*var row = tab.insertRow(i+1);
-		row.setAttribute('typetr', "prevision")
-		row.setAttribute('class', 'l'+i%2);
-		
-		var cell1=row.insertCell(0)
-		cell1.innerHTML=tabJson[i].mois;
-		cell1.setAttribute('align', "center")
-		
-		var cell2 = row.insertCell(1);
-		var inputmontant = document.createElement('input');
-		inputmontant.type='text';
-		inputmontant.id='montant-'+(i+1);
-		inputmontant.setAttribute('ligneid',tabJson[i].ligneId);
-		inputmontant.value=tabJson[i].montant;
-		inputmontant.onblur= function(){return isDouble(this);};
-		cell2.appendChild(inputmontant);
-		
-		//
-		var cell3 = row.insertCell(2);
-		var btnpropag = document.createElement('input');
-		btnpropag.id='btnpropag'+i;
-		btnpropag.setAttribute('index',i+1);
-		btnpropag.type='button';
-		btnpropag.className='bouton';
-		btnpropag.onclick=function(){propagerMontant(this);};
-		cell3.appendChild(btnpropag);*/
 	}
 }
 
@@ -290,12 +247,11 @@ function propagerMontant(btn){
 		data: { "ligneId": ligneId,
 			"mode": "equilibrer"
 		}, 
-		async: false, 
 		success: function(retour) {
+			affichePrevisions('liste',document.getElementById('annee').value, numeroCompte);
 			return false;
 		} 
 	});
-	affichePrevisions('liste',document.getElementById('annee').value, numeroCompte);
 }
 
 function enregistreListeLignes(form){
@@ -308,28 +264,25 @@ function enregistreListeLignes(form){
 	params+='&nbligne='+(i-1)+"&render=json";
 	$.ajax({
 		url: "index.php?domaine=previsionentete&service=update",
-		async: false,
 		dataType: 'json',
-		data: params
+		data: params,
+		success: function(data) {
+			$("div#boiteListeEntete").dialog('close');
+			affichePrevisions('liste',document.getElementById('annee').value, form.numeroCompte.value);
+		}
 		}
 	);
-	$("div#boiteListeEntete").dialog('close');
-	affichePrevisions('liste',document.getElementById('annee').value, form.numeroCompte.value);
 	return false;
 }
 
 function afficheEstimation(champs, nocompte){
 	var params = "noCompte="+nocompte;
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-			url: "index.php?domaine=prevision&service=estimationreste",
-			async: false,
-			dataType: 'json',
-			data: params
-	        }
-	    ).responseText
-	);
-	$('#estimation').text(jsonObjectInstance[0][1]);
+	$.ajax({
+		url: "index.php?domaine=prevision&service=estimationreste",
+		dataType: 'json',
+		data: params,
+		success: function (data) {
+			$('#estimation').text(data[0][1]);
+		}
+	});
 }
-
-

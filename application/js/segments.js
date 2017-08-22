@@ -6,45 +6,19 @@ $(document).ready(function() {
 var tabListe = 'tableSegments';
 var tabSegment = 'detail_segment';
 
-
-/*function afficheDetail(cleseg, idTableau) {	
-	$.ajax({ 
-	    url: "index.php?page=SEGMENT_D&cinematic=display",
-	    data: { "edition":"edition",
-	    	"cleseg":cleseg		    	
-		}, 
-	    async: false, 
-	    success: function(retour) { 
-			//fonctionne sous IE
-			//var xml = $.parseXML(retour)
-			//$('table#'+idTableau).html($(xml).find('tbody'));
-			//
-			
-			var xml = $.parseXML(retour)
-			$('table#'+idTableau).html(retour);
-			
-			return false;
-	    }
-	});
-}*/
-
 function afficheListe(cleseg, idTableau) {
 	
 	var params = "cleseg="+cleseg;
 	
-	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=segment&service=getsegment",
-	         async: false,
-	         dataType: 'json',
-	         data: params
-	        }
-	    ).responseText
-	);
-	
-	//alert(jsonObjectInstance);
-	parseListeJson(jsonObjectInstance, cleseg, idTableau);
+	//appel asynchrone de l'ajax
+	$.ajax({
+		url: "index.php?domaine=segment&service=getsegment",
+		dataType: 'json',
+	    data: params,
+		success: function(resultat) {
+			parseListeJson(resultat, cleseg, idTableau);
+		}
+	});
 	return false;
 }
 
@@ -101,7 +75,7 @@ function soumettreDetail(form, tabElement) {
 	    data: params,
 	    //data: {"edition":"edition"},
 	    dataType: "text",
-	    async: false, 
+	    //async: false, 
 	    success: function(retour) { 
 			//afficheDetail(form.elements['Ncleseg'].value, tableau);
 			if(form.cleseg.value=='CONF'){
@@ -134,7 +108,6 @@ function enregistreSegment(tableau, form) {
 	    data: params,
 	    //data: {"edition":"edition"},
 	    dataType: "text",
-	    async: false, 
 	    success: function(retour) { 
 			//alert('OK');
 			//alert(retour);
@@ -164,20 +137,17 @@ function contitueParamsListe(formulaire, tabElement) {
 			j++;
 		}
 	}
-	return params
+	return params;
 }
 
 function contitueParams(formulaire, tabElement) {
 	var params='';
-	
-	//for	(var i in tabElement) {
 	for (var i=0; i < formulaire.elements.length; i++) {
-		
 		if( typeof(formulaire.elements[i]) != "undefined") {
 			params += formulaire.elements[i].id +'='+ formulaire.elements[i].value+'&';
+		}
 	}
-	}
-	return params
+	return params;
 }
 
 
@@ -190,8 +160,6 @@ function editionDetail(cleseg, codseg){
 
 	if(codseg!='') {
 		var params="&cleseg="+cleseg+"&codseg="+codseg;
-	
-	
 		$.getJSON(
 			"index.php?domaine=segment&service=getone",
 			data=params,

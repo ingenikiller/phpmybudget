@@ -1,5 +1,6 @@
-
-
+$(document).ready(function() {
+	$('.search-box').SumoSelect({ csvDispCount: 3, selectAll:true, search: true, searchText:'Enter here.', okCancelInMulti:true });
+});
 
 function soumettreRelevesAnnee(form) {
 	if(!validForm(form)) {
@@ -7,16 +8,15 @@ function soumettreRelevesAnnee(form) {
 	}
 	
 	$.ajax({ 
-    url: "index.php?domaine=statistique&service=statannees",
-    data: { "numeroCompte": form.numeroCompte.value,
-			"premiereAnnee": form.premiereAnnee.value,
-			"derniereAnnee": form.derniereAnnee.value
-	}, 
-    async: false, 
-    success: function(retour) { 
-      $('table#tableResultat').html(retour);
-      return false;
-    } 
+		url: "index.php?domaine=statistique&service=statannees",
+		data: { "numeroCompte": form.numeroCompte.value,
+				"premiereAnnee": form.premiereAnnee.value,
+				"derniereAnnee": form.derniereAnnee.value
+		}, 
+		success: function(retour) { 
+		  $('table#tableResultat').html(retour);
+		  return false;
+		} 
 	});
 	return false;
 }
@@ -34,7 +34,6 @@ function soumettreMois(form) {
 				"derniereAnnee": form.derniereAnnee.value,
 				"dernierMois": form.dernierMois.value
 		}, 
-	    async: false, 
 	    success: function(retour) { 
 	      $('table#tableResultat').html(retour);
 	      return false;
@@ -49,16 +48,15 @@ function soumettreRelevesMois(form) {
 	}
 	
 	$.ajax({ 
-    url: "index.php?domaine=statistique&service=statreleves",
-    data: { "numeroCompte": form.numeroCompte.value,
-			"premierReleve": form.premierReleve.value,
-			"dernierReleve": form.dernierReleve.value
-	}, 
-    async: false, 
-    success: function(retour) { 
-      $('table#tableResultat').html(retour);
-      return false;
-    } 
+		url: "index.php?domaine=statistique&service=statreleves",
+		data: { "numeroCompte": form.numeroCompte.value,
+				"premierReleve": form.premierReleve.value,
+				"dernierReleve": form.dernierReleve.value
+		}, 
+		success: function(retour) { 
+		  $('table#tableResultat').html(retour);
+		  return false;
+		} 
 	});
 	return false;
 }
@@ -68,11 +66,11 @@ function afficheDetail(params){
 	$('#numeroPage').val(1);
 	listerObjects();
 	$("div#boiteDetail").dialog({
-					resizable: false,
-					height:750,
-					width:700,
-					modal: true
-				});
+		resizable: false,
+		height:750,
+		width:700,
+		modal: true
+	});
 }
 
 /************************
@@ -82,17 +80,15 @@ function listerObjects(){
 	
 	var params = $('#params').val();
 	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=operation&service=getliste",
-	         async: false,
-	         dataType: 'json',
-	         data: $('#params').val()+'&numeroPage='+$('#numeroPage').val()
-	        }
-	    ).responseText
-	);
 	
-	parseListeJson(jsonObjectInstance);
+	$.ajax({
+		url: "index.php?domaine=operation&service=getliste",
+		dataType: 'json',
+		data: $('#params').val()+'&numeroPage='+$('#numeroPage').val(),
+		success: function(resultat){
+			parseListeJson(jsonObjectInstance);
+		}
+	});
 	return false;
 }
 
