@@ -335,9 +335,11 @@ class GestionStatistiquesService extends ServiceStub {
         /*$requeteAsso = 'SELECT SUM( montant) AS total , fluxId, \'$parent->annee\' AS periode
 					FROM operation 
 					WHERE nocompte=' . $numeroCompte . ' and date like concat(\'$parent->annee\',\'%\') GROUP BY fluxid';*/
-        $requeteAsso = 'SELECT fluxId, substr(mois, 1, 4 ) AS periode, fluxMaitre, sum(total) as total
+        $requeteAsso = 'SELECT fluxId,  fluxMaitre, sum(total) as total
 					FROM stat_flux
-					WHERE nocompte=\'' . $numeroCompte . '\' and mois BETWEEN \''. $premiereAnnee .'\' AND \'' . $derniereAnnee . '\'  and fluxId IN ('.$fluxAjax.') GROUP BY fluxid';
+					WHERE nocompte=\'' . $numeroCompte . '\' and mois BETWEEN \''. $premiereAnnee .'\' AND \'' . $derniereAnnee . '\'  
+					GROUP BY fluxid, fluxMaitre';
+					//and fluxId IN ('.$fluxAjax.') 
 					
         $listMontantFlux = new ListDynamicObject();
         $listMontantFlux->name = 'ListeMontantFlux';
@@ -384,7 +386,7 @@ class GestionStatistiquesService extends ServiceStub {
 		$requeteMontantFils='SELECT sum(montant) AS total, fluxId
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
-						AND date  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\' and fluxId IN ('.$fluxAjax.')';
+						AND date  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\';// and fluxId IN ('.$fluxAjax.')';
 		$montantFluxFils = new ListDynamicObject();
 		$montantFluxFils->name='MontantFluxFils';
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
@@ -403,7 +405,8 @@ class GestionStatistiquesService extends ServiceStub {
 		$listeFlux->setAssociatedKey($listFluxFils);
         $listeFlux->request("SELECT DISTINCT flux.fluxId, flux, operationRecurrente , flux.fluxMaitre FROM stat_flux 
 						LEFT JOIN flux ON flux.fluxId = stat_flux.fluxId 
-                                                WHERE concat(mois, '-15') between '$premiereAnnee' and '$derniereAnnee' and nocompte='$numeroCompte' and flux.fluxId IN ($fluxAjax) ORDER BY flux");
+                                                WHERE concat(mois, '-15') between '$premiereAnnee' and '$derniereAnnee' and nocompte='$numeroCompte' ORDER BY flux");
+												//and flux.fluxId IN ($fluxAjax) 
                                                 //WHERE date between '$premiereAnnee' and '$derniereAnnee' and nocompte='$numeroCompte' ORDER BY flux");
         $p_contexte->addDataBlockRow($listeFlux);
         

@@ -3,10 +3,10 @@
  *********************************************************/
 $(document).ready(function() {
 	//
-	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
-	recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
 	afficheEstimation('estimation', $('#numeroCompte').val());
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N');
+	recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
+	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
 });
 
 
