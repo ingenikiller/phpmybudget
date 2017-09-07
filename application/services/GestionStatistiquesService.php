@@ -331,10 +331,16 @@ class GestionStatistiquesService extends ServiceStub {
 		$fluxAjax = $p_contexte->m_dataRequest->getData('listeFlux');
 		Logger::getInstance()->addLogMessage('liste ajax: '. $fluxAjax);
 		
-        //requête des montants par flux
-        $requeteAsso = 'SELECT fluxId, sum(montant) as total
-					FROM operation
-					WHERE noCompte=\'' . $numeroCompte . '\' and date BETWEEN \''. $premiereAnnee .'\' AND \'' . $derniereAnnee . '\'  and fluxId IN ('.$fluxAjax.') GROUP BY fluxid';
+        //requête des montants par flux/mois
+        /*$requeteAsso = 'SELECT SUM( montant) AS total , fluxId, \'$parent->annee\' AS periode
+					FROM operation 
+					WHERE nocompte=' . $numeroCompte . ' and date like concat(\'$parent->annee\',\'%\') GROUP BY fluxid';*/
+        $requeteAsso = 'SELECT fluxId,  fluxMaitre, sum(total) as total
+					FROM stat_flux
+					WHERE nocompte=\'' . $numeroCompte . '\' and mois BETWEEN \''. $premiereAnnee .'\' AND \'' . $derniereAnnee . '\'  
+					GROUP BY fluxid, fluxMaitre';
+					//and fluxId IN ('.$fluxAjax.') 
+					
         $listMontantFlux = new ListDynamicObject();
         $listMontantFlux->name = 'ListeMontantFlux';
         $listMontantFlux->setAssociatedRequest(null, $requeteAsso);
@@ -352,7 +358,7 @@ class GestionStatistiquesService extends ServiceStub {
 		$requeteMontantFils='SELECT sum(montant) AS total, fluxId
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
-						AND date  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\' and fluxId IN ('.$fluxAjax.')';
+						AND date  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\';// and fluxId IN ('.$fluxAjax.')';
 		$montantFluxFils = new ListDynamicObject();
 		$montantFluxFils->name='MontantFluxFils';
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
@@ -368,10 +374,11 @@ class GestionStatistiquesService extends ServiceStub {
         //liste des flux
         $listeFlux = new ListDynamicObject();
         $listeFlux->name = 'ListeFlux';
-		//$listeFlux->setAssociatedKey($listFluxFils);
-		//concat(mois, '-15') between '$premiereAnnee' and '$derniereAnnee' and
-        $listeFlux->request("SELECT DISTINCT flux.fluxId, flux, operationRecurrente , flux.fluxMaitre FROM  flux  
-                                                WHERE  compteId='$numeroCompte' and flux.fluxId IN ($fluxAjax) ORDER BY flux");
+		$listeFlux->setAssociatedKey($listFluxFils);
+        $listeFlux->request("SELECT DISTINCT flux.fluxId, flux, operationRecurrente , flux.fluxMaitre FROM stat_flux 
+						LEFT JOIN flux ON flux.fluxId = stat_flux.fluxId 
+                                                WHERE concat(mois, '-15') between '$premiereAnnee' and '$derniereAnnee' and nocompte='$numeroCompte' ORDER BY flux");
+												//and flux.fluxId IN ($fluxAjax) 
                                                 //WHERE date between '$premiereAnnee' and '$derniereAnnee' and nocompte='$numeroCompte' ORDER BY flux");
         $p_contexte->addDataBlockRow($listeFlux);
         
