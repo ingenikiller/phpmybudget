@@ -10,11 +10,15 @@
 	alimente les combos de sélection de compte
  *********************************************************/
 function alimenteListesCompte() {
-	var fluxJson = getListeComptes();
-	alimenteObjetSelectCompte($('#comptePrincipal'), null, fluxJson);
-	alimenteObjetSelectCompte($('#compteDestination'), null, fluxJson);
-	alimenteObjetSelectCompte($('#compteId'), null, fluxJson);
-	alimenteObjetSelectCompte($('#compteDest'), null, fluxJson);
+	var fonctionSuccess = function(resultat) {
+		alimenteObjetSelectCompte($('#comptePrincipal'), null, resultat);
+		alimenteObjetSelectCompte($('#compteDestination'), null, resultat);
+		alimenteObjetSelectCompte($('#compteId'), null, resultat);
+		alimenteObjetSelectCompte($('#compteDest'), null, resultat);
+	}
+	
+	getListeComptes(fonctionSuccess);
+	
 }
 
 /*********************************************************
@@ -45,17 +49,22 @@ function rechercherFlux(form){
 function listerObjects(){
 	
 	var params = 'numeroPage='+$('#numeroPage').val();
-	if($('#comptePrincipal').val()!='') {
+	if($('#comptePrincipal').val()!='' && $('#comptePrincipal').val()!=null) {
 		params+="&comptePrincipal="+$('#comptePrincipal').val();
 	}
-	if($('#compteDestination').val()!='') {
+	if($('#compteDestination').val()!='' && $('#compteDestination').val()!=null) {
 		params+="&compteDestination="+$('#compteDestination').val();
 	}
+	
+	var fonctionSuccess = function(resultat) {
+		parseListeJson(resultat);
+	}
+	
 	//appel synchrone de l'ajax
-	var jsonObjectInstance = getListeFlux(params);
+	getListeFlux(params, fonctionSuccess);
 	
 	//alert(jsonObjectInstance);
-	parseListeJson(jsonObjectInstance);
+	
 	return false;
 }
 
@@ -109,39 +118,41 @@ function editerFlux(fluxId){
 		//
 		$('#service').val('update');
 		var params = '&fluxId='+fluxId;
-		var jsonObjectInstance = getFlux(params);
 		//var tabJson = jsonObjectInstance[0].tabResult;
 		//var i=0;
-		$('#flux').val(jsonObjectInstance[0].flux);
-		$('#fluxId').val(jsonObjectInstance[0].fluxId);
-		$('#description').val(jsonObjectInstance[0].description);
-		$('#modePaiementId').val(jsonObjectInstance[0].modePaiementId);
-		$('#compteId').val(jsonObjectInstance[0].compteId);
-		
-		//numéro de compte en dur car compte principal
-		afficheFluxSelect('fluxMaitreId', jsonObjectInstance[0].compteId, 'fluxMaitre=O');
-		
-		$('#compteDest').val(jsonObjectInstance[0].compteDest);
-		if(jsonObjectInstance[0].entreeEpargne=='') {
+		var fonctionSuccess = function(resultat) {
+			$('#flux').val(resultat[0].flux);
+			$('#fluxId').val(resultat[0].fluxId);
+			$('#description').val(resultat[0].description);
+			$('#modePaiementId').val(resultat[0].modePaiementId);
+			$('#compteId').val(resultat[0].compteId);
+
+			//numéro de compte en dur car compte principal
+			afficheFluxSelect('fluxMaitreId', resultat[0].compteId, 'fluxMaitre=O');
+
+			$('#compteDest').val(resultat[0].compteDest);
+			if(resultat[0].entreeEpargne=='') {
 			$('#entreeEpargne').removeAttr('checked')
-		} else {	
+			} else {	
 			$('#entreeEpargne').attr('checked', 'checked');
+			}
+
+			if(resultat[0].sortieEpargne=='') {
+				$('#sortieEpargne').removeAttr('checked')
+			} else {	
+				$('#sortieEpargne').attr('checked', 'checked');
+			}
+
+			if(resultat[0].fluxMaitre=='N') {
+				$('#fluxMaitre').removeAttr('checked')
+			} else {	
+				$('#fluxMaitre').attr('checked', 'checked');
+			}
+
+			$('#fluxMaitreId').val(resultat[0].fluxMaitreId);
+			$('#depense').val(resultat[0].depense);
 		}
-		
-		if(jsonObjectInstance[0].sortieEpargne=='') {
-			$('#sortieEpargne').removeAttr('checked')
-		} else {	
-			$('#sortieEpargne').attr('checked', 'checked');
-		}
-		
-		if(jsonObjectInstance[0].fluxMaitre=='N') {
-			$('#fluxMaitre').removeAttr('checked')
-		} else {	
-			$('#fluxMaitre').attr('checked', 'checked');
-		}
-		
-		$('#fluxMaitreId').val(jsonObjectInstance[0].fluxMaitreId);
-		$('#depense').val(jsonObjectInstance[0].depense);
+		getFlux(params, fonctionSuccess);
 		
 	}
 	
@@ -164,27 +175,24 @@ function enregistreFlux(form){
 	}
 	
 	$.ajax({ 
-    url: "index.php?domaine=flux&service="+$('#service').val(),
-    data: { "fluxId": form.fluxId.value,
-			"flux": form.flux.value,
-	    	"description": form.description.value,
-			"modePaiementId": form.modePaiementId.value,
-			"compteId": form.compteId.value,
-			"compteDest": form.compteDest.value,
-			"entreeEpargne": $('#entreeEpargne').attr('checked')=='checked'?'checked':'',
-			"sortieEpargne": $('#sortieEpargne').attr('checked')=='checked'?'checked':'',
-			"fluxMaitreId": form.fluxMaitreId.value,
-			"fluxMaitre": $('#fluxMaitre').is(':checked')?'O':'N',
-			"depense": form.depense.value
-	}, 
-    async: false, 
-    success: function(retour) { 
-      //alert('OK');
-      return false;
-    } 
+		url: "index.php?domaine=flux&service="+$('#service').val(),
+		data: { "fluxId": form.fluxId.value,
+				"flux": form.flux.value,
+				"description": form.description.value,
+				"modePaiementId": form.modePaiementId.value,
+				"compteId": form.compteId.value,
+				"compteDest": form.compteDest.value,
+				"entreeEpargne": $('#entreeEpargne').attr('checked')=='checked'?'checked':'',
+				"sortieEpargne": $('#sortieEpargne').attr('checked')=='checked'?'checked':'',
+				"fluxMaitreId": form.fluxMaitreId.value,
+				"fluxMaitre": $('#fluxMaitre').is(':checked')?'O':'N',
+				"depense": form.depense.value
+		}, 
+		success: function(retour) { 
+			$("div#boiteFlux").dialog('close');
+			listerObjects();
+		  return false;
+		} 
 	});
-	
-	$("div#boiteFlux").dialog('close');
-	listerObjects();
 	return false;
 }

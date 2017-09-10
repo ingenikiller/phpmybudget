@@ -73,10 +73,10 @@
 							-->
 							<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
 								<xsl:variable name="annee" select="annee"/>
-								<xsl:variable name="valeur" select="/root/data/ListeFlux/Dynamic[fluxId=$fluxId]/associatedObjet/ListeFluxFils/Dynamic[fluxId=$fluxFils]/associatedObjet/MontantFluxFils/Dynamic[date=$annee]/total"/>
-								<td class="montant">
+								<xsl:variable name="valeur" select="/root/data/ListeFlux/Dynamic[fluxId=$fluxId]/associatedObjet/ListeFluxFils/Dynamic[fluxId=$fluxFils]/associatedObjet/MontantFluxFils/Dynamic/total"/>
+								<td class="text-right">
 									<xsl:if test="$valeur!=''">
-										<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=annee&amp;recFlux={$fluxFils}&amp;recDate={annee}')">
+										<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=cumal&amp;recFlux={$fluxFils}&amp;recIntervalle={annee}')">
 										<xsl:value-of select="format-number($valeur,$FORMAT_MNT)"/>
 										</a>
 									</xsl:if>
@@ -91,11 +91,11 @@
 	<xsl:template name="case">
 		<xsl:param name="fluxId"/>
 		<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
-			<td class="montant">
+			<td class="text-right">
 				<!--<xsl:if test="associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total">
 					<xsl:value-of select="format-number(associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total,$FORMAT_MNT)"/>
 				</xsl:if>-->
-				<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=annee&amp;recFlux={$fluxId}&amp;recDate={annee}')">
+				<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=cumul&amp;recFlux={$fluxId}&amp;recIntervalle={annee}')">
 					<xsl:if test="associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total">
 						<xsl:value-of select="format-number(associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total,$FORMAT_MNT)"/>
 					</xsl:if>

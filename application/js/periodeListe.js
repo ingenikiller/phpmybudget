@@ -75,17 +75,13 @@ function rechercherOperations(form){
 */
 function listerObjects(){
 	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=periode&service=getliste",
-	         async: false,
-	         dataType: 'json'
-	        }
-	    ).responseText
-	);
-	
-	//alert(jsonObjectInstance);
-	parseListeJson(jsonObjectInstance);
+	$.ajax({
+		url: "index.php?domaine=periode&service=getliste",
+		dataType: 'json',
+		success: function(resultat) {
+			parseListeJson(resultat);
+		}
+	});
 	return false;
 }
 
@@ -98,9 +94,6 @@ function parseListeJson(json) {
 	
 	var total = json[0].nbLineTotal;
 	var nbpage = Math.ceil(total/json[0].nbLine);
-	//document.getElementById('numeroPage').value=json[0].page;
-	//document.getElementById('rch_page').value=json[0].page;
-	//document.getElementById('max_page').value=json[0].totalPage;
 	
 	
 	var nb=json[0].nbLine;
@@ -111,18 +104,6 @@ function parseListeJson(json) {
 		row.append($('<td/>').text(tabJson[i].annee));
 		row.append($('<td  class="text-center"/>').text(tabJson[i].nbmois));
 		$("#tbodyResultat").append(row);
-
-		/*var row = tab.insertRow(i+1);
-		row.setAttribute('typetr', "annee")
-		row.setAttribute('class', 'l'+i%2);
-		
-		var cell1=row.insertCell(0)
-		cell1.innerHTML=tabJson[i].annee;
-		cell1.setAttribute('align', "center")
-		
-		var cell2 = row.insertCell(1);
-		cell2.innerHTML=tabJson[i].nbmois;
-		cell2.setAttribute('align', "center");*/
 	}
 }
 
@@ -136,13 +117,13 @@ function creerPeriode(form){
 		url: "index.php?domaine=periode&service=create",
 		data: { "annee": form.nouvelleannee.value
 		}, 
-		async: false, 
 		success: function(retour) { 
 			traiteRetourJSON(retour);
+			listerObjects();
 			return false;
 		} 
 	});
-	listerObjects();
+	
 	return false;
 }
 

@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-	afficheFluxSelect('multiselect', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
+	//afficheFluxSelect('multiselect', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 });
 
 

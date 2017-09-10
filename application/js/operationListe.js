@@ -20,7 +20,7 @@ $(document).ready(function() {
 			nextText: 'Suiv&#x3e;',
 			currentText: 'Courant',
 			monthNames: ['Janvier','F&eacute;vrier','Mars','Avril','Mai','Juin',
-			'Juillet','Août','Septembre','Octobre','Novembre','D&eacute;cembre'],
+			'Juillet','Ao&ucirc;t','Septembre','Octobre','Novembre','D&eacute;cembre'],
 			monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
 			'Jul','Aoû','Sep','Oct','Nov','Déc'],
 			dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
@@ -136,7 +136,7 @@ function rechercherOperations(form){
 function listerObjects(){
 	
 	var params = "numeroCompte="+$('#numeroCompte').val()+'&numeroPage='+$('#numeroPage').val();
-	if($('#recFlux').val()!='') {
+	if($('#recFlux').val()!='' && $('#recFlux').val()!=null) {
 		params+="&recFlux="+$('#recFlux').val();
 	}
 	
@@ -151,18 +151,14 @@ function listerObjects(){
 	}
 	
 	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=operation&service=getliste",
-	         async: false,
-	         dataType: 'json',
-	         data: params
-	        }
-	    ).responseText
-	);
-	
-	//alert(jsonObjectInstance);
-	parseListeJson(jsonObjectInstance);
+	$.ajax({
+		url: "index.php?domaine=operation&service=getliste",
+		dataType: 'json',
+		data: params,
+		success: function(resultat) {
+			parseListeJson(resultat);
+		}
+	});
 	return false;
 }
 
@@ -188,7 +184,14 @@ function parseListeJson(json) {
 		row.append($('<td/>').text(tabJson[i].noReleve));
 		row.append($('<td/>').text(tabJson[i].date));
 		row.append($('<td/>').text(tabJson[i].libelle));
-		row.append($('<td class="text-right"/>').text(tabJson[i].montant.replace(',','')));
+		var classeMontant='';
+		if(Number(tabJson[i].montant) >= 0) {
+			classeMontant='positif';
+		} else {
+			classeMontant='negatif';
+		}
+		
+		row.append($('<td class="text-right '+classeMontant+'"/>').text(tabJson[i].montant.replace(',','')));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		
 		var image='';

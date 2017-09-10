@@ -372,7 +372,7 @@ class GestionStatistiquesService extends ServiceStub {
         //$p_contexte->m_dataRequest->getData('dernierReleve');
         //requête principale
         //$l_requete = "SELECT distinct substr(date,1,4) AS annee FROM operation WHERE date between '$premiereAnnee' and '$derniereAnnee' and nocompte='$numeroCompte' order by annee";
-        $l_requete = "SELECT CONCAT('$premiereAnnee', '-', '$derniereAnnee') AS annee";
+        $l_requete = "SELECT CONCAT('$premiereAnnee', '_', '$derniereAnnee') AS annee";
 
         $listeReleves = new ListDynamicObject();
         $listeReleves->name = 'ListeAnnees';

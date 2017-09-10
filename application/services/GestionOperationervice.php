@@ -28,7 +28,14 @@ class GestionOperationervice extends ServiceStub{
 		if($recDate	!=null){
 			$requete.=" AND operation.date like concat('$recDate','%')";        	
         }
-        
+		
+        $recIntervalle = $p_contexte->m_dataRequest->getData('recIntervalle');
+		if($recIntervalle	!=null){
+			//Logger::getInstance()->addLogMessage('intervalle' . $recIntervalle);
+			$intervalle = explode('_', $recIntervalle);
+			$requete.=" AND operation.date between '". $intervalle[0] . "' AND '" . $intervalle[1] . "' ";	
+        }
+		
         $recNoReleve = $p_contexte->m_dataRequest->getData('recNoReleve');
         if($recNoReleve!=null){
 			$requete.=" AND operation.noReleve LIKE'$recNoReleve'";        	

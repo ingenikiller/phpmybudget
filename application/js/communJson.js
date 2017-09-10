@@ -1,18 +1,15 @@
 /*********************************************************
 	récupère la liste des comptes sous format Json
  *********************************************************/
-function getListeComptes(){
-	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=compte&service=getliste",
-	         async: false,
-	         dataType: 'json'
-	        }
-	    ).responseText
-	);
+function getListeComptes(fonctionSuccess){
+	//appel asynchrone de l'ajax
+	$.ajax({
+		url: "index.php?domaine=compte&service=getliste",
+		dataType: 'json',
+		success: fonctionSuccess
+	});
 	
-	return jsonObjectInstance;
+	return true;
 }
 
 /*********************************************************
@@ -35,48 +32,52 @@ function alimenteListeCompte(objetListe, compteDefaut){
 /*********************************************************
 	récupère la liste des flux sous format Json
  *********************************************************/
-function getListeFlux(params){
-	return $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=flux&service=getliste",
-	         async: false,
-	         dataType: 'json',
-	         data: params
-	        }
-	    ).responseText
-	);
+function getListeFlux(params, fonctionSuccess){
+	$.ajax({
+		url: "index.php?domaine=flux&service=getliste",
+		dataType: 'json',
+		data: params,
+		success: fonctionSuccess
+	});
 }
 
 /*********************************************************
 	récupère la liste des flux sous format Json
  *********************************************************/
-function getFlux(params){
-	return $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=flux&service=getone",
-	         async: false,
-	         dataType: 'json',
-	         data: params
-	        }
-	    ).responseText
-	);
+function getFlux(params, fonctionSuccess){
+	$.ajax({
+		url: "index.php?domaine=flux&service=getone",
+		dataType: 'json',
+		data: params,
+		success: fonctionSuccess
+	});
 }
 
 /*********************************************************
 	parse le tableau Json et génère le tableau graphique
  *********************************************************/
 function afficheFluxSelect(nomChamp, compte, chaineParams, valeur) {
-	var taille = $('#'+nomChamp+'>option').length;
-	$('#'+nomChamp).empty();
-	$('#'+nomChamp).append(new Option('','',true,true));
 	var params = 'comptePrincipal='+compte+'&'+chaineParams;
-	var liste = getListeFlux(params);
-	var nb=liste[0].nbLine;
-	var tabJson = liste[0].tabResult;
-	var i=0;
-	for(i=0; i<nb; i++) {
-		$('#'+nomChamp).append(new Option(tabJson[i].flux, tabJson[i].fluxId, false, false));
-	}
+	$.ajax({
+		url: "index.php?domaine=flux&service=getliste",
+		dataType: 'json',
+		data: params,
+		success: function(resultat) {
+			var taille = $('#'+nomChamp+'>option').length;
+			$('#'+nomChamp).empty();
+			$('#'+nomChamp).append(new Option('','',true,true));
+			
+			//var liste = getListeFlux(params);
+			var nb=resultat[0].nbLine;
+			var tabJson = resultat[0].tabResult;
+			var i=0;
+			for(i=0; i<nb; i++) {
+				$('#'+nomChamp).append(new Option(tabJson[i].flux, tabJson[i].fluxId, false, false));
+			}
+		}
+	});
+	
+	
 }
 
 function traiteRetourJSON(retour){

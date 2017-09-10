@@ -52,26 +52,24 @@ function soumettre(form) {
 				'montant': form.montant.value,
 				'verif': form.verif.checked?'checked':''
 		}, 
-		async: false, 
-		success: function(retour) { 
+		success: function(retour) {
+			getSoldeCompte(form.noCompte.value, 'solde');
+			//si on est en création, on garde la popup ouverte, sinon, on la ferme
+			if(service=='create') {
+				form.libelle.value='';
+				form.fluxId.value='';
+				form.modePaiementId.value='';
+				form.montant.value='';
+				form.libelle.focus();
+			} else {
+				$("div#boiteOperation").dialog('close');
+			}
+			
+			//maj de la liste des opérations
+			pagination('recherche');
 			return false;
 		} 
 	});
-	getSoldeCompte(form.noCompte.value, 'solde');
-	//si on est en création, on garde la popup ouverte, sinon, on la ferme
-	if(service=='create') {
-	 	form.libelle.value='';
-	 	form.fluxId.value='';
-	 	form.modePaiementId.value='';
-	 	form.montant.value='';
-	 	form.libelle.focus();
-	} else {
-		$("div#boiteOperation").dialog('close');
-	}
-	
-	//maj de la liste des opérations
-	pagination('recherche');
-
 	return false;
 }
 
@@ -97,6 +95,9 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
  *********************************************************/
 function getModeReglementDefaut(flux, modePaiement){
 	var params = '&fluxId='+flux.value;
-	var jsonObjectInstance = getFlux(params);
-	modePaiement.value = jsonObjectInstance[0].modePaiementId;
+	var fonctionSuccess = function(resultat) {
+		modePaiement.value = resultat[0].modePaiementId;
+	}
+	getFlux(params, fonctionSuccess);
+	
 }
