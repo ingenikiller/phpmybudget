@@ -10,6 +10,7 @@ class AuthentificateurStandard {
 			Logger::getInstance()->addLogMessage('Session non ouverte!');
 			throw new exception('Session non ouverte');
 		} else {
+			Logger::getInstance()->addLogMessage('Session ouverte!');
 			$userid = $_SESSION['userid'];
 		}
 		Logger::getInstance()->addLogMessage('appel authenticate'. ' avec ' . $userid);

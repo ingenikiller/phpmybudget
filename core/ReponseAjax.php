@@ -12,6 +12,7 @@
  */
 class ReponseAjax {
     
+	//OK ou KO
     public $status='';
     
     public $message='';

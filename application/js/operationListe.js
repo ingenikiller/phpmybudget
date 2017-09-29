@@ -124,8 +124,6 @@ function editerOperation(numeroCompte, operationId){
 	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
 */
 function rechercherOperations(form){
-	//$('#numeroPage').val(1);
-	//alert('toto');
 	listerObjects();
 	return false;
 }
@@ -140,9 +138,6 @@ function listerObjects(){
 		params+="&recFlux="+$('#recFlux').val();
 	}
 	
-	if($('#recNoReleve').val()!='') {
-		params+="&recNoReleve="+$('#recNoReleve').val();
-	}
 	if($('#recDate').val()!='') {
 		params+="&recDate="+$('#recDate').val();
 	}
@@ -194,15 +189,6 @@ function parseListeJson(json) {
 		row.append($('<td class="text-right '+classeMontant+'"/>').text(tabJson[i].montant.replace(',','')));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		
-		var image='';
-		if(tabJson[i].verif=='checked') {
-			image='checked';
-		} else {
-			image='unchecked';
-		}
-		//cell6.innerHTML='<img src="./application/images/'+image+'.jpg">';
-		
-		row.append($('<td class="text-center"/>').append('<img src="./application/images/'+image+'.jpg">'));
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="glyphicon glyphicon-pencil"/></a>'));
 		$("#tbodyResultat").append(row);
 	}

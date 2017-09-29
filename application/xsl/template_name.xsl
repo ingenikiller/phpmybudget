@@ -199,7 +199,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!--div class="form-group row">
                             <label for="fluxId" class="col-sm-6 form-control-label">
                                 <xsl:value-of select="$LBL.VERIFICATION"/>
                             </label>
@@ -207,7 +207,7 @@
                                 <input class="form-control" type="checkbox" name="verif" id="verif" checked="Verif"
                                        tabindex="70"/>
                             </div>
-                        </div>
+                        </div-->
 
                         <div class="row">
                             <div class="col-xs-4"/>

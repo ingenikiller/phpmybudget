@@ -32,11 +32,13 @@ class ListDynamicObject extends ListStructure implements IList{
         Logger::getInstance()->addLogMessage('requete dynamique:'.$p_requete);
         
         if($p_numPage!=null){
-			$stmt = self::$_pdo->query($p_requete);
+			$stmt = null;
+			try{
+				$stmt = self::$_pdo->query($p_requete);
+			} catch (Exception $e) {
+				throw new TechnicalException($e);
+			}
 			
-        	if($stmt==FALSE) {
-            	throw new TechnicalException(self::$_pdo->errorCode(),self::$_pdo->errorInfo() );
-       		}
         	$l_tab = $stmt->fetch(PDO::FETCH_ASSOC);
         	$this->nbLineTotal = $stmt->rowCount();
         	
@@ -45,15 +47,18 @@ class ListDynamicObject extends ListStructure implements IList{
         }
         
         Logger::getInstance()->addLogMessage('requete dynamique:'.$p_requete);
-        $stmt = self::$_pdo->query($p_requete);
-		if($stmt==FALSE) {
-			Logger::getInstance()->addLogMessage('ERREUR ERREUR ');
-			throw new TechnicalException(self::$_pdo->errorCode(),self::$_pdo->errorInfo() );
+		$stmt=null;
+        try{
+			$stmt = self::$_pdo->query($p_requete);
+		} catch (Exception $e) {
+			throw new TechnicalException($e);
 		}
         $this->nbLine = $stmt->rowCount();
         $stmt->setFetchMode(PDO::FETCH_INTO, $this);
         $this->tabResult = $stmt->fetchAll(PDO::FETCH_OBJ);
-        
+        if($p_numPage==null){
+			$this->nbLineTotal = count($this->tabResult);
+		}
         $this->totalPage = ceil($this->nbLineTotal / LIGNE_PAR_PAGE);
         $this->page=($p_numPage==null)? 1 : $p_numPage;
         

@@ -44,6 +44,10 @@ class PageDescription {
         $this->m_render=$render;
     }
 	
+	public function getRender(){
+        return $this->m_render;
+    }
+	
 	public function setClasse($classe){
         $this->m_classe=$classe;
     }
@@ -64,6 +68,7 @@ class PageDescription {
 			$methode = $this->m_methode.'';
 			$service->$methode($p_contexte);
         } catch (FunctionnalException $fe) {
+			Logger::getInstance()->addLogMessage('functional');
             $p_contexte->addError($fe->getMessage());
         }
         //lance l'affichage si le rendu est xsl

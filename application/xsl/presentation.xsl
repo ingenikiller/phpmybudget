@@ -18,7 +18,7 @@
 				<xsl:if test="$affMenu='O'">
 					<xsl:call-template name="menu"/>
 				</xsl:if>
-				<!-- affichage deu contenu -->
+				<!-- affichage du contenu -->
 				<div class="container contenu">
 					<xsl:choose>
 						<xsl:when test="$affMenu='O'">
@@ -59,14 +59,11 @@
 			<title>
 				<xsl:value-of select="$HeadTitre"/>
 			</title>
-			<!--link href="application/css/dhtmlgoodies_calendar.css" rel="stylesheet" type="text/css"/-->
-			
 			
 			<link href="application/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/css/bootstrap.min.css" rel="stylesheet"/>
 			
 			<link href="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 			
-			<!--script type="text/javascript" src="application/js/dhtmlgoodies_calendar.js" charset="iso-8859-1">&#160;</script-->
 			<script type="text/javascript" src="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/external/jquery/jquery.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="application/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.js" charset="iso-8859-1">&#160;</script>
 

@@ -49,8 +49,7 @@ function soumettre(form) {
 				"libelle": form.libelle.value,
 				"fluxId": form.fluxId.value,
 				'modePaiementId': form.modePaiementId.value,
-				'montant': form.montant.value,
-				'verif': form.verif.checked?'checked':''
+				'montant': form.montant.value
 		}, 
 		success: function(retour) {
 			getSoldeCompte(form.noCompte.value, 'solde');

@@ -46,23 +46,42 @@ class PageControl {
 		try {
 			$classe->execute($contexte);
 		} catch(TechnicalException $e){
-			echo $e->message;
-			if(is_array($e->tabException)){
-				echo '<table border="1">';
-				echo '<tr><td>ERROR</td></tr>';
-				foreach ($e->tabException as $value) {
-					echo "<tr><td>$value</td></tr>";
-				}
-				echo '</table>';
-				
-				echo '<table border="1">';
-				echo '<tr><td>ERROR</td></tr>';
-				print_r($e->getTrace());
-				foreach ($e->getTrace() as $value) {
+			Logger::getInstance()->addLogMessage('Exception render:'.$classe->getRender());
+			if($classe->getRender()=='json'){
+				$reponse = new ReponseAjax();
+				$reponse->status='KO';
+				$reponse->message='erreur technique:'.$e->message;
+				$contexte->addDataBlockRow($reponse);
+				echo json_encode($contexte->m_dataResponse);
+				Logger::getInstance()->addLogMessage('Exception:'.$e->message);
+				/*if(is_array($e->tabException)){
 					
-					echo "<tr><td>$value</td></tr>";
+					
+					Logger::getInstance()->addLogMessage(print_r($e->tabException, true));
+					//Logger::getInstance()->addLogMessage(print_r($e->getTrace(), true));
+					
+					Logger::getInstance()->addLogMessage('Fin exception');
+				}*/
+			} else {
+				echo $e->message;
+				if(is_array($e->tabException)){
+					echo '<table border="1">';
+					echo '<tr><td>ERROR</td></tr>';
+					foreach ($e->tabException as $value) {
+						echo "<tr><td>$value</td></tr>";
+					}
+					echo '</table>';
+					
+					echo '<table border="1">';
+					echo '<tr><td>ERROR</td></tr>';
+					print_r($e->getTrace());
+					foreach ($e->getTrace() as $value) {
+						
+						echo "<tr><td>$value</td></tr>";
+					}
+					echo '</table>';
 				}
-				echo '</table>';
+				Logger::getInstance()->addLogMessage('Exception:'.$e->message);
 			}
 		}
 	}
