@@ -32,7 +32,7 @@ function initFormCreation() {
 	}
 }
 /*********************************************************
-	soumission du formulaire des opÃ©rations
+	soumission du formulaire des opérations
  *********************************************************/
 function soumettre(form) {
 	if(!validForm(form)) {
@@ -49,29 +49,26 @@ function soumettre(form) {
 				"libelle": form.libelle.value,
 				"fluxId": form.fluxId.value,
 				'modePaiementId': form.modePaiementId.value,
-				'montant': form.montant.value,
-				'verif': form.verif.checked?'checked':''
-		},
-		async: false,
+				'montant': form.montant.value
+		}, 
 		success: function(retour) {
+			getSoldeCompte(form.noCompte.value, 'solde');
+			//si on est en création, on garde la popup ouverte, sinon, on la ferme
+			if(service=='create') {
+				form.libelle.value='';
+				form.fluxId.value='';
+				form.modePaiementId.value='';
+				form.montant.value='';
+				form.libelle.focus();
+			} else {
+				$("div#boiteOperation").dialog('close');
+			}
+			
+			//maj de la liste des opérations
+			pagination('recherche');
 			return false;
 		}
 	});
-	getSoldeCompte(form.noCompte.value, 'solde');
-	//si on est en crÃ©ation, on garde la popup ouverte, sinon, on la ferme
-	if(service=='create') {
-	 	form.libelle.value='';
-	 	form.fluxId.value='';
-	 	form.modePaiementId.value='';
-	 	form.montant.value='';
-	 	form.libelle.focus();
-	} else {
-		$("div#boiteOperation").dialog('close');
-	}
-
-	//maj de la liste des opï¿½rations
-	pagination('recherche');
-
 	return false;
 }
 
@@ -93,10 +90,13 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
 }
 
 /*********************************************************
-	recherche le mode de rÃ¨glement par dÃ©faut d'un flux
+	recherche le mode de règlement par défaut d'un flux
  *********************************************************/
 function getModeReglementDefaut(flux, modePaiement){
 	var params = '&fluxId='+flux.value;
-	var jsonObjectInstance = getFlux(params);
-	modePaiement.value = jsonObjectInstance[0].modePaiementId;
+	var fonctionSuccess = function(resultat) {
+		modePaiement.value = resultat[0].modePaiementId;
+	}
+	getFlux(params, fonctionSuccess);
+	
 }

@@ -60,10 +60,14 @@ class ListObject extends ListStructure implements IList{
         
         //requete de comptage
         $l_requete = "select count(*) as total $l_suff";
-        $stmt = self::$_pdo->query($l_requete);
-        if($stmt==FALSE) {
-            throw new TechnicalException(self::$_pdo->errorCode(),self::$_pdo->errorInfo() );
+        $stmt = null;
+		
+		try {
+            $stmt = self::$_pdo->query($l_requete);
+        } catch (PDOException $e) {
+            throw new TechnicalException($e);
         }
+		
         $l_tab = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->nbLineTotal = $l_tab['total'];
         //requete principale

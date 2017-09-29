@@ -60,15 +60,12 @@ abstract class SavableObject extends Objects {
     public function load() {
         $primaryKey = implode(' AND ', $this->getPrimaryKeyValorisee());
         $requete = "SELECT * FROM $this->_tableName WHERE $primaryKey";
+		Logger::getInstance()->addLogMessage('requete load:' . $requete);
         $stmt = null;
         try {
             $stmt = self::$_pdo->query($requete);
-            //print_r($stmt);
-            if ($stmt === FALSE) {
-                throw new TechnicalException(self::$_pdo->errorCode() . ':' . self::$_pdo->errorInfo());
-            }
         } catch (PDOException $e) {
-            throw new Exception("Error occured while saving your object", null, $e);
+            throw new TechnicalException($e);
         }
         switch ($stmt->rowCount()) {
             case 0:
@@ -113,7 +110,7 @@ abstract class SavableObject extends Objects {
             Logger::getInstance()->addLogMessage('requete create:' . $query);
             $stmt = self::$_pdo->exec($query);
         } catch (PDOException $e) {
-            throw new Exception("Error occured while saving your object", null, $e);
+            throw new TechnicalException($e);
         }
 	}
 	
@@ -142,7 +139,7 @@ abstract class SavableObject extends Objects {
             Logger::getInstance()->addLogMessage('requete update:' . $query);
             $stmt = self::$_pdo->exec($query);
         } catch (PDOException $e) {
-            throw new Exception("Error occured while saving your object", null, $e);
+            throw new TechnicalException($e);
         }
 	}
 
@@ -155,7 +152,7 @@ abstract class SavableObject extends Objects {
         try {
             $stmt = self::$_pdo->query($requete);
         } catch (PDOException $e) {
-            throw new Exception("Error occured while saving your object", null, $e);
+            throw new TechnicalException($e);
         }
     }
 
@@ -167,7 +164,7 @@ abstract class SavableObject extends Objects {
         $reflect = new ReflectionObject($this);
         //chaque champs de la classe
         foreach ($reflect->getProperties(ReflectionProperty::IS_PUBLIC) as $prop) {
-            if (!stripos($this->getPrimaryKey(), $prop->getName())) {
+            //if (!stripos($this->getPrimaryKey(), $prop->getName())) {
                 $requestElement = $request->getDataObject($prefix . $prop->getName() . $separator . $indice);
                 //si le champs est 
 
@@ -177,7 +174,7 @@ abstract class SavableObject extends Objects {
                 } else {
                     Logger::$instance->addLogMessage('champs:' . $prefix. $prop->getName() . ' vide');
                 }
-            }
+            //}
         }
     }
     

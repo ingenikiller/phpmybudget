@@ -33,18 +33,14 @@ function afficheListe(cleseg, idTableau) {
 	var params = "cleseg="+cleseg;
 	
 	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=segment&service=getsegment",
-	         async: false,
-	         dataType: 'json',
-	         data: params
-	        }
-	    ).responseText
-	);
-	
-	//alert(jsonObjectInstance);
-	parseListeJson(jsonObjectInstance, cleseg, idTableau);
+	$.ajax({
+		url: "index.php?domaine=segment&service=getsegment",
+		dataType: 'json',
+		data: params,
+		success: function(resultat) {
+			parseListeJson(resultat, cleseg, idTableau);
+		}
+	});
 	return false;
 }
 
@@ -101,7 +97,6 @@ function soumettreDetail(form, tabElement) {
 	    data: params,
 	    //data: {"edition":"edition"},
 	    dataType: "text",
-	    async: false, 
 	    success: function(retour) { 
 			//afficheDetail(form.elements['Ncleseg'].value, tableau);
 			if(form.cleseg.value=='CONF'){
@@ -134,7 +129,6 @@ function enregistreSegment(tableau, form) {
 	    data: params,
 	    //data: {"edition":"edition"},
 	    dataType: "text",
-	    async: false, 
 	    success: function(retour) { 
 			//alert('OK');
 			//alert(retour);
@@ -145,9 +139,6 @@ function enregistreSegment(tableau, form) {
 	      return false;
 	    }
 	});
-	
-	
-	
 	return false;
 }
 

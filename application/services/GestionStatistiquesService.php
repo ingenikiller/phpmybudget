@@ -295,6 +295,7 @@ class GestionStatistiquesService extends ServiceStub {
         
      }
 	 
+	 /*************************************************************/
 	/*************************************************************/
 	//
 	// gestion des cumul
@@ -345,7 +346,7 @@ class GestionStatistiquesService extends ServiceStub {
         $listMontantFlux->name = 'ListeMontantFlux';
         $listMontantFlux->setAssociatedRequest(null, $requeteAsso);
 		
-        $l_requete = "SELECT CONCAT('$premiereAnnee', '-', '$derniereAnnee') AS annee";
+        $l_requete = "SELECT CONCAT('$premiereAnnee', '_', '$derniereAnnee') AS annee";
 		$listeReleves = new ListDynamicObject();
         $listeReleves->name = 'ListeAnnees';
         $listeReleves->setAssociatedKey($listMontantFlux);

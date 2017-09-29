@@ -5,8 +5,8 @@
 var listeRecFlux='';
 
 $(document).ready(function() {
-	//afficheFluxSelect('recFlux', $('#numeroCompte').val(), '');
-	var ms = $('#recFlux').magicSuggest({
+	afficheFluxSelect('recFlux', $('#numeroCompte').val(), '');
+	/*var ms = $('#recFlux').magicSuggest({
 				placeholder:'Liste des flux',
 				id:'testFluxId',
 				data: function(q){
@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 	$(ms).on('selectionchange', function(e,m){
 		listeRecFlux= this.getValue();
-	});
+	});*/
 	
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 	getSoldeCompte($('#numeroCompte').val(), 'solde');
@@ -35,13 +35,13 @@ $(document).ready(function() {
 	//$( "#date" ).datepicker( "option", "dateFormat", "yyyy-mm-dd" );
 	$.datepicker.regional['fr'] = {
 			closeText: 'Fermer',
-			prevText: '&#x3c;Prï¿½c',
+			prevText: '&#x3c;Pr?c',
 			nextText: 'Suiv&#x3e;',
 			currentText: 'Courant',
 			monthNames: ['Janvier','F&eacute;vrier','Mars','Avril','Mai','Juin',
-			'Juillet','Aoï¿½t','Septembre','Octobre','Novembre','D&eacute;cembre'],
-			monthNamesShort: ['Jan','Fï¿½v','Mar','Avr','Mai','Jun',
-			'Jul','Aoï¿½','Sep','Oct','Nov','Dï¿½c'],
+			'Juillet','Ao&ucirc;t','Septembre','Octobre','Novembre','D&eacute;cembre'],
+			monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
+			'Jul','Aoû','Sep','Oct','Nov','Déc'],
 			dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
 			dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
 			dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
@@ -62,12 +62,12 @@ $(document).ready(function() {
 */
 $(function() {
 	$('#libelle').autocomplete({
-		source : function(requete, reponse){ // les deux arguments reprÃ©sentent les donnï¿½es nï¿½cessaires au plugin
+		source : function(requete, reponse){ // les deux arguments représentent les donn?es n?cessaires au plugin
 		$.ajax({
 			url : 'index.php?domaine=operation&service=reclibelle', // on appelle le script JSON
-			dataType : 'json', // on spÃ©cifie bien que le type de donnÃ©es est en JSON
+			dataType : 'json', // on spécifie bien que le type de données est en JSON
 			data : {
-			debLibelle : $('#libelle').val(), // on donne la chaï¿½ne de caractÃ¨re tapÃ©e dans le champ de recherche
+			debLibelle : $('#libelle').val(), // on donne la cha?ne de caractère tapée dans le champ de recherche
 			mode : 'libelleOperation',
 			numeroCompte : document.getElementById('numeroCompte').value,
 			maxRows : 15
@@ -86,7 +86,7 @@ $(function() {
 
 
 /*
-	Edition d'une opÃ©ration
+	Edition d'une opération
 */
 function editerOperation(numeroCompte, operationId){
 
@@ -142,28 +142,23 @@ function editerOperation(numeroCompte, operationId){
 }
 
 /*
-	rï¿½initialise le formulaire de recherche pour lancer une nouvelle recherche
+	r?initialise le formulaire de recherche pour lancer une nouvelle recherche
 */
 function rechercherOperations(form){
-	//$('#numeroPage').val(1);
-	//alert('toto');
 	listerObjects();
 	return false;
 }
 
 /*
-	exÃ©cute une requete Json et alimente le tableau des tï¿½sultats
+	exécute une requete Json et alimente le tableau des t?sultats
 */
 function listerObjects(){
 
 	var params = "numeroCompte="+$('#numeroCompte').val()+'&numeroPage='+$('#numeroPage').val();
-	if(listeRecFlux!='') {
-		params+="&recFlux="+listeRecFlux;
+	if($('#recFlux').val()!='' && $('#recFlux').val()!=null) {
+		params+="&recFlux="+$('#recFlux').val();
 	}
 	
-	if($('#recNoReleve').val()!='') {
-		params+="&recNoReleve="+$('#recNoReleve').val();
-	}
 	if($('#recDate').val()!='') {
 		params+="&recDate="+$('#recDate').val();
 	}
@@ -172,23 +167,19 @@ function listerObjects(){
 	}
 
 	//appel synchrone de l'ajax
-	var jsonObjectInstance = $.parseJSON(
-	    $.ajax({
-	         url: "index.php?domaine=operation&service=getliste",
-	         async: false,
-	         dataType: 'json',
-	         data: params
-	        }
-	    ).responseText
-	);
-
-	//alert(jsonObjectInstance);
-	parseListeJson(jsonObjectInstance);
+	$.ajax({
+		url: "index.php?domaine=operation&service=getliste",
+		dataType: 'json',
+		data: params,
+		success: function(resultat) {
+			parseListeJson(resultat);
+		}
+	});
 	return false;
 }
 
 /*
-	parse le tableau Json et gï¿½nï¿½re le tableau
+	parse le tableau Json et g?n?re le tableau
 */
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
@@ -209,18 +200,16 @@ function parseListeJson(json) {
 		row.append($('<td/>').text(tabJson[i].noReleve));
 		row.append($('<td/>').text(tabJson[i].date));
 		row.append($('<td/>').text(tabJson[i].libelle));
-		row.append($('<td class="text-right"/>').text(tabJson[i].montant.replace(',','')));
-		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
-
-		var image='';
-		if(tabJson[i].verif=='checked') {
-			image='checked';
+		var classeMontant='';
+		if(Number(tabJson[i].montant) >= 0) {
+			classeMontant='positif';
 		} else {
-			image='unchecked';
+			classeMontant='negatif';
 		}
-		//cell6.innerHTML='<img src="./application/images/'+image+'.jpg">';
 
-		row.append($('<td class="text-center"/>').append('<img src="./application/images/'+image+'.jpg">'));
+		row.append($('<td class="text-right '+classeMontant+'"/>').text(tabJson[i].montant.replace(',','')));
+		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
+		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="glyphicon glyphicon-pencil"/></a>'));
 		$("#tbodyResultat").append(row);
 	}

@@ -70,6 +70,12 @@ class ContextExecution {
 	public function setTitrePage($p_titrePage){
 		$this->m_titrePage = $p_titrePage;
 	}
+	
+	public function ajoutReponseAjaxOK() {
+		$reponse = new ReponseAjax();
+		$reponse->status='OK';
+		$this->addDataBlockRow($reponse);
+	}
 
 }
 ?>
