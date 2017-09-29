@@ -1,6 +1,6 @@
 <?php
 
-class GestionOperationervice extends ServiceStub{
+class GestionOperationService extends ServiceStub{
 	
 	public function gesListe(ContextExecution $p_contexte){
 		$userid = $p_contexte->getUser()->userId;
