@@ -201,7 +201,7 @@ function parseListeJson(json) {
 		row.append($('<td/>').text(tabJson[i].date));
 		row.append($('<td/>').text(tabJson[i].libelle));
 		var classeMontant='';
-		if(Number(tabJson[i].montant) >= 0) {
+		if(Number(tabJson[i].montant.replace(',','')) >= 0) {
 			classeMontant='positif';
 		} else {
 			classeMontant='negatif';
