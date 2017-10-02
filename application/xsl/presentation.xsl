@@ -75,10 +75,10 @@
 			<script type="text/javascript" src="application/js/communJson.js" charset="iso-8859-1">&#160;</script>
 
 			<!-- plugins -->
-			<script type="text/javascript" src="application/jquery/multiselect-master/js/multiselect.min.js" charset="iso-8859-1">&#160;</script>
+			<!--script type="text/javascript" src="application/jquery/multiselect-master/js/multiselect.min.js" charset="iso-8859-1">&#160;</script-->
 
-			<link href="application/css/magicsuggest.css" rel="stylesheet" type="text/css"/>
-			<script type="text/javascript" src="application/js/magicsuggest.js" charset="iso-8859-1">&#160;</script>
+			<link href="application/css/jquery.multiselect.css" rel="stylesheet" type="text/css"/>
+			<script type="text/javascript" src="application/js/jquery.multiselect.js" charset="iso-8859-1">&#160;</script>
 
 			<link href="application/css/bootstrap-force.css" rel="stylesheet" type="text/css"/>
 			<link href="application/css/phpmybudget.css" rel="stylesheet" type="text/css"/>

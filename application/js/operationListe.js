@@ -5,7 +5,7 @@
 var listeRecFlux='';
 
 $(document).ready(function() {
-	afficheFluxSelect('recFlux', $('#numeroCompte').val(), '');
+	afficheFluxSelectMulti('recFlux', $('#numeroCompte').val(), '');
 	/*var ms = $('#recFlux').magicSuggest({
 				placeholder:'Liste des flux',
 				id:'testFluxId',
@@ -25,6 +25,18 @@ $(document).ready(function() {
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 	getSoldeCompte($('#numeroCompte').val(), 'solde');
 	listerObjects();
+	
+	/*$('#recFlux').multiselect({
+		columns: 1,
+		placeholder: 'Select States',
+		search: true,
+		searchOptions: {
+			'default': 'Search States'
+		},
+		selectAll: true
+	});*/
+	
+	
 });
 
 /**

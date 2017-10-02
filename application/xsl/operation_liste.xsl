@@ -98,7 +98,7 @@
                                             <xsl:value-of select="$LBL.FLUX"/>
                                         </label>
                                         <div class="col-sm-9">
-                                            <select name="recFlux" id="recFlux" class="form-control"/>
+                                            <select name="recFlux" id="recFlux" class="form-control"  multiple="multiple"/>
                                         </div>
                                     </div>
                                 </div>

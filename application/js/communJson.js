@@ -76,8 +76,44 @@ function afficheFluxSelect(nomChamp, compte, chaineParams, valeur) {
 			}
 		}
 	});
-	
-	
+}
+
+/*********************************************************
+	parse le tableau Json et génère le tableau graphique
+ *********************************************************/
+function afficheFluxSelectMulti(nomChamp, compte, chaineParams, valeur) {
+	var params = 'comptePrincipal='+compte+'&'+chaineParams;
+	$.ajax({
+		url: "index.php?domaine=flux&service=getliste",
+		dataType: 'json',
+		data: params,
+		success: function(resultat) {
+			var taille = $('#'+nomChamp+'>option').length;
+			$('#'+nomChamp).empty();
+			//$('#'+nomChamp).append(new Option('','',true,true));
+			
+			//var liste = getListeFlux(params);
+			var nb=resultat[0].nbLine;
+			var tabJson = resultat[0].tabResult;
+			var i=0;
+			for(i=0; i<nb; i++) {
+				$('#'+nomChamp).append(new Option(tabJson[i].flux, tabJson[i].fluxId, false, false));
+			}
+			
+			$('#'+nomChamp).multiselect({
+				columns: 1,
+				placeholder: 'Sélection flux',
+				search: true,
+				maxHeight: 350,
+				/*searchOptions: {
+					'default': 'Sélection flux'
+				},*/
+				selectAll: true
+			});
+			
+			
+		}
+	});	
 }
 
 function traiteRetourJSON(retour){
