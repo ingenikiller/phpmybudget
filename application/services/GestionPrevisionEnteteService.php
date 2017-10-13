@@ -20,7 +20,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
         $entete->create();
         //$idEntete = $entete->lastInsertId();
         
-        Logger::getInstance()->addLogMessage('nouvelle entete:' . $idEntete);
+        //$this->logger->debug('nouvelle entete:' . $idEntete);
         
         
         $init=1;
@@ -42,7 +42,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
         }
         
         while($init<=12){
-        	$mois=$annee.'-'.sprintf("%02d", $init);//+$init;
+        	$mois=$annee.'-'.sprintf("%02d", $init);
         	
         	$prevision = new Prevision();
         	$prevision->annee=$annee;
@@ -53,9 +53,10 @@ class GestionPrevisionEnteteService extends ServiceStub {
         	//$prevision->identete=$idEntete;
         	$prevision->noCompte=$numeroCompte;
         	$prevision->create();
-        	Logger::getInstance()->addLogMessage('nouvelle prevision:' . $prevision->lastInsertId());
+        	$this->logger->debug('nouvelle prevision:' . $prevision->lastInsertId());
         	$init+=$intervalle;
         }
+		$p_contexte->ajoutReponseAjaxOK();
 	}
 
 
@@ -64,15 +65,13 @@ class GestionPrevisionEnteteService extends ServiceStub {
 		$numeroCompte = $p_contexte->m_dataRequest->getData('noCompte');
 		$nb = $p_contexte->m_dataRequest->getData('nbligne');
 		for($i=1;$i<=$nb;$i++){
-			 //Logger::$instance->addLogMessage('ligneId'.$i':'.$p_contexte->m_dataRequest->getData('ligneId-'+$i));
 			$prevision= new Prevision();
 			$prevision->ligneId=$p_contexte->m_dataRequest->getData('ligneId-'.$i);
 			$prevision->load();
 			$prevision->fieldObject($p_contexte->m_dataRequest, '', '-', $i);
 			$prevision->update();
 		}
-		
-		
+		$p_contexte->ajoutReponseAjaxOK();
 	}
 	
     /**

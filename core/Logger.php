@@ -31,19 +31,20 @@ class Logger {
 		/*$this->_file = $file;
 		$this->mode = $mode;
 		$this->nb_log = 0;*/
-        $this->filename='./logs/log.txt';
+                $this->filename='./logs/log.txt';
 		$this->_file = fopen($this->filename,"a");
                 
 	}
 	
 	function addLogMessage ( $logMessage ){
 		if(filesize($this->filename)>=$this->sizeLimit){
-			//echo 'nouveau fichier<br>';
-			fclose($this->_file);
-			rename($this->filename, './logs/log_save_'. date("d-m-Y_H_i_s").'.log');
-			$this->_file = fopen($this->filename,"a+");
-		}
+                    //echo 'nouveau fichier<br>';
+                    fclose($this->_file);
+                    rename($this->filename, './logs/log_save_'. date("d-m-Y_H_i_s").'.log');
+                    $this->_file = fopen($this->filename,"a+");
+                }
 		fwrite($this->_file, "[" . date("d-m-Y H:i:s") . "]: "  . $logMessage . "\n");
+                
 	}
 	function clearLogs ( ){
 		for ($i = 0; $i < $this->nb_log; $i++ )
@@ -63,6 +64,9 @@ class Logger {
 		}*/
 		// --- Close the log file
 		//fclose($this->_file);      
-	}	
+	}
+	
+	
+	
 }
 ?>

@@ -20,7 +20,7 @@ class GestionPeriodeService extends ServiceStub{
 		
 		//$listFlux->setAssociatedKey($comptePrincipal);
 		$listePeriode->request('Periode', $requete);
-		Logger::getInstance()->addLogMessage('nb periode:' . $listePeriode->getNbRows());
+		$this->logger->debug('nb periode:' . $listePeriode->getNbRows());
 		if ($listePeriode->getNbRows()!=0){
 			$reponse = new ReponseAjax();
 			$reponse->status='KO';

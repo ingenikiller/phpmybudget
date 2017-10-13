@@ -2,13 +2,19 @@
 
 class PageControl {
 
+	private $logger;
+	
+	public function __construct() {
+		$this->logger = Logger::getRootLogger();
+	}
+
 	public function process() {
 		
 		$contexte = new ContextExecution;
 		
-		Logger::getInstance()->addLogMessage('------------------------------------------------------');
-		Logger::getInstance()->addLogMessage('------------------------------------------------------');
-		Logger::getInstance()->addLogMessage('lancement');
+		$this->logger->debug('------------------------------------------------------');
+		$this->logger->debug('------------------------------------------------------');
+		$this->logger->debug('lancement');
 		$l_domaine= null;
 		$l_service= null;
 		
@@ -31,7 +37,7 @@ class PageControl {
 				die("Configuration incorrecte: $l_service inexistante");
 			}
 		}
-		Logger::getInstance()->addLogMessage('classe:' . $classe->getNom());
+		$this->logger->debug('classe:' . $classe->getNom());
 		
 		if($classe->isPrivee()) {
 			$auten = new AuthentificateurStandard();
@@ -46,22 +52,14 @@ class PageControl {
 		try {
 			$classe->execute($contexte);
 		} catch(TechnicalException $e){
-			Logger::getInstance()->addLogMessage('Exception render:'.$classe->getRender());
+			$this->logger->debug('Exception render:'.$classe->getRender());
 			if($classe->getRender()=='json'){
 				$reponse = new ReponseAjax();
 				$reponse->status='KO';
 				$reponse->message='erreur technique:'.$e->message;
 				$contexte->addDataBlockRow($reponse);
 				echo json_encode($contexte->m_dataResponse);
-				Logger::getInstance()->addLogMessage('Exception:'.$e->message);
-				/*if(is_array($e->tabException)){
-					
-					
-					Logger::getInstance()->addLogMessage(print_r($e->tabException, true));
-					//Logger::getInstance()->addLogMessage(print_r($e->getTrace(), true));
-					
-					Logger::getInstance()->addLogMessage('Fin exception');
-				}*/
+				$this->logger->debug('Exception:'.$e->message);
 			} else {
 				echo $e->message;
 				if(is_array($e->tabException)){
@@ -76,12 +74,11 @@ class PageControl {
 					echo '<tr><td>ERROR</td></tr>';
 					print_r($e->getTrace());
 					foreach ($e->getTrace() as $value) {
-						
 						echo "<tr><td>$value</td></tr>";
 					}
 					echo '</table>';
 				}
-				Logger::getInstance()->addLogMessage('Exception:'.$e->message);
+				$this->logger->debug('Exception:'.$e->message);
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Display a nice easy to use multiselect list
  * @Version: 2.4.2
  * @Author: Patrick Springstubbe
@@ -45,12 +45,12 @@
 
         // plugin texts
         texts: {
-            placeholder    : 'Select options', // text to use in dummy input
+            placeholder    : 'Sélectionner options', // text to use in dummy input
             search         : 'Recherche',         // search input placeholder text
-            selectedOptions: ' selectionnee(s)',      // selected suffix text
-            selectAll      : 'Tout selectionner',     // select all text
-            unselectAll    : 'Tout de selectionner',   // unselect all text
-            noneSelected   : 'Aucune selection'   // None selected text
+            selectedOptions: ' selectionné(s)',      // selected suffix text
+            selectAll      : 'Tout sélectionner',     // select all text
+            unselectAll    : 'Tout dé sélectionner',   // unselect all text
+            noneSelected   : 'Aucune sélection'   // None selected text
         },
 
         // general options

@@ -12,8 +12,10 @@ class DataRowSet{
 	public $m_page=0;
 	public $m_nbPage=0;
 	
+	private $logger;
+	
 	public function __construct(){
-		
+		$this->logger = Logger::getRootLogger();	
 	}
 	/**
 	 * 
@@ -24,7 +26,7 @@ class DataRowSet{
 	 * @param unknown_type $p_nameElement
 	 */
 	public function addRows(classe_bdd $p_connexion, $p_rows, $p_name, $p_nameElement){
-		Logger::getInstance()->addLogMessage('Instanciation DataRowSet:' . $p_name);
+		$this->logger->debug('Instanciation DataRowSet:' . $p_name);
 		$this->m_name = $p_name;
 		$this->m_nameElement = $p_nameElement;
 		$this->tabData=array();

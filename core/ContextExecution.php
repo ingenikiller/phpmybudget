@@ -24,7 +24,7 @@ class ContextExecution {
 	public function __construct(){
 		$this->m_dataRequest = new DataRequest();
 		//titre par défaut
-		$this->m_titrePage = "PhpMyBudget";
+		$this->m_titrePage = "";//"PhpMyBudget";
 	}
 	
 	/**

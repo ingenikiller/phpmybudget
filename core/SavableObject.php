@@ -6,7 +6,9 @@
  */
 abstract class SavableObject extends Objects {
 
-    public $associatedObjet = array();
+	private $logger;
+	
+	public $associatedObjet = array();
     private $isLoaded = false;
 
 	private $champsDef;
@@ -14,6 +16,7 @@ abstract class SavableObject extends Objects {
 	final public function __construct(){
 		parent::__construct();
 		$this->champsDef = $this->getChamps();
+		$this->logger = Logger::getRootLogger();
 	}
 	
     public function isLoaded() {
@@ -29,7 +32,7 @@ abstract class SavableObject extends Objects {
 		$l_requete = 'SHOW COLUMNS FROM ' . $this->_tableName;
 		$l_result = $pdo->query ( $l_requete );
 		while ( $l_champs = $l_result->fetch ( PDO::FETCH_ASSOC ) ) {
-			//Logger::getInstance()->addLogMessage($l_champs ['Field']);
+			//$this->logger->debug($l_champs ['Field']);
 			$table[$l_champs ['Field']] = $l_champs;
 		}
 		return $table;
@@ -60,7 +63,7 @@ abstract class SavableObject extends Objects {
     public function load() {
         $primaryKey = implode(' AND ', $this->getPrimaryKeyValorisee());
         $requete = "SELECT * FROM $this->_tableName WHERE $primaryKey";
-		Logger::getInstance()->addLogMessage('requete load:' . $requete);
+		$this->logger->debug('requete load:' . $requete);
         $stmt = null;
         try {
             $stmt = self::$_pdo->query($requete);
@@ -107,7 +110,7 @@ abstract class SavableObject extends Objects {
 		$query = sprintf("INSERT INTO %s (%s) VALUES (%s)", $this->_tableName, implode(',', $champs), implode(',', $values));
 		
 		try {
-            Logger::getInstance()->addLogMessage('requete create:' . $query);
+            $this->logger->debug('requete create:' . $query);
             $stmt = self::$_pdo->exec($query);
         } catch (PDOException $e) {
             throw new TechnicalException($e);
@@ -136,7 +139,7 @@ abstract class SavableObject extends Objects {
 		$query = sprintf("UPDATE %s SET %s WHERE %s", $this->_tableName, implode(',', $set), $primaryKey);
 		
 		try {
-            Logger::getInstance()->addLogMessage('requete update:' . $query);
+            $this->logger->debug('requete update:' . $query);
             $stmt = self::$_pdo->exec($query);
         } catch (PDOException $e) {
             throw new TechnicalException($e);
@@ -148,7 +151,7 @@ abstract class SavableObject extends Objects {
      */
     public function delete() {
         $requete = "DELETE FROM $this->_tableName WHERE " . implode(' AND ', $this->getPrimaryKeyValorisee());
-        Logger::$instance->addLogMessage('delete:' . $requete);
+        $this->logger->debug('delete:' . $requete);
         try {
             $stmt = self::$_pdo->query($requete);
         } catch (PDOException $e) {
@@ -169,10 +172,10 @@ abstract class SavableObject extends Objects {
                 //si le champs est 
 
                 if ($requestElement != null) {
-                    Logger::$instance->addLogMessage('champs:' . $prop->getName() . '->' . $requestElement->value);
+                    $this->logger->debug('champs:' . $prop->getName() . '->' . $requestElement->value);
                     $prop->setValue($this, $requestElement->value);
                 } else {
-                    Logger::$instance->addLogMessage('champs:' . $prefix. $prop->getName() . ' vide');
+                    $this->logger->debug('champs:' . $prefix. $prop->getName() . ' vide');
                 }
             //}
         }
@@ -184,4 +187,5 @@ abstract class SavableObject extends Objects {
         return self::$_pdo->lastInsertId();
     }
 }
+
 ?>

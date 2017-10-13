@@ -15,6 +15,19 @@ abstract class ListStructure extends Objects {
     protected $associatedKey= array();
     //public $associatedObjet = array();
     
+	private $logger;
+	
+	/*final public function __construct(){
+		parent::__construct();
+		$this->logger = Logger::getRootLogger();
+	}*/
+	protected function getLogger() {
+		if($this->logger==null) {
+			$this->logger = Logger::getRootLogger();
+		}
+		return $this->logger;
+	}
+	
     public function setAssociatedKey(IList $list){
         $this->associatedKey[]=$list;
     }
@@ -25,7 +38,7 @@ abstract class ListStructure extends Objects {
     public function setAssociatedRequest($classe, $clause){
         $this->associatedClasse=$classe;
         $this->associatedClause=$clause;
-        Logger::$instance->addLogMessage('clause this:'.$this->associatedClause);
+        $this->getLogger()->debug('clause this:'.$this->associatedClause);
     }
     
     /**
@@ -52,12 +65,12 @@ abstract class ListStructure extends Objects {
      * @param unknown_type $parent objet parent dans la structure de données
      */
     private function execAssociatedRequest($parent){
-        Logger::$instance->addLogMessage('clause av:'.$this->associatedClause);
-        Logger::$instance->addLogMessage('name:'.$this->name);
+        $this->getLogger()->debug('clause av:'.$this->associatedClause);
+        $this->getLogger()->debug('name:'.$this->name);
         $retour=null;
         $clause=null;
         eval("\$clause=\"$this->associatedClause\";");
-        Logger::$instance->addLogMessage('clause:'.$clause);
+        $this->logger->debug('clause:'.$clause);
         if($this->associatedClasse!=null){
             $retour=$this->request($this->associatedClasse, $clause);
         } else {

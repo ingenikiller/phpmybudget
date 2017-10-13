@@ -57,7 +57,16 @@ function isDouble (s)
  * fonction de validation des formulaire
  */
 function validForm(pForm) {
-	
+	//$('#new_user_form input, #new_user_form select').each(function(key, value) {
+	/*$($(pForm).prop('elements')).each(function(indice, objet){
+		//this
+		if(objet.attr('class').indexOf('obligatoire').indexOf("obligatoire")!=-1 && e.value =='') {
+			alert('Champs obligatoire!!!');
+			return false;
+		}
+	});*/
+		
+		
 	for (var i=0; i < pForm.elements.length; i++) {
 		var e = pForm.elements[i];
 		if((e.className.indexOf("obligatoire")!=-1 || e.className.indexOf("numerique_obligatoire")!=-1)  && e.value =='') {
@@ -70,7 +79,6 @@ function validForm(pForm) {
 				return false;
 			}
 		}
-		
 	}
 	return true;
 }

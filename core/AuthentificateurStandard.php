@@ -2,18 +2,21 @@
 
 class AuthentificateurStandard {
 
+	private $logger;
+	
 	public function __construct() {
+		$this->logger = Logger::getRootLogger();
 	}
 	
 	public function authenticate($p_contexte){
 		if(!isset($_SESSION['userid'])){
-			Logger::getInstance()->addLogMessage('Session non ouverte!');
+			$this->logger->debug('Session non ouverte!');
 			throw new exception('Session non ouverte');
 		} else {
-			Logger::getInstance()->addLogMessage('Session ouverte!');
+			$this->logger->debug('Session ouverte!');
 			$userid = $_SESSION['userid'];
 		}
-		Logger::getInstance()->addLogMessage('appel authenticate'. ' avec ' . $userid);
+		$this->logger->debug('appel authenticate'. ' avec ' . $userid);
 
 		$user = new Users();
 		$user->userId = $_SESSION['userid'];

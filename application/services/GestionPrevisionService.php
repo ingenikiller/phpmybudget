@@ -1,10 +1,10 @@
-<?php
+ï»¿<?php
 
 class GestionPrevisionService extends ServiceStub {
 	public function getPage(ContextExecution $p_contexte) {
-        //$userid = $p_contexte->getUser()->userId;
+        
         $annee=$p_contexte->m_dataRequest->getData('annee');
-        Logger::$instance->addLogMessage('annee:'.$annee);
+        $this->logger->debug('annee:'.$annee);
         if($annee==''){
             $annee = date('Y');
         }
@@ -21,7 +21,7 @@ class GestionPrevisionService extends ServiceStub {
 		$l_compte->load();
 		$p_contexte->addDataBlockRow($l_compte);
         
-        //périodes de l'année
+        //pÃ©riodes de l'annÃ©e
         $listePeriode = new ListObject();
         $listePeriode->name='ListePeriodes';
         $l_clause=" annee='$annee' order by periode ASC"; 
@@ -35,6 +35,7 @@ class GestionPrevisionService extends ServiceStub {
         $p_contexte->addDataBlockRow($listeAnnees);
 		
         $p_contexte->addDataBlockRow(ComptesCommun::calculSommeOperations($numeroCompte));
+		$p_contexte->setTitrePage("PrÃ©visions du compte " . $numeroCompte);
     }
 	
 	public function getListeAnnee(ContextExecution $p_contexte) {
@@ -53,23 +54,26 @@ class GestionPrevisionService extends ServiceStub {
         $previsions->setAssociatedRequest('Prevision', $clausePrevisions);
         
         
-        //requête des opérations récurrentes
-        $requeteTotaux = "SELECT ROUND(sum(montant),2) AS total
-						FROM operation 
-						LEFT JOIN flux ON flux.fluxId = operation.fluxId
-                                                LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.date LIKE concat( prevision.periode,\'%\')
-						WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked'" .
-                'AND date like concat(\'$parent->mois\',\'%\')';
-        $requete='SELECT ROUND(SUM( montant),2) AS total , fluxId
-					FROM operation 
-					WHERE nocompte=' . $numeroCompte . ' and date like concat(\'$parent->periode\',\'%\')
-                AND EXISTS (SELECT 1 FROM prevision WHERE prevision.noCOmpte=\''.$numeroCompte.'\'  AND prevision.fluxid=operation.fluxid AND operation.date LIKE concat( substring(prevision.mois,1,4),\'%\'))
-                  GROUP BY fluxid ';
+        //requÃ© des opÃ©rations rÃ©currentes
+        $requeteTotaux = 
+			"SELECT ROUND(sum(montant),2) AS total
+			FROM operation 
+				LEFT JOIN flux ON flux.fluxId = operation.fluxId
+				LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.date LIKE concat( prevision.periode,\'%\')
+			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked'" .
+				'AND date like concat(\'$parent->mois\',\'%\')';
+        $requete=
+			'SELECT ROUND(SUM( montant),2) AS total , fluxId
+			FROM operation 
+			WHERE nocompte=' . $numeroCompte . ' and date like concat(\'$parent->periode\',\'%\')
+				AND EXISTS (SELECT 1 FROM prevision WHERE prevision.noCOmpte=\''.$numeroCompte.'\'
+				AND prevision.fluxid=operation.fluxid AND operation.date LIKE concat( substring(prevision.mois,1,4),\'%\'))
+			GROUP BY fluxid ';
         $listMontantTotaux = new ListDynamicObject();
         $listMontantTotaux->name = 'ListeMontantFlux';
         $listMontantTotaux->setAssociatedRequest(null, $requete);
         
-		//liste des périodes
+		//liste des pÃ©riodes
         $liste = new ListObject();
         $liste->name='Periodes';
         $liste->setAssociatedKey($previsions);
@@ -81,9 +85,12 @@ class GestionPrevisionService extends ServiceStub {
         //liste des flux
         $listeFlux = new ListDynamicObject();
         $listeFlux->name = 'ListeFlux';
-        $listeFlux->request("SELECT DISTINCT flux.fluxId, flux, depense FROM prevision 
-						LEFT JOIN flux ON flux.fluxId = prevision.fluxId 
-                                                WHERE mois between '$dateDeb' and '$dateFin' and noCompte='$numeroCompte' ORDER BY flux");
+        $listeFlux->request(
+			"SELECT DISTINCT flux.fluxId, flux, depense
+			FROM prevision 
+				LEFT JOIN flux ON flux.fluxId = prevision.fluxId 
+			WHERE mois between '$dateDeb' and '$dateFin' 
+				and noCompte='$numeroCompte' ORDER BY flux");
         $p_contexte->addDataBlockRow($listeFlux);
     }
 	
@@ -99,14 +106,17 @@ class GestionPrevisionService extends ServiceStub {
         $tab = $soldeOpeDyn->getData();
         $soldeOpe = $tab[0];
         $soldeOpe = $soldeOpe->total;
-        Logger::getInstance()->addLogMessage('solde ope:'.$soldeOpe);
+        $this->logger->debug('solde ope:'.$soldeOpe);
 		
         $mois=date('Y-m');
-        $l_requete = "SELECT SUM(montant) as total FROM prevision, flux WHERE 1=1 "
-        			. "AND nocompte='$numeroCompte' "
-        			. "AND mois='$mois'"
-        			. "AND flux.fluxid=prevision.fluxid "
-        			. "AND depense='O'";
+        $l_requete =
+			"SELECT SUM(montant) as total 
+			FROM prevision, flux 
+			WHERE 1=1 
+				AND nocompte='$numeroCompte'
+				AND mois='$mois'
+				AND flux.fluxid=prevision.fluxid
+				AND depense='O'";
         
 		$dyn = new ListDynamicObject();
 		$dyn->name = 'SommePrevisions';
@@ -114,14 +124,22 @@ class GestionPrevisionService extends ServiceStub {
 		$tab = $dyn->getData();
         $soldePre = $tab[0];
 		$soldePre = $soldePre->total;
-        Logger::getInstance()->addLogMessage('solde pre:'.$soldePre);
+        $this->logger->debug('solde pre:'.$soldePre);
 		
 		
-		$l_requeteOpe ="SELECT sum(montant) as total FROM operation, flux WHERE 1=1 "
-					. "AND nocompte='$numeroCompte' "
-					. "AND date LIKE concat('$mois','%') "
-					. "AND flux.fluxid=operation.fluxid AND depense='O' "
-					. "AND EXISTS(SELECT 1 FROM prevision WHERE nocompte='$numeroCompte' AND mois='$mois' AND operation.fluxid=prevision.fluxid)";
+		$l_requeteOpe =
+			"SELECT sum(montant) as total 
+			FROM operation, flux 
+			WHERE 1=1 
+			AND nocompte='$numeroCompte' 
+			AND date LIKE concat('$mois','%') 
+			AND flux.fluxid=operation.fluxid AND depense='O' 
+			AND EXISTS(
+				SELECT 1 
+				FROM prevision 
+				WHERE nocompte='$numeroCompte' 
+				AND mois='$mois' 
+				AND operation.fluxid=prevision.fluxid)";
 		$dyn = new ListDynamicObject();
 		$dyn->name = 'SommePrevisions';
 		$dyn->request($l_requeteOpe);
@@ -129,7 +147,7 @@ class GestionPrevisionService extends ServiceStub {
         $sommeOpe = $tab[0];
 		$sommeOpe = $sommeOpe->total;
 		
-		Logger::getInstance()->addLogMessage('solde sommeope:'.$sommeOpe);
+		$this->logger->debug('solde sommeope:'.$sommeOpe);
 		
 		$solde = $compte->solde + $soldeOpe + $soldePre - $sommeOpe;
 		$tab=array();
@@ -140,13 +158,10 @@ class GestionPrevisionService extends ServiceStub {
 	
 	public function getOne(ContextExecution $p_contexte) {
         $ligneId = $p_contexte->m_dataRequest->getData('ligneId');
-        Logger::$instance->addLogMessage('ligneId:'.$ligneId);
+        $this->logger->debug('ligneId:'.$ligneId);
         $prevision = new Prevision();
         $prevision->ligneId = $ligneId;
         $prevision->load();
-        
-        
-        //echo json_encode($prevision);
         $p_contexte->addDataBlockRow($prevision);
     }
 	
@@ -154,7 +169,7 @@ class GestionPrevisionService extends ServiceStub {
         $prevision = new Prevision();
         $prevision->fieldObject($p_contexte->m_dataRequest);
         $prevision->create();
-    
+		$p_contexte->ajoutReponseAjaxOK();
     }
 	
 	public function update(ContextExecution $p_contexte){
@@ -164,6 +179,7 @@ class GestionPrevisionService extends ServiceStub {
 		$prevision->load();
 		$prevision->fieldObject($p_contexte->m_dataRequest);
 		$prevision->update();
+		$p_contexte->ajoutReponseAjaxOK();
     }
 	
 	public function equilibrerPrevision(ContextExecution $p_contexte){
@@ -181,6 +197,7 @@ class GestionPrevisionService extends ServiceStub {
 		$total=$tab[0];
 		$prevision->montant=$total->total;
 		$prevision->update();
+		$p_contexte->ajoutReponseAjaxOK();
     }
 }
 ?>

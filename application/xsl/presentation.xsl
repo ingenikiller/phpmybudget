@@ -16,7 +16,10 @@
 				</xsl:variable>
 				<!-- affichage barre de navigation -->
 				<xsl:if test="$affMenu='O'">
-					<xsl:call-template name="menu"/>
+					<xsl:call-template name="menu">
+						<xsl:with-param name="niveau1"><xsl:value-of select="/root/titre"/></xsl:with-param>
+					</xsl:call-template>
+					<br/>
 				</xsl:if>
 				<!-- affichage du contenu -->
 				<div class="container contenu">
@@ -57,7 +60,12 @@
 			<meta http-equiv="Expires" content="0"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=8"/>
 			<title>
-				<xsl:value-of select="$HeadTitre"/>
+				<xsl:choose>
+				<xsl:when test="$HeadTitre!=''">
+					<xsl:value-of select="$HeadTitre"/>
+				</xsl:when>
+					<xsl:value-of select="'PhpMyBudget'"/>
+				</xsl:choose>
 			</title>
 			
 			<link href="application/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -73,10 +81,10 @@
 			<script type="text/javascript" src="application/js/communFormulaire.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="application/js/dateFormat.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="application/js/communJson.js" charset="iso-8859-1">&#160;</script>
-
+			
+			<script type="text/javascript" src="application/js/core_ajax.js" charset="iso-8859-1">&#160;</script>
+			
 			<!-- plugins -->
-			<!--script type="text/javascript" src="application/jquery/multiselect-master/js/multiselect.min.js" charset="iso-8859-1">&#160;</script-->
-
 			<link href="application/css/jquery.multiselect.css" rel="stylesheet" type="text/css"/>
 			<script type="text/javascript" src="application/js/jquery.multiselect.js" charset="iso-8859-1">&#160;</script>
 
@@ -87,43 +95,58 @@
 	</xsl:template>
 	<!-- banniere -->
 	<xsl:template name="menu">
-			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-		                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		                    <span class="sr-only">Toggle navigation</span>
-		                    <span class="icon-bar"></span>
-		                    <span class="icon-bar"></span>
-		                    <span class="icon-bar"></span>
-		                </button>
-		                <a class="navbar-brand" href="#">PhpMybudget</a>
-		            </div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		                <ul class="nav navbar-nav navbar-right">
-		                    <li>
-		                        <a href="index.php?domaine=compte&amp;service=getpage">
-									<xsl:value-of select="$LBL.COMPTES"/>
-								</a>
-		                    </li>
-		                    <li>
-		                        <a href="index.php?domaine=flux&amp;service=getpage">
-									<xsl:value-of select="$LBL.FLUX"/>
-								</a>
-		                    </li>
-		                    <li>
-		                    	<a href="index.php?domaine=segment">
-									<xsl:value-of select="$LBL.PARAMETRAGE"/>
-								</a>
-							</li>
-							<li>
-								<a href="index.php?domaine=periode">
-									<xsl:value-of select="$LBL.PERIODE"/>
-								</a>
-							</li>
-		                </ul>
-		            </div>
-		        </div>
-            </nav>
+		<xsl:param name="niveau1"/>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!--a class="navbar-brand" href="#">PhpMybudget</a-->
+					<!--pan class="icon-bar">PhpMybudget</span-->
+					<p class="navbar-text" style="color: white;">PhpMybudget</p>
+					
+					<xsl:if test="$niveau1!=''">
+						<p class="navbar-text" style="color: white;">/</p>
+						<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
+					</xsl:if>
+					
+					<!--ol class="breadcrumb">
+					  <li>PhpMybudget</li>
+					  <li><a href="#">Library</a></li>
+					  <li class="active">Data</li>
+					</ol-->
+					
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="index.php?domaine=compte&amp;service=getpage">
+								<xsl:value-of select="$LBL.COMPTES"/>
+							</a>
+						</li>
+						<li>
+							<a href="index.php?domaine=flux&amp;service=getpage">
+								<xsl:value-of select="$LBL.FLUX"/>
+							</a>
+						</li>
+						<li>
+							<a href="index.php?domaine=segment">
+								<xsl:value-of select="$LBL.PARAMETRAGE"/>
+							</a>
+						</li>
+						<li>
+							<a href="index.php?domaine=periode">
+								<xsl:value-of select="$LBL.PERIODE"/>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 	</xsl:template>
 	<xsl:template name="controleMenu">O</xsl:template>
 	<xsl:template name="onLoadTemplate"/>

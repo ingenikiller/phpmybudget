@@ -19,8 +19,11 @@ class PageDescription {
     }
 
     private $m_xsl;
-
+	
+	private $logger;
+	
     public function __construct($p_domaine, $p_service, $p_nomClasse, $p_methode, $p_privee) {
+		$this->logger = Logger::getRootLogger();
         $this->m_domaine = $p_domaine;
         $this->m_service = $p_service;
         $this->m_nomClasse = $p_nomClasse;
@@ -58,17 +61,17 @@ class PageDescription {
      * @param ContextExecution $p_contexte
      */
     public function execute(ContextExecution $p_contexte) {
-        Logger::getInstance()->addLogMessage('Domaine:' . $this->m_domaine);
-        Logger::getInstance()->addLogMessage('Service:' . $this->m_service);
-        Logger::getInstance()->addLogMessage('Classe:' . $this->m_nomClasse);
-        Logger::getInstance()->addLogMessage('Methode:' . $this->m_methode);
+        $this->logger->debug('Domaine:' . $this->m_domaine);
+        $this->logger->debug('Service:' . $this->m_service);
+        $this->logger->debug('Classe:' . $this->m_nomClasse);
+        $this->logger->debug('Methode:' . $this->m_methode);
 
         try {
             $service = new $this->m_nomClasse;
 			$methode = $this->m_methode.'';
 			$service->$methode($p_contexte);
         } catch (FunctionnalException $fe) {
-			Logger::getInstance()->addLogMessage('functional');
+			$this->logger->debug('functional');
             $p_contexte->addError($fe->getMessage());
         }
         //lance l'affichage si le rendu est xsl
@@ -95,7 +98,7 @@ class PageDescription {
                     }
                 }
             } else if (is_array($value)){
-                Logger::$instance->addLogMessage('addBlock tableau');
+                $this->logger->debug('addBlock tableau');
                 $tab = $p_noeud->addChild($key);
                 $this->parseData($tab, $value);
             } else {
@@ -118,17 +121,17 @@ class PageDescription {
      * @param unknown_type $p_tabDataRow
      */
     public function parseData($p_noeud, $p_tabDataRow) {
-        Logger::$instance->addLogMessage('parse data');
+        $this->logger->debug('parse data');
         foreach ($p_tabDataRow as $key => $dataRow) {
             if ($dataRow instanceof IList) {
-                Logger::$instance->addLogMessage('List:' . $dataRow->name);
+                $this->logger->debug('List:' . $dataRow->name);
 				$this->parseListObject($p_noeud, $dataRow);
             } else if ($dataRow instanceof SavableObject) {
-                Logger::$instance->addLogMessage('parseobjet: ');
+                $this->logger->debug('parseobjet: ');
                 $group = $p_noeud->addChild($dataRow->getName());
                 $this->addBlock($group, $dataRow->fetchPublicMembers());
             } else if (is_array($dataRow)) {
-                Logger::$instance->addLogMessage('traite tableau');
+                $this->logger->debug('traite tableau');
                 $this->addBlockRow($p_noeud, $dataRow);
             } else if ($dataRow instanceof ReponseAjax) {
                 $tab = array();
@@ -139,7 +142,7 @@ class PageDescription {
                 }
                 $this->addBlock($group, $tab);
             } else {
-                Logger::$instance->addLogMessage('parse ligne');
+                $this->logger->debug('parse ligne');
                 $ligne = $p_noeud->addChild($key, $dataRow);
             }
         }
@@ -205,7 +208,7 @@ class PageDescription {
         if ($this->m_paramFlow != null) {
             $tab = explode(',', $this->m_paramFlow);
             foreach ($tab as $value) {
-                Logger::getInstance()->addLogMessage('flux:' . $value);
+                $this->logger->debug('flux:' . $value);
                 $segment = new ListObject();
                 $segment->name = $value;
                 $segment->request('Segment', "cleseg='$value' order by numord");
@@ -219,7 +222,7 @@ class PageDescription {
      * @param ContextExecution $p_contexte
      */
     public function parse(ContextExecution $p_contexte) {
-        Logger::getInstance()->addLogMessage('xsl:' . $this->m_xsl);
+        $this->logger->debug('xsl:' . $this->m_xsl);
 
         //création flux xml
         $doc = new SimpleXMLElement('<?xml version="1.0" encoding="ISO-8859-1"?><root></root>');

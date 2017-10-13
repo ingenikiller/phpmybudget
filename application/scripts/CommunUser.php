@@ -15,22 +15,12 @@ class CommunUser {
 							nom='". $p_user ."' AND 
 							motDePasse='". $p_mdp . "'";
 		
-		/*$l_result = $p_connexion->requeteBDD($l_requete);
-		if($l_result == FALSE) {
-			echo $p_connexion->getLastError();
-		}
-		
-		if($p_connexion->nbRows($l_result) != 1) {
+		$list = new ListObject();
+		$clause="nom='". $p_user ."' AND motDePasse='". $p_mdp . "'";
+		$list->request('Users', $clause);
+		if($list->nbLine!=1){
 			throw new FunctionnalException('nom ou mot de passe incorrect');
-			return null;
-		}*/
-		
-                $list = new ListObject();
-                $clause="nom='". $p_user ."' AND motDePasse='". $p_mdp . "'";
-                $list->request('Users', $clause);
-                if($list->nbLine!=1){
-                    throw new FunctionnalException('nom ou mot de passe incorrect');
-                }
+		}
                 
                 
 		return $list->tabResult[0];
@@ -39,7 +29,7 @@ class CommunUser {
 	public static function getUser($p_connexion, $p_user) {
 		$l_requete = "SELECT * FROM intervenants WHERE 
 							intervenantid='$p_user'";
-		Logger::getInstance()->addLogMessage('requete:'.$l_requete);
+		//Logger::getInstance()->addLogMessage('requete:'.$l_requete);
 		$l_result = $p_connexion->requeteBDD($l_requete);
 		if($l_result == FALSE) {
 			echo $p_connexion->getLastError();

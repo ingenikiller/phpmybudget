@@ -29,8 +29,8 @@ class SegmentsService {
     
     public function update(ContextExecution $p_contexte) {
         $indice=1;
-        Logger::getInstance()->addLogMessage("indice $indice");
-        Logger::getInstance()->addLogMessage("cleseg-$indice:".$p_contexte->m_dataRequest->getData('cleseg-'.$indice));
+        $this->logger->debug("indice $indice");
+        $this->logger->debug("cleseg-$indice:".$p_contexte->m_dataRequest->getData('cleseg-'.$indice));
         
         while($p_contexte->m_dataRequest->getData('cleseg-'.$indice)!=null) {
             $codseg = '';

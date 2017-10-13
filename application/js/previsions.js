@@ -137,7 +137,7 @@ function creerEntete(form) {
 		return false;
 	}
 	
-	$.ajax({ 
+	$.getJSON({ 
 		url: "index.php?domaine=previsionentete&service="+form.service.value,
 		data: { "ligneId": form.ligneId.value,
 				"noCompte": form.numeroCompte.value,
@@ -150,17 +150,15 @@ function creerEntete(form) {
 				'annee': $('#annee').val()
 		}, 
 		success: function(retour) { 
-			//alert('OK');
-			form.ligneId.value = retour[0].ligneId;
-			$("div#boiteEntete").dialog('close');
-			affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
-			recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
+			if(traiteRetourAjax(retour)){
+				form.ligneId.value = retour[0].ligneId;
+				$("div#boiteEntete").dialog('close');
+				affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
+				recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
+			}
 			return false;
 		} 
 	});
-	/*$("div#boiteEntete").dialog('close');
-	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
-	recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());*/
 	return false;
 }
 
@@ -176,10 +174,10 @@ function recupereListeEntetes(objet, annee, numeroCompte) {
 	$.getJSON(
 		 "index.php?domaine=previsionentete&service=getlisteentete",
 	    data=params,
-		function(json){
+		function(retour){
 			var obj=document.getElementById(objet);
-			var nb=json[0].nbLine;
-			var tabJson = json[0].tabResult;
+			var nb=retour[0].nbLine;
+			var tabJson = retour[0].tabResult;
 			var i=0;
 			obj.options[obj.length] = new Option('','',true,true);
 			for(i=0; i<nb; i++) {
@@ -197,13 +195,13 @@ function afficheListeGroupe(fluxId){
 	var params = "noCompte="+numeroCompte+"&annee="+annee+"&fluxId="+fluxId;
 	
 	//appel synchrone de l'ajax
-	$.ajax({
+	$.getJSON({
 		url: "index.php?domaine=previsionentete&service=getone",
 		dataType: 'json',
 		data: params,
 		success: function(resultat) {
 			parseListePrevisionJson(resultat);
-	
+
 			$("div#boiteListeEntete").dialog({
 				resizable: false,
 				width:400,
@@ -212,20 +210,9 @@ function afficheListeGroupe(fluxId){
 			});
 			
 			$('#listeEntete').val('');
+			
 		}
 	});
-	
-	/*parseListePrevisionJson(jsonObjectInstance);
-	
-	$("div#boiteListeEntete").dialog({
-		resizable: false,
-		width:400,
-		modal: true,
-		title : 'Edition prévision pour '+$("#listeEntete").find("option:selected").text()
-	});
-    
-    $('#listeEntete').val('');*/
-    
 	return false;
 }
 
@@ -246,35 +233,7 @@ function parseListePrevisionJson(json) {
 		//row.append($('<td/>').append('<input type="button" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);"></input>'));
 		row.append($('<td class="text-center"/>').append('<button class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);"><span class="ui-icon ui-icon-arrowthick-1-s"></span></button>'));
 
-
 		$("#tbodylisteentete").append(row);
-
-		/*var row = tab.insertRow(i+1);
-		row.setAttribute('typetr', "prevision")
-		row.setAttribute('class', 'l'+i%2);
-		
-		var cell1=row.insertCell(0)
-		cell1.innerHTML=tabJson[i].mois;
-		cell1.setAttribute('align', "center")
-		
-		var cell2 = row.insertCell(1);
-		var inputmontant = document.createElement('input');
-		inputmontant.type='text';
-		inputmontant.id='montant-'+(i+1);
-		inputmontant.setAttribute('ligneid',tabJson[i].ligneId);
-		inputmontant.value=tabJson[i].montant;
-		inputmontant.onblur= function(){return isDouble(this);};
-		cell2.appendChild(inputmontant);
-		
-		//
-		var cell3 = row.insertCell(2);
-		var btnpropag = document.createElement('input');
-		btnpropag.id='btnpropag'+i;
-		btnpropag.setAttribute('index',i+1);
-		btnpropag.type='button';
-		btnpropag.className='bouton';
-		btnpropag.onclick=function(){propagerMontant(this);};
-		cell3.appendChild(btnpropag);*/
 	}
 }
 
@@ -296,14 +255,16 @@ function propagerMontant(btn){
  * et un flux
  ***********************************************************************/
  function equilibrerPrevision(numeroCompte, ligneId) {
- 	$.ajax({ 
+ 	$.getJSON({ 
 		url: "index.php?domaine=prevision&service=equilibrerprevision",
 		data: { "ligneId": ligneId,
 			"mode": "equilibrer"
 		}, 
 		
 		success: function(retour) {
-			affichePrevisions('liste',document.getElementById('annee').value, numeroCompte);
+			if(traiteRetourAjax(retour)){
+				affichePrevisions('liste',document.getElementById('annee').value, numeroCompte);
+			}
 			return false;
 		} 
 	});
@@ -330,7 +291,7 @@ function enregistreListeLignes(form){
 
 function afficheEstimation(champs, nocompte){
 	var params = "noCompte="+nocompte;
-	$.ajax({
+	$.getJSON({
 		url: "index.php?domaine=prevision&service=estimationreste",
 		dataType: 'json',
 		data: params,

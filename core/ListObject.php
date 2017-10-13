@@ -17,16 +17,23 @@ class ListObject extends ListStructure implements IList{
     public $totalPage;
     public $page;
     
+	private $logger;
+	
+	final public function __construct(){
+		parent::__construct();
+		$this->logger = Logger::getRootLogger();
+	}
+	
     public function requestNoPage($classe, $clause=null) {
         $l_suff = " FROM $classe";
         if($clause!=null){
             $l_suff.=" WHERE $clause";
         }
-        Logger::$instance->addLogMessage('search: '. $l_suff);
+        $this->logger->debug('search: '. $l_suff);
         
         //requete principale
         $l_requete = 'select * '.$l_suff;
-        Logger::$instance->addLogMessage('search complete: '. $l_requete);
+        $this->logger->debug('search complete: '. $l_requete);
         $stmt = self::$_pdo->query($l_requete);
         
         $this->nbLine = $stmt->rowCount();
@@ -52,7 +59,7 @@ class ListObject extends ListStructure implements IList{
         if($clause!=null){
             $l_suff.=" WHERE $clause";
         }
-        Logger::$instance->addLogMessage('search: '. $l_suff);
+        $this->logger->debug('search: '. $l_suff);
         
         if($page==''){
             $page=1;
@@ -72,7 +79,7 @@ class ListObject extends ListStructure implements IList{
         $this->nbLineTotal = $l_tab['total'];
         //requete principale
         $l_requete = "select * $l_suff LIMIT " . ($page-1)*LIGNE_PAR_PAGE . ', ' . LIGNE_PAR_PAGE;
-        Logger::$instance->addLogMessage('search complete: '. $l_requete);
+        $this->logger->debug('search complete: '. $l_requete);
         $stmt = self::$_pdo->query($l_requete);
         
         $this->nbLine = $stmt->rowCount();

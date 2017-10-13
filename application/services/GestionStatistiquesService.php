@@ -295,7 +295,6 @@ class GestionStatistiquesService extends ServiceStub {
         
      }
 	 
-	 /*************************************************************/
 	/*************************************************************/
 	//
 	// gestion des cumul
@@ -330,7 +329,7 @@ class GestionStatistiquesService extends ServiceStub {
         $premiereAnnee.='-01-01';
 		
 		$fluxAjax = $p_contexte->m_dataRequest->getData('listeFlux');
-		Logger::getInstance()->addLogMessage('liste ajax: '. $fluxAjax);
+		$this->logger->debug('liste ajax: '. $fluxAjax);
 		
         //requête des montants par flux/mois
         /*$requeteAsso = 'SELECT SUM( montant) AS total , fluxId, \'$parent->annee\' AS periode

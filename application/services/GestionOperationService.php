@@ -31,7 +31,7 @@ class GestionOperationService extends ServiceStub{
 		
         $recIntervalle = $p_contexte->m_dataRequest->getData('recIntervalle');
 		if($recIntervalle	!=null){
-			//Logger::getInstance()->addLogMessage('intervalle' . $recIntervalle);
+			//$this->logger->debug('intervalle' . $recIntervalle);
 			$intervalle = explode('_', $recIntervalle);
 			$requete.=" AND operation.date between '". $intervalle[0] . "' AND '" . $intervalle[1] . "' ";	
         }
@@ -57,7 +57,7 @@ class GestionOperationService extends ServiceStub{
         $operation->fieldObject($p_contexte->m_dataRequest);
         $operation->create();
         $operation->operationId = $operation->lastInsertId();
-        Logger::getInstance()->addLogMessage('last insert:' . $operation->lastInsertId());
+        $this->logger->debug('last insert:' . $operation->lastInsertId());
         $operation->load();
         OperationCommun::operationLiee($operation);
 

@@ -26,11 +26,11 @@
         <div class="row">
             <div class="col-lg-offset-4 col-lg-4">
                 <table class="table table-bordered">
-					<tr>
+					<!--tr>
 						<th colspan="2" class="text-center">
 							<xsl:value-of select="concat($LBL.PREVISIONSCOMPTE, ' ', $NUMEROCOMPTE)"/>
 						</th>
-					</tr>
+					</tr-->
                     <tr>
 						<th>
 							<xsl:value-of select="$LBL.ANNEE"/>
