@@ -24,6 +24,30 @@
         <xsl:call-template name="boiteListeEntete"/>
 
         <div class="row">
+            <div class="col-lg-offset-4">
+				<div class="col-lg-4">
+					<div class="form-group row">
+						<label for="numerocompte" class="col-sm-6 form-control-label">
+							<xsl:value-of select="$LBL.ANNEE"/>
+						</label>
+						<div class="col-sm-6">
+							<select name="annee" id="annee" class="form-control" onchange="refreshWindow()">
+                                <xsl:apply-templates select="/root/data/ListeAnnees/Dynamic">
+                                    <xsl:with-param name="anneeSelect" select="$ANNEE"/>
+                                </xsl:apply-templates>
+                            </select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div id="radio">
+						<input type="radio" id="radio1" name="radioChoixType" value="complet" checked="checked"/><label for="radio1">Complet</label>
+						<input type="radio" id="radio2" name="radioChoixType" value="pinel"/><label for="radio2">Pinel</label>
+						<input type="radio" id="radio3" name="radioChoixType" value="sans"/><label for="radio3">Sans</label>
+					</div>
+				</div>
+				
+			</div>
             <div class="col-lg-offset-4 col-lg-4">
                 <table class="table table-bordered">
 					<!--tr>
@@ -127,13 +151,14 @@
                                 <xsl:value-of select="$LBL.FLUX"/>
                             </label>
                             <div class="col-sm-6">
-                                <xsl:call-template name="ListeFlux">
+                                <select class="form-control obligatoire" name="fluxId" id="fluxId" tabindex="5"/>
+								<!--xsl:call-template name="ListeFlux">
                                     <xsl:with-param name="liste" select="/root/data/ListeFlux"/>
-                                    <xsl:with-param name="champ" select="'fluxId'"/>
+                                    <xsl:with-param name="champ" select="'montant'"/>
                                     <xsl:with-param name="valeur" select="/root/data/Operation/fluxId"/>
                                     <xsl:with-param name="class" select="'obligatoire'"/>
                                     <xsl:with-param name="tabindex" select="'5'"/>
-                                </xsl:call-template>
+                                </xsl:call-template-->
                             </div>
                         </div>
                         <div class="form-group row">
@@ -170,53 +195,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!--table>
-                    <tr>
-                        <td>
-                            <xsl:value-of select="$LBL.FLUX"/>
-                        </td>
-                        <td>
-                            <xsl:call-template name="ListeFlux">
-                                <xsl:with-param name="liste" select="/root/data/ListeFlux"/>
-                                <xsl:with-param name="champ" select="'fluxId'"/>
-                                <xsl:with-param name="valeur" select="/root/data/Operation/fluxId"/>
-                                <xsl:with-param name="class" select="'obligatoire'"/>
-                                <xsl:with-param name="tabindex" select="'5'"/>
-                            </xsl:call-template>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <xsl:value-of select="$LBL.PERIODE"/>
-                        </td>
-                        <td>
-                            <select name="mois" id="mois" tabindex="10">
-                                <option/>
-                                <xsl:for-each select="/root/data/ListePeriodes/Periode">
-                                    <option value="{periode}">
-                                        <xsl:value-of select="periode"/>
-                                    </option>
-                                </xsl:for-each>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <xsl:value-of select="$LBL.MONTANT"/>
-                        </td>
-                        <td>
-                            <input size="7" name="montant" id="montant" class="numerique_obligatoire"
-                                   onblur="return isDouble(this);" tabindex="15"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center">
-                            <input type="submit" id="" name="" value="{$LBL.MODIFIER}"/>
-                        </td>
-                    </tr>
-                </table-->
             </form>
         </div>
         <div id="boiteEntete" title="Edition" style="display: none;">
@@ -243,13 +221,14 @@
                             <xsl:value-of select="$LBL.FLUX"/>
                         </td>
                         <td>
-                            <xsl:call-template name="ListeFlux">
+							<select class="form-control obligatoire" name="fluxIdEntete" id="fluxIdEntete" tabindex="5"/>
+                            <!--xsl:call-template name="ListeFlux">
                                 <xsl:with-param name="liste" select="/root/data/ListeFlux"/>
                                 <xsl:with-param name="champ" select="'fluxId'"/>
                                 <xsl:with-param name="valeur" select="/root/data/Operation/fluxId"/>
                                 <xsl:with-param name="class" select="'obligatoire'"/>
                                 <xsl:with-param name="tabindex" select="'5'"/>
-                            </xsl:call-template>
+                            </xsl:call-template-->
                         </td>
                     </tr>
                     <tr>

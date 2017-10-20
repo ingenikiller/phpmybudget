@@ -2,11 +2,21 @@
 	fonction d'init
  *********************************************************/
 $(document).ready(function() {
+	$( "#radio" ).controlgroup({
+      icon: false
+    });
+	
+	$('input:radio[name="radioChoixType"]').on("change", function(event) {
+		refreshWindow();
+	});
+	
 	//
-	afficheEstimation('estimation', $('#numeroCompte').val());
+	refreshWindow();
+	/*afficheEstimation('estimation', $('#numeroCompte').val());
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N');
+	afficheFluxSelect('fluxIdEntete', $('#numeroCompte').val(), 'fluxMaitre=N');
 	recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
-	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
+	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());*/
 });
 
 
@@ -19,7 +29,8 @@ function affichePrevisions(idTableau, periode, numeroCompte) {
 	    url: "index.php?domaine=prevision&service=getlisteannee",
 	    data: { "edition":"edition",
 	    	"periode":periode,
-	    	"numeroCompte": numeroCompte
+	    	"numeroCompte": numeroCompte,
+			"flagPinel": $('input:radio[name="radioChoixType"]:checked').val()
 		}, 
 	    success: function(retour) { 
 			var xml = $.parseXML(retour)
@@ -34,7 +45,24 @@ function affichePrevisions(idTableau, periode, numeroCompte) {
 	recharge la fenêtre au changement d'année
  *********************************************************/
 function refreshWindow() {
-	document.location.href='index.php?domaine=prevision&numeroCompte='+$('#numeroCompte').val()+'&annee='+$('#annee').val();
+	//document.location.href='index.php?domaine=prevision&numeroCompte='+$('#numeroCompte').val()+'&annee='+$('#annee').val();
+	
+	var flagPinel = $('input:radio[name="radioChoixType"]:checked').val()
+	var paramPinel='';
+	if(flagPinel == 'complet') {
+		//
+	} else if(flagPinel == 'sans') {
+		paramPinel='&fluxMaitreExclu=101';
+	} else if(flagPinel == 'pinel') {
+		paramPinel='&fluxMaitreId=101';
+	}
+	
+	
+	afficheEstimation('estimation', $('#numeroCompte').val());
+	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N'+paramPinel);
+	afficheFluxSelect('fluxIdEntete', $('#numeroCompte').val(), 'fluxMaitre=N'+paramPinel);
+	recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
+	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
 }
 
 /*********************************************************
@@ -98,11 +126,6 @@ function modifierPrevision(form) {
 		} 
 	});
 
-	/*affichePrevisions('liste',document.getElementById('annee').value, form.numeroCompte.value);
-	$("div#boite").dialog('close');
-	
-	afficheEstimation('estimation', $('#numeroCompte').val());*/
-	
 	return false;
 }
 
@@ -114,7 +137,7 @@ function modifierPrevision(form) {
 function afficheEntete(compte) {
 	
 	document.editionEnteteUnitaire.service.value='create';
-	document.editionEnteteUnitaire.fluxId.value='';
+	document.editionEnteteUnitaire.fluxIdEntete.value='';
 	document.editionEnteteUnitaire.periodicite.value='';
 	document.editionEnteteUnitaire.nomEntete.value='';
 	document.editionEnteteUnitaire.montant.value='';
@@ -141,7 +164,7 @@ function creerEntete(form) {
 		url: "index.php?domaine=previsionentete&service="+form.service.value,
 		data: { "ligneId": form.ligneId.value,
 				"noCompte": form.numeroCompte.value,
-				"fluxId": form.fluxId.value,
+				"fluxId": form.fluxIdEntete.value,
 				"typenr": form.typenr.value,
 				'nomEntete': form.nomEntete.value,
 				'annee': $('#annee').val(),

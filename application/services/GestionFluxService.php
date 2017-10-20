@@ -12,6 +12,8 @@ class GestionFluxService extends ServiceStub {
         $comptePrincipal = $p_contexte->m_dataRequest->getData('comptePrincipal');
         $compteDestination = $p_contexte->m_dataRequest->getData('compteDestination');
         $fluxMaitre = $p_contexte->m_dataRequest->getData('fluxMaitre');
+        $fluxMaitreId = $p_contexte->m_dataRequest->getData('fluxMaitreId');
+        $fluxMaitreExclu = $p_contexte->m_dataRequest->getData('fluxMaitreExclu');
 		
 		//paramètre permettant de rechercher les flux dont le compte est principal ou destinataire
         $recFluxOperations = $p_contexte->m_dataRequest->getData('recFluxOperations');
@@ -32,6 +34,15 @@ class GestionFluxService extends ServiceStub {
 		}
 		if($fluxMaitre!=''){
 			$requete.= " AND fluxMaitre='$fluxMaitre' ";
+		}
+		/*$this->logger->debug('flux maitre id:'.$fluxMaitreId);
+		$this->logger->debug('flux maitre exclu:'.$fluxMaitreExclu);*/
+		
+		if($fluxMaitreId!=''){
+			$requete.= " AND fluxMaitreId='$fluxMaitreId' ";
+		}
+		if($fluxMaitreExclu!=''){
+			$requete.= " AND fluxMaitreId!='$fluxMaitreExclu' ";
 		}
 		
 		$listFlux->request('Flux', $requete.' order by flux', $numeroPage);

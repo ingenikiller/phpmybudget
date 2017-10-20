@@ -10,11 +10,12 @@ class GestionPrevisionService extends ServiceStub {
         }
         
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
-        $listeFlux = new ListObject();
+        
+		/*$listeFlux = new ListObject();
         $listeFlux->name='ListeFlux';
         $l_clause="compteId='$numeroCompte' or compteDest='$numeroCompte' order by flux ASC"; 
         $listeFlux->requestNoPage('Flux', $l_clause);
-        $p_contexte->addDataBlockRow($listeFlux);
+        $p_contexte->addDataBlockRow($listeFlux);*/
         
         $l_compte = new Comptes();
 		$l_compte->numeroCompte=$numeroCompte;
@@ -40,6 +41,7 @@ class GestionPrevisionService extends ServiceStub {
 	
 	public function getListeAnnee(ContextExecution $p_contexte) {
         $annee=$p_contexte->m_dataRequest->getData('periode');
+        $flagPinel=$p_contexte->m_dataRequest->getData('flagPinel');
         //PeriodeCommun::initialiserPeriodeMois($annee);
         
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
@@ -47,18 +49,34 @@ class GestionPrevisionService extends ServiceStub {
         $dateDeb=$annee.'-01';
         $dateFin=$annee.'-12';
         
-        $clausePrevisions = "noCompte='$numeroCompte' and typenr='L' and mois='".'$parent->periode\'';
+		$clausePinel='';
+		switch($flagPinel){
+			case 'complet':
+				break;
+			case 'pinel':
+				$clausePinel='AND flux.fluxMaitreId =\'101\'';
+				break;
+			case 'sans':
+				$clausePinel='AND flux.fluxMaitreId !=\'101\'';
+				break;
+		}
+		
+		
+        $clausePrevisions = "noCompte='$numeroCompte' and typenr='L' and mois='".'$parent->periode\''. 
+				"AND EXISTS (SELECT 1 FROM flux WHERE 1=1 AND flux.fluxid=prevision.fluxid $clausePinel)";
         
         $previsions = new ListObject();
         $previsions->name='Previsions';
         $previsions->setAssociatedRequest('Prevision', $clausePrevisions);
         
+		
+		
         
-        //requé des opérations récurrentes
+        //requête des opérations récurrentes
         $requeteTotaux = 
 			"SELECT ROUND(sum(montant),2) AS total
 			FROM operation 
-				LEFT JOIN flux ON flux.fluxId = operation.fluxId
+				LEFT JOIN flux ON flux.fluxId = operation.fluxId $clausePinel
 				LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.date LIKE concat( prevision.periode,\'%\')
 			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked'" .
 				'AND date like concat(\'$parent->mois\',\'%\')';
@@ -88,7 +106,7 @@ class GestionPrevisionService extends ServiceStub {
         $listeFlux->request(
 			"SELECT DISTINCT flux.fluxId, flux, depense
 			FROM prevision 
-				LEFT JOIN flux ON flux.fluxId = prevision.fluxId 
+				LEFT JOIN flux ON flux.fluxId = prevision.fluxId  $clausePinel
 			WHERE mois between '$dateDeb' and '$dateFin' 
 				and noCompte='$numeroCompte' ORDER BY flux");
         $p_contexte->addDataBlockRow($listeFlux);
