@@ -44,10 +44,10 @@
     <!--
         affichage montant
     -->
-    <xsl:template name="Montant">
+    <!--xsl:template name="Montant">
         <xsl:param name="montant" select="0"/>
         <xsl:value-of select="format-number($montant, $FORMAT_MNT)"/>
-    </xsl:template>
+    </xsl:template-->
     <!--
         Modif select
     -->

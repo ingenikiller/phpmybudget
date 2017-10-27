@@ -27,7 +27,7 @@
             <div class="col-lg-offset-4">
 				<div class="col-lg-4">
 					<div class="form-group row">
-						<label for="numerocompte" class="col-sm-6 form-control-label">
+						<label for="annee" class="col-sm-6 form-control-label">
 							<xsl:value-of select="$LBL.ANNEE"/>
 						</label>
 						<div class="col-sm-6">
@@ -46,34 +46,15 @@
 						<input type="radio" id="radio3" name="radioChoixType" value="sans"/><label for="radio3">Sans</label>
 					</div>
 				</div>
-				
 			</div>
             <div class="col-lg-offset-4 col-lg-4">
                 <table class="table table-bordered">
-					<!--tr>
-						<th colspan="2" class="text-center">
-							<xsl:value-of select="concat($LBL.PREVISIONSCOMPTE, ' ', $NUMEROCOMPTE)"/>
-						</th>
-					</tr-->
-                    <tr>
-						<th>
-							<xsl:value-of select="$LBL.ANNEE"/>
-						</th>
-                        <td>
-                            <select name="annee" id="annee" onchange="refreshWindow()">
-                                <xsl:apply-templates select="/root/data/ListeAnnees/Dynamic">
-                                    <xsl:with-param name="anneeSelect" select="$ANNEE"/>
-                                </xsl:apply-templates>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
+					<tr>
                         <th>
 							<xsl:value-of select="$LBL.ENTETE"/>
 						</th>
 						<td>
-                            <input type="button" id="" name="" value="Entete"
-                                   onclick="afficheEntete('{$NUMEROCOMPTE}');"/>
+                            <input type="button" id="boutonEntete" name="boutonEntete" value="Entete" onclick="afficheEntete('{$NUMEROCOMPTE}');"/>
                             <select name="listeEntete" id="listeEntete" onchange="afficheListeGroupe(this.value)"/>
                         </td>
                     </tr>
@@ -109,28 +90,6 @@
         </div>
         <br/>
         <br/>
-        <!--h1>
-            <xsl:value-of select="concat($LBL.PREVISIONSCOMPTE, ' ', $NUMEROCOMPTE)"/>
-        </h1-->
-        <!--div class="row text-center">
-            <div class="col-lg-4">
-                <table class="table table-striped">
-                    <tr>
-                        <td>Solde</td>
-                        <td>
-                            <xsl:value-of
-                                    select="format-number(number(/root/data/SommeOperations/Dynamic/total) + number(/root/data/Comptes/solde), $FORMAT_MNT)"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Estimation</td>
-                        <td>
-                            <span id="estimation" name="estimation" disabled="disabled"/>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div-->
         <table class="table table-bordered " table-hover="" name="liste" id="liste"/>
         <form method="post" action="" name="formEntete" id="formEntete">
             <table id="tableEntete" name="tableEntete"/>
@@ -152,13 +111,6 @@
                             </label>
                             <div class="col-sm-6">
                                 <select class="form-control obligatoire" name="fluxId" id="fluxId" tabindex="5"/>
-								<!--xsl:call-template name="ListeFlux">
-                                    <xsl:with-param name="liste" select="/root/data/ListeFlux"/>
-                                    <xsl:with-param name="champ" select="'montant'"/>
-                                    <xsl:with-param name="valeur" select="/root/data/Operation/fluxId"/>
-                                    <xsl:with-param name="class" select="'obligatoire'"/>
-                                    <xsl:with-param name="tabindex" select="'5'"/>
-                                </xsl:call-template-->
                             </div>
                         </div>
                         <div class="form-group row">
@@ -222,13 +174,6 @@
                         </td>
                         <td>
 							<select class="form-control obligatoire" name="fluxIdEntete" id="fluxIdEntete" tabindex="5"/>
-                            <!--xsl:call-template name="ListeFlux">
-                                <xsl:with-param name="liste" select="/root/data/ListeFlux"/>
-                                <xsl:with-param name="champ" select="'fluxId'"/>
-                                <xsl:with-param name="valeur" select="/root/data/Operation/fluxId"/>
-                                <xsl:with-param name="class" select="'obligatoire'"/>
-                                <xsl:with-param name="tabindex" select="'5'"/>
-                            </xsl:call-template-->
                         </td>
                     </tr>
                     <tr>
@@ -285,9 +230,6 @@
                         </tr>
                     </tfoot>
                 </table>
-                <!--table width="80%" align="center">
-
-                </table-->
             </form>
         </div>
     </xsl:template>

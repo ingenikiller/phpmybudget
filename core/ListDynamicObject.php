@@ -21,6 +21,7 @@ class ListDynamicObject extends ListStructure implements IList{
 	private $logger;
 	
 	final public function __construct(){
+		parent::__construct();
 		$this->logger = Logger::getRootLogger();
 	}
     
@@ -35,7 +36,7 @@ class ListDynamicObject extends ListStructure implements IList{
      * @param unknown_type $st3 inutilisée
      */
     public function request($p_requete, $p_numPage=null, $dummy=null){
-        $this->logger->debug('requete dynamique:'.$p_requete);
+        $this->logger->debug('requete dynamique origine:'.$p_requete);
         
         if($p_numPage!=null){
 			$stmt = null;
@@ -52,7 +53,7 @@ class ListDynamicObject extends ListStructure implements IList{
         	$p_requete .= " LIMIT " . ($p_numPage-1)*LIGNE_PAR_PAGE . ', ' . LIGNE_PAR_PAGE;        	
         }
         
-        $this->logger->debug('requete dynamique:'.$p_requete);
+        $this->logger->debug('requete dynamique finale:'.$p_requete);
 		$stmt=null;
         try{
 			$stmt = self::$_pdo->query($p_requete);

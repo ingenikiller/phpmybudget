@@ -84,10 +84,10 @@ class GestionOperationService extends ServiceStub{
 
 		$numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
 		$debLibelle = $p_contexte->m_dataRequest->getData('debLibelle');
-		$requete="SELECT distinct operation.libelle FROM operation WHERE operation.nocompte='$numeroCompte' AND libelle LIKE concat('$debLibelle', '%')";
+		$requete="SELECT distinct operation.libelle AS libelle FROM operation WHERE operation.nocompte='$numeroCompte' AND libelle LIKE concat('$debLibelle', '%')";
 		$listeLibelles = new ListDynamicObject();
 		$listeLibelles->name = 'ListeLibelles';
-		$listeLibelles->request($requete,1);
+		$listeLibelles->request($requete, 1);
 		$p_contexte->addDataBlockRow($listeLibelles);
 	}
 
@@ -97,7 +97,7 @@ class GestionOperationService extends ServiceStub{
 		$compte->numeroCompte = $numeroCompte;
 		$compte->load();
 		$p_contexte->addDataBlockRow($compte);
-        $p_contexte->setTitrePage("Opérations sur compte " . $numeroCompte);
+        $p_contexte->setTitrePage('Opérations sur ' .$compte->libelle. ' ('. $numeroCompte .')');
 	}
 }
 

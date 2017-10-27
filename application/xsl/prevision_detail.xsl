@@ -1,38 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:import href="commun.xsl"/>
-    <xsl:import href="template_name.xsl"/>
-    <xsl:param name="CLESEG" select="/root/request/cleseg"/>
-    <xsl:variable name="TABLEAU">
-        <xsl:choose>
-            <xsl:when test="$CLESEG = 'CONF'">tableSegments</xsl:when>
-            <xsl:otherwise>detail_segment</xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
     <xsl:output indent="no" encoding="UTF-8" method="xml"/>
     <xsl:template match="/">
         <data>
 			<colgroup />
-			<xsl:for-each select="/root/data/Periodes/Periode">
-				<colgroup>
-					<xsl:if test="periode=substring(/root/date, 0, 8)">
-						<xsl:attribute name="class">colonnemoisencours</xsl:attribute>
-					</xsl:if>
-				</colgroup>
-			</xsl:for-each>
-			<colgroup />
-			<!--colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup style="background-color: #A9D0F5;"/>
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup /-->
-            <thead>
+				<xsl:for-each select="/root/data/Periodes/Periode">
+					<colgroup>
+						<xsl:if test="periode=substring(/root/date, 0, 8)">
+							<xsl:attribute name="class">colonnemoisencours</xsl:attribute>
+						</xsl:if>
+					</colgroup>
+				</xsl:for-each>
+				<colgroup />
+			<thead>
                 <tr>
                     <th>
                         <xsl:value-of select="$LBL.FLUX"/>
@@ -174,7 +155,7 @@
             <th rowspan="1" class="titre">
                 <xsl:value-of select="flux"/>
             </th>
-            <!-- chaque noreleve -->
+            <!-- chaque flux -->
             <xsl:call-template name="case">
                 <xsl:with-param name="fluxId" select="$fluxId"/>
             </xsl:call-template>

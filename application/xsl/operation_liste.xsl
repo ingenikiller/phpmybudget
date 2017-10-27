@@ -13,20 +13,20 @@
         <script language="JavaScript" src="application/js/jquery_opertation_edition.js" type="text/javascript"/>
     </xsl:template>
     <xsl:template name="Contenu">
-      <br/>
-        <div class="row">
-            <div class="col-lg-offset-2 col-lg-8">
+		<br/>
+        <!--div class="row">
+            <div class="col-lg-offset-1 col-lg-10">
 				<input type="hidden" id="retour" name="retour"/>
                 <xsl:call-template name="operationEdition">
                     <xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
                 </xsl:call-template>
                 <fieldset>
-                    <form method="POST" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
+                    <form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
                         <xsl:call-template name="formulaireJson"/>
                         <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
                         <div class="row">
-                            <div class="col-xs-4">
-                                <div class="form-group row">
+							<div class="form-group row">
+								<div class="col-xs-4">
                                     <label for="numerocompte" class="col-sm-6 form-control-label">
                                         <xsl:value-of select="$LBL.NUMEROCOMPTE"/>
                                     </label>
@@ -35,9 +35,7 @@
                                                value="{$NUMEROCOMPTE}"/>
                                     </div>
                                 </div>
-                            </div>
-							<div class="col-xs-4">
-                                <div class="form-group row">
+								<div class="col-xs-4">
                                     <label for="description" class="col-sm-5 form-control-label">
                                         <xsl:value-of select="$LBL.DESCRIPTION"/>
                                     </label>
@@ -46,9 +44,7 @@
                                                value="{/root/data/Comptes/libelle}"/>
                                     </div>
                                 </div>
-                            </div>
-							<div class="col-xs-4">
-                                <div class="form-group row">
+								<div class="col-xs-4">
                                     <label for="numerocompte" class="col-sm-6 form-control-label">
                                         <xsl:value-of select="$LBL.SOLDE"/>
                                     </label>
@@ -67,20 +63,18 @@
 										<xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
 									</label>
 									<div class="col-sm-6">
-										<input type="text" id="recDate" name="recDate"
-											   class="form-control numerique" size="10"/>
+										<input type="text" id="recDate" name="recDate" class="form-control numerique" size="10"/>
 									</div>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-xs-4">
 									<label for="recMontant" class="col-sm-5 form-control-label">
 										<xsl:value-of select="$LBL.MONTANT"/>
 									</label>
 									<div class="col-sm-7">
-										<input type="text" id="recMontant" name="recMontant"
-											   class="form-control numerique" size="8"/>
+										<input type="text" id="recMontant" name="recMontant" class="form-control numerique" size="8"/>
 									</div>
 								</div>
-								<div class="col-xs-5">
+								<div class="col-xs-4">
 									<label for="recFlux" class="col-sm-3 form-control-label">
 										<xsl:value-of select="$LBL.FLUX"/>
 									</label>
@@ -101,78 +95,66 @@
                     </form>
                 </fieldset>
             </div>
-        </div>
-        <!--br/>
-        <div class="row">
-            <input type="hidden" id="retour" name="retour"/>
-            <xsl:call-template name="operationEdition">
-                <xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
-            </xsl:call-template>
-            
-            <form method="POST" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
-                <xsl:call-template name="formulaireJson"/>
-                <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
-                <div class="col-lg-offset-1 col-lg-10">
-                    <div class="row">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerOperation('{$NUMEROCOMPTE}','');">
-                                <span class="glyphicon glyphicon-plus"/>
-                            </button>
-                        </div>
-                        <div class="btn-group">
-                                
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action <span class="caret"></span>
-                            </button>
-                            <div class="dropdown-menu dropdown-zone" role="zone" aria-labelledby="zone1">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <label for="recDate" class="col-sm-6 form-control-label">
-                                            <xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
-                                        </label>
-                                        <input type="text" id="recDate" name="recDate" class="form-control" size="10" length="10"/>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <label for="recNoReleve" class="col-sm-6 form-control-label">
-                                            <xsl:value-of select="$LBL.NORELEVE"/>
-                                        </label>
-                                   
-                                        <input type="text" id="recNoReleve" name="recNoReleve" class="form-control numerique" size="8"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <label for="recMontant" class="col-sm-5 form-control-label">
-                                            <xsl:value-of select="$LBL.MONTANT"/>
-                                        </label>
-                                        <input type="text" id="recMontant" name="recMontant"
-                                                   class="form-control numerique" size="8"/>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <label for="recFlux" class="col-sm-3 form-control-label">
-                                            <xsl:value-of select="$LBL.FLUX"/>
-                                        </label>
-                                        <select name="recFlux" id="recFlux" class="form-control"/>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        </div>
-        <br/-->
-		<div class="row">
+        </div-->
+        
+		<!--div class="row">
 			<div class="col-xs-1"/>
 			<div class="col-xs-10">
 				<button type="button" class="btn btn-primary" id="" name="" value="{$LBL.CREER}" onclick="editerOperation('{$NUMEROCOMPTE}','');">
 					<span class="glyphicon glyphicon-plus"/>
 				</button>
 			</div>
-		</div>
+		</div-->
 		<div class="row">
-			<div class="col-xs-1"/>
-			<div class="col-xs-10">
+			<input type="hidden" id="retour" name="retour"/>
+			<xsl:call-template name="operationEdition">
+				<xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
+			</xsl:call-template>
+			<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
+				<xsl:call-template name="formulaireJson"/>
+				<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
+				<aside class="col-sm-2 formulaire">
+					<br/>
+					<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+						<div class="btn-group" role="group" aria-label="First group">
+							<button type="submit" class="btn btn-primary">Rechercher</button>
+						</div>
+  
+						<div class="btn-group" role="group" aria-label="Third group" style="float:right;">
+							<button type="button" class="btn btn-primary" id="" name="" onclick="editerOperation('{$NUMEROCOMPTE}','');" style="font-size:20px;">
+								<span class="glyphicon glyphicon-plus"/>
+							</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="numerocompte" class="form-control-label">
+							<xsl:value-of select="$LBL.SOLDE"/>
+						</label>
+						<input type="text" id="solde" name="solde" class="form-control numerique" readonly="readonly" size="8"/>
+					</div>
+					<div class="form-group">
+						<label for="recDate" class="form-control-label">
+							<xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
+						</label>
+						<input type="text" id="recDate" name="recDate" class="form-control numerique" size="10"/>
+					</div>
+					
+					<div class="form-group">
+						<label for="recFlux" class="form-control-label">
+							<xsl:value-of select="$LBL.FLUX"/>
+						</label>
+						<select name="recFlux" id="recFlux" class="form-control"  multiple="multiple"/>
+					</div>
+					<div class="form-group">
+						<label for="recMontant" class="col-sm-5 form-control-label">
+							<xsl:value-of select="$LBL.MONTANT"/>
+						</label>
+						<input type="text" id="recMontant" name="recMontant" class="form-control numerique" size="8"/>
+					</div>
+					<br/>
+				</aside>
+			</form>
+			<div class="col-sm-10">
 				<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
 					<thead>
 						<tr>
@@ -198,13 +180,15 @@
 					</thead>
 					<tbody id="tbodyResultat"/>
 				</table>
+				
+				<xsl:call-template name="paginationJson">
+					<xsl:with-param name="formulairePrincipal" select="'recherche'"/>
+				</xsl:call-template>
 			</div>
 		</div>
         <br/>
 
-        <xsl:call-template name="paginationJson">
-            <xsl:with-param name="formulairePrincipal" select="'recherche'"/>
-        </xsl:call-template>
+        
 
         <br/>
     </xsl:template>

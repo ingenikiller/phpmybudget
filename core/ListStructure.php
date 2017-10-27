@@ -17,10 +17,10 @@ abstract class ListStructure extends Objects {
     
 	private $logger;
 	
-	/*final public function __construct(){
+	public function __construct(){
 		parent::__construct();
-		$this->logger = Logger::getRootLogger();
-	}*/
+		//$this->logger = Logger::getRootLogger();
+	}
 	protected function getLogger() {
 		if($this->logger==null) {
 			$this->logger = Logger::getRootLogger();

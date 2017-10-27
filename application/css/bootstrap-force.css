@@ -101,3 +101,8 @@ classes dropdown
 .barre_recherche_input {
 	border-radius: 0px;
 }
+
+aside.formulaire {
+	background-color : #E6E6E6;
+	border-radius: 5px;
+}
