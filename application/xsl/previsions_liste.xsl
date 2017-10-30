@@ -15,8 +15,8 @@
     </xsl:param>
     <!-- template js -->
     <xsl:template name="js.module.sheet">
-        <script type="text/javascript" src="application/js/previsions.js" charset="iso-8859-1">&#160;</script>
-        <script language="JavaScript" src="application/js/statistiques.js" type="text/javascript"/>
+        <script type="text/javascript" src="front/js/previsions.js" charset="iso-8859-1">&#160;</script>
+        <script language="JavaScript" src="front/js/statistiques.js" type="text/javascript"/>
     </xsl:template>
     <xsl:template name="Contenu">
         <xsl:call-template name="boiteUnitaire"/>

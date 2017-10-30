@@ -7,7 +7,7 @@
 	<xsl:output encoding="UTF-8"/>
 	
 	<!--variables de configuration-->
-	<xsl:variable name="IMG_ROOT" select="'application/images/'"/>
+	<xsl:variable name="IMG_ROOT" select="'front/images/'"/>
 	<!-- formats-->
 	<xsl:variable name="FORMAT_MNT" select="'##0.00'"/>
 	<!--conrtexte-->

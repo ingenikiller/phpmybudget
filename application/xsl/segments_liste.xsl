@@ -4,7 +4,7 @@
 	<xsl:import href="template_name.xsl"/>
 	<!-- template js -->
 	<xsl:template name="js.module.sheet">
-		<script type="text/javascript" src="application/js/segments.js" charset="iso-8859-1">&#160;</script>
+		<script type="text/javascript" src="front/js/segments.js" charset="iso-8859-1">&#160;</script>
 	</xsl:template>
 	<xsl:template name="Contenu">
 		<center>

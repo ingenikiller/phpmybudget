@@ -53,6 +53,6 @@
         </div>
     </xsl:template>
     <xsl:template name="js.module.sheet">
-        <script language="JavaScript" src="application/js/periodeListe.js" type="text/javascript"/>
+        <script language="JavaScript" src="front/js/periodeListe.js" type="text/javascript"/>
     </xsl:template>
 </xsl:stylesheet>

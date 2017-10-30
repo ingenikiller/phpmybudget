@@ -4,8 +4,8 @@
 	<xsl:import href="statistiques_commun.xsl"/>
 	<xsl:import href="template_name.xsl"/>
 	<xsl:template name="js.module.sheet">
-		<script language="JavaScript" src="application/js/statistiques.js" type="text/javascript"/>
-		<script language="JavaScript" src="application/js/statistiquesPeriode.js" type="text/javascript"/>
+		<script language="JavaScript" src="front/js/statistiques.js" type="text/javascript"/>
+		<script language="JavaScript" src="front/js/statistiquesPeriode.js" type="text/javascript"/>
 	</xsl:template>
 	<xsl:template name="controleMenu">N</xsl:template>
 	<xsl:template name="Contenu">

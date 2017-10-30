@@ -9,8 +9,8 @@
         <xsl:value-of select="/root/request/recFlux"/>
     </xsl:param-->
     <xsl:template name="js.module.sheet">
-        <script language="JavaScript" src="application/js/operationListe.js" type="text/javascript"/>
-        <script language="JavaScript" src="application/js/jquery_opertation_edition.js" type="text/javascript"/>
+        <script language="JavaScript" src="front/js/operationListe.js" type="text/javascript"/>
+        <script language="JavaScript" src="front/js/jquery_opertation_edition.js" type="text/javascript"/>
     </xsl:template>
     <xsl:template name="Contenu">
 		<br/>

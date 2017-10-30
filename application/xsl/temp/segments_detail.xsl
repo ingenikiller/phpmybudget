@@ -17,7 +17,7 @@
 		</xsl:choose>
 	</xsl:variable>
 	<xsl:template name="js.module.sheet">
-		<script type="text/javascript" src="application/js/palette.js" charset="iso-8859-1">&#160;</script>
+		<script type="text/javascript" src="front/js/palette.js" charset="iso-8859-1">&#160;</script>
 	</xsl:template>
 	<xsl:template match="/">
 		<html>
@@ -203,7 +203,7 @@
 						<input maxlength="2" size="2" name="Nnumord" value="{Nnumord}" onchange="isDouble(this);" class="obligatoire"/>
 					</td>
 					<td>
-						<input type="image" border="0" src="application/images/icone_creer.gif"/>
+						<input type="image" border="0" src="front/images/icone_creer.gif"/>
 					</td>
 				</tr>
 			</xsl:when>
@@ -222,7 +222,7 @@
 						<input maxlength="2" size="2" name="Nnumord" value="{Nnumord}" onchange="isDouble(this);" class="obligatoire"/>
 					</td>
 					<td>
-						<input type="image" border="0" src="application/images/icone_creer.gif"/>
+						<input type="image" border="0" src="front/images/icone_creer.gif"/>
 					</td>
 				</tr>
 			</xsl:otherwise>

@@ -3,7 +3,7 @@
     <xsl:import href="template_name.xsl"/>
     <xsl:import href="commun.xsl"/>
     <xsl:template name="js.module.sheet">
-        <script language="JavaScript" src="application/js/compteEdition.js" type="text/javascript"/>
+        <script language="JavaScript" src="front/js/compteEdition.js" type="text/javascript"/>
     </xsl:template>
     <xsl:template name="Contenu">
         <xsl:call-template name="compteEdition"/>

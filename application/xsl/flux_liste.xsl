@@ -8,7 +8,7 @@
 		</a>
 	</xsl:variable>
 	<xsl:template name="js.module.sheet">
-		<script language="JavaScript" src="application/js/fluxListe.js" type="text/javascript"/>
+		<script language="JavaScript" src="front/js/fluxListe.js" type="text/javascript"/>
 	</xsl:template>
 	<xsl:template name="Contenu">
 		<!--p>

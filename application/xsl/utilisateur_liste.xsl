@@ -61,7 +61,7 @@
 						<input name="nnom" type="text" size="15"/>
 					</td>
 					<td>
-						<input type="image" border="0" src="application/images/icone_creer.gif"/>
+						<input type="image" border="0" src="front/images/icone_creer.gif"/>
 					</td>
 				</tr>
 			</table>
