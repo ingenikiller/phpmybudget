@@ -18,7 +18,7 @@
                 <xsl:value-of select="/root/dial/messages/erreur"/>
             </p>
         </xsl:if>
-        <form method="post" onsubmit="return connexion();">
+        <form method="post" action="index.php?domaine=technique&amp;service=connexion">
             <div class="row">
                 <div class="col-xs-4"/>
                 <div class="col-xs-4">

@@ -18,14 +18,12 @@ class CommunUser {
 		$list = new ListObject();
 		$clause="nom='". $p_user ."' AND motDePasse='". $p_mdp . "'";
 		$list->request('Users', $clause);
-		/*if($list->nbLine!=1){
+		if($list->nbLine!=1){
 			throw new FunctionnalException('nom ou mot de passe incorrect');
-		}*/
-		if(isset($list->tabResult[0])){
-			return $list->tabResult[0];			
-		} else {
-			return null;
 		}
+                
+                
+		return $list->tabResult[0];
 	}
 	
 	public static function getUser($p_connexion, $p_user) {

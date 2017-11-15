@@ -66,8 +66,7 @@
 		</domaine>
 		<domaine name="technique">
 			<service name="login" classe="Login" methode="fictive" isPrivee="false"  xsl="xsl/login.xsl" privee="false"/>
-			<service name="connexion" classe="Login" methode="connexion" isPrivee="false" render="json"/>
-			<service name="deconnexion" classe="Login" methode="deconnexion" isPrivee="false" render="json"/>
+			<service name="connexion" classe="Login" methode="connexion" isPrivee="false"  xsl="xsl/login.xsl" privee="false"/>
 			<service name="gentables" classe="GenerateurService" methode="create" isPrivee="false"  xsl="xsl/login.xsl" privee="false"/>
 		</domaine>
 		<domaine name="defaut">
