@@ -8,9 +8,17 @@ class Login extends ServiceStub{
 		
 		$l_user = CommunUser::getUserLogin($tab['nom'], $tab['motDePasse']);
 		
-        $_SESSION['userid'] = $l_user->userId;
+		$reponse = new ReponseAjax();
+		if($l_user!=null){
+			$_SESSION['userid'] = $l_user->userId;
+			$p_contexte->setUser($l_user);			
+			$reponse->status='OK';
+		} else {
+			$reponse->status='KO';
+			$reponse->message='nom ou mot de passe incorrect';
+		}
 		
-        $p_contexte->setUser($l_user);
+		$p_contexte->addDataBlockRow($reponse);
 	}
 	
 }

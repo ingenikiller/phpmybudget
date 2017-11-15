@@ -286,6 +286,7 @@ function propagerMontant(btn){
 		
 		success: function(retour) {
 			if(traiteRetourAjax(retour)){
+				afficheEstimation('estimation', $('#numeroCompte').val());
 				affichePrevisions('liste',document.getElementById('annee').value, numeroCompte);
 			}
 			return false;

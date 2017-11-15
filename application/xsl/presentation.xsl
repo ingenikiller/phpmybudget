@@ -83,6 +83,7 @@
 			<script type="text/javascript" src="front/js/communJson.js" charset="iso-8859-1">&#160;</script>
 			
 			<script type="text/javascript" src="front/js/core_ajax.js" charset="iso-8859-1">&#160;</script>
+			<script type="text/javascript" src="front/core/session.js" charset="iso-8859-1">&#160;</script>
 			
 			<!-- plugins -->
 			<link href="front/css/jquery.multiselect.css" rel="stylesheet" type="text/css"/>
