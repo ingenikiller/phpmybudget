@@ -81,7 +81,7 @@
 			<script type="text/javascript" src="front/js/communFormulaire.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="front/js/dateFormat.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="front/js/communJson.js" charset="iso-8859-1">&#160;</script>
-			
+			<script type="text/javascript" src="front/core/session.js" charset="iso-8859-1">&#160;</script>
 			<script type="text/javascript" src="front/js/core_ajax.js" charset="iso-8859-1">&#160;</script>
 			
 			<!-- plugins -->
