@@ -4,8 +4,8 @@
 	<xsl:import href="statistiques_commun.xsl"/>
 	<xsl:import href="template_name.xsl"/>
 	<xsl:template name="js.module.sheet">
-		<script language="JavaScript" src="front/js/statistiques.js" type="text/javascript"/>
-		<script language="JavaScript" src="front/js/statistiquesCumul.js" type="text/javascript"/>
+		<script type="text/javascript" src="front/js/statistiques.js" charset="iso-8859-1">&#160;</script>
+		<script type="text/javascript" src="front/js/statistiquesCumul.js" charset="iso-8859-1">&#160;</script>
 	</xsl:template>
 	<xsl:template name="controleMenu">N</xsl:template>
 	<xsl:template name="Contenu">
@@ -14,37 +14,36 @@
 			<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
 			
 			<div class="row">
-				<div class="col-xs-4"/>
-				<div class="col-xs-4">
-			
-				<form class="form-group row"  method="POST" action="#" onsubmit="return soumettreCumul(this);" name="formulaire" id="formulaire">
-					<fieldset>
-						<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
-						<div class="form-group row">
-							<label for="premiereAnnee" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.PREMIEREANNEE"/></label>
-							<div class="col-sm-3">
-								<xsl:apply-templates select="/root/data/ListeAnnee">
-									<xsl:with-param name="name" select="'premiereAnnee'"/>
-									<xsl:with-param name="obligatoire" select="'O'"/>
-								</xsl:apply-templates>
+				
+				<div class="col-xs-offset-4 col-xs-4">
+					<form class="form-group row"  method="POST" action="#" onsubmit="return soumettreCumul(this);" name="formulaire" id="formulaire">
+						<fieldset>
+							<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
+							<div class="form-group row">
+								<label for="premiereAnnee" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.PREMIEREANNEE"/></label>
+								<div class="col-sm-3">
+									<xsl:apply-templates select="/root/data/ListeAnnee">
+										<xsl:with-param name="name" select="'premiereAnnee'"/>
+										<xsl:with-param name="obligatoire" select="'O'"/>
+									</xsl:apply-templates>
+								</div>
 							</div>
-						</div>
-						
-						<div class="form-group row">
-							<label for="derniereAnnee" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.DERNIEREANNEE"/></label>
-							<div class="col-sm-3">
-								<xsl:apply-templates select="/root/data/ListeAnnee">
-									<xsl:with-param name="name" select="'derniereAnnee'"/>
-								</xsl:apply-templates>
+							
+							<div class="form-group row">
+								<label for="derniereAnnee" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.DERNIEREANNEE"/></label>
+								<div class="col-sm-3">
+									<xsl:apply-templates select="/root/data/ListeAnnee">
+										<xsl:with-param name="name" select="'derniereAnnee'"/>
+									</xsl:apply-templates>
+								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<div class="text-center">
-								<button type="submit" class="btn btn-primary">Valider</button>
+							<div class="form-group row">
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary">Valider</button>
+								</div>
 							</div>
-						</div>
-					</fieldset>
-				</form>
+						</fieldset>
+					</form>
 			</div>
 		</div>			
 		<center>

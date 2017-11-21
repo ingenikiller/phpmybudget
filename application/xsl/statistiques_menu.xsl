@@ -16,17 +16,17 @@
 			<br/>
 			<br/>
 			<p>
-		Pour afficher lles statistiques suivant les années sous forme de tableau, cliquer <a href="index.php?domaine=statistique&amp;service=affformannees&amp;type=tabTotauxAnnuels&amp;numeroCompte={$NUMEROCOMPTE}">ici</a>
+		Pour afficher les statistiques suivant les années sous forme de tableau, cliquer <a href="index.php?domaine=statistique&amp;service=affformannees&amp;type=tabTotauxAnnuels&amp;numeroCompte={$NUMEROCOMPTE}">ici</a>
 			</p>
 			<br/>
 			<br/>
 			<p>
-		Pour afficher lles statistiques cumulatives, cliquer <a href="index.php?domaine=statistique&amp;service=affformcumul&amp;type=tabTotauxAnnuels&amp;numeroCompte={$NUMEROCOMPTE}">ici</a>
+		Pour afficher les statistiques cumulatives, cliquer <a href="index.php?domaine=statistique&amp;service=affformcumul&amp;type=tabTotauxAnnuels&amp;numeroCompte={$NUMEROCOMPTE}">ici</a>
 			</p>
 			<br/>
 			<br/>
 			<p>
-		Pour afficher lles statistiques par période, cliquer <a href="index.php?domaine=statistique&amp;service=affformperiode&amp;type=tabTotauxAnnuels&amp;numeroCompte={$NUMEROCOMPTE}">ici</a>
+		Pour afficher les statistiques par période, cliquer <a href="index.php?domaine=statistique&amp;service=affformperiode&amp;type=tabTotauxAnnuels&amp;numeroCompte={$NUMEROCOMPTE}">ici</a>
 			</p>
 			<br/>
 			<br/>

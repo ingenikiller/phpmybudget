@@ -15,14 +15,11 @@
     </xsl:param>
     <!-- template js -->
     <xsl:template name="js.module.sheet">
-        <script type="text/javascript" src="front/js/previsions.js" charset="iso-8859-1">&#160;</script>
-        <script language="JavaScript" src="front/js/statistiques.js" type="text/javascript"/>
+        <script type="text/javascript" src="front/js/previsions.js" charset="UTF-8">&#160;</script>
+		<script type="text/javascript" src="front/js/statistiques.js" charset="UTF-8">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
-        <xsl:call-template name="boiteUnitaire"/>
-        <xsl:call-template name="boiteDetail"/>
-        <xsl:call-template name="boiteListeEntete"/>
-
+        
         <div class="row">
             <div class="col-lg-offset-4">
 				<div class="col-lg-4">
@@ -39,10 +36,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-6">
 					<div id="radio">
 						<input type="radio" id="radio1" name="radioChoixType" value="complet" checked="checked"/><label for="radio1">Complet</label>
-						<input type="radio" id="radio2" name="radioChoixType" value="pinel"/><label for="radio2">Pinel</label>
+						<input type="radio" id="radio2" name="radioChoixType" value="pinel"/><label for="radio2">Avec Pinel</label>
 						<input type="radio" id="radio3" name="radioChoixType" value="sans"/><label for="radio3">Sans</label>
 					</div>
 				</div>
@@ -55,7 +52,7 @@
 						</th>
 						<td>
                             <input type="button" id="boutonEntete" name="boutonEntete" value="Entete" onclick="afficheEntete('{$NUMEROCOMPTE}');"/>
-                            <select name="listeEntete" id="listeEntete" onchange="afficheListeGroupe(this.value)"/>
+                            <select name="listeEntete" id="listeEntete" onchange="afficheListeGroupe(this.value)">&#160;</select>
                         </td>
                     </tr>
                     <tr>
@@ -63,9 +60,7 @@
 							<xsl:value-of select="$LBL.CREER"/>
 						</th>
 						<td>
-                            <input type="button" id="" name="" value="Unitaire"
-                                   onclick="afficheUnitaire('{$NUMEROCOMPTE}','');"/>
-
+                            <input type="button" id="afficheUnitaire" value="Unitaire" onclick="afficheUnitaire('{$NUMEROCOMPTE}','');"/>
                         </td>
                     </tr>
 					<tr>
@@ -73,8 +68,7 @@
 							<xsl:value-of select="$LBL.SOLDE"/>
 						</th>
                         <td>
-                            <xsl:value-of
-                                    select="format-number(number(/root/data/SommeOperations/Dynamic/total) + number(/root/data/Comptes/solde), $FORMAT_MNT)"/>
+                            <xsl:value-of select="format-number(number(/root/data/SommeOperations/Dynamic/total) + number(/root/data/Comptes/solde), $FORMAT_MNT)"/>
                         </td>
                     </tr>
                     <tr>
@@ -82,18 +76,18 @@
 							<xsl:value-of select="$LBL.ESTIMATION"/>
 						</th>
                         <td>
-                            <span id="estimation" name="estimation" disabled="disabled"/>
+                            <span id="estimation">&#160;</span>
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
-        <br/>
-        <br/>
-        <table class="table table-bordered " table-hover="" name="liste" id="liste"/>
-        <form method="post" action="" name="formEntete" id="formEntete">
-            <table id="tableEntete" name="tableEntete"/>
-        </form>
+        
+        <table class="table table-bordered" id="liste">&#160;</table>
+        
+		<xsl:call-template name="boiteUnitaire"/>
+        <xsl:call-template name="boiteDetail"/>
+        <xsl:call-template name="boiteListeEntete"/>
     </xsl:template>
     <xsl:template name="boiteUnitaire">
         <div id="boite" title="{$LBL.EDITIONPREVISION}" style="display: none;">
@@ -110,7 +104,7 @@
                                 <xsl:value-of select="$LBL.FLUX"/>
                             </label>
                             <div class="col-sm-6">
-                                <select class="form-control obligatoire" name="fluxId" id="fluxId" tabindex="5"/>
+                                <select class="form-control obligatoire" name="fluxId" id="fluxId" tabindex="5">&#160;</select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -138,7 +132,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-4"/>
                             <div class="form-group row">
                                 <div class="col-sm-offset-5 col-sm-5">
                                     <button type="submit" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
@@ -153,56 +146,53 @@
             <!--
                 formulaire entete
             -->
-            <form method="POST" name="editionEnteteUnitaire" id="editionEnteteUnitaire" action="index.php"
-                  onsubmit="return creerEntete(this)">
-                <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
+            <form method="POST" name="editionEnteteUnitaire" id="editionEnteteUnitaire" action="#" onsubmit="return creerEntete(this)">
+				<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
                 <input type="hidden" id="typenr" name="typenr" value="E"/>
                 <input type="hidden" id="ligneId" name="ligneId" value=""/>
                 <input type="hidden" id="service" name="service" value="create"/>
-                <table>
-                    <tr>
-                        <td>
-                            titre
-                        </td>
-                        <td>
-                            <input type="texte" id="nomEntete" name="nomEntete" tabindex="1"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <xsl:value-of select="$LBL.FLUX"/>
-                        </td>
-                        <td>
-							<select class="form-control obligatoire" name="fluxIdEntete" id="fluxIdEntete" tabindex="5"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Périodicité</td>
-                        <td>
-                            <select name="periodicite" id="periodicite" class="obligatoire" tabindex="10">
+                <div class="container popup_operation">
+					<div class="form-group row">
+						<label for="nomEntete" class="col-sm-6 form-control-label">Titre</label>
+						<div class="col-sm-6">
+							<input class="form-control obligatoire" id="nomEntete" tabindex="1" required="required"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="noReleve" class="col-sm-6 form-control-label">
+							<xsl:value-of select="$LBL.FLUX"/>
+						</label>
+						<div class="col-sm-6">
+							<select class="form-control obligatoire" id="fluxIdEntete" tabindex="5">&#160;</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="noReleve" class="col-sm-6 form-control-label">Périodicité</label>
+						<div class="col-sm-6">
+							<select name="periodicite" id="periodicite" class="form-control obligatoire" tabindex="10" required="required">
                                 <option/>
                                 <option value="M">Mensuelle</option>
                                 <option value="T1">Trimestre début</option>
                                 <option value="T3">Trimestre fin</option>
                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <xsl:value-of select="$LBL.MONTANT"/>
-                        </td>
-                        <td>
-                            <input size="7" name="montant" id="montant" class="numerique_obligatoire"
-                                   onblur="return isDouble(this);" tabindex="15"/>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2" align="center">
-                            <input type="submit" class="bouton" id="" name="" value="{$LBL.MODIFIER}" tabindex="30"/>
-                        </td>
-                    </tr>
-                </table>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="fluxId" class="col-sm-6 form-control-label">
+							<xsl:value-of select="$LBL.MONTANT"/>
+						</label>
+						<div class="col-sm-6">
+							<input size="7" id="montantPeriode" class="form-control obligatoire" type="text" tabindex="15" required="required" onblur="return isDouble(this);"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group row">
+							<div class="col-sm-offset-5 col-sm-5">
+								<button type="submit" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
+							</div>
+						</div>
+					</div>
+				</div>
             </form>
         </div>
     </xsl:template>
@@ -225,7 +215,7 @@
                     <tfoot>
                         <tr>
                             <td style="text-align:center;" colspan="3">
-                                <input type="submit" class="bouton" id="" name="" value="{$LBL.MODIFIER}"/>
+                                <input type="submit" class="bouton" id="" value="{$LBL.MODIFIER}"/>
                             </td>
                         </tr>
                     </tfoot>

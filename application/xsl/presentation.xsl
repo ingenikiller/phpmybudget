@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!--regle principal-->
 	<xsl:template match="/">
-		<html>
+		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;</xsl:text>
+		<html lang="fr">
 			<xsl:call-template name="Header">
 				<xsl:with-param name="HeadTitre"><xsl:value-of select="/root/titre"/></xsl:with-param>
 			</xsl:call-template>
-			<body>
+			<body lang="fr">
 				<xsl:attribute name="onload">
 					<xsl:call-template name="onLoadTemplate"/>
 				</xsl:attribute>
@@ -19,13 +21,12 @@
 					<xsl:call-template name="menu">
 						<xsl:with-param name="niveau1"><xsl:value-of select="/root/titre"/></xsl:with-param>
 					</xsl:call-template>
-					<br/>
 				</xsl:if>
 				<!-- affichage du contenu -->
 				<div class="container contenu">
 					<xsl:choose>
 						<xsl:when test="$affMenu='O'">
-							<xsl:attribute name="class">container contenu marge</xsl:attribute>
+							<xsl:attribute name="class">container contenu</xsl:attribute>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:attribute name="class">container contenu</xsl:attribute>
@@ -36,19 +37,7 @@
 			</body>
 		</html>
 	</xsl:template>
-	<!-- template entete -->
-	<xsl:template name="entete">
-		<!-- banniere -->
-		<xsl:call-template name="banniere"/>
-		<!-- menu -->
-		<xsl:variable name="affMenu">
-			<xsl:call-template name="controleMenu"/>
-		</xsl:variable>
-		<xsl:if test="$affMenu='O'">
-			<xsl:call-template name="menu"/>
-		</xsl:if>
-	</xsl:template>
-	<!--header de la domaine-->
+	<!--header de la page-->
 	<xsl:template name="Header">
 		<xsl:param name="HeadTitre"/>
 		<head>
@@ -61,10 +50,12 @@
 			<meta http-equiv="X-UA-Compatible" content="IE=8"/>
 			<title>
 				<xsl:choose>
-				<xsl:when test="$HeadTitre!=''">
-					<xsl:value-of select="$HeadTitre"/>
-				</xsl:when>
-					<xsl:value-of select="'PhpMyBudget'"/>
+					<xsl:when test="$HeadTitre!=''">
+						<xsl:value-of select="$HeadTitre"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="'PhpMyBudget'"/>
+					</xsl:otherwise>
 				</xsl:choose>
 			</title>
 			
@@ -73,20 +64,20 @@
 
 			<link href="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 			
-			<script type="text/javascript" src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/external/jquery/jquery.js" charset="iso-8859-1">&#160;</script>
-			<script type="text/javascript" src="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/js/bootstrap.min.js" charset="iso-8859-1">&#160;</script>
-			<script type="text/javascript" src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.js" charset="iso-8859-1">&#160;</script>
+			<script type="text/javascript" src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/external/jquery/jquery.js" charset="UTF-8">&#160;</script>
+			<script type="text/javascript" src="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/js/bootstrap.min.js" charset="UTF-8">&#160;</script>
+			<script type="text/javascript" src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.js" charset="UTF-8">&#160;</script>
 
-			<script type="text/javascript" src="front/js/commun.js" charset="iso-8859-1">&#160;</script>
-			<script type="text/javascript" src="front/js/communFormulaire.js" charset="iso-8859-1">&#160;</script>
-			<script type="text/javascript" src="front/js/dateFormat.js" charset="iso-8859-1">&#160;</script>
-			<script type="text/javascript" src="front/js/communJson.js" charset="iso-8859-1">&#160;</script>
-			<script type="text/javascript" src="front/core/session.js" charset="iso-8859-1">&#160;</script>
-			<script type="text/javascript" src="front/js/core_ajax.js" charset="iso-8859-1">&#160;</script>
+			<script type="text/javascript" src="front/js/commun.js" charset="UTF-8">&#160;</script>
+			<script type="text/javascript" src="front/js/communFormulaire.js" charset="UTF-8">&#160;</script>
+			<script type="text/javascript" src="front/js/dateFormat.js" charset="UTF-8">&#160;</script>
+			<script type="text/javascript" src="front/js/communJson.js" charset="UTF-8">&#160;</script>
+			<script type="text/javascript" src="front/core/session.js" charset="UTF-8">&#160;</script>
+			<script type="text/javascript" src="front/js/core_ajax.js" charset="UTF-8">&#160;</script>
 			
 			<!-- plugins -->
 			<link href="front/css/jquery.multiselect.css" rel="stylesheet" type="text/css"/>
-			<script type="text/javascript" src="front/js/jquery.multiselect.js" charset="iso-8859-1">&#160;</script>
+			<script type="text/javascript" src="front/js/jquery.multiselect.js" charset="UTF-8">&#160;</script>
 
 			<link href="front/css/bootstrap-force.css" rel="stylesheet" type="text/css"/>
 			<link href="front/css/phpmybudget.css" rel="stylesheet" type="text/css"/>
@@ -96,8 +87,11 @@
 	<!-- banniere -->
 	<xsl:template name="menu">
 		<xsl:param name="niveau1"/>
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-			<div class="container">
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-10">
+		
+		<nav class="navbar navbar-default" role="navigation">
+			
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span>
@@ -145,8 +139,10 @@
 						</li>
 					</ul>
 				</div>
-			</div>
+			
 		</nav>
+			</div>
+			</div>
 	</xsl:template>
 	<xsl:template name="controleMenu">O</xsl:template>
 	<xsl:template name="onLoadTemplate"/>

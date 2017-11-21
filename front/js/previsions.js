@@ -10,6 +10,13 @@ $(document).ready(function() {
 		refreshWindow();
 	});
 	
+	/*$( "#montantPeriode" ).spinner({
+      culture: "en-EN",
+	  step: 0.01,
+      numberFormat: "n"
+    });*/
+	
+	
 	//
 	refreshWindow();
 	/*afficheEstimation('estimation', $('#numeroCompte').val());
@@ -90,7 +97,6 @@ function afficheUnitaire(compte, idLigne){
 	}
 	$("div#boite").dialog({
             resizable: false,
-            height:190,
             width:620,
             modal: true
             });
@@ -140,12 +146,12 @@ function afficheEntete(compte) {
 	document.editionEnteteUnitaire.fluxIdEntete.value='';
 	document.editionEnteteUnitaire.periodicite.value='';
 	document.editionEnteteUnitaire.nomEntete.value='';
-	document.editionEnteteUnitaire.montant.value='';
+	document.editionEnteteUnitaire.montantPeriode.value='';
 	document.editionEnteteUnitaire.ligneId.value='';
 
 	$("div#boiteEntete").dialog({
 		resizable: false,
-		width:400,
+		width:620,
 		modal: true
 	});
 }
@@ -156,9 +162,9 @@ function afficheEntete(compte) {
  ***********************************************************************/
 function creerEntete(form) {
 	
-	if(!validForm(form)) {
+	/*if(!validForm(form)) {
 		return false;
-	}
+	}*/
 	
 	$.getJSON({ 
 		url: "index.php?domaine=previsionentete&service="+form.service.value,
@@ -169,7 +175,7 @@ function creerEntete(form) {
 				'nomEntete': form.nomEntete.value,
 				'annee': $('#annee').val(),
 				'periodicite': $('#periodicite').val(),
-				'montant': form.montant.value,
+				'montant': form.montantPeriode.value,
 				'annee': $('#annee').val()
 		}, 
 		success: function(retour) { 

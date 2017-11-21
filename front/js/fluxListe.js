@@ -158,7 +158,7 @@ function editerFlux(fluxId){
 	
 	$("div#boiteFlux").dialog({
 			resizable: false,
-			height:450,
+			//height:450,
 			width:620,
 			modal: true
 		});

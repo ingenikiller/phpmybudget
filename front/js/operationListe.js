@@ -6,37 +6,9 @@ var listeRecFlux='';
 
 $(document).ready(function() {
 	afficheFluxSelectMulti('recFlux', $('#numeroCompte').val(), '');
-	/*var ms = $('#recFlux').magicSuggest({
-				placeholder:'Liste des flux',
-				id:'testFluxId',
-				data: function(q){
-						var retour = getListeFlux('comptePrincipal='+$('#numeroCompte').val()+'&fluxMaitre=N&flux='+q);
-						return retour[0].tabResult;
-				},
-				allowFreeEntries: false,
-				valueField: 'fluxId',
-				displayField: 'flux'
-	});
-
-	$(ms).on('selectionchange', function(e,m){
-		listeRecFlux= this.getValue();
-	});*/
-	
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 	getSoldeCompte($('#numeroCompte').val(), 'solde');
 	listerObjects();
-	
-	/*$('#recFlux').multiselect({
-		columns: 1,
-		placeholder: 'Select States',
-		search: true,
-		searchOptions: {
-			'default': 'Search States'
-		},
-		selectAll: true
-	});*/
-	
-	
 });
 
 /**
@@ -44,7 +16,6 @@ $(document).ready(function() {
 */
  $(function() {
 	$( "#date" ).datepicker();
-	//$( "#date" ).datepicker( "option", "dateFormat", "yyyy-mm-dd" );
 	$.datepicker.regional['fr'] = {
 			closeText: 'Fermer',
 			prevText: '&#x3c;Pr?c',
@@ -65,7 +36,7 @@ $(document).ready(function() {
 			yearSuffix: ''};
 	$.datepicker.setDefaults($.datepicker.regional['fr']);
 	$( "#date" ).datepicker();
-	$( "#date" ).datepicker();
+	
 	$( "#recDate" ).datepicker();
 });
 
@@ -103,8 +74,6 @@ $(function() {
 function editerOperation(numeroCompte, operationId){
 
 	var params = "numeroCompte="+numeroCompte;
-
-	var hauteur = 370;
 	var largeur = 620;
 
 	if(operationId!='') {
@@ -126,7 +95,6 @@ function editerOperation(numeroCompte, operationId){
 
 				$("div#boiteOperation").dialog({
 					resizable: false,
-					height:hauteur,
 					width:largeur,
 					modal: true
 				});
@@ -140,11 +108,9 @@ function editerOperation(numeroCompte, operationId){
 		document.operation.montant.value='';
 		document.operation.fluxId.value='';
 		document.operation.modePaiementId.value='';
-		//document.operation.date.value=;
 
 		$("div#boiteOperation").dialog({
 			resizable: false,
-			height:hauteur,
 			width:largeur,
 			modal: true
 		});
@@ -165,6 +131,8 @@ function rechercherOperations(form){
 	exécute une requete Json et alimente le tableau des t?sultats
 */
 function listerObjects(){
+
+	$('#numeroPage').val($.isNumeric($('#numeroPage').val())? $('#numeroPage').val():1);
 
 	var params = "numeroCompte="+$('#numeroCompte').val()+'&numeroPage='+$('#numeroPage').val();
 	if($('#recFlux').val()!='' && $('#recFlux').val()!=null) {

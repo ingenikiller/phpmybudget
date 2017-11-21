@@ -3,12 +3,9 @@
     <xsl:import href="template_name.xsl"/>
     <xsl:import href="commun.xsl"/>
     <xsl:template name="js.module.sheet">
-        <script language="JavaScript" src="front/js/compteEdition.js" type="text/javascript"/>
+        <script type="text/javascript" src="front/js/compteEdition.js" charset="iso-8859-1">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
-        <xsl:call-template name="compteEdition"/>
-        <br/>
-        <br/>
         <div class="row">
             <div class="col-lg-offset-1 col-lg-10">
 
@@ -58,7 +55,6 @@
                 </xsl:call-template>
             </div>
         </div>
-        <br/>
-        <br/>
+        <xsl:call-template name="compteEdition"/>
     </xsl:template>
 </xsl:stylesheet>

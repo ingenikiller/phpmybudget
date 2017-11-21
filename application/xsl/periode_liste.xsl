@@ -31,14 +31,12 @@
                                     <xsl:value-of select="$LBL.ANNEE"/>
                                 </label>
                                 <div class="col-sm-6">
-                                    <input class="form-control obligatoire" type="text" name="nouvelleannee"
-                                           id="nouvelleannee" size="4" maxlength="4"/>
+                                    <input class="form-control obligatoire" type="text" name="nouvelleannee" id="nouvelleannee" size="4" maxlength="4"/>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-4"/>
                                 <div class="form-group row">
-                                    <div class="col-sm-offset-5 col-sm-5">
+                                    <div class="col-sm-offset-4 col-sm-4" style="text-align:center;">
                                         <button type="submit" class="btn btn-primary">
                                             <xsl:value-of select="$LBL.CREER"/>
                                         </button>
@@ -53,6 +51,6 @@
         </div>
     </xsl:template>
     <xsl:template name="js.module.sheet">
-        <script language="JavaScript" src="front/js/periodeListe.js" type="text/javascript"/>
+        <script type="text/javascript" src="front/js/periodeListe.js" charset="iso-8859-1">&#160;</script>
     </xsl:template>
 </xsl:stylesheet>

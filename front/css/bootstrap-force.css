@@ -1,15 +1,15 @@
 
 
 body {
-	font-size : 10px;
+	font-size : 14px;
 	background-color: #DADADA;
 }
 
-/*.navbar-brand */
+
 .navbar-default {
 	background-color: #3474f6;
-	/*color: #FFFFFF;*/
 	background-image: -webkit-linear-gradient(top,#3474f6 0,#3474f6 100%);
+	margin-bottom:0px;
 }
 
 .nav.navbar-nav.navbar-right li a {
@@ -30,8 +30,7 @@ body {
 }
 
 .row {
-	font-size : 10px;
-	/*background-color: #FFFFFF;*/
+	font-size : 14px;
 }
 
 .table-striped > tbody > tr:nth-of-type(2n+1) {
@@ -40,7 +39,6 @@ body {
 
 .form-control {
 	font-size : 10px;
-	/*height: 24px;*/
 	padding: 0px 0px 0px 12px;
 }
 
@@ -52,10 +50,6 @@ body {
 	width : 0;
 }
 
-
-.btn {
-	/*font-size : 12px;*/
-}
 
 label {
 	padding-top: 5px;
@@ -71,9 +65,6 @@ label {
 }
 
 fieldset {
-	/*border: 1px solid #c0c0c0;*/
-	/*margin: 0 2px;
-	padding: 0.35em 0.625em 0.75em;*/
 	background-color : #E6E6E6;
 }
 

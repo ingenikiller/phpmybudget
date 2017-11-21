@@ -4,7 +4,7 @@
 	<xsl:import href="statistiques_commun.xsl"/>
 	<xsl:import href="template_name.xsl"/>
 	<xsl:template name="js.module.sheet">
-		<script language="JavaScript" src="front/js/statistiques.js" type="text/javascript"/>
+		<script type="text/javascript" src="front/js/statistiques.js" charset="iso-8859-1">&#160;</script>
 	</xsl:template>
 	<xsl:template name="controleMenu">N</xsl:template>
 	<xsl:template name="Contenu">
@@ -13,8 +13,7 @@
 				<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
 			</div>
 			<div class="row">
-				<div class="col-xs-4"/>
-				<div class="col-xs-4">
+				<div class="col-xs-offset-4 col-xs-4">
 					<form class="form-group row"  method="POST" action="#" onsubmit="return soumettreRelevesAnnee(this);" name="formulaire" id="formulaire">
 						<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
 						<fieldset>
@@ -46,7 +45,7 @@
 				</div>
 			</div>
 		<center>
-			<table id="tableResultat" name="tableResultat" class="table table-bordered"  table-hover=""/>
+			<table id="tableResultat" class="table table-bordered"/>
 		</center>
 	</xsl:template>
 	<xsl:template match="ListeAnnee">
