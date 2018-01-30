@@ -99,7 +99,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
     	
     	$liste = new ListObject();
     	$liste->name='PrevisionListe';
-    	$liste->request('Prevision', "noCompte='$numeroCompte' AND fluxId='$fluxId' AND annee='$annee' AND typenr='L'");
+    	$liste->request('Prevision', "noCompte='$numeroCompte' AND fluxId='$fluxId' AND annee='$annee' AND typenr='L'  ORDER BY mois");
     	
     	$p_contexte->addDataBlockRow($liste);
     }
