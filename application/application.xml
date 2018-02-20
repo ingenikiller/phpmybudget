@@ -17,7 +17,8 @@
 			<service name="update" classe="GestionFluxService" methode="update" render="json" isPrivee="true"/>
 		</domaine>
 		<domaine name="operation">
-			<service name="getpage" classe="GestionOperationService" methode="getPage" isPrivee="false"  xsl="xsl/operation_liste.xsl" paramFlow="MODPAI"/>
+			<service name="getpage" classe="GestionOperationService" methode="getPage" isPrivee="false" xsl="xsl/operation_liste.xsl" paramFlow="MODPAI"/>
+			<service name="getsoldeoperation" classe="GestionOperationService" methode="getSoldeOperation" isPrivee="true" render="json"/>
 			<service name="reclibelle" classe="GestionOperationService" methode="recLibelle" render="json" isPrivee="false"/>
 			<service name="getliste" classe="GestionOperationService" methode="gesListe" render="json" isPrivee="true"/>
 			<service name="getone" classe="GestionOperationService" methode="gesListe" render="json" isPrivee="true"/>
@@ -29,7 +30,6 @@
 			<service name="create" classe="GestionPeriodeService" render="json" methode="create" isPrivee="true"/>
 			<service name="getliste" classe="GestionPeriodeService" render="json" methode="getListe" isPrivee="true"/>
 		</domaine>
-
 		<domaine name="previsionentete">
 			<service name="getone" classe="GestionPrevisionEnteteService" methode="getOne" render="json" isPrivee="true"/>
 			<service name="getlisteentete" classe="GestionPrevisionEnteteService" methode="getListeEntete" render="json" isPrivee="true"/>
@@ -37,35 +37,35 @@
 			<service name="update" classe="GestionPrevisionEnteteService" methode="update" render="json" isPrivee="true"/>
 		</domaine>
 		<domaine name="prevision">
-			<service name="defaut" classe="GestionPrevisionService" methode="getPage" isPrivee="true"  xsl="xsl/previsions_liste.xsl" />
+			<service name="defaut" classe="GestionPrevisionService" methode="getPage" isPrivee="true" xsl="xsl/previsions_liste.xsl"/>
 			<service name="estimationreste" classe="GestionPrevisionService" methode="estimationReste" isPrivee="true" render="json"/>
-			<service name="getlisteannee" classe="GestionPrevisionService" methode="getListeAnnee" isPrivee="true"  xsl="xsl/prevision_detail.xsl" />
+			<service name="getlisteannee" classe="GestionPrevisionService" methode="getListeAnnee" isPrivee="true" xsl="xsl/prevision_detail.xsl"/>
 			<service name="getone" classe="GestionPrevisionService" methode="getOne" render="json" isPrivee="true"/>
 			<service name="create" classe="GestionPrevisionService" methode="create" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionPrevisionService" methode="update" render="json" isPrivee="true"/>
 			<service name="equilibrerprevision" classe="GestionPrevisionService" methode="equilibrerPrevision" render="json" isPrivee="true"/>
 		</domaine>
 		<domaine name="segment">
-			<service name="defaut" classe="GestionSegmentService" methode="fictive" isPrivee="true"  xsl="xsl/segments_liste.xsl" />
+			<service name="defaut" classe="GestionSegmentService" methode="fictive" isPrivee="true" xsl="xsl/segments_liste.xsl"/>
 			<service name="getsegment" classe="GestionSegmentService" methode="getSegment" render="json" isPrivee="true"/>
 			<service name="getone" classe="GestionSegmentService" methode="getOne" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionSegmentService" methode="update" render="json" isPrivee="true"/>
 		</domaine>
 		<domaine name="statistique">
-			<service name="defaut" classe="GestionStatistiquesService" methode="fictive" isPrivee="true"  xsl="xsl/statistiques_menu.xsl" />
-			<service name="menu" classe="GestionStatistiquesService" methode="fictive" isPrivee="true"  xsl="xsl/statistiques_menu.xsl" />
-			<service name="affformreleves" classe="GestionStatistiquesService" methode="affFormReleves" isPrivee="true"  xsl="xsl/statistiques_releves_form.xsl" />
-			<service name="statreleves" classe="GestionStatistiquesService" methode="statReleves" isPrivee="true"  xsl="xsl/statistiques_releves.xsl" />
-			<service name="affformmois" classe="GestionStatistiquesService" methode="affFormMois" isPrivee="true"  xsl="xsl/statistiques_mois_form.xsl" />
-			<service name="statmois" classe="GestionStatistiquesService" methode="statMois" isPrivee="true"  xsl="xsl/statistiques_mois.xsl" />
-			<service name="affformannees" classe="GestionStatistiquesService" methode="affFormMois" isPrivee="true"  xsl="xsl/statistiques_annees_form.xsl" />
-			<service name="statannees" classe="GestionStatistiquesService" methode="statAnnees" isPrivee="true"  xsl="xsl/statistiques_annees.xsl" />
-			<service name="affformcumul" classe="GestionStatistiquesService" methode="affFormCumul" isPrivee="true"  xsl="xsl/statistiques_cumul_form.xsl" />
-			<service name="statcumul" classe="GestionStatistiquesService" methode="statCumul" isPrivee="true"  xsl="xsl/statistiques_cumul.xsl" />
-			<service name="affformperiode" classe="GestionStatistiquesService" methode="fictive" isPrivee="true"  xsl="xsl/statistiques_periode_form.xsl" />
+			<service name="defaut" classe="GestionStatistiquesService" methode="fictive" isPrivee="true" xsl="xsl/statistiques_menu.xsl"/>
+			<service name="menu" classe="GestionStatistiquesService" methode="fictive" isPrivee="true" xsl="xsl/statistiques_menu.xsl" />
+			<service name="affformreleves" classe="GestionStatistiquesService" methode="affFormReleves" isPrivee="true" xsl="xsl/statistiques_releves_form.xsl"/>
+			<service name="statreleves" classe="GestionStatistiquesService" methode="statReleves" isPrivee="true" xsl="xsl/statistiques_releves.xsl"/>
+			<service name="affformmois" classe="GestionStatistiquesService" methode="affFormMois" isPrivee="true" xsl="xsl/statistiques_mois_form.xsl"/>
+			<service name="statmois" classe="GestionStatistiquesService" methode="statMois" isPrivee="true" xsl="xsl/statistiques_mois.xsl"/>
+			<service name="affformannees" classe="GestionStatistiquesService" methode="affFormMois" isPrivee="true" xsl="xsl/statistiques_annees_form.xsl"/>
+			<service name="statannees" classe="GestionStatistiquesService" methode="statAnnees" isPrivee="true" xsl="xsl/statistiques_annees.xsl"/>
+			<service name="affformcumul" classe="GestionStatistiquesService" methode="affFormCumul" isPrivee="true" xsl="xsl/statistiques_cumul_form.xsl"/>
+			<service name="statcumul" classe="GestionStatistiquesService" methode="statCumul" isPrivee="true" xsl="xsl/statistiques_cumul.xsl"/>
+			<service name="affformperiode" classe="GestionStatistiquesService" methode="fictive" isPrivee="true" xsl="xsl/statistiques_periode_form.xsl"/>
 		</domaine>
 		<domaine name="technique">
-			<service name="login" classe="Login" methode="fictive" isPrivee="false"  xsl="xsl/login.xsl" privee="false"/>
+			<service name="login" classe="Login" methode="fictive" isPrivee="false" xsl="xsl/login.xsl" privee="false"/>
 			<service name="connexion" classe="Login" methode="connexion" isPrivee="false" render="json"/>
 			<service name="deconnexion" classe="Login" methode="deconnexion" isPrivee="false" render="json"/>
 			<service name="gentables" classe="GenerateurService" methode="create" isPrivee="false"  xsl="xsl/login.xsl" privee="false"/>

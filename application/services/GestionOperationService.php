@@ -81,7 +81,6 @@ class GestionOperationService extends ServiceStub{
     }
 
 	public function recLibelle(ContextExecution $p_contexte){
-
 		$numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
 		$debLibelle = $p_contexte->m_dataRequest->getData('debLibelle');
 		$requete="SELECT distinct operation.libelle AS libelle FROM operation WHERE operation.nocompte='$numeroCompte' AND libelle LIKE concat('$debLibelle', '%')";
@@ -99,6 +98,34 @@ class GestionOperationService extends ServiceStub{
 		$p_contexte->addDataBlockRow($compte);
         $p_contexte->setTitrePage('Opérations sur ' .$compte->libelle. ' ('. $numeroCompte .')');
 	}
+	
+	public function getSoldeOperation(ContextExecution $p_contexte){
+		$userid = $p_contexte->getUser()->userId;
+		$numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
+		$operationId = $p_contexte->m_dataRequest->getData('operationId');
+		$operation = new Operation();
+        $operation->operationId=$operationId;
+        $operation->load();
+		
+		$compte=new Comptes();
+		$compte->userId=$userid;
+		$compte->numeroCompte=$numeroCompte;
+		$compte->load();
+		
+		$requete = "SELECT SUM(montant) as total FROM operation WHERE 1=1 
+				AND nocompte='$numeroCompte' 
+				AND (date = '$operation->date' AND operationid<$operationId OR date < '$operation->date')";
+		$dyn = new ListDynamicObject();
+		$dyn->name = 'SommeOperations';
+		$dyn->request($requete);
+		$tab = $dyn->getData();
+		 
+		$reponse = new ReponseAjax();
+		$reponse->status='OK';
+		$reponse->valeur = $compte->solde + $tab[0]->total + $operation->montant;
+		$p_contexte->addDataBlockRow($reponse);
+	}
+	
 }
 
 ?>

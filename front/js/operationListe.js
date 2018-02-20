@@ -1,4 +1,4 @@
-/*
+/**
 	chargement de la page
 */
 
@@ -45,21 +45,20 @@ $(document).ready(function() {
 */
 $(function() {
 	$('#libelle').autocomplete({
-		source : function(requete, reponse){ // les deux arguments représentent les donn?es n?cessaires au plugin
+		source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
 		$.ajax({
 			url : 'index.php?domaine=operation&service=reclibelle', // on appelle le script JSON
-			dataType : 'json', // on spécifie bien que le type de données est en JSON
-			data : {
-			debLibelle : $('#libelle').val(), // on donne la cha?ne de caractère tapée dans le champ de recherche
-			mode : 'libelleOperation',
-			numeroCompte : document.getElementById('numeroCompte').value,
-			maxRows : 15
-		},
-
+				dataType : 'json', // on spécifie bien que le type de données est en JSON
+				data : {
+				debLibelle : $('#libelle').val(), // on donne la chaîne de caractère tapée dans le champ de recherche
+				mode : 'libelleOperation',
+				numeroCompte : document.getElementById('numeroCompte').value,
+				maxRows : 15
+			},
 			success : function(donnee){
 				reponse($.map(donnee[0].tabResult, function(objet){
 					return objet.libelle; // on retourne cette forme de suggestion
-			}));
+				}));
 			}
 		});
 	},
@@ -78,7 +77,6 @@ function editerOperation(numeroCompte, operationId){
 
 	if(operationId!='') {
 		params+="&operationId="+operationId;
-
 
 		$.getJSON(
 			"index.php?domaine=operation&service=getone",
@@ -120,7 +118,7 @@ function editerOperation(numeroCompte, operationId){
 }
 
 /*
-	r?initialise le formulaire de recherche pour lancer une nouvelle recherche
+	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
 */
 function rechercherOperations(form){
 	listerObjects();
@@ -128,7 +126,7 @@ function rechercherOperations(form){
 }
 
 /*
-	exécute une requete Json et alimente le tableau des t?sultats
+	exécute une requête Json et alimente le tableau des résultats
 */
 function listerObjects(){
 
@@ -146,7 +144,7 @@ function listerObjects(){
 		params+="&recMontant="+$('#recMontant').val();
 	}
 
-	//appel synchrone de l'ajax
+	//appel synchrone du service
 	$.ajax({
 		url: "index.php?domaine=operation&service=getliste",
 		dataType: 'json',
@@ -159,7 +157,7 @@ function listerObjects(){
 }
 
 /*
-	parse le tableau Json et g?n?re le tableau
+	parse le tableau Json et génère le tableau
 */
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
@@ -187,10 +185,32 @@ function parseListeJson(json) {
 			classeMontant='negatif';
 		}
 
-		row.append($('<td class="text-right '+classeMontant+'"/>').text(tabJson[i].montant.replace(',','')));
+		row.append($('<td class="text-right '+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',','')))));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="glyphicon glyphicon-pencil"/></a>'));
+		row.append($('<td class="text-center"/>').append('<div href="#" class="soldeoperation" ><span class="glyphicon glyphicon-pencil" noCompte="'+ tabJson[i].nocompte +'" operationId="'+ tabJson[i].operationId +'" soldeoperation="O"/></div>'));
+		
 		$("#tbodyResultat").append(row);
 	}
+	
+	$( ".soldeoperation span" ).tooltip({
+		track:true,
+		open: function(evt, ui) {
+			var elem = $(this);
+			var numeroCompte = $(elem).attr('noCompte');
+			var operationId = $(elem).attr('operationId');
+			
+			$.getJSON('index.php?domaine=operation&service=getsoldeoperation&numeroCompte='+numeroCompte+'&operationId='+operationId).always(function(resultat) {
+				elem.tooltip('option', 'content', 'Solde= '+resultat[0].valeur.toFixed(2));
+			 });
+		}
+    });
+	
+	$(".soldeoperation span").mouseout(function(){
+	   $(this).attr('title','Please wait...');
+	   $(this).tooltip();
+	   $('.ui-tooltip').hide();
+	 });
+
 }

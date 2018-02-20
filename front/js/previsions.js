@@ -9,21 +9,10 @@ $(document).ready(function() {
 	$('input:radio[name="radioChoixType"]').on("change", function(event) {
 		refreshWindow();
 	});
-	
-	/*$( "#montantPeriode" ).spinner({
-      culture: "en-EN",
-	  step: 0.01,
-      numberFormat: "n"
-    });*/
-	
-	
+		
 	//
 	refreshWindow();
-	/*afficheEstimation('estimation', $('#numeroCompte').val());
-	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N');
-	afficheFluxSelect('fluxIdEntete', $('#numeroCompte').val(), 'fluxMaitre=N');
-	recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
-	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());*/
+	
 });
 
 
@@ -63,8 +52,7 @@ function refreshWindow() {
 	} else if(flagPinel == 'pinel') {
 		paramPinel='&fluxMaitreId=101';
 	}
-	
-	
+		
 	afficheEstimation('estimation', $('#numeroCompte').val());
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N'+paramPinel);
 	afficheFluxSelect('fluxIdEntete', $('#numeroCompte').val(), 'fluxMaitre=N'+paramPinel);
@@ -81,7 +69,6 @@ function afficheUnitaire(compte, idLigne){
 			"index.php?domaine=prevision&service=getone",
 			{"ligneId": idLigne },
 			function(json){
-				//alert("JSON Data: " +  json.users[3].name);
 				document.editionPrevisionUnitaire.service.value='update';
 				document.editionPrevisionUnitaire.montant.value=json[0].montant;
 				document.editionPrevisionUnitaire.fluxId.value=json[0].fluxId;
@@ -293,6 +280,7 @@ function propagerMontant(btn){
 		success: function(retour) {
 			if(traiteRetourAjax(retour)){
 				affichePrevisions('liste',document.getElementById('annee').value, numeroCompte);
+				afficheEstimation('estimation', $('#numeroCompte').val());
 			}
 			return false;
 		} 

@@ -80,6 +80,9 @@
 							<th class="text-center">
 								<xsl:value-of select="$LBL.ACTION"/>
 							</th>
+							<th class="text-center">
+								<xsl:value-of select="$LBL.SOLDE"/>
+							</th>
 						</tr>
 					</thead>
 					<tbody id="tbodyResultat"/>

@@ -56,12 +56,6 @@ function trim (s)
 	return ltrim(rtrim(s));
 }
 
-
-function submitSupp(p_form) {
-	document.forms[p_form].cinematic.value='delete';
-	document.forms[p_form].submit();
-}
-
 /*********************************************************
  fonction de validation des formulaire
 	- pForm: formulaire à valider
@@ -165,5 +159,12 @@ return _sRetour;
 }
 
 
+function formatMonetaire(montant) {
+	return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(montant);
+}
 
+
+function formatNumerique(montant) {
+	return new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(montant);
+}
 
