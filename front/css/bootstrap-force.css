@@ -6,18 +6,18 @@ body {
 }
 
 
-.navbar-default {
+.navbar {
 	background-color: #3474f6;
 	background-image: -webkit-linear-gradient(top,#3474f6 0,#3474f6 100%);
 	margin-bottom:0px;
 }
 
-.nav.navbar-nav.navbar-right li a {
+/*.nav.navbar-nav.navbar-right li a {
     color: white;
 	font-size : 12px;
-}
+}*/
 
-.navbar-default .navbar-brand {
+/*.navbar-default .navbar-brand {
     color: white;
 	font-size : 18px;
 }
@@ -27,7 +27,8 @@ body {
 	font-size : 18px;
 	margin-right: 3px;
 	margin-left: 3px;
-}
+}*/
+
 
 .row {
 	font-size : 14px;
@@ -39,7 +40,7 @@ body {
 
 .form-control {
 	font-size : 10px;
-	padding: 0px 0px 0px 12px;
+	/* v4 padding: 0px 0px 0px 12px;*/
 }
 
 .form-group {

@@ -19,32 +19,31 @@
 		<script type="text/javascript" src="front/js/statistiques.js" charset="UTF-8">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
-        
-        <div class="row">
-            <div class="col-lg-offset-4">
-				<div class="col-lg-4">
-					<div class="form-group row">
-						<label for="annee" class="col-sm-6 form-control-label">
-							<xsl:value-of select="$LBL.ANNEE"/>
-						</label>
-						<div class="col-sm-6">
-							<select name="annee" id="annee" class="form-control" onchange="refreshWindow()">
-                                <xsl:apply-templates select="/root/data/ListeAnnees/Dynamic">
-                                    <xsl:with-param name="anneeSelect" select="$ANNEE"/>
-                                </xsl:apply-templates>
-                            </select>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div id="radio">
-						<input type="radio" id="radio1" name="radioChoixType" value="complet" checked="checked"/><label for="radio1">Complet</label>
-						<input type="radio" id="radio2" name="radioChoixType" value="pinel"/><label for="radio2">Avec Pinel</label>
-						<input type="radio" id="radio3" name="radioChoixType" value="sans"/><label for="radio3">Sans</label>
+        <div class="row justify-content-md-center">
+			<div class="col">
+				<div class="col col-lg4 form-group">
+					<label for="annee" class="col-sm-4 form-control-label">
+						<xsl:value-of select="$LBL.ANNEE"/>
+					</label>
+					<div class="col-sm-6">
+						<select name="annee" id="annee" class="form-control" onchange="refreshWindow()">
+							<xsl:apply-templates select="/root/data/ListeAnnees/Dynamic">
+								<xsl:with-param name="anneeSelect" select="$ANNEE"/>
+							</xsl:apply-templates>
+						</select>
 					</div>
 				</div>
 			</div>
-            <div class="col-lg-offset-4 col-lg-4">
+			<div class="col">
+				<div id="radio">
+					<input type="radio" id="radio1" name="radioChoixType" value="complet" checked="checked"/><label for="radio1">Complet</label>
+					<input type="radio" id="radio2" name="radioChoixType" value="pinel"/><label for="radio2">Avec Pinel</label>
+					<input type="radio" id="radio3" name="radioChoixType" value="sans"/><label for="radio3">Sans</label>
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+            <div class="row justify-content-md-center">
                 <table class="table table-bordered">
 					<tr>
                         <th>
@@ -52,7 +51,7 @@
 						</th>
 						<td>
                             <input type="button" id="boutonEntete" name="boutonEntete" value="Entete" onclick="afficheEntete('{$NUMEROCOMPTE}');"/>
-                            <select name="listeEntete" id="listeEntete" onchange="afficheListeGroupe(this.value)">&#160;</select>
+                            <!--select name="listeEntete" id="listeEntete" onchange="afficheListeGroupe(this.value)">&#160;</select-->
                         </td>
                     </tr>
                     <tr>
@@ -91,54 +90,47 @@
     </xsl:template>
     <xsl:template name="boiteUnitaire">
         <div id="boite" title="{$LBL.EDITIONPREVISION}" style="display: none;">
-            <form method="POST" name="editionPrevisionUnitaire" id="editionPrevisionUnitaire" action="index.php"
-                  onsubmit="return modifierPrevision(this)">
+            <form method="POST" name="editionPrevisionUnitaire" id="editionPrevisionUnitaire" action="index.php" onsubmit="return modifierPrevision(this)">
                 <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
                 <input type="hidden" id="typenr" name="typenr" value="L"/>
                 <input type="hidden" id="ligneId" name="ligneId" value=""/>
                 <input type="hidden" id="service" name="service"/>
-                <div class="container popup_operation">
-                    <div class="col-lg-12">
-                        <div class="form-group row">
-                            <label for="noReleve" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.FLUX"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <select class="form-control obligatoire" name="fluxId" id="fluxId" tabindex="5">&#160;</select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="date" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.PERIODE"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <select name="mois" id="mois" tabindex="10" class="form-control">
-                                    <option/>
-                                    <xsl:for-each select="/root/data/ListePeriodes/Periode">
-                                        <option value="{periode}">
-                                            <xsl:value-of select="periode"/>
-                                        </option>
-                                    </xsl:for-each>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="fluxId" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.MONTANT"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <input size="7" name="montant" id="montant" class="form-control obligatoire"
-                                       onblur="return isDouble(this);" tabindex="15"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group row">
-                                <div class="col-sm-offset-5 col-sm-5">
-                                    <button type="submit" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="container popup_operation">                  
+					<div class="form-group row">
+						<label for="fluxId" class="col-sm-6 form-control-label">
+							<xsl:value-of select="$LBL.FLUX"/>
+						</label>
+						<div class="col-sm-6">
+							<select class="form-control obligatoire" name="fluxId" id="fluxId" tabindex="5">&#160;</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="mois" class="col-sm-6 form-control-label">
+							<xsl:value-of select="$LBL.PERIODE"/>
+						</label>
+						<div class="col-sm-6">
+							<select name="mois" id="mois" tabindex="10" class="form-control">
+								<option/>
+								<xsl:for-each select="/root/data/ListePeriodes/Periode">
+									<option value="{periode}">
+										<xsl:value-of select="periode"/>
+									</option>
+								</xsl:for-each>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="fluxId" class="col-sm-6 form-control-label">
+							<xsl:value-of select="$LBL.MONTANT"/>
+						</label>
+						<div class="col-sm-6">
+							<input size="7" name="montant" id="montant" class="form-control obligatoire"
+								   onblur="return isDouble(this);" tabindex="15"/>
+						</div>
+					</div>
+					<div class="row justify-content-md-center">
+						<button type="submit" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
+					</div>
                 </div>
             </form>
         </div>
@@ -185,12 +177,8 @@
 							<input size="7" id="montantPeriode" class="form-control obligatoire" type="text" tabindex="15" required="required" onblur="return isDouble(this);"/>
 						</div>
 					</div>
-					<div class="row">
-						<div class="form-group row">
-							<div class="col-sm-offset-5 col-sm-5">
-								<button type="submit" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
-							</div>
-						</div>
+					<div class="row justify-content-md-center">
+						<button type="submit" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
 					</div>
 				</div>
             </form>

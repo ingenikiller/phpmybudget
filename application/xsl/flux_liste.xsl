@@ -22,7 +22,7 @@
 						</div>
 						<div class="btn-group" role="group" aria-label="Third group" style="float:right;">
 							<button type="button" class="btn btn-primary" id="" name="" onclick="editerFlux('');" style="font-size:20px;">
-								<span class="glyphicon glyphicon-plus"/>
+								<span class="oi oi-plus"/>
 							</button>
 						</div>
 
@@ -161,12 +161,8 @@
 							</div>
 						</div>
 						
-						<div class="row">
-							<div class="form-group row">
-								<div class="col-sm-offset-4 col-sm-4" style="text-align:center;">
-									<button type="submit" class="btn btn-primary">Enregristrer</button>
-								</div>
-							</div>
+						<div class="row justify-content-md-center">
+							<button type="submit" class="btn btn-primary">Enregristrer</button>
 						</div>
 					</div>
 				</div>

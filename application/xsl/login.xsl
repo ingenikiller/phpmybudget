@@ -10,16 +10,16 @@
         <br/>
         <br/>
         <br/>
-        <form method="post" id="formconnexion">
-            <div class="row">
-                <div class="col-sm-offset-4 col-xs-4">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4">
+				<form method="post" id="formconnexion">
                     <fieldset>
                         <legend>
                             <xsl:value-of select="$LBL.LOGIN"/>
                         </legend>
                         <br/>
                         <div class="form-group row">
-                            <label for="nom" class="col-sm-6 form-control-label">
+                            <label for="nom" class="col-sm-6 col-form-label">
                                 <xsl:value-of select="$LBL.LOGIN"/>
                             </label>
                             <div class="col-sm-6">
@@ -35,8 +35,8 @@
                             </div>
                         </div>
 						<br/>
-                        <div class="form-group row">
-                            <div class="col-sm-offset-4 col-sm-4">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-auto">
                                 <button type="submit" class="btn btn-primary">
 									<xsl:value-of select="$LBL.SECONNECTER"/>
 								</button>
@@ -44,9 +44,9 @@
                         </div>
                         <br/>
                     </fieldset>
-                </div>
-            </div>
-        </form>
+				</form>
+			</div>
+		</div>
         <br/>
         <br/>
         <br/>

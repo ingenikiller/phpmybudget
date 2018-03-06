@@ -17,7 +17,7 @@
 			<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
 				<xsl:call-template name="formulaireJson"/>
 				<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
-				<aside class="col-sm-2 formulaire">
+				<aside class="col formulaire">
 					<br/>
 					<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 						<div class="btn-group" role="group" aria-label="First group">
@@ -26,7 +26,7 @@
   
 						<div class="btn-group" role="group" aria-label="Third group" style="float:right;">
 							<button type="button" class="btn btn-primary" id="" name="" onclick="editerOperation('{$NUMEROCOMPTE}','');" style="font-size:20px;">
-								<span class="glyphicon glyphicon-plus"/>
+								<span class="oi oi-plus"/>
 							</button>
 						</div>
 					</div>
@@ -47,7 +47,7 @@
 						<label for="recFlux" class="form-control-label">
 							<xsl:value-of select="$LBL.FLUX"/>
 						</label>
-						<select name="recFlux" id="recFlux" class="form-control"  multiple="multiple">&#160;</select>
+						<select name="recFlux" id="recFlux" class="form-control" multiple="multiple">&#160;</select>
 					</div>
 					<div class="form-group">
 						<label for="recMontant" class="form-control-label">
@@ -58,7 +58,7 @@
 					<br/>
 				</aside>
 			</form>
-			<div class="col-sm-10">
+			<div class="col-10">
 				<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
 					<thead>
 						<tr>

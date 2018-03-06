@@ -1,4 +1,4 @@
-/*********************************************************
+ï»¿/*********************************************************
 	fonction d'init
  *********************************************************/
 $(document).ready(function() {
@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 
 /*********************************************************
-	affiche les prévisions de l'année
+	affiche les prÃ©visions de l'annÃ©e
  *********************************************************/
 function affichePrevisions(idTableau, periode, numeroCompte) {
 	
@@ -38,7 +38,7 @@ function affichePrevisions(idTableau, periode, numeroCompte) {
 }
 
 /*********************************************************
-	recharge la fenêtre au changement d'année
+	recharge la fenÃªtre au changement d'annÃ©e
  *********************************************************/
 function refreshWindow() {
 	//document.location.href='index.php?domaine=prevision&numeroCompte='+$('#numeroCompte').val()+'&annee='+$('#annee').val();
@@ -53,15 +53,15 @@ function refreshWindow() {
 		paramPinel='&fluxMaitreId=101';
 	}
 		
+	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
 	afficheEstimation('estimation', $('#numeroCompte').val());
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N'+paramPinel);
 	afficheFluxSelect('fluxIdEntete', $('#numeroCompte').val(), 'fluxMaitre=N'+paramPinel);
-	recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
-	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
+	//recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
 }
 
 /*********************************************************
-	affichage d'une prévision
+	affichage d'une prÃ©vision
  *********************************************************/
 function afficheUnitaire(compte, idLigne){
 	if(idLigne!= '') {
@@ -83,14 +83,14 @@ function afficheUnitaire(compte, idLigne){
 	    document.editionPrevisionUnitaire.ligneId.value='';
 	}
 	$("div#boite").dialog({
-            resizable: false,
-            width:620,
-            modal: true
-            });
+		resizable: false,
+		width:620,
+		modal: true
+	});
 }
 
 /*********************************************************
-	modification de prévision
+	modification de prÃ©vision
  *********************************************************/
 function modifierPrevision(form) {
 	
@@ -124,8 +124,8 @@ function modifierPrevision(form) {
 
 
 /***********************************************************************
- affiche la popup de saisie d'une entete de prévision
-	-compte: numéro de compte
+ affiche la popup de saisie d'une entete de prÃ©vision
+	-compte: numÃ©ro de compte
  ***********************************************************************/
 function afficheEntete(compte) {
 	
@@ -170,7 +170,7 @@ function creerEntete(form) {
 				form.ligneId.value = retour[0].ligneId;
 				$("div#boiteEntete").dialog('close');
 				affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
-				recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
+				//recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
 			}
 			return false;
 		} 
@@ -180,10 +180,10 @@ function creerEntete(form) {
 
 
 /***********************************************************************
- * récupère la liste des entêtes pour une année
+ * rÃ©cupÃ¨re la liste des entÃªtes pour une annÃ©e
  *
  ***********************************************************************/
-function recupereListeEntetes(objet, annee, numeroCompte) {
+/*function recupereListeEntetes(objet, annee, numeroCompte) {
 	
 	var params="noCompte="+numeroCompte+"&typenr=E&annee="+annee;
 	document.getElementById(objet).innerHTML=null;
@@ -202,7 +202,7 @@ function recupereListeEntetes(objet, annee, numeroCompte) {
 			return false;
 		}
 	);
-}
+}*/
 
 
 function afficheListeGroupe(fluxId){
@@ -222,7 +222,7 @@ function afficheListeGroupe(fluxId){
 				resizable: false,
 				width:400,
 				modal: true,
-				title : 'Edition prévision pour '+$("#listeEntete").find("option:selected").text()
+				title : 'Edition prÃ©vision'// pour '+$("#listeEntete").find("option:selected").text()
 			});
 			
 			$('#listeEntete').val('');
@@ -233,7 +233,7 @@ function afficheListeGroupe(fluxId){
 }
 
 /*
-	parse le tableau Json et génère le tableau
+	parse le tableau Json et gÃ©nÃ¨re le tableau
 */
 function parseListePrevisionJson(json) {
 	tab = document.getElementById('tabListeEntete');
@@ -245,9 +245,8 @@ function parseListePrevisionJson(json) {
 	for(i=0; i<nb; i++) {
 		var row = $('<tr typetr="prevision"/>');
 		row.append($('<td/>').text(tabJson[i].mois));
-		row.append($('<td/>').append('<input class="text-right" type="text" id="montant-'+(i+1)+'" ligneid="'+tabJson[i].ligneId+'" onblur="return isDouble(this);" value="'+tabJson[i].montant+'" size="10" />'));
-		//row.append($('<td/>').append('<input type="button" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);"></input>'));
-		row.append($('<td class="text-center"/>').append('<button class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);"><span class="ui-icon ui-icon-arrowthick-1-s"></span></button>'));
+		row.append($('<td/>').append('<input class="form-control numerique" type="text" id="montant-'+(i+1)+'" ligneid="'+tabJson[i].ligneId+'" onblur="return isDouble(this);" value="'+tabJson[i].montant+'" size="10" />'));
+		row.append($('<td class="text-center"/>').append('<button class="ui-button ui-widget ui-corner-all" title="" id="btnpropag-'+(i+1)+'" index="'+(i+1)+'" onclick="return propagerMontant(this);"><span class="oi oi-arrow-bottom"></span></button>'));
 
 		$("#tbodylisteentete").append(row);
 	}
@@ -267,7 +266,7 @@ function propagerMontant(btn){
 
 
 /***********************************************************************
- * mets à jour la prévision avec la somme des montants poir un mois 
+ * mets Ã  jour la prÃ©vision avec la somme des montants pour un mois 
  * et un flux
  ***********************************************************************/
  function equilibrerPrevision(numeroCompte, ligneId) {

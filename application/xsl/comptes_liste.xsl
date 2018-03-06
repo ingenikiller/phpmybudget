@@ -6,8 +6,8 @@
         <script type="text/javascript" src="front/js/compteEdition.js" charset="iso-8859-1">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
-        <div class="row">
-            <div class="col-lg-offset-1 col-lg-10">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-10">
 
                 <h1>
                     <xsl:value-of select="$LBL.LISTEDESCOMPTES"/>
@@ -16,7 +16,7 @@
                     <xsl:call-template name="formulaireJson"/>
                 </form>
                 <button type="button" class="btn btn-primary" id="" name="" onclick="editerCompte('');">
-                    <span class="glyphicon glyphicon-plus"/>
+                    <span class="oi oi-plus"/>
                 </button>
                 <br/>
                 <table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">

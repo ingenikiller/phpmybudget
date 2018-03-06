@@ -60,11 +60,14 @@
 			</title>
 			
 			<link href="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/css/bootstrap.min.css" rel="stylesheet"/>
-			<link href="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/css/bootstrap-theme.min.css" rel="stylesheet"/>
-
+			<!--link href="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/css/bootstrap-theme.min.css" rel="stylesheet"/-->
+			<link href="front/font/css/open-iconic-bootstrap.css" rel="stylesheet" type="text/css"/>
+			
 			<link href="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 			
 			<script type="text/javascript" src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/external/jquery/jquery.js" charset="UTF-8">&#160;</script>
+			<!--script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script-->
+    
 			<script type="text/javascript" src="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/js/bootstrap.min.js" charset="UTF-8">&#160;</script>
 			<script type="text/javascript" src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.js" charset="UTF-8">&#160;</script>
 
@@ -87,26 +90,30 @@
 	<!-- banniere -->
 	<xsl:template name="menu">
 		<xsl:param name="niveau1"/>
-		<div class="row">
-			<div class="col-xs-offset-1 col-xs-10">
+		<div class="row justify-content-md-center">
+			<div class="col-sm-10">
 		
-		<nav class="navbar navbar-default" role="navigation">
-			
-				<div class="navbar-header">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<!--p class="navbar-brand" style="color: white;">PhpMybudget</p>
+				<xsl:if test="$niveau1!=''">
+						<p class="navbar-text" style="color: white;">/</p>
+						<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
+					</xsl:if-->
+				<!--div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
-					</button>
+					</button-->
 					<!--a class="navbar-brand" href="#">PhpMybudget</a-->
 					<!--pan class="icon-bar">PhpMybudget</span-->
-					<p class="navbar-text" style="color: white;">PhpMybudget</p>
+					<!--p class="navbar-text" style="color: white;">PhpMybudget</p>
 					
 					<xsl:if test="$niveau1!=''">
 						<p class="navbar-text" style="color: white;">/</p>
 						<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
-					</xsl:if>
+					</xsl:if-->
 					
 					<!--ol class="breadcrumb">
 					  <li>PhpMybudget</li>
@@ -114,31 +121,77 @@
 					  <li class="active">Data</li>
 					</ol-->
 					
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<li>
+				<!--/div-->
+				<div class="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
+					<!--div class="navbar-nav">
+					<a class="nav-item nav-link active" href="index.php?domaine=compte&amp;service=getpage">
+						<xsl:value-of select="$LBL.COMPTES"/>
+					</a>
+					  <a class="nav-item nav-link active" href="#">Features</a>
+					  <a class="nav-item nav-link active" href="#">Pricing</a>
+					  <a class="nav-item nav-link active" href="#">Disabled</a>
+					</div-->
+					<p class="navbar-brand" style="color: white;">PhpMybudget</p>
+							<xsl:if test="$niveau1!=''">
+							<p class="navbar-text" style="color: white;">/</p>
+							<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
+					</xsl:if>
+					<!--ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<p class="navbar-brand" style="color: white;">PhpMybudget</p>
+							<xsl:if test="$niveau1!=''">
+							<p class="navbar-text" style="color: white;">/</p>
+							<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
+							</xsl:if>
+						</li>
+					</ul-->
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-item nav-link active" href="index.php?domaine=compte&amp;service=getpage" style="color: white;">
+								<xsl:value-of select="$LBL.COMPTES"/>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link active" href="index.php?domaine=flux&amp;service=getpage" style="color: white;">
+								<xsl:value-of select="$LBL.FLUX"/>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link active" href="index.php?domaine=segment" style="color: white;">
+								<xsl:value-of select="$LBL.PARAMETRAGE"/>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link active blanc" href="index.php?domaine=periode" style="color: white;">
+								<xsl:value-of select="$LBL.PERIODE"/>
+							</a>
+						</li>
+					</ul>
+				  </div>
+				<!--div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+						<li class="nav-item active">
 							<a href="index.php?domaine=compte&amp;service=getpage">
 								<xsl:value-of select="$LBL.COMPTES"/>
 							</a>
 						</li>
-						<li>
+						<li class="nav-item active">
 							<a href="index.php?domaine=flux&amp;service=getpage">
 								<xsl:value-of select="$LBL.FLUX"/>
 							</a>
 						</li>
-						<li>
+						<li class="nav-item active">
 							<a href="index.php?domaine=segment">
 								<xsl:value-of select="$LBL.PARAMETRAGE"/>
 							</a>
 						</li>
-						<li>
+						<li class="nav-item active">
 							<a href="index.php?domaine=periode">
 								<xsl:value-of select="$LBL.PERIODE"/>
 							</a>
 						</li>
 					</ul>
-				</div>
+				</div-->
 			
 		</nav>
 			</div>
