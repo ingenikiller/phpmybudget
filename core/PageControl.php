@@ -31,12 +31,11 @@ class PageControl {
 		}
 		$classe = ParserConfiguration::getAction($l_domaine, $l_service);
 		
-		//si pas de classe, chargement de la page par defaut
+		//si pas de classe, chargement de la page par défaut
 		if($classe==null) {
-			if($classe==null) {
-				die("Configuration incorrecte: $l_service inexistante");
-			}
+			die("Configuration incorrecte: $l_service inexistante");
 		}
+		
 		$this->logger->debug('classe:' . $classe->getNom());
 		
 		if($classe->isPrivee()) {

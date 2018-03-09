@@ -77,8 +77,7 @@ class PageDescription {
         //lance l'affichage si le rendu est xsl
         if($this->m_render==null || $this->m_render=='xsl'){
             $this->parse($p_contexte);
-        }
-        if($this->m_render=='json'){
+        } else if($this->m_render=='json'){
             echo json_encode($p_contexte->m_dataResponse);
         }
     }
@@ -124,14 +123,14 @@ class PageDescription {
         $this->logger->debug('parse data');
         foreach ($p_tabDataRow as $key => $dataRow) {
             if ($dataRow instanceof IList) {
-                $this->logger->debug('List:' . $dataRow->name);
+                //$this->logger->debug('List:' . $dataRow->name);
 				$this->parseListObject($p_noeud, $dataRow);
             } else if ($dataRow instanceof SavableObject) {
-                $this->logger->debug('parseobjet: ');
+                //$this->logger->debug('parseobjet: ');
                 $group = $p_noeud->addChild($dataRow->getName());
                 $this->addBlock($group, $dataRow->fetchPublicMembers());
             } else if (is_array($dataRow)) {
-                $this->logger->debug('traite tableau');
+                //$this->logger->debug('traite tableau');
                 $this->addBlockRow($p_noeud, $dataRow);
             } else if ($dataRow instanceof ReponseAjax) {
                 $tab = array();
@@ -142,7 +141,7 @@ class PageDescription {
                 }
                 $this->addBlock($group, $tab);
             } else {
-                $this->logger->debug('parse ligne');
+                //$this->logger->debug('parse ligne');
                 $ligne = $p_noeud->addChild($key, $dataRow);
             }
         }
@@ -208,7 +207,7 @@ class PageDescription {
         if ($this->m_paramFlow != null) {
             $tab = explode(',', $this->m_paramFlow);
             foreach ($tab as $value) {
-                $this->logger->debug('flux:' . $value);
+                //$this->logger->debug('flux:' . $value);
                 $segment = new ListObject();
                 $segment->name = $value;
                 $segment->request('Segment', "cleseg='$value' order by numord");
