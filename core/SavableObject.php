@@ -29,7 +29,7 @@ abstract class SavableObject extends Objects {
 	private function getChamps(){
 		$table=array();
 		$pdo = ConnexionPDO::getInstance ();
-		$l_requete = 'SHOW COLUMNS FROM ' . $this->_tableName;
+		$l_requete = 'SHOW COLUMNS FROM ' . strtolower($this->_tableName);
 		$l_result = $pdo->query ( $l_requete );
 		while ( $l_champs = $l_result->fetch ( PDO::FETCH_ASSOC ) ) {
 			//$this->logger->debug($l_champs ['Field']);
@@ -62,7 +62,7 @@ abstract class SavableObject extends Objects {
      */
     public function load() {
         $primaryKey = implode(' AND ', $this->getPrimaryKeyValorisee());
-        $requete = "SELECT * FROM $this->_tableName WHERE $primaryKey";
+        $requete = 'SELECT * FROM '.strtolower($this->_tableName) ." WHERE $primaryKey";
 		$this->logger->debug('requete load:' . $requete);
         $stmt = null;
         try {
@@ -99,15 +99,28 @@ abstract class SavableObject extends Objects {
 					
 				} else {
 					$champs[] = $col;
-					if(stripos($champDefinition['Type'], 'date') === 0 || stripos($champDefinition['Type'], 'varchar') === 0) {
+					if(stripos($champDefinition['Type'], 'varchar') === 0) {
+						//type VARCHAR
 						$values[] = trim(self::$_pdo->quote($val));
-					} else{
+					} else if(stripos($champDefinition['Type'], 'longtext') === 0) {
+						//type LOnGTEXT
+						$values[] = trim(self::$_pdo->quote($val));
+					} else if(stripos($champDefinition['Type'], 'date') === 0){
+						//type DATE
+						if($val=='') {
+							$values[] = 'null';
+						} else {
+							$values[] = trim(self::$_pdo->quote($val));
+						}
+					} else {
+						//type AUTRE
+						$this->logger->debug('Type non géréen create:' . $champDefinition['Type']);
 						$values[] = $val=='' ? 0 : $val;
 					}
 				}
             }
         }
-		$query = sprintf("INSERT INTO %s (%s) VALUES (%s)", $this->_tableName, implode(',', $champs), implode(',', $values));
+		$query = sprintf("INSERT INTO %s (%s) VALUES (%s)", strtolower($this->_tableName), implode(',', $champs), implode(',', $values));
 		
 		try {
             $this->logger->debug('requete create:' . $query);
@@ -128,15 +141,29 @@ abstract class SavableObject extends Objects {
             if ($col != 'associatedObjet') {
 				if (array_search($col, $tabKey) === false) {
                     $champDefinition = $this->champsDef[$col];
-					if(stripos($champDefinition['Type'], 'date') === 0 || stripos($champDefinition['Type'], 'varchar') === 0) {
+					$this->logger->debug('type:' . $champDefinition['Type']);
+					if(stripos($champDefinition['Type'], 'varchar') === 0) {
+						//type VARCHAR
 						$set[] = sprintf("%s=%s", $col, trim(self::$_pdo->quote($val)));
-					} else{
+					} else if(stripos($champDefinition['Type'], 'longtext') === 0) {
+						//type LONGTEXT
+						$set[] = sprintf("%s=%s", $col, trim(self::$_pdo->quote($val)));
+					} else if (stripos($champDefinition['Type'], 'date') === 0) {
+						//type DATE
+						if($val=='') {
+							$set[] = sprintf("%s=%s", $col, 'null');
+						} else {
+							$set[] = sprintf("%s=%s", $col, trim(self::$_pdo->quote($val)));
+						}
+					} else {
+						//type AUTRE
+						$this->logger->debug('Type non géré en update:' . $champDefinition['Type']);
 						$set[] = sprintf("%s=%s", $col, $val=='' ? 0 : $val);
 					}
                 }
             }
         }
-		$query = sprintf("UPDATE %s SET %s WHERE %s", $this->_tableName, implode(',', $set), $primaryKey);
+		$query = sprintf("UPDATE %s SET %s WHERE %s", strtolower($this->_tableName), implode(',', $set), $primaryKey);
 		
 		try {
             $this->logger->debug('requete update:' . $query);
@@ -150,7 +177,7 @@ abstract class SavableObject extends Objects {
      * fonction de suppression en base d'un objet
      */
     public function delete() {
-        $requete = "DELETE FROM $this->_tableName WHERE " . implode(' AND ', $this->getPrimaryKeyValorisee());
+        $requete = 'DELETE FROM '.strtolower($this->_tableName). ' WHERE ' . implode(' AND ', $this->getPrimaryKeyValorisee());
         $this->logger->debug('delete:' . $requete);
         try {
             $stmt = self::$_pdo->query($requete);
