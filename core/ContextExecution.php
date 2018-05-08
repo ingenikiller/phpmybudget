@@ -12,6 +12,9 @@ class ContextExecution {
 	
 	private $m_user=null;
 	
+	private $membre=null;
+	
+	
 	//titre de la page
 	private $m_titrePage;
 
@@ -36,6 +39,13 @@ class ContextExecution {
 	}
 	public function getUser(){
 		return $this->m_user;
+	}
+	
+	public function setMembre($p_membre){
+		$this->membre = $p_membre;
+	}
+	public function getMembre(){
+		return $this->membre;
 	}
 	
 	/**

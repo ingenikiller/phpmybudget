@@ -8,12 +8,12 @@
 	<xsl:template name="controleMenu">N</xsl:template>
 	<xsl:template name="Contenu">
 		<xsl:call-template name="boiteDetail"/>
-		
-		
-			<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
-			<div class="row">
-				<div class="col-xs-offset-4 col-xs-4">
-					<form class="form-group row"  method="POST" action="#" onsubmit="return soumettreRelevesMois(this);" name="formulaire" id="formulaire">
+			<div class="row justify-content-md-center">
+				<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col col-lg-4">
+					<form method="POST" action="#" onsubmit="return soumettreRelevesMois(this);" name="formulaire" id="formulaire">
 						<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
 						<fieldset>
 							<div class="form-group row">
@@ -33,10 +33,8 @@
 							</xsl:apply-templates>
 								</div>
 							</div>
-							<div class="form-group row">
-								<div class="text-center">
-									<button type="submit" class="btn btn-primary">Valider</button>
-								</div>
+							<div class="row justify-content-md-center">
+								<button type="submit" class="btn btn-primary">Valider</button>
 							</div>
 						</fieldset>
 					</form>

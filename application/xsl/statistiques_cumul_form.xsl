@@ -11,17 +11,19 @@
 	<xsl:template name="Contenu">
 		<xsl:call-template name="boiteDetail"/>
 		
-			<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
 			
-			<div class="row">
+			<div class="row justify-content-md-center">
+				<a href="index.php?domaine=statistique&amp;numeroCompte={$NUMEROCOMPTE}">Retour</a><br/>
+			</div>
+			<div class="row justify-content-md-center">
 				
-				<div class="col-xs-offset-4 col-xs-4">
+				<div class="col col-lg-4">
 					<form class="form-group row"  method="POST" action="#" onsubmit="return soumettreCumul(this);" name="formulaire" id="formulaire">
 						<fieldset>
 							<input name="numeroCompte" id="numeroCompte" type="hidden" value="{$NUMEROCOMPTE}"/>
 							<div class="form-group row">
-								<label for="premiereAnnee" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.PREMIEREANNEE"/></label>
-								<div class="col-sm-3">
+								<label for="premiereAnnee" class="col-sm-7 form-control-label"><xsl:value-of select="$LBL.PREMIEREANNEE"/></label>
+								<div class="col-sm-5">
 									<xsl:apply-templates select="/root/data/ListeAnnee">
 										<xsl:with-param name="name" select="'premiereAnnee'"/>
 										<xsl:with-param name="obligatoire" select="'O'"/>
@@ -30,17 +32,15 @@
 							</div>
 							
 							<div class="form-group row">
-								<label for="derniereAnnee" class="col-sm-9 form-control-label"><xsl:value-of select="$LBL.DERNIEREANNEE"/></label>
-								<div class="col-sm-3">
+								<label for="derniereAnnee" class="col-sm-7 form-control-label"><xsl:value-of select="$LBL.DERNIEREANNEE"/></label>
+								<div class="col-sm-5">
 									<xsl:apply-templates select="/root/data/ListeAnnee">
 										<xsl:with-param name="name" select="'derniereAnnee'"/>
 									</xsl:apply-templates>
 								</div>
 							</div>
-							<div class="form-group row">
-								<div class="text-center">
-									<button type="submit" class="btn btn-primary">Valider</button>
-								</div>
+							<div class="row justify-content-md-center">
+								<button type="submit" class="btn btn-primary">Valider</button>
 							</div>
 						</fieldset>
 					</form>

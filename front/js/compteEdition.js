@@ -51,16 +51,16 @@ function parseListeJson(json) {
 		var numeroCompte = tabJson[i].numeroCompte;
 		row.append($('<td class="text-right"/>').text(formatMonetaire(calcul)));
 		
-		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerCompte(\''+ numeroCompte +'\')"><span class="glyphicon glyphicon-pencil"/></a>'));
+		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerCompte(\''+ numeroCompte +'\')"><span class="oi oi-pencil"/></a>'));
 		
 		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=operation&amp;service=getpage&amp;numeroCompte='+ numeroCompte +'">'
-					+'<span class="glyphicon glyphicon-list-alt"/>'
+					+'<span class="oi oi-list"/>'
 					+'</a>'));
 		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=statistique&amp;service=menu&amp;numeroCompte='+ numeroCompte +'">'
-					+'<span class="glyphicon glyphicon-stats"/>'
+					+'<span class="oi oi-bar-chart"/>'
 					+'</a>'));
 		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=prevision&amp;numeroCompte='+ numeroCompte +'">'
-					+'<span class="glyphicon glyphicon-signal"/>'
+					+'<span class="oi oi-signal"/>'
 					+'</a>'));
 		
 		$("#tbodyResultat").append(row);
@@ -94,7 +94,7 @@ function editerCompte(numeroCompte){
 	
 	$("div#boiteCompte").dialog({
 		resizable: false,
-		width:600,
+		width: 620,
 		modal: true
 	});
 }

@@ -128,7 +128,7 @@ function editerFlux(fluxId){
 			$('#compteId').val(resultat[0].compteId);
 
 			//numéro de compte en dur car compte principal
-			afficheFluxSelect('fluxMaitreId', resultat[0].compteId, 'fluxMaitre=O');
+			afficheFluxSelect('fluxMaitreId', resultat[0].compteId, 'fluxMaitre=O', resultat[0].fluxMaitreId);
 
 			$('#compteDest').val(resultat[0].compteDest);
 			if(resultat[0].entreeEpargne=='') {

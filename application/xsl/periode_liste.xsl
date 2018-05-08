@@ -3,8 +3,8 @@
     <xsl:import href="template_name.xsl"/>
     <xsl:import href="commun.xsl"/>
     <xsl:template name="Contenu">
-        <div class="row">
-            <div class="col-lg-offset-4 col-lg-4">
+        <div class="row justify-content-md-center">
+            <div class="col-6">
                 <form method="POST" name="recherche" id="recherche" onsubmit="return rechercherOperations(this);">
                     <xsl:call-template name="formulaireJson"/>
                 </form>
@@ -24,27 +24,73 @@
                 <br/>
                 <fieldset>
                     <br/>
-                    <form id="creationperiode" onsubmit="return creerPeriode(this);">
-                        <div class="col-lg-12">
-                            <div class="form-group row">
+                    <form id="creationperiode" onsubmit="return creerPeriode(this);" class="form-inline">
+					
+						<label for="nouvelleannee"><xsl:value-of select="$LBL.ANNEE"/></label>
+						<input class="form-control mb-2 mr-sm-2 obligatoire" type="text" name="nouvelleannee" id="nouvelleannee" size="4" maxlength="4"/>
+						<button type="submit" class="btn btn-primary mb-2"><xsl:value-of select="$LBL.CREER"/></button>
+							
+                            <!--div class="form-row align-items-center">
+							<div class="col-auto">
                                 <label for="flux" class="col-sm-6 form-control-label">
                                     <xsl:value-of select="$LBL.ANNEE"/>
                                 </label>
-                                <div class="col-sm-6">
-                                    <input class="form-control obligatoire" type="text" name="nouvelleannee" id="nouvelleannee" size="4" maxlength="4"/>
-                                </div>
-                            </div>
-                            <div class="row">
+								</div>
+								<div class="col-auto">
+								
+									<div class="form-control mb-2">
+										<input class="form-control obligatoire" type="text" name="nouvelleannee" id="nouvelleannee" size="4" maxlength="4"/>
+									</div>
+								</div>
+								
+								<div class="col-auto">
+								<button type="submit" class="btn btn-primary">
+                                            <xsl:value-of select="$LBL.CREER"/>
+                                        </button>
+								</div>
+                            </div-->
+                            <!--div class="row">
                                 <div class="form-group row">
-                                    <div class="col-sm-offset-4 col-sm-4" style="text-align:center;">
+                                    
                                         <button type="submit" class="btn btn-primary">
                                             <xsl:value-of select="$LBL.CREER"/>
                                         </button>
-                                    </div>
+                                   
                                 </div>
-                            </div>
-                        </div>
+                            </div-->
+                        
                     </form>
+					
+					<form>
+					  <div class="form-row align-items-center">
+						<div class="col-sm-3 my-1">
+						  <label class="sr-only" for="inlineFormInputName">Name</label>
+						  <input type="text" class="form-control" id="inlineFormInputName" placeholder="Jane Doe"/>
+						</div>
+						<div class="col-sm-3 my-1">
+						  <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+						  <div class="input-group">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">@</div>
+							</div>
+							<input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username"/>
+						  </div>
+						</div>
+						<div class="col-auto my-1">
+						  <div class="form-check">
+							<input class="form-check-input" type="checkbox" id="autoSizingCheck2"/>
+							<label class="form-check-label" for="autoSizingCheck2">
+							  Remember me
+							</label>
+						  </div>
+						</div>
+						<div class="col-auto my-1">
+						  <button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					  </div>
+					</form>
+					
+					
                 </fieldset>
                 <br/>
             </div>

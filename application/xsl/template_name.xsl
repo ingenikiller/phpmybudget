@@ -197,9 +197,9 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row justify-content-md-center">
                             <div class="form-group row">
-                                <div class="col-sm-offset-4 col-sm-4" style="text-align:center;">
+                                <div class="col-md-auto">
                                     <button type="submit" class="btn btn-primary">Valider</button>
                                 </div>
                             </div>
@@ -219,39 +219,36 @@
             <form method="POST" action="#" onsubmit="return soumettre(this);">
                 <input type="hidden" name="service" id="service"/>
                 <div class="container popup_operation">
-                    <div class="col-lg-12">
-                        <div class="form-group row">
-                            <label for="numeroCompte" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.NUMEROCOMPTE"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <input class="form-control" size="12" name="numeroCompte" id="numeroCompte" tabindex="10" required="required"/>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="libelle" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.DESCRIPTION"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <input class="form-control" type="text" name="libelle" id="libelle" size="11" maxlength="40" tabindex="20"/>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="solde" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.SOLDEBASE"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <input class="form-control numerique" type="numeric" name="solde" id="solde" size="10" tabindex="30" required="required"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group row">
-                                <div class="col-lg-offset-4 col-lg-4" style="text-align:center;">
-                                    <button type="submit" class="btn btn-primary">Valider</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+					<div class="form-group row">
+						<label for="numeroCompte" class="col-sm-6 form-control-label">
+							<xsl:value-of select="$LBL.NUMEROCOMPTE"/>
+						</label>
+						<div class="col-sm-6">
+							<input class="form-control" size="12" name="numeroCompte" id="numeroCompte" tabindex="10" required="required"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="libelle" class="col-sm-6 form-control-label">
+							<xsl:value-of select="$LBL.DESCRIPTION"/>
+						</label>
+						<div class="col-sm-6">
+							<input class="form-control" type="text" name="libelle" id="libelle" size="11" maxlength="40" tabindex="20"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="solde" class="col-sm-6 form-control-label">
+							<xsl:value-of select="$LBL.SOLDEBASE"/>
+						</label>
+						<div class="col-sm-6">
+							<input class="form-control numerique" type="numeric" name="solde" id="solde" size="10" tabindex="30" required="required"/>
+						</div>
+					</div>
+					<div class="row justify-content-md-center">
+						<div class="col-lg-offset-4 col-lg-4" style="text-align:center;">
+							<button type="submit" class="btn btn-primary">Valider</button>
+						</div>
+					</div>
+                    
                 </div>
             </form>
         </div>

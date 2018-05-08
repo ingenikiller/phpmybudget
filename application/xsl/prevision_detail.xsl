@@ -153,7 +153,9 @@
         <tr class="l{@index mod 2}">
             <!-- libelle du flux -->
             <th rowspan="1" class="titre">
-                <xsl:value-of select="flux"/>
+				<a href="#" onclick="afficheListeGroupe('{fluxId}')">
+					<span class="oi oi-arrow-thick-right"/> <xsl:value-of select="flux"/>
+				</a>
             </th>
             <!-- chaque flux -->
             <xsl:call-template name="case">

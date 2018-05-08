@@ -25,7 +25,7 @@ class ListObject extends ListStructure implements IList{
 	}
 	
     public function requestNoPage($classe, $clause=null) {
-        $l_suff = " FROM $classe";
+        $l_suff = " FROM ".strtolower ($classe);
         if($clause!=null){
             $l_suff.=" WHERE $clause";
         }

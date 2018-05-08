@@ -74,6 +74,7 @@ function afficheFluxSelect(nomChamp, compte, chaineParams, valeur) {
 			for(i=0; i<nb; i++) {
 				$('#'+nomChamp).append(new Option(tabJson[i].flux, tabJson[i].fluxId, false, false));
 			}
+			$('#'+nomChamp).val(valeur);
 		}
 	});
 }

@@ -9,7 +9,7 @@
 class OperationCommun {
 
 	/**
-	 * Recherche une op�ration fille
+	 * Recherche une opération fille
 	 * @param unknown_type $flux
 	 * @param unknown_type $p_operation
 	 */
@@ -18,7 +18,7 @@ class OperationCommun {
 		
 		$listOpe = new ListObject();
         $listOpe->name='ListeOperations';
-        //recherche d'une op�ration ayant les r�f�rences de l'op�ration en cours
+        //recherche d'une opération ayant les références de l'opération en cours
         $listOpe->request('Operation', "numeroCompteOri='$p_operation->noCompte' AND operationIdOri=$p_operation->operationId");
 		$tab = $listOpe->tabResult;
         $logger->debug('Total ope '.count($tab));
@@ -30,7 +30,7 @@ class OperationCommun {
 	}
 
 	/**
-     * Gestion d'une op�ration li�e pour les flux multi comptes
+     * Gestion d'une opération liée pour les flux multi comptes
      */
     public static function operationLiee($p_operation){
         $logger = Logger::getRootLogger();
@@ -44,7 +44,7 @@ class OperationCommun {
 
         //si le flux n'a pas de compte lié
         if($l_flux->compteDest =='') {
-            //on recherche une op�ration li�e pour la supprimer ( cas du changement de flux)
+            //on recherche une opération liée pour la supprimer (cas du changement de flux)
         	$operation = self::rechercherOperationLiee($l_flux, $p_operation);
         	if($operation!=null){
         		$operation->delete();
@@ -54,8 +54,8 @@ class OperationCommun {
             //le flux a un compte destination
             //ce compte est différent du compte en cours
         	if($l_flux->compteDest != $p_operation->noCompte) {
-                $logger->debug('Operation liee');
-                //recherche d'une op�arion existante
+                $logger->debug('Operation liée');
+                //recherche d'une opération existante
                 $listOpe = new ListObject();
                 $listOpe->name='ListeOperations';
                 $listOpe->request('Operation', "operationIdOri=$p_operation->operationId");
@@ -82,7 +82,7 @@ class OperationCommun {
                     $logger->debug($p_operation->noCompte."----".$l_flux->compteDest);
                     //si l'opération est sur le compte destination, mise à jour
                     if($p_operation->noCompte==$l_flux->compteDest){
-	                    $logger->debug('Operation meme compte');
+	                    $logger->debug('Operation même compte');
 	                    $l_operation = $tab[0];
 	                    $l_operation->libelle = $p_operation->libelle;
 	                    $l_operation->modePaiementId = $p_operation->modePaiementId;
@@ -90,7 +90,7 @@ class OperationCommun {
 	                    $l_operation->verif = $p_operation->verif;
 	                    $l_operation->update();
                     } else {
-                    	//sinon, on modifie le num�ro de compte
+                    	//sinon, on modifie le numéro de compte
                     	$logger->debug('Operation compte different');
                     	$l_operation = $tab[0];
 	                    $l_operation->libelle = $p_operation->libelle;
@@ -103,7 +103,7 @@ class OperationCommun {
                 }
             } else {
                 if($l_flux->compteDest == $p_operation->noCompte){
-                    //mise � jour de l'op�ration d'origine
+                    //mise � jour de l'opération d'origine
                     $listOpeRec = new ListObject();
                     $listOpe->request('Operation', "noCompte='$l_flux->compteDest' AND noCompte='$p_operation->numeroCompteOri' AND operationId=$p_operation->operationIdOri");
                     $tab = $listOpeRec->tabResult;

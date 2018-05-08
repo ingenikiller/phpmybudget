@@ -188,8 +188,8 @@ function parseListeJson(json) {
 		row.append($('<td class="text-right '+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',','')))));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		
-		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="glyphicon glyphicon-pencil"/></a>'));
-		row.append($('<td class="text-center"/>').append('<div href="#" class="soldeoperation" ><span class="glyphicon glyphicon-pencil" noCompte="'+ tabJson[i].nocompte +'" operationId="'+ tabJson[i].operationId +'" soldeoperation="O"/></div>'));
+		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="oi oi-pencil"/></a>'));
+		row.append($('<td class="text-center"/>').append('<div href="#" class="soldeoperation" ><span class="oi oi-question-mark" noCompte="'+ tabJson[i].nocompte +'" operationId="'+ tabJson[i].operationId +'" soldeoperation="O"/></div>'));
 		
 		$("#tbodyResultat").append(row);
 	}
