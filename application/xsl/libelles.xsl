@@ -32,7 +32,7 @@
 	<xsl:variable name="LBL.EDITIONFLUX">Edtion d'un flux</xsl:variable>
 	<xsl:variable name="LBL.EDITIONOPERATION">Edtion d'une opération</xsl:variable>
 	<xsl:variable name="LBL.EDITIONSEGMENT">Edtion d'un segment</xsl:variable>
-	<xsl:variable name="LBL.ENTETE">EntÃªte</xsl:variable>
+	<xsl:variable name="LBL.ENTETE">Entête</xsl:variable>
 	<xsl:variable name="LBL.ENTREEEPARGNE">Entrée épargne</xsl:variable>
 	<xsl:variable name="LBL.ENREGISTRER">Enregistrer</xsl:variable>
 	<xsl:variable name="LBL.EQUILIBRER">Equilibrer</xsl:variable>
@@ -79,7 +79,7 @@
 	<xsl:variable name="LBL.PROPAGER">Propager</xsl:variable>
 	<xsl:variable name="LBL.RECETTE">Recette</xsl:variable>
 	<xsl:variable name="LBL.RECETTES">Recettes</xsl:variable>
-	<xsl:variable name="LBL.RETOURALALISTE">Retour Ã  la liste</xsl:variable>
+	<xsl:variable name="LBL.RETOURALALISTE">Retour à la liste</xsl:variable>
 	<xsl:variable name="LBL.RETOURCOMPTE">Retour au compte</xsl:variable>
 	<xsl:variable name="LBL.SAISIEAUTRE">Saisie autre opération</xsl:variable>
 	<xsl:variable name="LBL.SECONNECTER">Se connecter</xsl:variable>

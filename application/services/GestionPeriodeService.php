@@ -11,6 +11,16 @@ class GestionPeriodeService extends ServiceStub{
     	$p_contexte->addDataBlockRow($liste);
 	}
 	
+	public function getListeMois(ContextExecution $p_contexte) {
+		$annee = $p_contexte->m_dataRequest->getData('annee');
+		//$requete = "select distinct annee, count(1) as nbmois from periode where annee='$annee'";
+		$listePeriode = new ListObject();
+		$listePeriode->name='ListePeriodeMois';
+		$requete="annee='$annee'";
+        $listePeriode->request('Periode', $requete);
+    	$p_contexte->addDataBlockRow($listePeriode);
+	}
+
 	public function create(ContextExecution $p_contexte){
 		$annee = $p_contexte->m_dataRequest->getData('annee');
 		

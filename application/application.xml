@@ -20,7 +20,7 @@
 			<service name="getpage" classe="GestionOperationService" methode="getPage" isPrivee="false" xsl="xsl/operation_liste.xsl" paramFlow="MODPAI"/>
 			<service name="getsoldeoperation" classe="GestionOperationService" methode="getSoldeOperation" isPrivee="true" render="json"/>
 			<service name="reclibelle" classe="GestionOperationService" methode="recLibelle" render="json" isPrivee="false"/>
-			<service name="getliste" classe="GestionOperationService" methode="gesListe" render="json" isPrivee="true"/>
+			<service name="getliste" classe="GestionOperationService" methode="getListe" render="json" isPrivee="true"/>
 			<service name="getone" classe="GestionOperationService" methode="gesListe" render="json" isPrivee="true"/>
 			<service name="create" classe="GestionOperationService" methode="create" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionOperationService" methode="update" render="json" isPrivee="true"/>
@@ -29,10 +29,10 @@
 			<service name="defaut" classe="GestionPeriodeService" methode="Fictive" isPrivee="true" xsl="xsl/periode_liste.xsl"/>
 			<service name="create" classe="GestionPeriodeService" render="json" methode="create" isPrivee="true"/>
 			<service name="getliste" classe="GestionPeriodeService" render="json" methode="getListe" isPrivee="true"/>
+			<service name="getlistemois" classe="GestionPeriodeService" render="json" methode="getListeMois" isPrivee="true"/>
 		</domaine>
 		<domaine name="previsionentete">
 			<service name="getone" classe="GestionPrevisionEnteteService" methode="getOne" render="json" isPrivee="true"/>
-			<!--service name="getlisteentete" classe="GestionPrevisionEnteteService" methode="getListeEntete" render="json" isPrivee="true"/-->
 			<service name="create" classe="GestionPrevisionEnteteService" methode="create" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionPrevisionEnteteService" methode="update" render="json" isPrivee="true"/>
 		</domaine>

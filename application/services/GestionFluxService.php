@@ -87,6 +87,4 @@ class GestionFluxService extends ServiceStub {
 		$flux->update();
 	}
 }
-
-
 ?>

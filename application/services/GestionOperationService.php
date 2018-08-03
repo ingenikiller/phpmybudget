@@ -2,14 +2,14 @@
 
 class GestionOperationService extends ServiceStub{
 
-	public function gesListe(ContextExecution $p_contexte){
+	public function getListe(ContextExecution $p_contexte){
 		$userid = $p_contexte->getUser()->userId;
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
 
         $operationId=$p_contexte->m_dataRequest->getData('operationId');
         $page=1;
         $numeroPage=$p_contexte->m_dataRequest->getData('numeroPage');
-        if($numeroPage!=null && $numeroPage!=''){
+        if($numeroPage!=null && $numeroPage!='') {
         	$page=$numeroPage;
         }
 
@@ -31,7 +31,6 @@ class GestionOperationService extends ServiceStub{
 		
         $recIntervalle = $p_contexte->m_dataRequest->getData('recIntervalle');
 		if($recIntervalle	!=null){
-			//$this->logger->debug('intervalle' . $recIntervalle);
 			$intervalle = explode('_', $recIntervalle);
 			$requete.=" AND operation.date between '". $intervalle[0] . "' AND '" . $intervalle[1] . "' ";	
         }
@@ -83,7 +82,11 @@ class GestionOperationService extends ServiceStub{
 	public function recLibelle(ContextExecution $p_contexte){
 		$numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
 		$debLibelle = $p_contexte->m_dataRequest->getData('debLibelle');
-		$requete="SELECT distinct operation.libelle AS libelle FROM operation WHERE operation.nocompte='$numeroCompte' AND libelle LIKE concat('$debLibelle', '%')";
+		$requete="SELECT distinct operation.libelle AS libelle 
+					FROM operation 
+					WHERE 1=1 
+						AND operation.nocompte='$numeroCompte' 
+						AND libelle LIKE concat('$debLibelle', '%')";
 		$listeLibelles = new ListDynamicObject();
 		$listeLibelles->name = 'ListeLibelles';
 		$listeLibelles->request($requete, 1);
@@ -112,9 +115,12 @@ class GestionOperationService extends ServiceStub{
 		$compte->numeroCompte=$numeroCompte;
 		$compte->load();
 		
-		$requete = "SELECT SUM(montant) as total FROM operation WHERE 1=1 
-				AND nocompte='$numeroCompte' 
-				AND (date = '$operation->date' AND operationid<$operationId OR date < '$operation->date')";
+		$requete = "SELECT SUM(montant) as total 
+				FROM operation 
+				WHERE 1=1 
+					AND nocompte='$numeroCompte' 
+					AND (date = '$operation->date' 
+					AND operationid<$operationId OR date < '$operation->date')";
 		$dyn = new ListDynamicObject();
 		$dyn->name = 'SommeOperations';
 		$dyn->request($requete);

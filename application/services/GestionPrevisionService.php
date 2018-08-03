@@ -11,25 +11,12 @@ class GestionPrevisionService extends ServiceStub {
         
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
         
-		/*$listeFlux = new ListObject();
-        $listeFlux->name='ListeFlux';
-        $l_clause="compteId='$numeroCompte' or compteDest='$numeroCompte' order by flux ASC"; 
-        $listeFlux->requestNoPage('Flux', $l_clause);
-        $p_contexte->addDataBlockRow($listeFlux);*/
-        
         $l_compte = new Comptes();
 		$l_compte->numeroCompte=$numeroCompte;
 		$l_compte->load();
 		$p_contexte->addDataBlockRow($l_compte);
         
-        //périodes de l'année
-        $listePeriode = new ListObject();
-        $listePeriode->name='ListePeriodes';
-        $l_clause=" annee='$annee' order by periode ASC"; 
-        $listePeriode->requestNoPage('Periode', $l_clause);
-        $p_contexte->addDataBlockRow($listePeriode);
-        
-		$requete = 'SELECT DISTINCT annee from periode WHERE TRIM(annee) IS NOT NULL ORDER BY annee';
+        $requete = 'SELECT DISTINCT annee from periode WHERE TRIM(annee) IS NOT NULL ORDER BY annee';
 		$listeAnnees = new ListDynamicObject();
         $listeAnnees->name = 'ListeAnnees';
         $listeAnnees->request($requete);
@@ -42,7 +29,6 @@ class GestionPrevisionService extends ServiceStub {
 	public function getListeAnnee(ContextExecution $p_contexte) {
         $annee=$p_contexte->m_dataRequest->getData('periode');
         $flagPinel=$p_contexte->m_dataRequest->getData('flagPinel');
-        //PeriodeCommun::initialiserPeriodeMois($annee);
         
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
         
@@ -68,10 +54,7 @@ class GestionPrevisionService extends ServiceStub {
         $previsions = new ListObject();
         $previsions->name='Previsions';
         $previsions->setAssociatedRequest('Prevision', $clausePrevisions);
-        
 		
-		
-        
         //requête des opérations récurrentes
         $requeteTotaux = 
 			"SELECT ROUND(sum(montant),2) AS total
@@ -106,12 +89,16 @@ class GestionPrevisionService extends ServiceStub {
         $listeFlux->request(
 			"SELECT DISTINCT flux.fluxId, flux, depense
 			FROM prevision 
-				LEFT JOIN flux ON flux.fluxId = prevision.fluxId  $clausePinel
-			WHERE mois between '$dateDeb' and '$dateFin' 
-				and noCompte='$numeroCompte' ORDER BY flux");
+				INNER JOIN flux ON flux.fluxId = prevision.fluxId  $clausePinel
+			WHERE 1=1 AND 
+				mois between '$dateDeb' and '$dateFin' AND 
+				noCompte='$numeroCompte' ORDER BY flux");
         $p_contexte->addDataBlockRow($listeFlux);
     }
 	
+	/**
+	 * retourne le capital restant en soustrayant au solde du compte les prévisions du mois restantes
+	 */
 	public function estimationReste(ContextExecution $p_contexte) {
 		$userid = $p_contexte->getUser()->userId;
 		$numeroCompte = $p_contexte->m_dataRequest->getData('noCompte');
@@ -127,6 +114,7 @@ class GestionPrevisionService extends ServiceStub {
         $this->logger->debug('solde ope:'.$soldeOpe);
 		
         $mois=date('Y-m');
+		//on ne prend que les dépenses pour être dans le cas le plus défavorable
         $l_requete =
 			"SELECT SUM(montant) as total 
 			FROM prevision, flux 
@@ -143,7 +131,6 @@ class GestionPrevisionService extends ServiceStub {
         $soldePre = $tab[0];
 		$soldePre = $soldePre->total;
         $this->logger->debug('solde pre:'.$soldePre);
-		
 		
 		$l_requeteOpe =
 			"SELECT sum(montant) as total 
@@ -167,6 +154,7 @@ class GestionPrevisionService extends ServiceStub {
 		
 		$this->logger->debug('solde sommeope:'.$sommeOpe);
 		
+		// solde du compte + somme des opérations du compte + somme des prévisions du mois - somme des opérations correspondant à des prévisions
 		$solde = $compte->solde + $soldeOpe + $soldePre - $sommeOpe;
 		$tab=array();
 		$tab[1]=number_format($solde, 2,'.', '');
@@ -205,9 +193,13 @@ class GestionPrevisionService extends ServiceStub {
 		$prevision = new Prevision();
 		$prevision->ligneId=$ligneId;
 		$prevision->load();
-		$requeteTotaux = "SELECT round(sum(montant),2) as total
-						FROM operation 
-						WHERE nocompte='$prevision->noCompte' and date like concat('$prevision->mois','%') and fluxid='$prevision->fluxId'";
+		$requeteTotaux = 
+			"SELECT round(sum(montant),2) as total
+			FROM operation 
+			WHERE 1=1
+				AND nocompte='$prevision->noCompte' 
+				AND date like concat('$prevision->mois','%') 
+				AND fluxid='$prevision->fluxId'";
 		$listMontantTotaux = new ListDynamicObject();
 		$listMontantTotaux->name = 'ListeMontantFlux';
 		$listMontantTotaux->request($requeteTotaux);

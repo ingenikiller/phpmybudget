@@ -1,10 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of PrevisionCommun
  *
@@ -21,7 +15,6 @@ class PrevisionCommun {
      * @param $montant montant de la prévision
      */
     public static function genereLignes(Prevision $entete, $identete, $periodicite, $decalage, $montant){
-        //$periode = $entete->annee * 100 + $decalage;
         $mois=$decalage;
         while( $mois <= 12) {
             $periode = $entete->annee * 100 + $mois;
@@ -37,11 +30,7 @@ class PrevisionCommun {
             //decalage
             $mois+=$periodicite;
         }
-        
-        
-        
     }
-    
 }
 
 ?>

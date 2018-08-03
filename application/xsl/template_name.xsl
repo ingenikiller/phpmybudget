@@ -2,53 +2,6 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <!--
-        liste flux
-    -->
-    <xsl:template name="ListeFlux">
-        <xsl:param name="liste"/>
-        <xsl:param name="champ"/>
-        <xsl:param name="valeur"/>
-        <xsl:param name="obligatoire" select="'N'"/>
-        <xsl:param name="class" select="''"/>
-        <xsl:param name="valeurVide" select="'O'"/>
-        <xsl:param name="tabindex" select="''"/>
-        <xsl:param name="onchange" select="''"/>
-        <select name="{$champ}" id="{$champ}" class="form-control {$class}">
-            <xsl:if test="$obligatoire='true'">
-                <xsl:attribute name="class">obligatoire</xsl:attribute>
-            </xsl:if>
-            <xsl:if test="$tabindex!=''">
-                <xsl:attribute name="tabindex">
-                    <xsl:value-of select="$tabindex"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="$onchange!=''">
-                <xsl:attribute name="onchange">
-                    <xsl:value-of select="$onchange"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="$valeurVide='' or $valeurVide='O'">
-                <option/>
-            </xsl:if>
-            <xsl:for-each select="$liste/Flux">
-                <option value="{fluxId}">
-                    <xsl:if test="$valeur=fluxId">
-                        <xsl:attribute name="selected">selected</xsl:attribute>
-                    </xsl:if>
-                    <xsl:value-of select="flux"/>
-                </option>
-            </xsl:for-each>
-        </select>
-    </xsl:template>
-
-    <!--
-        affichage montant
-    -->
-    <!--xsl:template name="Montant">
-        <xsl:param name="montant" select="0"/>
-        <xsl:value-of select="format-number($montant, $FORMAT_MNT)"/>
-    </xsl:template-->
-    <!--
         Modif select
     -->
     <xsl:template name="ModifSelect">

@@ -103,7 +103,7 @@ class OperationCommun {
                 }
             } else {
                 if($l_flux->compteDest == $p_operation->noCompte){
-                    //mise � jour de l'opération d'origine
+                    //mise à jour de l'opération d'origine
                     $listOpeRec = new ListObject();
                     $listOpe->request('Operation', "noCompte='$l_flux->compteDest' AND noCompte='$p_operation->numeroCompteOri' AND operationId=$p_operation->operationIdOri");
                     $tab = $listOpeRec->tabResult;

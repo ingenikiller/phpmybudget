@@ -94,57 +94,12 @@
 			<div class="col-sm-10">
 		
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<!--p class="navbar-brand" style="color: white;">PhpMybudget</p>
-				<xsl:if test="$niveau1!=''">
-						<p class="navbar-text" style="color: white;">/</p>
-						<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
-					</xsl:if-->
-				<!--div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button-->
-					<!--a class="navbar-brand" href="#">PhpMybudget</a-->
-					<!--pan class="icon-bar">PhpMybudget</span-->
-					<!--p class="navbar-text" style="color: white;">PhpMybudget</p>
-					
+				<div class="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
+					<p class="navbar-brand" style="color: white;">PhpMybudget</p>
 					<xsl:if test="$niveau1!=''">
 						<p class="navbar-text" style="color: white;">/</p>
 						<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
-					</xsl:if-->
-					
-					<!--ol class="breadcrumb">
-					  <li>PhpMybudget</li>
-					  <li><a href="#">Library</a></li>
-					  <li class="active">Data</li>
-					</ol-->
-					
-				<!--/div-->
-				<div class="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
-					<!--div class="navbar-nav">
-					<a class="nav-item nav-link active" href="index.php?domaine=compte&amp;service=getpage">
-						<xsl:value-of select="$LBL.COMPTES"/>
-					</a>
-					  <a class="nav-item nav-link active" href="#">Features</a>
-					  <a class="nav-item nav-link active" href="#">Pricing</a>
-					  <a class="nav-item nav-link active" href="#">Disabled</a>
-					</div-->
-					<p class="navbar-brand" style="color: white;">PhpMybudget</p>
-							<xsl:if test="$niveau1!=''">
-							<p class="navbar-text" style="color: white;">/</p>
-							<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
 					</xsl:if>
-					<!--ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-							<p class="navbar-brand" style="color: white;">PhpMybudget</p>
-							<xsl:if test="$niveau1!=''">
-							<p class="navbar-text" style="color: white;">/</p>
-							<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
-							</xsl:if>
-						</li>
-					</ul-->
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
 							<a class="nav-item nav-link active" href="index.php?domaine=compte&amp;service=getpage" style="color: white;">
@@ -168,34 +123,9 @@
 						</li>
 					</ul>
 				  </div>
-				<!--div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-						<li class="nav-item active">
-							<a href="index.php?domaine=compte&amp;service=getpage">
-								<xsl:value-of select="$LBL.COMPTES"/>
-							</a>
-						</li>
-						<li class="nav-item active">
-							<a href="index.php?domaine=flux&amp;service=getpage">
-								<xsl:value-of select="$LBL.FLUX"/>
-							</a>
-						</li>
-						<li class="nav-item active">
-							<a href="index.php?domaine=segment">
-								<xsl:value-of select="$LBL.PARAMETRAGE"/>
-							</a>
-						</li>
-						<li class="nav-item active">
-							<a href="index.php?domaine=periode">
-								<xsl:value-of select="$LBL.PERIODE"/>
-							</a>
-						</li>
-					</ul>
-				</div-->
-			
-		</nav>
+				</nav>
 			</div>
-			</div>
+		</div>
 	</xsl:template>
 	<xsl:template name="controleMenu">O</xsl:template>
 	<xsl:template name="onLoadTemplate"/>

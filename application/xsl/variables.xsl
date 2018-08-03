@@ -5,7 +5,7 @@
 <xsl:variable name="JQUERY-VERSION" select="'1.12.0'"/>
 
 <!-- version de Bootstrap -->
-<xsl:variable name="BOOTSTRAP-VERSION" select="'4.0.0'"/>
+<xsl:variable name="BOOTSTRAP-VERSION" select="'4.1.3'"/>
 
 <xsl:variable name="BLANK">application/xsl/blank.html</xsl:variable>
 

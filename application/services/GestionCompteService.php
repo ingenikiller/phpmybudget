@@ -45,7 +45,7 @@ class GestionCompteService extends ServiceStub {
         $compte->load();
         $compte->fieldObject($p_contexte->m_dataRequest);
         $compte->update();
-				$p_contexte->addDataBlockRow($compte);
+		$p_contexte->addDataBlockRow($compte);
     }
 
 	public function soldeCompte($p_contexte){

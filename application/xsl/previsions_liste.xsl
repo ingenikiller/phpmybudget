@@ -51,7 +51,6 @@
 						</th>
 						<td>
                             <input type="button" id="boutonEntete" name="boutonEntete" value="Entete" onclick="afficheEntete('{$NUMEROCOMPTE}');"/>
-                            <!--select name="listeEntete" id="listeEntete" onchange="afficheListeGroupe(this.value)">&#160;</select-->
                         </td>
                     </tr>
                     <tr>
@@ -109,14 +108,7 @@
 							<xsl:value-of select="$LBL.PERIODE"/>
 						</label>
 						<div class="col-sm-6">
-							<select name="mois" id="mois" tabindex="10" class="form-control">
-								<option/>
-								<xsl:for-each select="/root/data/ListePeriodes/Periode">
-									<option value="{periode}">
-										<xsl:value-of select="periode"/>
-									</option>
-								</xsl:for-each>
-							</select>
+							<select name="mois" id="mois" tabindex="10" class="form-control">&#160;</select>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -159,12 +151,12 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="noReleve" class="col-sm-6 form-control-label">Périodicité</label>
+						<label for="noReleve" class="col-sm-6 form-control-label">Pï¿½riodicitï¿½</label>
 						<div class="col-sm-6">
 							<select name="periodicite" id="periodicite" class="form-control obligatoire" tabindex="10" required="required">
                                 <option/>
                                 <option value="M">Mensuelle</option>
-                                <option value="T1">Trimestre début</option>
+                                <option value="T1">Trimestre dï¿½but</option>
                                 <option value="T3">Trimestre fin</option>
                             </select>
 						</div>
@@ -185,7 +177,7 @@
         </div>
     </xsl:template>
     <!--
-        template boite de dialogue liste des prévisions par entête
+        template boite de dialogue liste des prï¿½visions par entï¿½te
     -->
     <xsl:template name="boiteListeEntete">
         <div id="boiteListeEntete" title="{$LBL.EDITIONLISTEPREVISION}" style="display: none;">

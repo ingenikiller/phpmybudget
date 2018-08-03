@@ -52,13 +52,35 @@ function refreshWindow() {
 	} else if(flagPinel == 'pinel') {
 		paramPinel='&fluxMaitreId=101';
 	}
-		
+	
+	afficheListePeriode();	
 	affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
 	afficheEstimation('estimation', $('#numeroCompte').val());
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N'+paramPinel);
 	afficheFluxSelect('fluxIdEntete', $('#numeroCompte').val(), 'fluxMaitre=N'+paramPinel);
+	
 	//recupereListeEntetes('listeEntete', $('#annee').val(), $('#numeroCompte').val());
 }
+
+function afficheListePeriode() {
+	var annee = $('#annee').val();
+	$.getJSON(
+		"index.php?domaine=periode&service=getlistemois",
+		{"annee": annee },
+		function(json){
+			$('#mois').empty();
+
+			var nb=json[0].nbLine;
+			var tabJson = json[0].tabResult;
+			var i=0;
+			for(i=0; i<nb; i++) {
+				$('#mois').append(new Option(tabJson[i].periode, tabJson[i].periode, false, false));
+			}
+			//$('#mois').val(valeur);
+		}
+	);
+}
+
 
 /*********************************************************
 	affichage d'une prÃ©vision
@@ -124,8 +146,8 @@ function modifierPrevision(form) {
 
 
 /***********************************************************************
- affiche la popup de saisie d'une entete de prévision
-	-compte: numéro de compte
+ affiche la popup de saisie d'une entete de prï¿½vision
+	-compte: numï¿½ro de compte
  ***********************************************************************/
 function afficheEntete(compte) {
 	
