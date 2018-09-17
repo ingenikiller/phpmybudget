@@ -31,7 +31,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="numerocompte" class="form-control-label">
+						<label for="solde" class="form-control-label">
 							<xsl:value-of select="$LBL.SOLDE"/>
 						</label>
 						<input type="text" id="solde" name="solde" class="form-control numerique" readonly="readonly" size="8"/>

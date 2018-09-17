@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:import href="commun.xsl"/>
     <xsl:import href="template_name.xsl"/>
@@ -65,16 +65,16 @@
                         <th>
 							<xsl:value-of select="$LBL.SOLDE"/>
 						</th>
-                        <td>
-                            <xsl:value-of select="format-number(number(/root/data/SommeOperations/Dynamic/total) + number(/root/data/Comptes/solde), $FORMAT_MNT)"/>
+                        <td class="text-right">
+                            <xsl:value-of select="format-number(number(/root/data/SommeOperations/Dynamic/total) + number(/root/data/Comptes/solde), $FORMAT_MNT)"/> €
                         </td>
                     </tr>
                     <tr>
                         <th>
 							<xsl:value-of select="$LBL.ESTIMATION"/>
 						</th>
-                        <td>
-                            <span id="estimation">&#160;</span>
+                        <td class="text-right">
+                            <span id="estimation">&#160;</span> €
                         </td>
                     </tr>
                 </table>
@@ -128,7 +128,7 @@
         </div>
         <div id="boiteEntete" title="Edition" style="display: none;">
             <!--
-                formulaire entete
+                formulaire entête
             -->
             <form method="POST" name="editionEnteteUnitaire" id="editionEnteteUnitaire" action="#" onsubmit="return creerEntete(this)">
 				<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
@@ -151,12 +151,12 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="noReleve" class="col-sm-6 form-control-label">P�riodicit�</label>
+						<label for="noReleve" class="col-sm-6 form-control-label">Périodicité</label>
 						<div class="col-sm-6">
 							<select name="periodicite" id="periodicite" class="form-control obligatoire" tabindex="10" required="required">
                                 <option/>
                                 <option value="M">Mensuelle</option>
-                                <option value="T1">Trimestre d�but</option>
+                                <option value="T1">Trimestre début</option>
                                 <option value="T3">Trimestre fin</option>
                             </select>
 						</div>
@@ -177,7 +177,7 @@
         </div>
     </xsl:template>
     <!--
-        template boite de dialogue liste des pr�visions par ent�te
+        template boite de dialogue liste des prévisions par entête
     -->
     <xsl:template name="boiteListeEntete">
         <div id="boiteListeEntete" title="{$LBL.EDITIONLISTEPREVISION}" style="display: none;">

@@ -18,7 +18,6 @@ function alimenteListesCompte() {
 	}
 	
 	getListeComptes(fonctionSuccess);
-	
 }
 
 /*********************************************************
@@ -63,8 +62,6 @@ function listerObjects(){
 	//appel synchrone de l'ajax
 	getListeFlux(params, fonctionSuccess);
 	
-	//alert(jsonObjectInstance);
-	
 	return false;
 }
 
@@ -81,7 +78,6 @@ function parseListeJson(json) {
 	document.getElementById('rch_page').value=json[0].page;
 	document.getElementById('max_page').value=json[0].totalPage;
 	
-	
 	var nb=json[0].nbLine;
 	var tabJson = json[0].tabResult;
 	var i=0;
@@ -91,7 +87,6 @@ function parseListeJson(json) {
 		row.append($('<td/>').text(tabJson[i].description));
 		row.append($('<td class="text-center"/>').text(tabJson[i].compteId));
 		row.append($('<td class="text-center"/>').text(tabJson[i].compteDest));
-		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerFlux(\''+ tabJson[i].fluxId +'\')">Editer</a>'));
 		$("#tbodyResultat").append(row);
 	}
@@ -118,8 +113,6 @@ function editerFlux(fluxId){
 		//
 		$('#service').val('update');
 		var params = '&fluxId='+fluxId;
-		//var tabJson = jsonObjectInstance[0].tabResult;
-		//var i=0;
 		var fonctionSuccess = function(resultat) {
 			$('#flux').val(resultat[0].flux);
 			$('#fluxId').val(resultat[0].fluxId);
@@ -153,15 +146,14 @@ function editerFlux(fluxId){
 			$('#depense').val(resultat[0].depense);
 		}
 		getFlux(params, fonctionSuccess);
-		
 	}
 	
 	$("div#boiteFlux").dialog({
-			resizable: false,
-			//height:450,
-			width:620,
-			modal: true
-		});
+		resizable: false,
+		//height:450,
+		width:620,
+		modal: true
+	});
 }
 
 

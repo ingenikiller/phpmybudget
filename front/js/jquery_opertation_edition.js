@@ -98,5 +98,4 @@ function getModeReglementDefaut(flux, modePaiement){
 		modePaiement.value = resultat[0].modePaiementId;
 	}
 	getFlux(params, fonctionSuccess);
-	
 }

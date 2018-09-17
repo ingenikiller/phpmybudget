@@ -13,8 +13,9 @@
 	<xsl:template name="Contenu">
 		<br/>
 		<div class="row">
-			<aside class="col-sm-2 formulaire">
-				<form class="form-inline" method="post" name="recherche" id="recherche" onsubmit="return rechercherFlux(this);">
+			<aside class="col formulaire">
+				<form method="post" name="recherche" id="recherche" onsubmit="return rechercherFlux(this);">
+					<br/>
 					<xsl:call-template name="formulaireJson"/>
 					<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 						<div class="btn-group" role="group" aria-label="First group">
@@ -25,20 +26,23 @@
 								<span class="oi oi-plus"/>
 							</button>
 						</div>
-
-						<div class="form-group">
-							<label for="comptePrincipal"><xsl:value-of select="$LBL.COMPTEPRINCIPAL"/></label>
-							<select class="form-control" id="comptePrincipal">&#160;</select>
-						</div>
-						<div class="form-group">
-							<label for="compteDestination"><xsl:value-of select="$LBL.COMPTEDESTINATION"/></label>
-							<select class="form-control" id="compteDestination">&#160;</select>
-						</div>
+					</div>
+					<div class="form-group">
+						<label for="comptePrincipal" class="form-control-label">
+							<xsl:value-of select="$LBL.COMPTEPRINCIPAL"/>
+						</label>
+						<select class="form-control" id="comptePrincipal">&#160;</select>
+					</div>
+					<div class="form-group">
+						<label for="compteDestination" class="form-control-label">
+							<xsl:value-of select="$LBL.COMPTEDESTINATION"/>
+						</label>
+						<select class="form-control" id="compteDestination">&#160;</select>
 					</div>
 				</form>
 				<br/>
 			</aside>
-			<div class="col-sm-10">
+			<div class="col-10">
 				<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
 					<thead>
 						<tr class="entete">

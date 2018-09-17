@@ -168,8 +168,7 @@ function parseListeJson(json) {
 	document.getElementById('numeroPage').value=json[0].page;
 	document.getElementById('rch_page').value=json[0].page;
 	document.getElementById('max_page').value=json[0].totalPage;
-
-
+	
 	var nb=json[0].nbLine;
 	var tabJson = json[0].tabResult;
 	var i=0;
@@ -202,7 +201,7 @@ function parseListeJson(json) {
 			var operationId = $(elem).attr('operationId');
 			
 			$.getJSON('index.php?domaine=operation&service=getsoldeoperation&numeroCompte='+numeroCompte+'&operationId='+operationId).always(function(resultat) {
-				elem.tooltip('option', 'content', 'Solde= '+resultat[0].valeur.toFixed(2));
+				elem.tooltip('option', 'content', 'Solde = '+resultat[0].valeur.toFixed(2)+' €');
 			 });
 		}
     });
