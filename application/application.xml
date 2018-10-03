@@ -19,9 +19,9 @@
 		<domaine name="operation">
 			<service name="getpage" classe="GestionOperationService" methode="getPage" isPrivee="false" xsl="xsl/operation_liste.xsl" paramFlow="MODPAI"/>
 			<service name="getsoldeoperation" classe="GestionOperationService" methode="getSoldeOperation" isPrivee="true" render="json"/>
-			<service name="reclibelle" classe="GestionOperationService" methode="recLibelle" render="json" isPrivee="false"/>
+			<service name="reclibelle" classe="GestionOperationService" methode="recLibelle" render="json" isPrivee="true"/>
 			<service name="getliste" classe="GestionOperationService" methode="getListe" render="json" isPrivee="true"/>
-			<service name="getone" classe="GestionOperationService" methode="gesListe" render="json" isPrivee="true"/>
+			<service name="getone" classe="GestionOperationService" methode="getListe" render="json" isPrivee="true"/>
 			<service name="create" classe="GestionOperationService" methode="create" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionOperationService" methode="update" render="json" isPrivee="true"/>
 		</domaine>
@@ -65,13 +65,13 @@
 			<service name="affformperiode" classe="GestionStatistiquesService" methode="fictive" isPrivee="true" xsl="xsl/statistiques_periode_form.xsl"/>
 		</domaine>
 		<domaine name="technique">
-			<service name="login" classe="Login" methode="fictive" isPrivee="false" xsl="xsl/login.xsl" privee="false"/>
+			<service name="login" classe="Login" methode="fictive" isPrivee="false" xsl="xsl/login.xsl"/>
 			<service name="connexion" classe="Login" methode="connexion" isPrivee="false" render="json"/>
 			<service name="deconnexion" classe="Login" methode="deconnexion" isPrivee="false" render="json"/>
-			<service name="gentables" classe="GenerateurService" methode="create" isPrivee="false"  xsl="xsl/login.xsl" privee="false"/>
+			<service name="gentables" classe="GenerateurService" methode="create" isPrivee="true"  xsl="xsl/login.xsl"/>
 		</domaine>
 		<domaine name="defaut">
-			<service name="defaut" classe="Login" methode="fictive" isPrivee="false"  xsl="xsl/login.xsl" privee="false"/>
+			<service name="defaut" classe="Login" methode="fictive" isPrivee="false"  xsl="xsl/login.xsl"/>
 		</domaine>
 	</domaines>
 </configuration>

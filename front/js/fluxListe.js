@@ -74,9 +74,9 @@ function parseListeJson(json) {
 	
 	var total = json[0].nbLineTotal;
 	var nbpage = Math.ceil(total/json[0].nbLine);
-	document.getElementById('numeroPage').value=json[0].page;
-	document.getElementById('rch_page').value=json[0].page;
-	document.getElementById('max_page').value=json[0].totalPage;
+	$('#numeroPage').val(json[0].page);
+	$('#rch_page').val(json[0].page);
+	$('#max_page').val(json[0].totalPage);
 	
 	var nb=json[0].nbLine;
 	var tabJson = json[0].tabResult;
@@ -125,21 +125,21 @@ function editerFlux(fluxId){
 
 			$('#compteDest').val(resultat[0].compteDest);
 			if(resultat[0].entreeEpargne=='') {
-			$('#entreeEpargne').removeAttr('checked')
+				$('#entreeEpargne').prop('checked', false);
 			} else {	
-			$('#entreeEpargne').attr('checked', 'checked');
+				$('#entreeEpargne').prop('checked', true);
 			}
 
 			if(resultat[0].sortieEpargne=='') {
-				$('#sortieEpargne').removeAttr('checked')
+				$('#sortieEpargne').prop('checked', false);
 			} else {	
-				$('#sortieEpargne').attr('checked', 'checked');
+				$('#sortieEpargne').prop('checked', true);
 			}
 
 			if(resultat[0].fluxMaitre=='N') {
-				$('#fluxMaitre').removeAttr('checked')
+				$('#fluxMaitre').prop('checked', false);
 			} else {	
-				$('#fluxMaitre').attr('checked', 'checked');
+				$('#fluxMaitre').prop('checked', true);
 			}
 
 			$('#fluxMaitreId').val(resultat[0].fluxMaitreId);
@@ -174,8 +174,8 @@ function enregistreFlux(form){
 				"modePaiementId": form.modePaiementId.value,
 				"compteId": form.compteId.value,
 				"compteDest": form.compteDest.value,
-				"entreeEpargne": $('#entreeEpargne').attr('checked')=='checked'?'checked':'',
-				"sortieEpargne": $('#sortieEpargne').attr('checked')=='checked'?'checked':'',
+				"entreeEpargne": $('#entreeEpargne').is(':checked')?'O':'',
+				"sortieEpargne": $('#sortieEpargne').is(':checked')?'O':'',
 				"fluxMaitreId": form.fluxMaitreId.value,
 				"fluxMaitre": $('#fluxMaitre').is(':checked')?'O':'N',
 				"depense": form.depense.value

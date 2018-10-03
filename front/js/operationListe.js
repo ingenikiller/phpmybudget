@@ -82,14 +82,14 @@ function editerOperation(numeroCompte, operationId){
 			"index.php?domaine=operation&service=getone",
 			data=params,
 			function(json){
-				document.operation.service.value='update';
-				document.operation.operationId.value=json[0].tabResult[0].operationId;
-				document.operation.noReleve.value=json[0].tabResult[0].noReleve;
-				document.operation.libelle.value=json[0].tabResult[0].libelle;
-				document.operation.montant.value=json[0].tabResult[0].montant.replace(',','');
-				document.operation.fluxId.value=json[0].tabResult[0].fluxId;
-				document.operation.modePaiementId.value=json[0].tabResult[0].modePaiementId;
-				document.operation.date.value=json[0].tabResult[0].date;
+				$('#service').val('update');
+				$('#operationId').val(json[0].tabResult[0].operationId);
+				$('#noReleve').val(json[0].tabResult[0].noReleve);
+				$('#libelle').val(json[0].tabResult[0].libelle);
+				$('#montant').val(json[0].tabResult[0].montant.replace(',',''));
+				$('#fluxId').val(json[0].tabResult[0].fluxId);
+				$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
+				$('#date').val(json[0].tabResult[0].date);
 
 				$("div#boiteOperation").dialog({
 					resizable: false,
@@ -99,13 +99,13 @@ function editerOperation(numeroCompte, operationId){
 			}
 		);
 	} else {
-		document.operation.service.value='create';
-		document.operation.operationId.value='';
-		document.operation.noReleve.value='';
-		document.operation.libelle.value='';
-		document.operation.montant.value='';
-		document.operation.fluxId.value='';
-		document.operation.modePaiementId.value='';
+		$('#service').val('create');
+		$('#operationId').val('');
+		$('#noReleve').val('');
+		$('#libelle').val('');
+		$('#montant').val('');
+		$('#fluxId').val('');
+		$('#modePaiementId').val('');
 
 		$("div#boiteOperation").dialog({
 			resizable: false,
@@ -165,9 +165,10 @@ function parseListeJson(json) {
 
 	var total = json[0].nbLineTotal;
 	var nbpage = Math.ceil(total/json[0].nbLine);
-	document.getElementById('numeroPage').value=json[0].page;
-	document.getElementById('rch_page').value=json[0].page;
-	document.getElementById('max_page').value=json[0].totalPage;
+
+	$('#numeroPage').val(json[0].page);
+	$('#rch_page').val(json[0].page);
+	$('#max_page').val(json[0].totalPage);
 	
 	var nb=json[0].nbLine;
 	var tabJson = json[0].tabResult;
