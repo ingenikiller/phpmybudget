@@ -6,8 +6,8 @@
         <xsl:value-of select="/root/request/recNoReleve"/>
     </xsl:param>
     <xsl:template name="js.module.sheet">
-        <script type="text/javascript" src="front/js/operationListe.js" charset="iso-8859-1">&#160;</script>
-		<script type="text/javascript" src="front/js/jquery_opertation_edition.js" charset="iso-8859-1">&#160;</script>
+        <script src="front/js/operationListe.js">&#160;</script>
+		<script src="front/js/jquery_opertation_edition.js">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
 		<br/>
@@ -25,8 +25,8 @@
 						</div>
   
 						<div class="btn-group" role="group" aria-label="Third group" style="float:right;">
-							<button type="button" class="btn btn-primary" id="" name="" onclick="editerOperation('{$NUMEROCOMPTE}','');" style="font-size:20px;">
-								<span class="oi oi-plus"/>
+							<button type="button" class="btn btn-primary" id="editerOperation" name="editerOperation" onclick="editerOperation('{$NUMEROCOMPTE}','');" style="font-size:20px;">
+								<span class="oi oi-plus">&#160;</span>
 							</button>
 						</div>
 					</div>
@@ -59,7 +59,7 @@
 				</aside>
 			</form>
 			<div class="col-10">
-				<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
+				<table class="table table-striped table-bordered" id="tableauResultat">
 					<thead>
 						<tr>
 							<th class="text-center">

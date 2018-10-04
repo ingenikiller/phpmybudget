@@ -121,7 +121,7 @@
 						</div>
 					</div>
 					<div class="row justify-content-md-center">
-						<button type="submit" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
+						<button type="submit" id="modifierPrevision" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
 					</div>
                 </div>
             </form>
@@ -170,7 +170,7 @@
 						</div>
 					</div>
 					<div class="row justify-content-md-center">
-						<button type="submit" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
+						<button type="submit" id="creerEntete" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
 					</div>
 				</div>
             </form>
@@ -183,7 +183,7 @@
         <div id="boiteListeEntete" title="{$LBL.EDITIONLISTEPREVISION}" style="display: none;">
             <form method="post" action="" onsubmit="return enregistreListeLignes(this);">
                 <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
-                <table id="tabListeEntete" name="tabListeEntete" width="80%" align="center" class="table table-striped table-bordered">
+                <table id="tabListeEntete" width="80%" class="table table-striped table-bordered">
                     <thead>
 						<tr>
 							<th><xsl:value-of select="$LBL.MOIS"/></th>
@@ -195,7 +195,7 @@
                     <tfoot>
                         <tr>
                             <td style="text-align:center;" colspan="3">
-                                <input type="submit" class="bouton" id="" value="{$LBL.MODIFIER}"/>
+                                <input type="submit" class="bouton" id="enregistreListeLignes" value="{$LBL.MODIFIER}"/>
                             </td>
                         </tr>
                     </tfoot>

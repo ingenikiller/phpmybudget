@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:output indent="yes" method="html" omit-xml-declaration="yes" />
 	<!--regle principal-->
 	<xsl:template match="/">
 		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;</xsl:text>
@@ -44,10 +45,10 @@
 			<meta content="text/html;charset=UTF-8" http-equiv="content-type"/>
 			<meta NAME="DESCRIPTION" CONTENT="PhpMyBudget"/>
 			<meta NAME="KEYWORDS" CONTENT="gestion compte"/>
-			<meta http-equiv="Pragma" content="no-cache"/>
+			<!--meta http-equiv="Pragma" content="no-cache"/>
 			<meta http-equiv="Cache-Control" content="no-cache"/>
 			<meta http-equiv="Expires" content="0"/>
-			<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+			<meta http-equiv="X-UA-Compatible" content="IE=8"/-->
 			<title>
 				<xsl:choose>
 					<xsl:when test="$HeadTitre!=''">
@@ -65,22 +66,22 @@
 			
 			<link href="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 			
-			<script type="text/javascript" src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/external/jquery/jquery.js" charset="UTF-8">&#160;</script>
+			<script src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/external/jquery/jquery.js">&#160;</script>
 			<!--script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script-->
     
-			<script type="text/javascript" src="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/js/bootstrap.min.js" charset="UTF-8">&#160;</script>
-			<script type="text/javascript" src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.js" charset="UTF-8">&#160;</script>
+			<script src="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/js/bootstrap.min.js">&#160;</script>
+			<script src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.js">&#160;</script>
 
-			<script type="text/javascript" src="front/js/commun.js" charset="UTF-8">&#160;</script>
-			<script type="text/javascript" src="front/js/communFormulaire.js" charset="UTF-8">&#160;</script>
-			<script type="text/javascript" src="front/js/dateFormat.js" charset="UTF-8">&#160;</script>
-			<script type="text/javascript" src="front/js/communJson.js" charset="UTF-8">&#160;</script>
-			<script type="text/javascript" src="front/core/session.js" charset="UTF-8">&#160;</script>
-			<script type="text/javascript" src="front/js/core_ajax.js" charset="UTF-8">&#160;</script>
+			<script src="front/js/commun.js">&#160;</script>
+			<script src="front/js/communFormulaire.js">&#160;</script>
+			<script src="front/js/dateFormat.js">&#160;</script>
+			<script src="front/js/communJson.js">&#160;</script>
+			<script src="front/core/session.js">&#160;</script>
+			<script src="front/js/core_ajax.js">&#160;</script>
 			
 			<!-- plugins -->
 			<link href="front/css/jquery.multiselect.css" rel="stylesheet" type="text/css"/>
-			<script type="text/javascript" src="front/js/jquery.multiselect.js" charset="UTF-8">&#160;</script>
+			<script src="front/js/jquery.multiselect.js">&#160;</script>
 
 			<link href="front/css/bootstrap-force.css" rel="stylesheet" type="text/css"/>
 			<link href="front/css/phpmybudget.css" rel="stylesheet" type="text/css"/>

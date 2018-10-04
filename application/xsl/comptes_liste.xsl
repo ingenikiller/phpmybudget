@@ -3,7 +3,7 @@
     <xsl:import href="template_name.xsl"/>
     <xsl:import href="commun.xsl"/>
     <xsl:template name="js.module.sheet">
-        <script type="text/javascript" src="front/js/compteEdition.js" charset="iso-8859-1">&#160;</script>
+        <script src="front/js/compteEdition.js">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
         <div class="row justify-content-md-center">
@@ -15,7 +15,7 @@
                 <form name="recComptes" id="recComptes">
                     <xsl:call-template name="formulaireJson"/>
                 </form>
-                <button type="button" class="btn btn-primary" id="" name="" onclick="editerCompte('');">
+                <button type="button" class="btn btn-primary" id="editerCompte" name="editerCompte" onclick="editerCompte('');">
                     <span class="oi oi-plus"/>
                 </button>
                 <br/>

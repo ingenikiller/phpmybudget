@@ -11,7 +11,7 @@
 				<form  class="form-inline" method="post" onsubmit="return pagination('{$formulairePrincipal}')" name="{$formPagination}" id="{$formPagination}">
 					<div class="form-group">
 						<a href="#" onclick="javascript:changePage('{$formulairePrincipal}', '-1')"  id="lienPrecedant">
-							<span class="oi oi-caret-left"/>
+							<span class="oi oi-caret-left">&#160;</span>
 						</a>
 					</div>
 					<div class="form-group">
@@ -21,8 +21,8 @@
 
 					</div>
 					<div class="form-group">
-						<a href="#" onclick="changePage('{$formulairePrincipal}', '1')" disabled="" id="lienSuivant">
-							<span class="oi oi-caret-right"/>
+						<a href="#" onclick="changePage('{$formulairePrincipal}', '1')" id="lienSuivant">
+							<span class="oi oi-caret-right">&#160;</span>
 						</a>
 					</div>
 				</form>

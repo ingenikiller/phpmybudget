@@ -8,7 +8,7 @@
 		</a>
 	</xsl:variable>
 	<xsl:template name="js.module.sheet">
-		<script type="text/javascript" src="front/js/fluxListe.js" charset="UTF-8">&#160;</script>
+		<script src="front/js/fluxListe.js">&#160;</script>
 	</xsl:template>
 	<xsl:template name="Contenu">
 		<br/>
@@ -22,7 +22,7 @@
 							<button type="submit" class="btn btn-primary">Rechercher</button>
 						</div>
 						<div class="btn-group" role="group" aria-label="Third group" style="float:right;">
-							<button type="button" class="btn btn-primary" id="" name="" onclick="editerFlux('');" style="font-size:20px;">
+							<button type="button" class="btn btn-primary" id="editerFlux" name="editerFlux" onclick="editerFlux('');" style="font-size:20px;">
 								<span class="oi oi-plus"/>
 							</button>
 						</div>
@@ -43,7 +43,7 @@
 				<br/>
 			</aside>
 			<div class="col-10">
-				<table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
+				<table class="table table-striped table-bordered" id="tableauResultat">
 					<thead>
 						<tr class="entete">
 							<th>
