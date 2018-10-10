@@ -2,12 +2,8 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:import href="template_name.xsl"/>
     <xsl:import href="commun.xsl"/>
-    <xsl:param name="RECRELEVE">
-        <xsl:value-of select="/root/request/recNoReleve"/>
-    </xsl:param>
     <xsl:template name="js.module.sheet">
-        <script src="front/js/operationListe.js">&#160;</script>
-		<script src="front/js/jquery_opertation_edition.js">&#160;</script>
+        <script src="front/js/operation_recurrente.js">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
 		<br/>
@@ -31,19 +27,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="solde" class="form-control-label">
-							<xsl:value-of select="$LBL.SOLDE"/>
-						</label>
-						<input type="text" id="solde" name="solde" class="form-control numerique" readonly="readonly" size="8"/>
-					</div>
-					<div class="form-group">
-						<label for="recDate" class="form-control-label">
-							<xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
-						</label>
-						<input type="text" id="recDate" name="recDate" class="form-control numerique" size="10"/>
-					</div>
-					
-					<div class="form-group">
 						<label for="recFlux" class="form-control-label">
 							<xsl:value-of select="$LBL.FLUX"/>
 						</label>
@@ -63,25 +46,16 @@
 					<thead>
 						<tr>
 							<th class="text-center">
-								<xsl:value-of select="$LBL.NUMERORELEVE"/>
-							</th>
-							<th class="text-center">
-								<xsl:value-of select="$LBL.DATE"/>
-							</th>
-							<th class="text-center">
 								<xsl:value-of select="$LBL.LIBELLE"/>
-							</th>
-							<th class="text-center">
-								<xsl:value-of select="$LBL.MONTANT"/>
 							</th>
 							<th class="text-center">
 								<xsl:value-of select="$LBL.FLUX"/>
 							</th>
 							<th class="text-center">
-								<xsl:value-of select="$LBL.ACTION"/>
+								<xsl:value-of select="$LBL.MONTANT"/>
 							</th>
 							<th class="text-center">
-								<xsl:value-of select="$LBL.SOLDE"/>
+								<xsl:value-of select="$LBL.ACTION"/>
 							</th>
 						</tr>
 					</thead>
@@ -93,7 +67,7 @@
 				</xsl:call-template>
 			</div>
 		</div>
-		<xsl:call-template name="operationEdition">
+		<xsl:call-template name="operationRecurrenteEdition">
 			<xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
 		</xsl:call-template>
     </xsl:template>

@@ -22,7 +22,7 @@
 							<button type="submit" class="btn btn-primary">Rechercher</button>
 						</div>
 						<div class="btn-group" role="group" aria-label="Third group" style="float:right;">
-							<button type="button" class="btn btn-primary" id="editerFlux" name="editerFlux" onclick="editerFlux('');" style="font-size:20px;">
+							<button type="button" class="btn btn-primary" id="editerFluxBtn" name="editerFluxBtn" onclick="editerFlux('');" style="font-size:20px;">
 								<span class="oi oi-plus"/>
 							</button>
 						</div>

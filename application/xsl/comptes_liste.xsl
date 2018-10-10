@@ -40,6 +40,9 @@
                             <th class="text-center">
                                 <xsl:value-of select="$LBL.OPERATIONS"/>
                             </th>
+							<th class="text-center">
+                                <xsl:value-of select="$LBL.OPERATIONSRECURRENTES"/>
+                            </th>
                             <th class="text-center">
                                 <xsl:value-of select="$LBL.STATISTIQUES"/>
                             </th>

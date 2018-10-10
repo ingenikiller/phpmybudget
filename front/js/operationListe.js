@@ -8,6 +8,7 @@ $(document).ready(function() {
 	afficheFluxSelectMulti('recFlux', $('#numeroCompte').val(), '');
 	afficheFluxSelect('fluxId', $('#numeroCompte').val(), 'fluxMaitre=N&recFluxOperations=O');
 	getSoldeCompte($('#numeroCompte').val(), 'solde');
+	getListeOpeRecurrente($('#numeroCompte').val());
 	listerObjects();
 });
 
@@ -91,6 +92,7 @@ function editerOperation(numeroCompte, operationId){
 				$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
 				$('#date').val(json[0].tabResult[0].date);
 
+				$("div#divOpeRec").hide();
 				$("div#boiteOperation").dialog({
 					resizable: false,
 					width:largeur,
@@ -106,7 +108,7 @@ function editerOperation(numeroCompte, operationId){
 		$('#montant').val('');
 		$('#fluxId').val('');
 		$('#modePaiementId').val('');
-
+		$("div#divOpeRec").show();
 		$("div#boiteOperation").dialog({
 			resizable: false,
 			width:largeur,
@@ -213,4 +215,26 @@ function parseListeJson(json) {
 	   $('.ui-tooltip').hide();
 	 });
 
+}
+
+/*********************************************************
+	récupère la liste des opé récurrentes pour le compte
+	en cours et alimente la combo de choix
+ *********************************************************/
+function getListeOpeRecurrente(numeroCompte) {
+	var params = "numeroCompte="+numeroCompte;
+	$.ajax({
+		url: "index.php?domaine=operationrecurrente&service=getliste",
+		dataType: 'json',
+		data: params,
+		success: function(json) {
+			var nb=json[0].nbLine;
+			var tabJson = json[0].tabResult;
+			var i=0;
+			$('#operationrecurrenteId').append(new Option("", false,false));
+			for(i=0; i<nb; i++) {
+				$('#operationrecurrenteId').append(new Option(tabJson[i].libelle + " " +tabJson[i].montant, tabJson[i].operationrecurrenteId, false, false));
+			}
+		}
+	});
 }

@@ -90,12 +90,20 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
 }
 
 /*********************************************************
-	recherche le mode de règlement par défaut d'un flux
+	récupère l'ope sélectionnée et alimente les champs de 
+	saisie à partir d'un appel ajax
  *********************************************************/
-function getModeReglementDefaut(flux, modePaiement){
-	var params = '&fluxId='+flux.value;
-	var fonctionSuccess = function(resultat) {
-		modePaiement.value = resultat[0].modePaiementId;
-	}
-	getFlux(params, fonctionSuccess);
+function getInfoOpeRec(obj) {
+	var opeId=$(obj).val();
+	var params="operationrecurrenteId="+opeId+"&numeroCompte="+$('#numeroCompte').val();
+	$.getJSON(
+		"index.php?domaine=operationrecurrente&service=getone",
+		data=params,
+		function(json){
+			$('#libelle').val(json[0].tabResult[0].libelle);
+			$('#fluxId').val(json[0].tabResult[0].fluxId);
+			$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
+			$('#montant').val(json[0].tabResult[0].montant.replace(',',''));
+		}
+	);
 }

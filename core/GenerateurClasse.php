@@ -24,7 +24,7 @@ class GenerateurClasse {
 	 */
 	public function generer() {
 		//récupération de la liste des tables
-		$l_requete = 'SHOW TABLES';
+		$l_requete = 'SHOW full tables WHERE Table_Type = \'BASE TABLE\'';
 		$pdo = ConnexionPDO::getInstance ();
 		$l_result = $stmt = $pdo->query ( $l_requete );
 		while ( $l_table = $l_result->fetch ( PDO::FETCH_ASSOC ) ) {

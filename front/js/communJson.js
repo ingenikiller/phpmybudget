@@ -124,3 +124,14 @@ function traiteRetourJSON(retour){
 	}
 	return false;
 }
+
+/*********************************************************
+	recherche le mode de règlement par défaut d'un flux
+ *********************************************************/
+function getModeReglementDefaut(flux, modePaiement){
+	var params = '&fluxId='+flux.value;
+	var fonctionSuccess = function(resultat) {
+		modePaiement.value = resultat[0].modePaiementId;
+	}
+	getFlux(params, fonctionSuccess);
+}

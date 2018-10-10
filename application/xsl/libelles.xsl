@@ -66,6 +66,7 @@
 	<xsl:variable name="LBL.NUMERORELEVE">Numéro de relevé</xsl:variable>
 	<xsl:variable name="LBL.OPERATION">Opération</xsl:variable>
 	<xsl:variable name="LBL.OPERATIONS">Opérations</xsl:variable>
+	<xsl:variable name="LBL.OPERATIONSRECURRENTES">Opé. récurrentes</xsl:variable>
 	<xsl:variable name="LBL.OUI">Oui</xsl:variable>
 	<xsl:variable name="LBL.PARAMETRAGE">Paramétrage</xsl:variable>
 	<xsl:variable name="LBL.PERIODE">Période</xsl:variable>
