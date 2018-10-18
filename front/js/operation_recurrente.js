@@ -7,6 +7,13 @@ $(document).ready(function() {
 	listerObjects();
 });
 
+/*
+	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
+*/
+function rechercherOperations(form){
+	listerObjects();
+	return false;
+}
 
 function listerObjects(){
 

@@ -92,7 +92,7 @@
                                 <xsl:value-of select="$LBL.OPERATIONSRECURRENTES"/>
                             </label>
                             <div class="col-sm-6">
-                                <select class="form-control" name="operationrecurrenteId" id="operationrecurrenteId" onchange="return getInfoOpeRec(this)" tabindex="100">&#160;</select>
+                                <select class="form-control" name="operationrecurrenteId" id="operationrecurrenteId" onblur="return getInfoOpeRec(this)" tabindex="100">&#160;</select>
                             </div>
                         </div>
 						<div class="form-group row">
@@ -128,7 +128,7 @@
                                 <xsl:value-of select="$LBL.FLUX"/>
                             </label>
                             <div class="col-sm-6">
-                                <select class="form-control obligatoire" name="fluxId" id="fluxId" onchange="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
+                                <select class="form-control obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -316,7 +316,7 @@
 										<xsl:value-of select="$LBL.FLUX"/>
 									</label>
 									<div class="col-sm-6">
-										<select class="form-control obligatoire" name="fluxId" id="fluxId" onchange="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
+										<select class="form-control obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
 									</div>
 								</div>
 								<div class="form-group row">

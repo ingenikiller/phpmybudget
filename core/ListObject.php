@@ -19,9 +19,12 @@ class ListObject extends ListStructure implements IList{
     
 	private $logger;
 	
+	private $ligneParPage;
+	
 	final public function __construct(){
 		parent::__construct();
 		$this->logger = Logger::getRootLogger();
+		$this->ligneParPage = LIGNE_PAR_PAGE;
 	}
 	
     public function requestNoPage($classe, $clause=null) {
@@ -78,14 +81,14 @@ class ListObject extends ListStructure implements IList{
         $l_tab = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->nbLineTotal = $l_tab['total'];
         //requete principale
-        $l_requete = "select * $l_suff LIMIT " . ($page-1)*LIGNE_PAR_PAGE . ', ' . LIGNE_PAR_PAGE;
+        $l_requete = "select * $l_suff LIMIT " . ($page-1)*$this->ligneParPage . ', ' . $this->ligneParPage;
         $this->logger->debug('search complete: '. $l_requete);
         $stmt = self::$_pdo->query($l_requete);
         
         $this->nbLine = $stmt->rowCount();
         $this->tabResult = $stmt->fetchAll(PDO::FETCH_CLASS, $classe);//, array(self::$_pdo, $table[1]));   
         
-        $this->totalPage = ceil($this->getNbLineTotal() / LIGNE_PAR_PAGE);
+        $this->totalPage = ceil($this->getNbLineTotal() / $this->ligneParPage);
         $this->page=$page;
         //appel des requetes des objets associés
         $this->callAssoc();
@@ -112,5 +115,9 @@ class ListObject extends ListStructure implements IList{
     public function getNbLine(){
         return $this->nbLine;
     }
+	
+	public function setLigneParPage($nbLignes) {
+		$this->ligneParPage = $nbLignes;
+	}
 }
 ?>

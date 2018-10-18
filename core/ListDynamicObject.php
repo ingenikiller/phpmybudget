@@ -20,9 +20,12 @@ class ListDynamicObject extends ListStructure implements IList{
 	
 	private $logger;
 	
+	private $ligneParPage;
+	
 	final public function __construct(){
 		parent::__construct();
 		$this->logger = Logger::getRootLogger();
+		$this->ligneParPage = LIGNE_PAR_PAGE;
 	}
     
 //    public function getData() {
@@ -50,7 +53,7 @@ class ListDynamicObject extends ListStructure implements IList{
         	$this->nbLineTotal = $stmt->rowCount();
         	
         	
-        	$p_requete .= " LIMIT " . ($p_numPage-1)*LIGNE_PAR_PAGE . ', ' . LIGNE_PAR_PAGE;        	
+        	$p_requete .= " LIMIT " . ($p_numPage-1)*$this->ligneParPage . ', ' . $this->ligneParPage;        	
         }
         
         $this->logger->debug('requete dynamique finale:'.$p_requete);
@@ -66,7 +69,7 @@ class ListDynamicObject extends ListStructure implements IList{
         if($p_numPage==null){
 			$this->nbLineTotal = count($this->tabResult);
 		}
-        $this->totalPage = ceil($this->nbLineTotal / LIGNE_PAR_PAGE);
+        $this->totalPage = ceil($this->nbLineTotal / $this->ligneParPage);
         $this->page=($p_numPage==null)? 1 : $p_numPage;
         
         //exécute les requêtes associées
@@ -92,5 +95,10 @@ class ListDynamicObject extends ListStructure implements IList{
     public function getNbLine(){
         return count($this->tabResult);
     }
+	
+	public function setLigneParPage($nbLignes) {
+		$this->ligneParPage = $nbLignes;
+	}
+	
 }
 ?>
