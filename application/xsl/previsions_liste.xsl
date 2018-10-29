@@ -89,7 +89,7 @@
     </xsl:template>
     <xsl:template name="boiteUnitaire">
         <div id="boite" title="{$LBL.EDITIONPREVISION}" style="display: none;">
-            <form method="POST" name="editionPrevisionUnitaire" id="editionPrevisionUnitaire" action="index.php" onsubmit="return modifierPrevision(this)">
+            <form method="POST" name="editionPrevisionUnitaire" id="editionPrevisionUnitaire" onsubmit="return modifierPrevision(this);">
                 <input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
                 <input type="hidden" id="typenr" name="typenr" value="L"/>
                 <input type="hidden" id="ligneId" name="ligneId" value=""/>
@@ -121,7 +121,7 @@
 						</div>
 					</div>
 					<div class="row justify-content-md-center">
-						<button type="submit" id="modifierPrevision" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
+						<button type="submit" id="modifierPrevisionBtn" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
 					</div>
                 </div>
             </form>
