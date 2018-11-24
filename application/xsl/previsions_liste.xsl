@@ -121,7 +121,7 @@
 						</div>
 					</div>
 					<div class="row justify-content-md-center">
-						<button type="submit" id="modifierPrevisionBtn" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
+						<button type="submit" id="btnModifierPrevision" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
 					</div>
                 </div>
             </form>
@@ -170,7 +170,7 @@
 						</div>
 					</div>
 					<div class="row justify-content-md-center">
-						<button type="submit" id="creerEntete" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
+						<button type="submit" id="btnCreerEntete" class="btn btn-primary"><xsl:value-of select="$LBL.MODIFIER"/></button>
 					</div>
 				</div>
             </form>
@@ -195,7 +195,7 @@
                     <tfoot>
                         <tr>
                             <td style="text-align:center;" colspan="3">
-                                <input type="submit" class="bouton" id="enregistreListeLignes" value="{$LBL.MODIFIER}"/>
+                                <input type="submit" class="bouton" id="btnEnregistreListeLignes" value="{$LBL.MODIFIER}"/>
                             </td>
                         </tr>
                     </tfoot>
