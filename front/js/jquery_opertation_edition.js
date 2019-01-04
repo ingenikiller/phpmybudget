@@ -42,14 +42,15 @@ function soumettre(form) {
 	var service = form.service.value;
 	$.ajax({
 		url: "index.php?domaine=operation&service="+service,
-		data: { "noCompte": form.noCompte.value,
-				"operationId": form.operationId.value,
-				"noReleve": form.noReleve.value,
-				"date": form.date.value,
-				"libelle": form.libelle.value,
-				"fluxId": form.fluxId.value,
-				'modePaiementId': form.modePaiementId.value,
-				'montant': form.montant.value
+		data: {
+			"noCompte": form.noCompte.value,
+			"operationId": form.operationId.value,
+			"noReleve": form.noReleve.value,
+			"date": form.date.value,
+			"libelle": form.libelle.value,
+			"fluxId": form.fluxId.value,
+			'modePaiementId': form.modePaiementId.value,
+			'montant': form.montant.value
 		}, 
 		success: function(retour) {
 			getSoldeCompte(form.noCompte.value, 'solde');
@@ -95,15 +96,17 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
  *********************************************************/
 function getInfoOpeRec(obj) {
 	var opeId=$(obj).val();
-	var params="operationrecurrenteId="+opeId+"&numeroCompte="+$('#numeroCompte').val();
-	$.getJSON(
-		"index.php?domaine=operationrecurrente&service=getone",
-		data=params,
-		function(json){
-			$('#libelle').val(json[0].tabResult[0].libelle);
-			$('#fluxId').val(json[0].tabResult[0].fluxId);
-			$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
-			$('#montant').val(json[0].tabResult[0].montant.replace(',',''));
-		}
-	);
+	if(opeId!='false' &&opeId!=null) {
+		var params="operationrecurrenteId="+opeId+"&numeroCompte="+$('#numeroCompte').val();
+		$.getJSON(
+			"index.php?domaine=operationrecurrente&service=getone",
+			data=params,
+			function(json){
+				$('#libelle').val(json[0].tabResult[0].libelle);
+				$('#fluxId').val(json[0].tabResult[0].fluxId);
+				$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
+				$('#montant').val(json[0].tabResult[0].montant.replace(',',''));
+			}
+		);
+	}
 }

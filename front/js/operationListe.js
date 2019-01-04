@@ -101,6 +101,7 @@ function editerOperation(numeroCompte, operationId){
 			}
 		);
 	} else {
+		$('#operationrecurrenteId').val('');
 		$('#service').val('create');
 		$('#operationId').val('');
 		$('#noReleve').val('');
@@ -204,7 +205,7 @@ function parseListeJson(json) {
 			var operationId = $(elem).attr('operationId');
 			
 			$.getJSON('index.php?domaine=operation&service=getsoldeoperation&numeroCompte='+numeroCompte+'&operationId='+operationId).always(function(resultat) {
-				elem.tooltip('option', 'content', 'Solde = '+resultat[0].valeur.toFixed(2)+' €');
+				elem.tooltip('option', 'content', 'Solde= '+resultat[0].valeur.toFixed(2)+' €');
 			 });
 		}
     });
@@ -214,7 +215,6 @@ function parseListeJson(json) {
 	   $(this).tooltip();
 	   $('.ui-tooltip').hide();
 	 });
-
 }
 
 /*********************************************************
