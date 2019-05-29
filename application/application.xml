@@ -26,8 +26,7 @@
 			<service name="update" classe="GestionOperationService" methode="update" render="json" isPrivee="true"/>
 		</domaine>
 		<domaine name="operationrecurrente">
-			<service name="getpage" classe="GestionOperationRecurrenteService" methode="getPage" isPrivee="true" xsl="xsl/operation_recurrente_liste.xsl" paramFlow
-			="MODPAI"/>
+			<service name="getpage" classe="GestionOperationRecurrenteService" methode="getPage" isPrivee="true" xsl="xsl/operation_recurrente_liste.xsl" paramFlow="MODPAI"/>
 			<service name="getliste" classe="GestionOperationRecurrenteService" methode="getListe" render="json" isPrivee="true"/>
 			<service name="getone" classe="GestionOperationRecurrenteService" methode="getListe" render="json" isPrivee="true"/>
 			<service name="create" classe="GestionOperationRecurrenteService" methode="create" render="json" isPrivee="true"/>
@@ -42,6 +41,7 @@
 		<domaine name="previsionentete">
 			<service name="getone" classe="GestionPrevisionEnteteService" methode="getOne" render="json" isPrivee="true"/>
 			<service name="create" classe="GestionPrevisionEnteteService" methode="create" render="json" isPrivee="true"/>
+			<service name="reporter" classe="GestionPrevisionEnteteService" methode="reporter" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionPrevisionEnteteService" methode="update" render="json" isPrivee="true"/>
 		</domaine>
 		<domaine name="prevision">

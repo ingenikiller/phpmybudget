@@ -35,6 +35,29 @@ class ConnexionPDO {
         }
         return self::$instance;
     }
+	
+	/******************************************
+	 * démarrage d'une transaction
+	 ******************************************/
+	public static function beginTransaction() {
+		self::$instance->beginTransaction();
+	}
+	
+	/******************************************
+	 * commit d'une transaction
+	 ******************************************/
+	public static function commit() {
+		self::$instance->commit();
+	}
+	
+	/******************************************
+	 * roolback d'une transaction
+	 ******************************************/
+	public static function rollBack () {
+		self::$instance->rollBack ();
+	}
+	
+	
 }
 
 ?>

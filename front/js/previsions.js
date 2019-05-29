@@ -20,7 +20,6 @@ $(document).ready(function() {
 	affiche les prévisions de l'année
  *********************************************************/
 function affichePrevisions(idTableau, periode, numeroCompte) {
-	
 	$.ajax({ 
 	    url: "index.php?domaine=prevision&service=getlisteannee",
 	    data: { "edition":"edition",
@@ -110,7 +109,6 @@ function afficheUnitaire(compte, idLigne){
 	modification de prévision
  *********************************************************/
 function modifierPrevision(form) {
-	
 	if(!validForm(form)) {
 		return false;
 	}
@@ -141,11 +139,10 @@ function modifierPrevision(form) {
 
 
 /***********************************************************************
- affiche la popup de saisie d'une entête de prévision
-	-compte: numéro de compte
+ * affiche la popup de saisie d'une entête de prévision
+ *	-compte: numéro de compte
  ***********************************************************************/
 function afficheEntete(compte) {
-	
 	document.editionEnteteUnitaire.service.value='create';
 	document.editionEnteteUnitaire.fluxIdEntete.value='';
 	document.editionEnteteUnitaire.periodicite.value='';
@@ -165,11 +162,6 @@ function afficheEntete(compte) {
  *
  ***********************************************************************/
 function creerEntete(form) {
-	
-	/*if(!validForm(form)) {
-		return false;
-	}*/
-	
 	$.getJSON({ 
 		url: "index.php?domaine=previsionentete&service="+form.service.value,
 		data: { "ligneId": form.ligneId.value,
@@ -177,7 +169,6 @@ function creerEntete(form) {
 				"fluxId": form.fluxIdEntete.value,
 				"typenr": form.typenr.value,
 				'nomEntete': form.nomEntete.value,
-				'annee': $('#annee').val(),
 				'periodicite': $('#periodicite').val(),
 				'montant': form.montantPeriode.value,
 				'annee': $('#annee').val()
@@ -196,31 +187,8 @@ function creerEntete(form) {
 
 
 /***********************************************************************
- * récupère la liste des entêtes pour une année
- *
+ * affiche les prévisions pour un flux
  ***********************************************************************/
-/*function recupereListeEntetes(objet, annee, numeroCompte) {
-	
-	var params="noCompte="+numeroCompte+"&typenr=E&annee="+annee;
-	document.getElementById(objet).innerHTML=null;
-	$.getJSON(
-		 "index.php?domaine=previsionentete&service=getlisteentete",
-	    data=params,
-		function(retour){
-			var obj=document.getElementById(objet);
-			var nb=retour[0].nbLine;
-			var tabJson = retour[0].tabResult;
-			var i=0;
-			obj.options[obj.length] = new Option('','',true,true);
-			for(i=0; i<nb; i++) {
-				obj.options[obj.length] = new Option(tabJson[i].flux, tabJson[i].fluxid, false, false);
-			}
-			return false;
-		}
-	);
-}*/
-
-
 function afficheListeGroupe(fluxId){
 	var annee =  $('#annee').val();
 	var numeroCompte = $('#numeroCompte').val();
@@ -249,7 +217,7 @@ function afficheListeGroupe(fluxId){
 /*
 	parse le tableau Json et génère le tableau
 */
-function parseListePrevisionJson(json) {
+function parseListePrevisionJson(json){
 	tab = document.getElementById('tabListeEntete');
 	$('tr[typetr=prevision]').remove();
 	
@@ -278,12 +246,11 @@ function propagerMontant(btn){
 	return false;
 }
 
-
 /***********************************************************************
  * mets à jour la prévision avec la somme des montants pour un mois 
  * et un flux
  ***********************************************************************/
- function equilibrerPrevision(numeroCompte, ligneId) {
+ function equilibrerPrevision(numeroCompte, ligneId){
  	$.getJSON({ 
 		url: "index.php?domaine=prevision&service=equilibrerprevision",
 		data: { "ligneId": ligneId,
@@ -300,10 +267,13 @@ function propagerMontant(btn){
 	});
 }
 
+/***********************************************************************
+ * permet d'enregistrer les modifications d'une liste de prévisions
+ ***********************************************************************/
 function enregistreListeLignes(form){
 	var params = "";
 	var i = 1;
-	while($('#montant-'+i).length){
+	while($('#montant-'+i).length) {
 		params+='&ligneId-'+i+'='+$('#montant-'+i).attr('ligneid')+'&montant-'+i+'='+$('#montant-'+i).val();
 		i+=1;
 	}
@@ -318,6 +288,9 @@ function enregistreListeLignes(form){
 	return false;
 }
 
+/***********************************************************************
+ * calcule le reste après imputation des prévisions
+ ***********************************************************************/
 function afficheEstimation(champs, nocompte){
 	var params = "noCompte="+nocompte;
 	$.getJSON({
@@ -328,7 +301,23 @@ function afficheEstimation(champs, nocompte){
 			$('#estimation').text(resultat[0][1]);
 		}
 	});
-	
 }
 
-
+/***********************************************************************
+ * permet de créer des prévisions pour un flux pour l'année suivante
+ ***********************************************************************/
+function reporterAnneeSuivante(nocompte, flux, anneeAReporter){
+	var params = "noCompte="+nocompte+"&fluxid="+flux+"&anneeAReporter="+anneeAReporter;
+	$.getJSON({
+		url: "index.php?domaine=previsionentete&service=reporter",
+		dataType: 'json',
+		data: params,
+		success: function(resultat) {
+			if(resultat[0].status=='OK') {
+				alert('Prévisions créées!');
+			} else {
+				alert(resultat[0].message);
+			}
+		}
+	});
+}

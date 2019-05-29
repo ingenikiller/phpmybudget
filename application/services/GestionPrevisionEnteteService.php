@@ -103,6 +103,58 @@ class GestionPrevisionEnteteService extends ServiceStub {
     	
     	$p_contexte->addDataBlockRow($liste);
     }
+	
+	public function reporter(ContextExecution $p_contexte) {
+		$userid = $p_contexte->getUser()->userId;
+		$numeroCompte = $p_contexte->m_dataRequest->getData('noCompte');
+		$fluxid = $p_contexte->m_dataRequest->getData('fluxid');
+		$anneeSource = $p_contexte->m_dataRequest->getData('anneeAReporter');
+		$anneeCible = $anneeSource + 1;
+		
+		//vérification de l'existence de périodes sur l'année suivante
+		
+		//vérification de l'existence de prévisions pour l'année suivante
+		$listePrevFutur = new ListObject();
+		$listePrevFutur->request('Prevision', "nocompte='$numeroCompte' AND typenr='L' AND fluxid='$fluxid' AND mois like '$anneeCible%'");
+		$tabFutur = $listePrevFutur->tabResult;
+		if(count($tabFutur)) {
+			$ajax = new ReponseAjax();
+			$ajax->status='KO';
+			$ajax->message='Il existe des prévisions pour ce flux';
+			$p_contexte->addDataBlockRow($ajax);
+			return null;
+		}
+		
+		//recherche des préviions de l'année source
+		$listePrev = new ListObject();
+		$listePrev->request('Prevision', "nocompte='$numeroCompte' AND typenr='L' AND fluxid='$fluxid' AND mois like '$anneeSource%'");
+		$tab = $listePrev->tabResult;
+		//pour chaque ligne, on crée l'année suivante
+		ConnexionPDO::beginTransaction();
+		
+		for($i=0; $i<count($tab); $i++) {
+			$this->logger->debug('Mois à dupliquer: ' . $tab[$i]->mois);
+			$prev = new Prevision();
+			$prev->typenr = $tab[$i]->typenr;
+			$prev->noCompte = $tab[$i]->noCompte;
+			$prev->fluxId = $tab[$i]->fluxId;
+			$prev->montant = $tab[$i]->montant;
+			$prev->annee = $anneeCible;
+			$prev->mois = $anneeCible . substr($tab[$i]->mois, 4, 6);
+			$prev->create();
+		}
+		
+		//création de l'entête
+		$entete = new Prevision();
+		$entete->typenr = 'E';
+		$entete->noCompte = $numeroCompte;
+		$entete->fluxId = $fluxid;
+		$entete->annee = $anneeCible;
+		$entete->create();
+		ConnexionPDO::commit();
+		$p_contexte->ajoutReponseAjaxOK();
+		
+	}
 }
 
 ?>

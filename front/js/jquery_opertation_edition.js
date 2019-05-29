@@ -56,6 +56,7 @@ function soumettre(form) {
 			getSoldeCompte(form.noCompte.value, 'solde');
 			//si on est en création, on garde la popup ouverte, sinon, on la ferme
 			if(service=='create') {
+				$('#operationrecurrenteId').val('');
 				form.libelle.value='';
 				form.fluxId.value='';
 				form.modePaiementId.value='';

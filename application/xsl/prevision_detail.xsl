@@ -2,7 +2,20 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:import href="commun.xsl"/>
     <xsl:output indent="no" encoding="UTF-8" method="xml"/>
-    <xsl:template match="/">
+    
+	<xsl:param name="ANNEEEDITION">
+		<xsl:value-of select="/root/data/Periodes/Periode[1]/annee"/>
+	</xsl:param>
+	<xsl:param name="ANNEEENCOURS">
+        <xsl:choose>
+            <xsl:when test="not(/root/request/annee)">
+                <xsl:value-of select="substring(/root/date,1,4)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="/root/request/annee"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:param><xsl:template match="/">
         <data>
 			<colgroup />
 				<xsl:for-each select="/root/data/Periodes/Periode">
@@ -26,6 +39,9 @@
                     <th class="text-center">
                         <xsl:value-of select="/root/data/Periodes/Periode[1]/annee"/>
                     </th>
+					<xsl:if test="$ANNEEENCOURS=$ANNEEEDITION">
+						<th>AS</th>
+					</xsl:if>
                 </tr>
             </thead>
             <tbody>
@@ -141,8 +157,7 @@
                     </td>
                 </xsl:for-each>
                 <td class="text-right recap">
-                    <xsl:value-of
-                            select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/Previsions/Prevision/montant),$FORMAT_MNT)"/>
+                    <xsl:value-of select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/Previsions/Prevision/montant),$FORMAT_MNT)"/>
                 </td>
             </tr>
             </tbody>
@@ -162,9 +177,15 @@
                 <xsl:with-param name="fluxId" select="$fluxId"/>
             </xsl:call-template>
             <td class="text-right recap">
-                <xsl:value-of
-                        select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/Previsions/Prevision[fluxId=$fluxId]/montant),$FORMAT_MNT)"/>
+                <xsl:value-of select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/Previsions/Prevision[fluxId=$fluxId]/montant),$FORMAT_MNT)"/>
             </td>
+			<xsl:if test="$ANNEEENCOURS=$ANNEEEDITION">
+				<td>
+					<a href="#" onclick="reporterAnneeSuivante('{$NUMEROCOMPTE}','{$fluxId}','{$ANNEEENCOURS}');">
+						<span class="oi oi-share"/>
+					</a>
+				</td>
+			</xsl:if>
         </tr>
         <tr class="l{@index mod 2}">
 			<td/>
@@ -172,15 +193,13 @@
 				<td class="text-right">
                     <xsl:if test="associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total">
                         <a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=mois&amp;recDate={periode}&amp;recFlux={$fluxId}')">
-                            <xsl:value-of
-                                    select="format-number(associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total,$FORMAT_MNT)"/>
+                            <xsl:value-of select="format-number(associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total,$FORMAT_MNT)"/>
                         </a>
                     </xsl:if>
                 </td>
             </xsl:for-each>
             <td class="text-right recap">
-                <xsl:value-of
-                        select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total),$FORMAT_MNT)"/>
+                <xsl:value-of select="format-number(sum(/root/data/Periodes/Periode/associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total),$FORMAT_MNT)"/>
             </td>
         </tr>
     </xsl:template>
@@ -192,14 +211,12 @@
                     <xsl:if test="associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total!='' and number(associatedObjet/Previsions/Prevision[fluxId=$fluxId]/montant)!=number(associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total)">
                         <a href="#"
                            onclick="javascript:equilibrerPrevision('{$NUMEROCOMPTE}','{associatedObjet/Previsions/Prevision[fluxId=$fluxId]/ligneId}')">
-                            <img border="0" src="{$IMG_ROOT}icone_balance_agee_detail.gif" alt="{$LBL.EQUILIBRER}"
-                                 title="{$LBL.EQUILIBRER}"/>
+                            <img border="0" src="{$IMG_ROOT}icone_balance_agee_detail.gif" alt="{$LBL.EQUILIBRER}" title="{$LBL.EQUILIBRER}"/>
                         </a>
                     </xsl:if>
                     <a href="#"
                        onclick="javascript:afficheUnitaire('{$NUMEROCOMPTE}','{associatedObjet/Previsions/Prevision[fluxId=$fluxId]/ligneId}')">
-                        <xsl:value-of
-                                select="format-number(associatedObjet/Previsions/Prevision[fluxId=$fluxId]/montant,$FORMAT_MNT)"/>
+                        <xsl:value-of select="format-number(associatedObjet/Previsions/Prevision[fluxId=$fluxId]/montant,$FORMAT_MNT)"/>
                     </a>
                 </xsl:if>
             </td>
