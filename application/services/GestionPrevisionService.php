@@ -40,45 +40,46 @@ class GestionPrevisionService extends ServiceStub {
 			case 'complet':
 				break;
 			case 'pinel':
-				$clausePinel='AND flux.fluxMaitreId =\'101\'';
+				$clausePinel='AND EXISTS (SELECT 1 FROM flux WHERE 1=1 AND flux.fluxid=prevision.fluxid AND flux.fluxMaitreId =\'101\')';
 				break;
 			case 'sans':
-				$clausePinel='AND flux.fluxMaitreId !=\'101\'';
+				$clausePinel='AND EXISTS (SELECT 1 FROM flux WHERE 1=1 AND flux.fluxid=prevision.fluxid AND flux.fluxMaitreId !=\'101\')';
 				break;
 		}
 		
 		
-        $clausePrevisions = "noCompte='$numeroCompte' and typenr='L' and mois='".'$parent->periode\''. 
-				"AND EXISTS (SELECT 1 FROM flux WHERE 1=1 AND flux.fluxid=prevision.fluxid $clausePinel)";
+        $clausePrevisions = "noCompte='$numeroCompte' and typenr='L' and annee='$annee' $clausePinel";
         
         $previsions = new ListObject();
         $previsions->name='Previsions';
-        $previsions->setAssociatedRequest('Prevision', $clausePrevisions);
+        $previsions->request('Prevision', $clausePrevisions);
+		$p_contexte->addDataBlockRow($previsions);
 		
         //requête des opérations récurrentes
         $requeteTotaux = 
 			"SELECT ROUND(sum(montant),2) AS total
 			FROM operation 
 				LEFT JOIN flux ON flux.fluxId = operation.fluxId $clausePinel
-				LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.date LIKE concat( prevision.periode,\'%\')
-			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked'" .
-				'AND date like concat(\'$parent->mois\',\'%\')';
+				LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.date LIKE concat( prevision.periode,'%')
+			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked' AND date like concat('$annee','%')";
+		
         $requete=
-			'SELECT ROUND(SUM( montant),2) AS total , fluxId
+			"SELECT ROUND(SUM( montant),2) AS total , fluxId, substring(operation.date,1,7) as mois
 			FROM operation 
-			WHERE nocompte=' . $numeroCompte . ' and date like concat(\'$parent->periode\',\'%\')
-				AND EXISTS (SELECT 1 FROM prevision WHERE prevision.noCOmpte=\''.$numeroCompte.'\'
-				AND prevision.fluxid=operation.fluxid AND operation.date LIKE concat( substring(prevision.mois,1,4),\'%\'))
-			GROUP BY fluxid ';
+			WHERE nocompte='$numeroCompte' and date like concat('$annee', '%')
+				AND EXISTS (SELECT 1 FROM prevision WHERE prevision.noCOmpte='$numeroCompte'
+				AND prevision.fluxid=operation.fluxid AND operation.date LIKE concat( substring(prevision.mois,1,4), '%'))
+			GROUP BY fluxid, mois";
         $listMontantTotaux = new ListDynamicObject();
         $listMontantTotaux->name = 'ListeMontantFlux';
-        $listMontantTotaux->setAssociatedRequest(null, $requete);
-        
+        $listMontantTotaux->request($requete);
+        $p_contexte->addDataBlockRow($listMontantTotaux);
+		
 		//liste des périodes
         $liste = new ListObject();
         $liste->name='Periodes';
-        $liste->setAssociatedKey($previsions);
-        $liste->setAssociatedKey($listMontantTotaux);
+        //$liste->setAssociatedKey($previsions);
+        //$liste->setAssociatedKey($listMontantTotaux);
         $liste->request('Periode', "periode between '$dateDeb' and '$dateFin' order by periode");
         
         $p_contexte->addDataBlockRow($liste);

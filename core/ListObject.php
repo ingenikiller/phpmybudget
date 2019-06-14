@@ -38,7 +38,7 @@ class ListObject extends ListStructure implements IList{
         $l_requete = 'select * '.$l_suff;
         $this->logger->debug('search complete: '. $l_requete);
         $stmt = self::$_pdo->query($l_requete);
-        
+        $this->logger->debug('requete OK');
         $this->nbLine = $stmt->rowCount();
         $this->tabResult = $stmt->fetchAll(PDO::FETCH_CLASS, $classe);//, array(self::$_pdo, $table[1]));   
         
@@ -84,7 +84,7 @@ class ListObject extends ListStructure implements IList{
         $l_requete = "select * $l_suff LIMIT " . ($page-1)*$this->ligneParPage . ', ' . $this->ligneParPage;
         $this->logger->debug('search complete: '. $l_requete);
         $stmt = self::$_pdo->query($l_requete);
-        
+        $this->logger->debug('requete OK');
         $this->nbLine = $stmt->rowCount();
         $this->tabResult = $stmt->fetchAll(PDO::FETCH_CLASS, $classe);//, array(self::$_pdo, $table[1]));   
         

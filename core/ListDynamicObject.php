@@ -63,6 +63,7 @@ class ListDynamicObject extends ListStructure implements IList{
 		} catch (Exception $e) {
 			throw new TechnicalException($e);
 		}
+		$this->logger->debug('requete OK');
         $this->nbLine = $stmt->rowCount();
         $stmt->setFetchMode(PDO::FETCH_INTO, $this);
         $this->tabResult = $stmt->fetchAll(PDO::FETCH_OBJ);
