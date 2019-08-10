@@ -73,8 +73,8 @@ function afficheDetail(params){
 }
 
 /************************
-	
-*************************/
+ * 	affichege des résultats
+ ************************/
 function listerObjects(){
 	var params = $('#params').val();
 	//appel synchrone de l'ajax
@@ -90,9 +90,9 @@ function listerObjects(){
 }
 
 
-/*
-	parse le tableau Json et génère le tableau
-*/
+/************************
+ * parse le tableau Json et génère le tableau
+ ************************/
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
 	$('tr[typetr=operation]').remove();
@@ -102,7 +102,6 @@ function parseListeJson(json) {
 	document.getElementById('numeroPage').value=json[0].page;
 	document.getElementById('rch_page').value=json[0].page;
 	document.getElementById('max_page').value=json[0].totalPage;
-	
 	
 	var nb=json[0].nbLine;
 	var tabJson = json[0].tabResult;
@@ -117,18 +116,17 @@ function parseListeJson(json) {
 	}
 }
 
+/************************
+ * gère le dépliage et repliage des détails
+ ************************/
 function deplieDetail(lien){
 	var attrReplie=lien.getAttribute('replie');
 	var attrRef=lien.getAttribute('fluxid');
 	if(attrReplie == "O") {
-		//alert(attrReplie);
 		attrReplie=lien.setAttribute('replie', 'N');
-		//$('tr[idAgreg='+attrRef+']').display='table-row';
 		$('tr[fluxid='+attrRef+']').show('N');
 	} else {
-		//alert(attrReplie);
 		attrReplie=lien.setAttribute('replie', 'O');
-		//$('tr[idAgreg='+attrRef+']').display='none';
 		$('tr[fluxid='+attrRef+']').hide('O');
 	}
 }

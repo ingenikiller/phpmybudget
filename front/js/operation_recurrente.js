@@ -24,9 +24,6 @@ function listerObjects(){
 		params+="&recFlux="+$('#recFlux').val();
 	}
 	
-	/*if($('#recDate').val()!='') {
-		params+="&recDate="+$('#recDate').val();
-	}*/
 	if($('#recMontant').val()!='') {
 		params+="&recMontant="+$('#recMontant').val();
 	}

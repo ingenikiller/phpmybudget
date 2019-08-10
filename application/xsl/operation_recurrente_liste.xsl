@@ -9,7 +9,6 @@
 		<br/>
 		<div class="row">
 			<input type="hidden" id="retour" name="retour"/>
-			
 			<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
 				<xsl:call-template name="formulaireJson"/>
 				<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
@@ -61,7 +60,6 @@
 					</thead>
 					<tbody id="tbodyResultat"/>
 				</table>
-				
 				<xsl:call-template name="paginationJson">
 					<xsl:with-param name="formulairePrincipal" select="'recherche'"/>
 				</xsl:call-template>

@@ -58,7 +58,7 @@ class OperationCommun {
                 //recherche d'une opération existante
                 $listOpe = new ListObject();
                 $listOpe->name='ListeOperations';
-                $listOpe->request('Operation', "operationIdOri=$p_operation->operationId");
+                $listOpe->request('Operation', "operationIdOri=$p_operation->operationId AND (numeroCompteOri is not null AND numeroCompteOri<>'')");
 
                 $tab = $listOpe->tabResult;
                 $logger->debug('Total ope '.count($tab));
