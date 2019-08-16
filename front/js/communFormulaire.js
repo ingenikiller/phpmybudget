@@ -14,7 +14,8 @@ function isDigit (c)
 var errDouble = "Le champ saisi comporte des caract&egrave;res non num&eacute;riques, veuillez le ressaisir SVP";
 function isDouble (s)
 {
-	if(!$.isNumeric(s.value)){
+	var valeur = s.value
+	if(valeur!='' && !$.isNumeric(valeur)){
 		alert(ERRINTEGER);
 		return false;
 	}
