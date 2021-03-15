@@ -1,6 +1,6 @@
 <?php
-	define('HOST', 'localhost:3307', true);
-	define('USER', 'userlocal', true);
-	define('PASSWD', 'userlocal!1979', true);
-	define('DATABASE', 'phpmybudget', true);
+	define('HOST', 'localhost:3306');
+	define('USER', 'root');
+	define('PASSWD', '');
+	define('DATABASE', 'phpmybudget');
 ?>

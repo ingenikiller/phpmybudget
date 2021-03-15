@@ -108,7 +108,7 @@ class GestionStatistiquesService extends ServiceStub {
         
         $listReleves = new ListDynamicObject();
         $listReleves->name = 'ListeAnnee';
-        $listReleves->request("SELECT DISTINCT substr( date, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee asc");
+        $listReleves->request("SELECT DISTINCT substr( date, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee desc");
         $p_contexte->addDataBlockRow($listReleves);
     }
 	
@@ -202,7 +202,7 @@ class GestionStatistiquesService extends ServiceStub {
         
         $listReleves = new ListDynamicObject();
         $listReleves->name = 'ListeAnnee';
-        $listReleves->request("SELECT DISTINCT substr( date, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee asc");
+        $listReleves->request("SELECT DISTINCT substr( date, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee desc");
         $p_contexte->addDataBlockRow($listReleves);
     }
 	

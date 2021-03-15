@@ -16,7 +16,7 @@ class GestionPrevisionService extends ServiceStub {
 		$l_compte->load();
 		$p_contexte->addDataBlockRow($l_compte);
         
-        $requete = 'SELECT DISTINCT annee from periode WHERE TRIM(annee) IS NOT NULL ORDER BY annee';
+        $requete = 'SELECT DISTINCT annee from periode WHERE TRIM(annee) IS NOT NULL ORDER BY annee DESC limit 0,6';
 		$listeAnnees = new ListDynamicObject();
         $listeAnnees->name = 'ListeAnnees';
         $listeAnnees->request($requete);
