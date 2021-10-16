@@ -1,5 +1,5 @@
 /*********************************************************
-	fonction exécutée au chargement de la page
+	fonction exï¿½cutï¿½e au chargement de la page
  *********************************************************/
  $(document).ready(function() {
 	alimenteListesCompte();
@@ -7,7 +7,7 @@
 });
 
 /*********************************************************
-	alimente les combos de sélection de compte
+	alimente les combos de sï¿½lection de compte
  *********************************************************/
 function alimenteListesCompte() {
 	var fonctionSuccess = function(resultat) {
@@ -21,7 +21,7 @@ function alimenteListesCompte() {
 }
 
 /*********************************************************
-	alimente une combo de sélection de compte
+	alimente une combo de sÃ©lection de compte
  *********************************************************/
 function alimenteObjetSelectCompte(objetListe, compteDefaut, fluxJson){
  	objetListe.append(new Option('','',true,true));
@@ -34,7 +34,7 @@ function alimenteObjetSelectCompte(objetListe, compteDefaut, fluxJson){
 }
 
 /*********************************************************
-	recherche les flux suivant les données du formulaire
+	recherche les flux suivant les donnÃ©es du formulaire
  *********************************************************/
 function rechercherFlux(form){
 	//$('#numeroPage').val(1);
@@ -66,7 +66,7 @@ function listerObjects(){
 }
 
 /*********************************************************
-	parse le tableau Json et génère le tableau graphique
+	parse le tableau Json et gÃ©nÃ¨re le tableau graphique
  *********************************************************/
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
@@ -87,13 +87,13 @@ function parseListeJson(json) {
 		row.append($('<td/>').text(tabJson[i].description));
 		row.append($('<td class="text-center"/>').text(tabJson[i].compteId));
 		row.append($('<td class="text-center"/>').text(tabJson[i].compteDest));
-		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerFlux(\''+ tabJson[i].fluxId +'\')">Editer</a>'));
+		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerFlux(\''+ tabJson[i].fluxId +'\')"><span class="oi oi-pencil"/></a>'));
 		$("#tbodyResultat").append(row);
 	}
 }
 
 /*********************************************************
-	affiche la popup d'édition d'un compte
+	affiche la popup d'Ã©dition d'un compte
  *********************************************************/
 function editerFlux(fluxId){
 	
@@ -120,7 +120,7 @@ function editerFlux(fluxId){
 			$('#modePaiementId').val(resultat[0].modePaiementId);
 			$('#compteId').val(resultat[0].compteId);
 
-			//numéro de compte en dur car compte principal
+			//numÃ©ro de compte en dur car compte principal
 			afficheFluxSelect('fluxMaitreId', resultat[0].compteId, 'fluxMaitre=O', resultat[0].fluxMaitreId);
 
 			$('#compteDest').val(resultat[0].compteDest);
@@ -148,12 +148,11 @@ function editerFlux(fluxId){
 		getFlux(params, fonctionSuccess);
 	}
 	
-	$("div#boiteFlux").dialog({
-		resizable: false,
-		//height:450,
-		width:620,
-		modal: true
+	var myModal = new bootstrap.Modal(document.getElementById('boiteFlux'), {
+		backdrop: 'static',
+		keyboard: false
 	});
+	myModal.show();
 }
 
 
@@ -181,7 +180,7 @@ function enregistreFlux(form){
 				"depense": form.depense.value
 		}, 
 		success: function(retour) { 
-			$("div#boiteFlux").dialog('close');
+			$("div#boiteFlux").modal('close');
 			listerObjects();
 		  return false;
 		} 

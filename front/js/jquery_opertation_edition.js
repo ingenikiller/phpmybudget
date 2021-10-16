@@ -32,7 +32,7 @@ function initFormCreation() {
 	}
 }
 /*********************************************************
-	soumission du formulaire des opérations
+	soumission du formulaire des op?rations
  *********************************************************/
 function soumettre(form) {
 	if(!validForm(form)) {
@@ -54,7 +54,7 @@ function soumettre(form) {
 		}, 
 		success: function(retour) {
 			getSoldeCompte(form.noCompte.value, 'solde');
-			//si on est en création, on garde la popup ouverte, sinon, on la ferme
+			//si on est en cr?ation, on garde la popup ouverte, sinon, on la ferme
 			if(service=='create') {
 				$('#operationrecurrenteId').val('');
 				form.libelle.value='';
@@ -63,10 +63,11 @@ function soumettre(form) {
 				form.montant.value='';
 				form.libelle.focus();
 			} else {
-				$("div#boiteOperation").dialog('close');
+				//$("div#boiteOperation").dialog('close');
+				$('#boiteOperation').modal('hide');
 			}
 			
-			//maj de la liste des opérations
+			//maj de la liste des op?rations
 			pagination('recherche');
 			return false;
 		}

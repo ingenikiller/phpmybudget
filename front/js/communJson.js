@@ -101,16 +101,26 @@ function afficheFluxSelectMulti(nomChamp, compte, chaineParams, valeur) {
 				$('#'+nomChamp).append(new Option(tabJson[i].flux, tabJson[i].fluxId, false, false));
 			}
 			
-			$('#'+nomChamp).multiselect({
+			$('#'+nomChamp).multiselect(
+				{
+					includeSelectAllOption: true,
+					enableFiltering: true,
+					includeFilterClearBtn: false,
+					maxHeight: 400,
+					dropUp: true,
+					widthSynchronizationMode: 'always',
+					buttonWidth: '175px'
+				}
+			);
+
+			/*{
 				columns: 1,
 				placeholder: 'Sélection flux',
 				search: true,
 				maxHeight: 350,
-				/*searchOptions: {
-					'default': 'Sélection flux'
-				},*/
+				
 				selectAll: true
-			});
+			}*/
 			
 			
 		}

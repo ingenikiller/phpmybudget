@@ -99,6 +99,11 @@ function editerOperation(numeroCompte, operationrecurrenteId){
 					backdrop: 'static',
 					keyboard: false
 				});
+				var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
+					backdrop: 'static',
+					keyboard: false
+				});
+				myModal.show();
 			}
 		);
 	} else {
@@ -109,10 +114,11 @@ function editerOperation(numeroCompte, operationrecurrenteId){
 		$('#fluxId').val('');
 		$('#modePaiementId').val('');
 
-		$('#boiteOperation').modal({
+		var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
 			backdrop: 'static',
 			keyboard: false
 		});
+		myModal.show();
 	}
 	return false;
 }

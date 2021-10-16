@@ -48,20 +48,4 @@
 			<table id="tableResultat" class="table table-bordered"/>
 		</center>
 	</xsl:template>
-	<xsl:template match="ListeAnnee">
-		<xsl:param name="name"/>
-		<xsl:param name="obligatoire"/>
-		<select name="{$name}" id="{$name}" class="form-control">
-			<xsl:if test="$obligatoire='O'">
-				<xsl:attribute name="class">form-control obligatoire</xsl:attribute>
-			</xsl:if>
-			<option/>
-			<xsl:apply-templates select="Dynamic"/>
-		</select>
-	</xsl:template>
-	<xsl:template match="Dynamic">
-		<option value="{annee}">
-			<xsl:value-of select="annee"/>
-		</option>
-	</xsl:template>
 </xsl:stylesheet>

@@ -13,11 +13,10 @@
 		<br/>
 		<div class="row">
 			<input type="hidden" id="retour" name="retour"/>
-			
-			<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
-				<xsl:call-template name="formulaireJson"/>
-				<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
-				<aside class="col formulaire">
+			<aside class="col formulaire">
+				<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
+					<xsl:call-template name="formulaireJson"/>
+					<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
 					<br/>
 					<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 						<div class="btn-group" role="group" aria-label="First group">
@@ -30,34 +29,33 @@
 							</button>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="solde" class="form-control-label">
+					<div class="mb-3">
+						<label for="solde" class="form-label">
 							<xsl:value-of select="$LBL.SOLDE"/>
 						</label>
 						<input type="text" id="solde" name="solde" class="form-control numerique" readonly="readonly" size="8"/>
 					</div>
-					<div class="form-group">
-						<label for="recDate" class="form-control-label">
+					<div class="row mb-3">
+						<label for="recDate" class="form-label">
 							<xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
 						</label>
 						<input type="text" id="recDate" name="recDate" class="form-control numerique" size="10"/>
 					</div>
-					
-					<div class="form-group">
-						<label for="recFlux" class="form-control-label">
+					<div class="mb-3">
+						<label for="recFlux" class="form-label">
 							<xsl:value-of select="$LBL.FLUX"/>
 						</label>
-						<select name="recFlux" id="recFlux" class="form-control" multiple="multiple">&#160;</select>
+						<select id="recFlux" multiple="multiple"/>
 					</div>
-					<div class="form-group">
-						<label for="recMontant" class="form-control-label">
+					<div class="mb-3">
+						<label for="recMontant" class="form-label">
 							<xsl:value-of select="$LBL.MONTANT"/>
 						</label>
 						<input type="text" id="recMontant" name="recMontant" class="form-control numerique" size="8"/>
 					</div>
 					<br/>
-				</aside>
-			</form>
+				</form>
+			</aside>
 			<div class="col-10">
 				<table class="table table-striped table-bordered" id="tableauResultat">
 					<thead>

@@ -9,10 +9,10 @@
 		<br/>
 		<div class="row">
 			<input type="hidden" id="retour" name="retour"/>
-			<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
-				<xsl:call-template name="formulaireJson"/>
-				<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
-				<aside class="col formulaire">
+			<aside class="col formulaire">
+				<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
+					<xsl:call-template name="formulaireJson"/>
+					<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
 					<br/>
 					<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 						<div class="btn-group" role="group" aria-label="First group">
@@ -38,8 +38,8 @@
 						<input type="text" id="recMontant" name="recMontant" class="form-control numerique" size="8"/>
 					</div>
 					<br/>
-				</aside>
-			</form>
+				</form>
+			</aside>
 			<div class="col-10">
 				<table class="table table-striped table-bordered" id="tableauResultat">
 					<thead>

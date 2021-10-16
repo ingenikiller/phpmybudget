@@ -24,8 +24,8 @@ $(document).ready(function() {
 			currentText: 'Courant',
 			monthNames: ['Janvier','F&eacute;vrier','Mars','Avril','Mai','Juin',
 			'Juillet','Ao&ucirc;t','Septembre','Octobre','Novembre','D&eacute;cembre'],
-			monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
-			'Jul','Aoû','Sep','Oct','Nov','Déc'],
+			monthNamesShort: ['Jan','F?v','Mar','Avr','Mai','Jun',
+			'Jul','Ao?','Sep','Oct','Nov','D?c'],
 			dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
 			dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
 			dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
@@ -93,11 +93,11 @@ function editerOperation(numeroCompte, operationId){
 				$('#date').val(json[0].tabResult[0].date);
 
 				$("div#divOpeRec").hide();
-				$("div#boiteOperation").dialog({
-					resizable: false,
-					width:largeur,
-					modal: true
+				var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
+					backdrop: 'static',
+					keyboard: false
 				});
+				myModal.show();
 			}
 		);
 	} else {
@@ -110,18 +110,18 @@ function editerOperation(numeroCompte, operationId){
 		$('#fluxId').val('');
 		$('#modePaiementId').val('');
 		$("div#divOpeRec").show();
-		$("div#boiteOperation").dialog({
-			resizable: false,
-			width:largeur,
-			modal: true
+		var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
+			backdrop: 'static',
+			keyboard: false
 		});
+		myModal.show();
 	}
 	initFormOperation();
 	return false;
 }
 
 /*
-	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
+	r?initialise le formulaire de recherche pour lancer une nouvelle recherche
 */
 function rechercherOperations(form){
 	listerObjects();
@@ -129,7 +129,7 @@ function rechercherOperations(form){
 }
 
 /*
-	exécute une requête Json et alimente le tableau des résultats
+	ex?cute une requ?te Json et alimente le tableau des r?sultats
 */
 function listerObjects(){
 
@@ -160,7 +160,7 @@ function listerObjects(){
 }
 
 /*
-	parse le tableau Json et génère le tableau
+	parse le tableau Json et g?n?re le tableau
 */
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
@@ -205,7 +205,7 @@ function parseListeJson(json) {
 			var operationId = $(elem).attr('operationId');
 			
 			$.getJSON('index.php?domaine=operation&service=getsoldeoperation&numeroCompte='+numeroCompte+'&operationId='+operationId).always(function(resultat) {
-				elem.tooltip('option', 'content', 'Solde= '+resultat[0].valeur.toFixed(2)+' €');
+				elem.tooltip('option', 'content', 'Solde= '+resultat[0].valeur.toFixed(2)+' ?');
 			 });
 		}
     });
@@ -218,7 +218,7 @@ function parseListeJson(json) {
 }
 
 /*********************************************************
-	récupère la liste des opé récurrentes pour le compte
+	r?cup?re la liste des op? r?currentes pour le compte
 	en cours et alimente la combo de choix
  *********************************************************/
 function getListeOpeRecurrente(numeroCompte) {

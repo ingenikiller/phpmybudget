@@ -20,7 +20,7 @@
 				<!-- affichage barre de navigation -->
 				<xsl:if test="$affMenu='O'">
 					<xsl:call-template name="menu">
-						<xsl:with-param name="niveau1"><xsl:value-of select="/root/titre"/></xsl:with-param>
+						<!--xsl:with-param name="niveau1"><xsl:value-of select="/root/titre"/></xsl:with-param-->
 					</xsl:call-template>
 				</xsl:if>
 				<!-- affichage du contenu -->
@@ -67,9 +67,8 @@
 			<link href="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 			
 			<script src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/external/jquery/jquery.js">&#160;</script>
-			<!--script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script-->
-    
-			<script src="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/js/bootstrap.min.js">&#160;</script>
+			
+			<script src="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/js/bootstrap.bundle.js">&#160;</script>
 			<script src="front/jquery/jquery-ui-{$JQUERY-VERSION}.custom/jquery-ui.min.js">&#160;</script>
 
 			<script src="front/js/commun.js">&#160;</script>
@@ -80,11 +79,15 @@
 			<script src="front/js/core_ajax.js">&#160;</script>
 			
 			<!-- plugins -->
-			<link href="front/css/jquery.multiselect.css" rel="stylesheet" type="text/css"/>
-			<script src="front/js/jquery.multiselect.js">&#160;</script>
+			<!--link href="front/css/jquery.multiselect.css" rel="stylesheet" type="text/css"/-->
+			<!--script src="front/js/jquery.multiselect.js">&#160;</script-->
+			<script src="front/js/bootstrap-multiselect.js">&#160;</script>
+			<link href="front/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
 
 			<link href="front/css/bootstrap-force.css" rel="stylesheet" type="text/css"/>
 			<link href="front/css/phpmybudget.css" rel="stylesheet" type="text/css"/>
+
+			
 			<xsl:call-template name="js.module.sheet"/>
 		</head>
 	</xsl:template>
@@ -94,36 +97,39 @@
 		<div class="row justify-content-md-center">
 			<div class="col-sm-10">
 		
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
-					<p class="navbar-brand" style="color: white;">PhpMybudget</p>
-					<xsl:if test="$niveau1!=''">
-						<p class="navbar-text" style="color: white;">/</p>
-						<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
-					</xsl:if>
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item">
-							<a class="nav-item nav-link active" href="index.php?domaine=compte&amp;service=getpage" style="color: white;">
-								<xsl:value-of select="$LBL.COMPTES"/>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-item nav-link active" href="index.php?domaine=flux&amp;service=getpage" style="color: white;">
-								<xsl:value-of select="$LBL.FLUX"/>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-item nav-link active" href="index.php?domaine=segment" style="color: white;">
-								<xsl:value-of select="$LBL.PARAMETRAGE"/>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-item nav-link active blanc" href="index.php?domaine=periode" style="color: white;">
-								<xsl:value-of select="$LBL.PERIODE"/>
-							</a>
-						</li>
-					</ul>
-				  </div>
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<div class="container-fluid">
+					<div class="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
+						<p class="navbar-brand" style="color: white;">PhpMybudget</p>
+						<xsl:if test="$niveau1!=''">
+							<p class="navbar-text" style="color: white;">/</p>
+							<p class="navbar-text" style="color: white;"><xsl:value-of select="$niveau1"/></p>
+						</xsl:if>
+						
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item">
+								<a class="nav-item nav-link active" href="index.php?domaine=compte&amp;service=getpage" style="color: white;">
+									<xsl:value-of select="$LBL.COMPTES"/>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-item nav-link active" href="index.php?domaine=flux&amp;service=getpage" style="color: white;">
+									<xsl:value-of select="$LBL.FLUX"/>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-item nav-link active" href="index.php?domaine=segment" style="color: white;">
+									<xsl:value-of select="$LBL.PARAMETRAGE"/>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-item nav-link active blanc" href="index.php?domaine=periode" style="color: white;">
+									<xsl:value-of select="$LBL.PERIODE"/>
+								</a>
+							</li>
+						</ul>
+					</div>
+					</div>
 				</nav>
 			</div>
 		</div>

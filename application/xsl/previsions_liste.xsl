@@ -26,7 +26,7 @@
 						<xsl:value-of select="$LBL.ANNEE"/>
 					</label>
 					<div class="col-sm-6">
-						<select name="annee" id="annee" class="form-control" onchange="refreshWindow()">
+						<select name="annee" id="annee" class="form-select form-select-sm" onchange="refreshWindow()">
 							<xsl:apply-templates select="/root/data/ListeAnnees/Dynamic">
 								<xsl:with-param name="anneeSelect" select="$ANNEE"/>
 							</xsl:apply-templates>
@@ -34,7 +34,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col">
+			<div class="-sm-6">
 				<div id="radio">
 					<input type="radio" id="radio1" name="radioChoixType" value="complet" checked="checked"/><label for="radio1">Complet</label>
 					<input type="radio" id="radio2" name="radioChoixType" value="pinel"/><label for="radio2">Avec Pinel</label>
@@ -100,7 +100,7 @@
 							<xsl:value-of select="$LBL.FLUX"/>
 						</label>
 						<div class="col-sm-6">
-							<select class="form-control obligatoire" name="fluxId" id="fluxId" tabindex="5">&#160;</select>
+							<select class="form-select form-select-sm obligatoire" name="fluxId" id="fluxId" tabindex="5">&#160;</select>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -147,7 +147,7 @@
 							<xsl:value-of select="$LBL.FLUX"/>
 						</label>
 						<div class="col-sm-6">
-							<select class="form-control obligatoire" id="fluxIdEntete" tabindex="5">&#160;</select>
+							<select class="form-select form-select-sm obligatoire" id="fluxIdEntete" tabindex="5">&#160;</select>
 						</div>
 					</div>
 					<div class="form-group row">

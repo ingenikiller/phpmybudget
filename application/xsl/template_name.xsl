@@ -14,7 +14,7 @@
         <xsl:param name="class" select="''"/>
         <xsl:param name="tabindex" select="''"/>
         <xsl:param name="optionVide" select="'O'"/>
-        <select class="form-control {$class}" name="{$nom}" id="{$nom}">
+        <select class="form-select form-select-sm {$class}" name="{$nom}" id="{$nom}">
             <xsl:if test="$onChange!=''">
                 <xsl:attribute name="onchange">
                     <xsl:value-of select="$onChange"/>
@@ -55,123 +55,137 @@
     <xsl:template name="SelectMois">
         <xsl:param name="name"/>
         <xsl:param name="obligatoire" select="'N'"/>
-        <select name="{$name}" id="{$name}" class="form-control">
+        <select name="{$name}" id="{$name}" class="form-select form-select-sm">
             <xsl:if test="$obligatoire='O'">
-                <xsl:attribute name="class">form-control obligatoire</xsl:attribute>
+                <xsl:attribute name="class">form-select form-select-sm obligatoire</xsl:attribute>
             </xsl:if>
             <option/>
             <option value="01">Janvier</option>
-            <option value="02">Février</option>
+            <option value="02">Fï¿½vrier</option>
             <option value="03">Mars</option>
             <option value="04">Avril</option>
             <option value="05">Mai</option>
             <option value="06">Juin</option>
             <option value="07">Juillet</option>
-            <option value="08">Aoùt</option>
+            <option value="08">Aoï¿½t</option>
             <option value="09">Septembre</option>
             <option value="10">Octobre</option>
             <option value="11">Novembre</option>
-            <option value="12">Décembre</option>
+            <option value="12">Dï¿½cembre</option>
         </select>
     </xsl:template>
     <!--
-        édition d'une opération
+        Edition d'une opÃ©ration
     -->
     <xsl:template name="operationEdition">
         <xsl:param name="numeroCompte"/>
-        <div id="boiteOperation" title="{$LBL.EDITIONOPERATION}" style="display: none;">
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" id="boiteOperation" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Edition</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
 
-            <form method="POST" action="#" onsubmit="return soumettre(this);" name="operation" id="operation">
-                <input type="hidden" name="service" id="service"/>
-                <input type="hidden" id="noCompte" name="noCompte" value="{$numeroCompte}"/>
-                <input type="hidden" name="operationId" id="operationId" value=""/>
-                <div class="container popup_operation">
-                    <div class="col-lg-12">
-                        <div class="form-group row" id="divOpeRec">
-                            <label for="noReleve" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.OPERATIONSRECURRENTES"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <select class="form-control" name="operationrecurrenteId" id="operationrecurrenteId" onblur="return getInfoOpeRec(this)" tabindex="100">&#160;</select>
-                            </div>
-                        </div>
-						<div class="form-group row">
-                            <label for="noReleve" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.NUMERORELEVE"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <input class="form-control" size="12" name="noReleve" id="noReleve" tabindex="10"/>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="date" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.DATE"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <input class="form-control" type="text" name="date" id="date" size="11" maxlength="10"
-                                       tabindex="20"/>
-                            </div>
-                        </div>
+                        <form method="POST" action="#" onsubmit="return soumettre(this);" name="operation" id="operation">
+                            <input type="hidden" name="service" id="service"/>
+                            <input type="hidden" id="noCompte" name="noCompte" value="{$numeroCompte}"/>
+                            <input type="hidden" name="operationId" id="operationId" value=""/>
+                            <div class="container popup_operation">
+                                <div class="col-lg-12">
+                                    <div class="form-group row" id="divOpeRec">
+                                        <label for="noReleve" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.OPERATIONSRECURRENTES"/>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <select class="form-select form-select-sm" name="operationrecurrenteId" id="operationrecurrenteId" onblur="return getInfoOpeRec(this)" tabindex="100">&#160;</select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="noReleve" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.NUMERORELEVE"/>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control" size="12" name="noReleve" id="noReleve" tabindex="10"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="date" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.DATE"/>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control" type="text" name="date" id="date" size="11" maxlength="10"
+                                                tabindex="20"/>
+                                        </div>
+                                    </div>
 
-                        <div class="form-group row">
-                            <label for="libelle" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.LIBELLE"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <input class="form-control" type="text" size="40" id="libelle" tabindex="30"/>
-                            </div>
-                        </div>
+                                    <div class="form-group row">
+                                        <label for="libelle" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.LIBELLE"/>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control" type="text" size="40" id="libelle" tabindex="30"/>
+                                        </div>
+                                    </div>
 
 
-                        <div class="form-group row">
-                            <label for="fluxId" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.FLUX"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <select class="form-control obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="modePaiementId" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.MODEDEPAIEMENT"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <xsl:call-template name="ModifSelect">
-                                    <xsl:with-param name="value" select="/root/data/Operation/modePaiementId"/>
-                                    <xsl:with-param name="Node" select="/root/paramFlow/MODPAI"/>
-                                    <xsl:with-param name="nom" select="'modePaiementId'"/>
-                                    <xsl:with-param name="defaultValue" select="''"/>
-                                    <xsl:with-param name="defaultDisplay" select="''"/>
-                                    <xsl:with-param name="optionVide" select="'O'"/>
-                                    <xsl:with-param name="tabindex" select="'50'"/>
-                                </xsl:call-template>
-                            </div>
-                        </div>
+                                    <div class="form-group row">
+                                        <label for="fluxId" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.FLUX"/>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <select class="form-select form-select-sm obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="modePaiementId" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.MODEDEPAIEMENT"/>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <xsl:call-template name="ModifSelect">
+                                                <xsl:with-param name="value" select="/root/data/Operation/modePaiementId"/>
+                                                <xsl:with-param name="Node" select="/root/paramFlow/MODPAI"/>
+                                                <xsl:with-param name="nom" select="'modePaiementId'"/>
+                                                <xsl:with-param name="defaultValue" select="''"/>
+                                                <xsl:with-param name="defaultDisplay" select="''"/>
+                                                <xsl:with-param name="optionVide" select="'O'"/>
+                                                <xsl:with-param name="tabindex" select="'50'"/>
+                                            </xsl:call-template>
+                                        </div>
+                                    </div>
 
-                        <div class="form-group row">
-                            <label for="fluxId" class="col-sm-6 form-control-label">
-                                <xsl:value-of select="$LBL.MONTANT"/>
-                            </label>
-                            <div class="col-sm-6">
-                                <input class="form-control obligatoire numerique" size="7" name="montant" id="montant" onblur="return isDouble(this);" tabindex="60"/>
-                            </div>
-                        </div>
+                                    <div class="form-group row">
+                                        <label for="fluxId" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.MONTANT"/>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control obligatoire numerique" size="7" name="montant" id="montant" onblur="return isDouble(this);" tabindex="60"/>
+                                        </div>
+                                    </div>
 
-                        <div class="row justify-content-md-center">
-                            <div class="form-group row">
-                                <div class="col-md-auto">
-                                    <button type="submit" class="btn btn-primary">Valider</button>
+                                    <!--div class="row justify-content-md-center">
+                                        <div class="form-group row">
+                                            <div class="col-md-auto">
+                                                <button type="button" class="btn btn-primary">Valider</button>
+                                            </div>
+                                        </div>
+                                    </div-->
+                                    <div class="modal-footer">
+										<button type="submit" class="btn btn-primary">Valider</button>
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+									</div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </xsl:template>
 
     <!--
-        édition d'un compte
+        ï¿½dition d'un compte
     -->
     <xsl:template name="compteEdition">
         <div id="boiteCompte" title="{$LBL.EDITIONCOMPTE}" style="display: none;">
@@ -215,7 +229,7 @@
     </xsl:template>
 
     <!--
-        édition d'un segment
+        ï¿½dition d'un segment
     -->
     <xsl:template name="segmentDetailEdition">
         <div id="boiteSegmentDetail" title="{$LBL.EDITIONSEGMENT}" style="display: none;">
@@ -276,18 +290,16 @@
     </xsl:template>
 	
 	<!--
-        édition d'une opération récurrente
+        Ã©dition d'une opÃ©ration rÃ©currente
     -->
     <xsl:template name="operationRecurrenteEdition">
         <xsl:param name="numeroCompte"/>
         <div class="modal fade bd-example-modal-lg" tabindex="-1" id="boiteOperation" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Edition</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true" class="oi oi-x"></span>
-						</button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<form method="POST" action="#" onsubmit="return soumettre(this);" name="operation" id="operation">
@@ -309,7 +321,7 @@
 											<xsl:value-of select="$LBL.FLUX"/>
 										</label>
 										<div class="col-sm-6">
-											<select class="form-control obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
+											<select class="form-select form-select-lg mb-3 obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -338,7 +350,7 @@
 									</div>
 									 <div class="modal-footer">
 										<button type="submit" class="btn btn-primary">Valider</button>
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
 									</div>
 								</div>
 							</div>

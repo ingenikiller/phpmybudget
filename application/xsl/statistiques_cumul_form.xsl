@@ -51,25 +51,4 @@
 		</center>
 			<br/>
 	</xsl:template>
-	<xsl:template match="ListeAnnee">
-		<xsl:param name="name"/>
-		<xsl:param name="obligatoire"/>
-		<select name="{$name}" id="{$name}">
-			<xsl:choose>
-				<xsl:when test="$obligatoire='O'">
-					<xsl:attribute name="class">form-control obligatoire</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:attribute name="class">form-control</xsl:attribute>
-				</xsl:otherwise>
-			</xsl:choose>
-			<option/>
-			<xsl:apply-templates select="Dynamic"/>
-		</select>
-	</xsl:template>
-	<xsl:template match="Dynamic">
-		<option value="{annee}">
-			<xsl:value-of select="annee"/>
-		</option>
-	</xsl:template>
 </xsl:stylesheet>

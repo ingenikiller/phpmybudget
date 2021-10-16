@@ -2,10 +2,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <!-- version de jQuery -->
-<xsl:variable name="JQUERY-VERSION" select="'1.12.0'"/>
+<xsl:variable name="JQUERY-VERSION" select="'1.13.0'"/>
 
 <!-- version de Bootstrap -->
-<xsl:variable name="BOOTSTRAP-VERSION" select="'4.1.3'"/>
+<xsl:variable name="BOOTSTRAP-VERSION" select="'5.1.1'"/>
 
 <xsl:variable name="BLANK">application/xsl/blank.html</xsl:variable>
 
