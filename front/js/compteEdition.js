@@ -95,11 +95,11 @@ function editerCompte(numeroCompte){
 		$('#solde').val(0);
 	}
 	
-	$("div#boiteCompte").dialog({
-		resizable: false,
-		width: 620,
-		modal: true
+	var myModal = new bootstrap.Modal(document.getElementById('boiteCompte'), {
+		backdrop: 'static',
+		keyboard: false
 	});
+	myModal.show();
 }
 
 
@@ -115,7 +115,7 @@ function soumettre(form) {
 				"solde": form.solde.value
 		}, 
 		success: function(retour) { 
-			$("div#boiteCompte").dialog('close');
+			$("div#boiteCompte").modal('hide');
 			listerObjects()
 			return false;
 		}

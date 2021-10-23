@@ -1,5 +1,5 @@
 /*********************************************************
-	fonction ex�cut�e au chargement de la page
+	fonction exécutée au chargement de la page
  *********************************************************/
  $(document).ready(function() {
 	alimenteListesCompte();
@@ -7,7 +7,7 @@
 });
 
 /*********************************************************
-	alimente les combos de s�lection de compte
+	alimente les combos de sélection de compte
  *********************************************************/
 function alimenteListesCompte() {
 	var fonctionSuccess = function(resultat) {
@@ -180,7 +180,7 @@ function enregistreFlux(form){
 				"depense": form.depense.value
 		}, 
 		success: function(retour) { 
-			$("div#boiteFlux").modal('close');
+			$("div#boiteFlux").modal('hide');
 			listerObjects();
 		  return false;
 		} 

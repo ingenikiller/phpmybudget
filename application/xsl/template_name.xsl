@@ -61,21 +61,21 @@
             </xsl:if>
             <option/>
             <option value="01">Janvier</option>
-            <option value="02">Fï¿½vrier</option>
+            <option value="02">Février</option>
             <option value="03">Mars</option>
             <option value="04">Avril</option>
             <option value="05">Mai</option>
             <option value="06">Juin</option>
             <option value="07">Juillet</option>
-            <option value="08">Aoï¿½t</option>
+            <option value="08">Aoùt</option>
             <option value="09">Septembre</option>
             <option value="10">Octobre</option>
             <option value="11">Novembre</option>
-            <option value="12">Dï¿½cembre</option>
+            <option value="12">Décembre</option>
         </select>
     </xsl:template>
     <!--
-        Edition d'une opÃ©ration
+        Edition d'une opération
     -->
     <xsl:template name="operationEdition">
         <xsl:param name="numeroCompte"/>
@@ -87,7 +87,6 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-
                         <form method="POST" action="#" onsubmit="return soumettre(this);" name="operation" id="operation">
                             <input type="hidden" name="service" id="service"/>
                             <input type="hidden" id="noCompte" name="noCompte" value="{$numeroCompte}"/>
@@ -163,14 +162,6 @@
                                             <input class="form-control obligatoire numerique" size="7" name="montant" id="montant" onblur="return isDouble(this);" tabindex="60"/>
                                         </div>
                                     </div>
-
-                                    <!--div class="row justify-content-md-center">
-                                        <div class="form-group row">
-                                            <div class="col-md-auto">
-                                                <button type="button" class="btn btn-primary">Valider</button>
-                                            </div>
-                                        </div>
-                                    </div-->
                                     <div class="modal-footer">
 										<button type="submit" class="btn btn-primary">Valider</button>
 										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -185,51 +176,58 @@
     </xsl:template>
 
     <!--
-        ï¿½dition d'un compte
+        édition d'un compte
     -->
     <xsl:template name="compteEdition">
-        <div id="boiteCompte" title="{$LBL.EDITIONCOMPTE}" style="display: none;">
-            <!--br/-->
-            <form method="POST" action="#" onsubmit="return soumettre(this);">
-                <input type="hidden" name="service" id="service"/>
-                <div class="container popup_operation">
-					<div class="form-group row">
-						<label for="numeroCompte" class="col-sm-6 form-control-label">
-							<xsl:value-of select="$LBL.NUMEROCOMPTE"/>
-						</label>
-						<div class="col-sm-6">
-							<input class="form-control" size="12" name="numeroCompte" id="numeroCompte" tabindex="10" required="required"/>
-						</div>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" id="boiteCompte" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Edition</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<div class="form-group row">
-						<label for="libelle" class="col-sm-6 form-control-label">
-							<xsl:value-of select="$LBL.DESCRIPTION"/>
-						</label>
-						<div class="col-sm-6">
-							<input class="form-control" type="text" name="libelle" id="libelle" size="11" maxlength="40" tabindex="20"/>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="solde" class="col-sm-6 form-control-label">
-							<xsl:value-of select="$LBL.SOLDEBASE"/>
-						</label>
-						<div class="col-sm-6">
-							<input class="form-control numerique" type="numeric" name="solde" id="solde" size="10" tabindex="30" required="required"/>
-						</div>
-					</div>
-					<div class="row justify-content-md-center">
-						<div class="col-lg-offset-4 col-lg-4" style="text-align:center;">
-							<button type="submit" class="btn btn-primary">Valider</button>
-						</div>
-					</div>
-                    
+					<div class="modal-body">
+                        <form method="POST" action="#" onsubmit="return soumettre(this);">
+                            <input type="hidden" name="service" id="service"/>
+                            <div class="container popup_operation">
+                                <div class="form-group row">
+                                    <label for="numeroCompte" class="col-sm-6 form-control-label">
+                                        <xsl:value-of select="$LBL.NUMEROCOMPTE"/>
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" size="12" name="numeroCompte" id="numeroCompte" tabindex="10" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="libelle" class="col-sm-6 form-control-label">
+                                        <xsl:value-of select="$LBL.DESCRIPTION"/>
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" name="libelle" id="libelle" size="11" maxlength="40" tabindex="20"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="solde" class="col-sm-6 form-control-label">
+                                        <xsl:value-of select="$LBL.SOLDEBASE"/>
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control numerique" type="numeric" name="solde" id="solde" size="10" tabindex="30" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Valider</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </form>			
+                    </div> 
                 </div>
-            </form>
+            </div>
         </div>
     </xsl:template>
 
     <!--
-        ï¿½dition d'un segment
+        édition d'un segment
     -->
     <xsl:template name="segmentDetailEdition">
         <div id="boiteSegmentDetail" title="{$LBL.EDITIONSEGMENT}" style="display: none;">
@@ -290,7 +288,7 @@
     </xsl:template>
 	
 	<!--
-        Ã©dition d'une opÃ©ration rÃ©currente
+        édition d'une opération récurrente
     -->
     <xsl:template name="operationRecurrenteEdition">
         <xsl:param name="numeroCompte"/>

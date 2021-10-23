@@ -46,12 +46,12 @@ $(document).ready(function() {
 */
 $(function() {
 	$('#libelle').autocomplete({
-		source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
+		source : function(requete, reponse){ // les deux arguments reprï¿½sentent les donnï¿½es nï¿½cessaires au plugin
 		$.ajax({
 			url : 'index.php?domaine=operation&service=reclibelle', // on appelle le script JSON
-				dataType : 'json', // on spécifie bien que le type de données est en JSON
+				dataType : 'json', // on spï¿½cifie bien que le type de donnï¿½es est en JSON
 				data : {
-				debLibelle : $('#libelle').val(), // on donne la chaîne de caractère tapée dans le champ de recherche
+				debLibelle : $('#libelle').val(), // on donne la chaï¿½ne de caractï¿½re tapï¿½e dans le champ de recherche
 				mode : 'libelleOperation',
 				numeroCompte : document.getElementById('numeroCompte').value,
 				maxRows : 15
@@ -69,7 +69,7 @@ $(function() {
 
 
 /*
-	Edition d'une opération
+	Edition d'une opï¿½ration
 */
 function editerOperation(numeroCompte, operationId){
 
@@ -160,7 +160,7 @@ function listerObjects(){
 }
 
 /*
-	parse le tableau Json et g?n?re le tableau
+	parse le tableau Json et gÃ©nÃ¨re le tableau
 */
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
@@ -218,7 +218,7 @@ function parseListeJson(json) {
 }
 
 /*********************************************************
-	r?cup?re la liste des op? r?currentes pour le compte
+	rÃ©cupÃ¨re la liste des opÃ© rÃ©currentes pour le compte
 	en cours et alimente la combo de choix
  *********************************************************/
 function getListeOpeRecurrente(numeroCompte) {

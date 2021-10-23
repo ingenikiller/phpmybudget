@@ -98,11 +98,12 @@ function afficheUnitaire(compte, idLigne){
 		document.editionPrevisionUnitaire.mois.value='';
 	    document.editionPrevisionUnitaire.ligneId.value='';
 	}
-	$("div#boite").dialog({
-		resizable: false,
-		width:620,
-		modal: true
+	
+	var myModal = new bootstrap.Modal(document.getElementById('boite'), {
+		backdrop: 'static',
+		keyboard: false
 	});
+	myModal.show();
 }
 
 /*********************************************************
@@ -127,7 +128,7 @@ function modifierPrevision(form) {
 		}, 
 		success: function(retour) { 
 			affichePrevisions('liste',$('#annee').val(), form.numeroCompte.value);
-			$("div#boite").dialog('close');
+			$("div#boite").modal('hide');
 
 			afficheEstimation('estimation', $('#numeroCompte').val());
 			return false;
@@ -150,11 +151,11 @@ function afficheEntete(compte) {
 	document.editionEnteteUnitaire.montantPeriode.value='';
 	document.editionEnteteUnitaire.ligneId.value='';
 
-	$("div#boiteEntete").dialog({
-		resizable: false,
-		width:620,
-		modal: true
+	var myModal = new bootstrap.Modal(document.getElementById('boiteEntete'), {
+		backdrop: 'static',
+		keyboard: false
 	});
+	myModal.show();
 }
 
 /***********************************************************************
@@ -176,7 +177,7 @@ function creerEntete(form) {
 		success: function(retour) { 
 			if(traiteRetourAjax(retour)){
 				form.ligneId.value = retour[0].ligneId;
-				$("div#boiteEntete").dialog('close');
+				$("div#boiteEntete").modal('hide');
 				affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
 			}
 			return false;
@@ -202,12 +203,11 @@ function afficheListeGroupe(fluxId){
 		success: function(resultat) {
 			parseListePrevisionJson(resultat);
 
-			$("div#boiteListeEntete").dialog({
-				resizable: false,
-				width:400,
-				modal: true,
-				title : 'Edition prévision'
+			var myModal = new bootstrap.Modal(document.getElementById('boiteListeEntete'), {
+				backdrop: 'static',
+				keyboard: false
 			});
+			myModal.show();
 			$('#listeEntete').val('');
 		}
 	});
@@ -247,7 +247,7 @@ function propagerMontant(btn){
 }
 
 /***********************************************************************
- * mets à jour la prévision avec la somme des montants pour un mois 
+ * met à jour la prévision avec la somme des montants pour un mois 
  * et un flux
  ***********************************************************************/
  function equilibrerPrevision(numeroCompte, ligneId){
@@ -283,7 +283,7 @@ function enregistreListeLignes(form){
 		dataType: 'json',
 		data: params
 	});
-	$("div#boiteListeEntete").dialog('close');
+	$("div#boiteListeEntete").modal('hide');
 	affichePrevisions('liste',$('#annee').val(), form.numeroCompte.value);
 	return false;
 }

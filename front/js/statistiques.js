@@ -64,16 +64,21 @@ function afficheDetail(params){
 	$('#params').val(params);
 	$('#numeroPage').val(1);
 	listerObjects();
-	$("div#boiteDetail").dialog({
+	/*$("div#boiteDetail").dialog({
 					resizable: false,
 					height:750,
 					width:700,
 					modal: true
-				});
+				});*/
+	var myModal = new bootstrap.Modal(document.getElementById('boiteDetail'), {
+		backdrop: 'static',
+		keyboard: false
+	});
+	myModal.show();
 }
 
 /************************
- * 	affichege des résultats
+ * 	affichege des rï¿½sultats
  ************************/
 function listerObjects(){
 	var params = $('#params').val();
@@ -91,7 +96,7 @@ function listerObjects(){
 
 
 /************************
- * parse le tableau Json et génère le tableau
+ * parse le tableau Json et gï¿½nï¿½re le tableau
  ************************/
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
@@ -117,7 +122,7 @@ function parseListeJson(json) {
 }
 
 /************************
- * gère le dépliage et repliage des détails
+ * gï¿½re le dï¿½pliage et repliage des dï¿½tails
  ************************/
 function deplieDetail(lien){
 	var attrReplie=lien.getAttribute('replie');

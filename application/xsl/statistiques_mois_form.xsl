@@ -29,10 +29,8 @@
 										<xsl:with-param name="name" select="'premiereAnnee'"/>
 										<xsl:with-param name="obligatoire" select="'O'"/>
 									</xsl:apply-templates>
-
 								</div>
 							</div>
-
 							<div class="form-group row">
 								<label for="derniereAnnee" class="col-sm-4 form-control-label"><xsl:value-of select="$LBL.DERNIERMOIS"/></label>
 								<div class="col-sm-5">
@@ -56,21 +54,5 @@
 			</div>
 			<table id="tableResultat" name="tableResultat" class="table table-bordered"  table-hover=""/>
 		</center>
-	</xsl:template>
-	<xsl:template match="ListeAnnee">
-		<xsl:param name="name"/>
-		<xsl:param name="obligatoire"/>
-		<select name="{$name}" id="{$name}" class="form-control">
-			<xsl:if test="$obligatoire='O'">
-				<xsl:attribute name="class">form-control obligatoire</xsl:attribute>
-			</xsl:if>
-			<option/>
-			<xsl:apply-templates select="Dynamic"/>
-		</select>
-	</xsl:template>
-	<xsl:template match="Dynamic">
-		<option value="{annee}">
-			<xsl:value-of select="annee"/>
-		</option>
 	</xsl:template>
 </xsl:stylesheet>

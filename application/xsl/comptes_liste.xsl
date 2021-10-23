@@ -8,7 +8,6 @@
     <xsl:template name="Contenu">
         <div class="row justify-content-md-center">
             <div class="col-lg-10">
-
                 <h1>
                     <xsl:value-of select="$LBL.LISTEDESCOMPTES"/>
                 </h1>
