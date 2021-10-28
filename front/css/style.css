@@ -238,7 +238,7 @@ tr
 	padding-bottom: 0px;
 }
 
-/* Lignes entête de tableau */
+/* Lignes entï¿½te de tableau */
 tr.entete
 {
 	height: 30px;
@@ -323,7 +323,7 @@ td.positive{
 	text-align:right;
 }
 
-td.recap{
+.td.recap{
 	background-color: #babac5;
 	text-align:right;
 	font-weight: bold;

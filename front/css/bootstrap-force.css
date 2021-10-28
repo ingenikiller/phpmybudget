@@ -81,3 +81,10 @@ aside.formulaire {
 a:link {
   text-decoration: none;
 }
+
+/*.table > :not(caption) > * > * {
+	padding: .5rem .5rem;
+	background-color: #c22b2b;
+	border-bottom-width: 1px;
+	box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}*/

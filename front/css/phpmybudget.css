@@ -45,7 +45,8 @@ p {
 }
 
 .recap {
-	background-color:#CBC1DB;
+	background-color:#CBC1DB !important;
+	font-weight: bold;
 }
 
 
