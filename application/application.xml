@@ -47,7 +47,7 @@
 		<domaine name="prevision">
 			<service name="defaut" classe="GestionPrevisionService" methode="getPage" isPrivee="true" xsl="xsl/previsions_liste.xsl"/>
 			<service name="estimationreste" classe="GestionPrevisionService" methode="estimationReste" isPrivee="true" render="json"/>
-			<service name="getlisteannee" classe="GestionPrevisionService" methode="getListeAnnee" isPrivee="true" xsl="xsl/prevision_detail.xsl"/>
+			<service name="getlisteannee" classe="GestionPrevisionService" methode="getListeAnnee" isPrivee="true" render="json" xsl="xsl/prevision_detail.xsl"/>
 			<service name="getone" classe="GestionPrevisionService" methode="getOne" render="json" isPrivee="true"/>
 			<service name="create" classe="GestionPrevisionService" methode="create" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionPrevisionService" methode="update" render="json" isPrivee="true"/>

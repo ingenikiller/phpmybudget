@@ -47,6 +47,80 @@ class GestionPrevisionService extends ServiceStub {
 				break;
 		}
 		
+		//liste des périodes
+        $liste = new ListObject();
+        $liste->name='Periodes';
+        $liste->request('Periode', "annee='$annee' order by periode");
+        
+        $p_contexte->addDataBlockRow($liste);
+		
+		$p_contexte->addDataBlockRow($this->getFluxGroupe($annee, 'O', $clausePinel, $numeroCompte));
+		$p_contexte->addDataBlockRow($this->getFluxGroupe($annee, 'N', $clausePinel, $numeroCompte));
+    }
+
+	/**
+	 * 
+	 * 
+	 */
+	private function getFluxGroupe($annee, $typeFlux, $clausePinel, $numeroCompte) {
+		$requeteOperation='select distinct p.periode ,  sum(operation.montant) as total from periode p
+		left join operation on operation.date between p.debut and p.fin and nocompte=\'$parent->noCompte\' and fluxid=\'$parent->fluxId\'
+		 where annee=\''.$annee.'\' 
+		 group by p.periode';
+
+		$listeOperation = new ListDynamicObject();
+        $listeOperation->name = 'ListeOperation';
+		$listeOperation->setAssociatedRequest(null, $requeteOperation);
+
+		$requetePrevision='select distinct p.periode, ligneid, prevision.montant as total from periode p
+		left join prevision on prevision.mois = p.periode and prevision.nocompte=\'$parent->noCompte\' and prevision.fluxid=\'$parent->fluxId\'
+		 where p.annee=\''.$annee.'\' ORDER BY p.periode asc';
+
+		$listePrevision = new ListDynamicObject();
+        $listePrevision->name = 'ListePrevision';
+		$listePrevision->setAssociatedRequest(null, $requetePrevision);
+		
+		//liste des flux dépense
+        $listeFlux = new ListDynamicObject();
+        $listeFlux->name = 'ListeFluxDepense';
+		$listeFlux->setAssociatedKey($listePrevision);
+		$listeFlux->setAssociatedKey($listeOperation);
+		$listeFlux->request($this->getRequeteFlux($typeFlux,$clausePinel, $annee,$numeroCompte));
+		return $listeFlux;
+	}
+
+
+
+	private function getRequeteFlux($depense, $clausePinel, $annee,$numeroCompte) {
+		return "SELECT DISTINCT flux.fluxId, flux, depense, noCompte
+		FROM prevision 
+			INNER JOIN flux ON flux.fluxId = prevision.fluxId  $clausePinel
+		WHERE 1=1 AND 
+			mois LIKE '$annee%' AND 
+			noCompte='$numeroCompte' AND depense='$depense' ORDER BY flux";
+	}
+	
+	public function getListeAnneeOld(ContextExecution $p_contexte) {
+        $annee=$p_contexte->m_dataRequest->getData('periode');
+        $flagPinel=$p_contexte->m_dataRequest->getData('flagPinel');
+        
+        $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
+        
+        $dateDeb=$annee.'-01';
+        $dateFin=$annee.'-12';
+        
+		$clausePinel='';
+		switch($flagPinel){
+			case 'complet':
+				break;
+			case 'pinel':
+				$clausePinel='AND EXISTS (SELECT 1 FROM flux WHERE 1=1 AND flux.fluxid=prevision.fluxid AND flux.fluxMaitreId =\'101\')';
+				break;
+			case 'sans':
+				$clausePinel='AND EXISTS (SELECT 1 FROM flux WHERE 1=1 AND flux.fluxid=prevision.fluxid AND flux.fluxMaitreId !=\'101\')';
+				break;
+		}
+		
 		
         $clausePrevisions = "noCompte='$numeroCompte' and typenr='L' and annee='$annee' $clausePinel";
         
@@ -61,7 +135,7 @@ class GestionPrevisionService extends ServiceStub {
 			FROM operation 
 				LEFT JOIN flux ON flux.fluxId = operation.fluxId $clausePinel
 				LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.date LIKE concat( prevision.periode,'%')
-			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked' AND date like concat('$annee','%')";
+			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked' AND date like concat('$annee','%') ";
 		
         $requete=
 			"SELECT ROUND(SUM( montant),2) AS total , fluxId, substring(operation.date,1,7) as mois
@@ -96,7 +170,7 @@ class GestionPrevisionService extends ServiceStub {
 				noCompte='$numeroCompte' ORDER BY flux");
         $p_contexte->addDataBlockRow($listeFlux);
     }
-	
+
 	/**
 	 * retourne le capital restant en soustrayant au solde du compte les prévisions du mois restantes
 	 */

@@ -44,6 +44,7 @@
 		</div>
 		<div class="row justify-content-md-center">
             <div class="col-lg-3">
+                <input type="hidden" id="nocompte" value="{$NUMEROCOMPTE}"/>
                 <table class="table table-bordered">
 					<tr>
                         <th>
@@ -223,15 +224,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tbodylisteentete"/>
-                                <tfoot>
-                                    <tr>
-                                        <td style="text-align:center;" colspan="3">
-                                            <input type="submit" class="bouton" id="btnEnregistreListeLignes" value="{$LBL.MODIFIER}"/>
-                                        </td>
-                                    </tr>
-                                </tfoot>
                             </table>
-            
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Valider</button>
