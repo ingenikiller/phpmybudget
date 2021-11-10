@@ -448,16 +448,20 @@ function genereGroupe(tbody, listeFlux, listeMois,libelle) {
 		ligne.append('<th>'+'</th>');
 		listeRelle = flux.associatedObjet[1];
 		sommeRelle=0;
-		for(let relle of listeRelle.tabResult) {
-			let montant = relle.total == null ? '' : relle.total;
+		for(let reelle of listeRelle.tabResult) {
+			let montant = reelle.total == null ? '' : reelle.total;
 			sommeRelle+=Number(montant);
 			if(montant!='') {
-				ligne.append('<td class="text-end">'+Number(montant).toFixed(2)+'</td>');
+				ligne.append('<td class="text-end">'+
+					'<a href="javascript:afficheDetail(\'numeroCompte='+nocompte+'&amp;mode=mois&amp;recDate='+reelle.periode+'&amp;recFlux='+flux.fluxId+'\')">'+
+						Number(montant).toFixed(2)+
+					'</a></td>'	
+				);
 			} else {
 				ligne.append('<td/>');
 			}
 			
-			tabRelles[relle.periode]+=Number(montant);
+			tabRelles[reelle.periode]+=Number(montant);
 		}
 		ligne.append('<td class="text-end recap">'+sommeRelle.toFixed(2)+'</td>');
 
