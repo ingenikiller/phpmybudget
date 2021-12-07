@@ -79,7 +79,10 @@ class PageDescription {
             $this->parse($p_contexte);
         } else if($this->m_render=='json'){
             echo json_encode($p_contexte->m_dataResponse);
-        }
+        } else {
+			$parser = new ParserJson2();
+			echo $parser->parse($p_contexte);
+		}
     }
 
     public function setXslFile($p_xslFile) {
