@@ -421,7 +421,7 @@ function genereGroupe(tbody, listeFlux, listeMois,libelle) {
 				
 				let lien='';
 				//s'il existe une dépense pour le flux/mois en cours
-				if(listeRelle.tabResult[Number(prevision.periode.substr(5))]!=null) {
+				if(listeRelle.tabResult[Number(prevision.periode.substr(5))-1]!=null) {
 					let relleMois = listeRelle.tabResult[Number(prevision.periode.substr(5)) -1].total;
 				
 					//si 
