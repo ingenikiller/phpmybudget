@@ -114,7 +114,8 @@ abstract class SavableObject extends Objects {
 						}
 					} else {
 						//type AUTRE
-						$this->logger->debug('Type non géréen create:' . $champDefinition['Type']);
+						$this->logger->debug('Type non géré 
+						en create:' . $champDefinition['Type']);
 						$values[] = $val=='' ? 0 : $val;
 					}
 				}

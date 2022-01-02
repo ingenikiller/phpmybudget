@@ -110,11 +110,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="date" class="col-sm-6 form-control-label">
+                                        <label for="dateOperation" class="col-sm-6 form-control-label">
                                             <xsl:value-of select="$LBL.DATE"/>
                                         </label>
                                         <div class="col-sm-6">
-                                            <input class="form-control" type="text" name="date" id="date" size="11" maxlength="10"
+                                            <input class="form-control" type="text" name="dateOperation" id="dateOperation" size="11" maxlength="10"
                                                 tabindex="20"/>
                                         </div>
                                     </div>

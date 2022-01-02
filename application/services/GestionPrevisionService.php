@@ -64,7 +64,7 @@ class GestionPrevisionService extends ServiceStub {
 	 */
 	private function getFluxGroupe($annee, $typeFlux, $clausePinel, $numeroCompte) {
 		$requeteOperation='select distinct p.periode ,  sum(operation.montant) as total from periode p
-		left join operation on operation.date between p.debut and p.fin and nocompte=\'$parent->noCompte\' and fluxid=\'$parent->fluxId\'
+		left join operation on operation.dateOperation between p.debut and p.fin and nocompte=\'$parent->noCompte\' and fluxid=\'$parent->fluxId\'
 		 where annee=\''.$annee.'\' 
 		 group by p.periode';
 
@@ -134,15 +134,15 @@ class GestionPrevisionService extends ServiceStub {
 			"SELECT ROUND(sum(montant),2) AS total
 			FROM operation 
 				LEFT JOIN flux ON flux.fluxId = operation.fluxId $clausePinel
-				LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.date LIKE concat( prevision.periode,'%')
-			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked' AND date like concat('$annee','%') ";
+				LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.dateOperation LIKE concat( prevision.periode,'%')
+			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked' AND dateOperation like concat('$annee','%') ";
 		
         $requete=
-			"SELECT ROUND(SUM( montant),2) AS total , fluxId, substring(operation.date,1,7) as mois
+			"SELECT ROUND(SUM( montant),2) AS total , fluxId, substring(operation.dateOperation,1,7) as mois
 			FROM operation 
-			WHERE nocompte='$numeroCompte' and date like concat('$annee', '%')
+			WHERE nocompte='$numeroCompte' and dateOperation like concat('$annee', '%')
 				AND EXISTS (SELECT 1 FROM prevision WHERE prevision.noCOmpte='$numeroCompte'
-				AND prevision.fluxid=operation.fluxid AND operation.date LIKE concat( substring(prevision.mois,1,4), '%'))
+				AND prevision.fluxid=operation.fluxid AND operation.dateOperation LIKE concat( substring(prevision.mois,1,4), '%'))
 			GROUP BY fluxid, mois";
         $listMontantTotaux = new ListDynamicObject();
         $listMontantTotaux->name = 'ListeMontantFlux';
@@ -212,7 +212,7 @@ class GestionPrevisionService extends ServiceStub {
 			FROM operation, flux 
 			WHERE 1=1 
 			AND nocompte='$numeroCompte' 
-			AND date LIKE concat('$mois','%') 
+			AND dateOperation LIKE concat('$mois','%') 
 			AND flux.fluxid=operation.fluxid AND depense='O' 
 			AND EXISTS(
 				SELECT 1 
@@ -273,7 +273,7 @@ class GestionPrevisionService extends ServiceStub {
 			FROM operation 
 			WHERE 1=1
 				AND nocompte='$prevision->noCompte' 
-				AND date like concat('$prevision->mois','%') 
+				AND dateOperation like concat('$prevision->mois','%') 
 				AND fluxid='$prevision->fluxId'";
 		$listMontantTotaux = new ListDynamicObject();
 		$listMontantTotaux->name = 'ListeMontantFlux';

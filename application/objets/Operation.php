@@ -10,7 +10,7 @@ class Operation extends SavableObject {
 	
 	public $noReleve;
 	
-	public $date;
+	public $dateOperation;
 	
 	public $libelle;
 	

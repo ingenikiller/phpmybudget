@@ -16,7 +16,7 @@ $(document).ready(function() {
 	fonction d'init des zones date
 */
  $(function() {
-	$( "#date" ).datepicker();
+	$( "#dateOperation" ).datepicker();
 	$.datepicker.regional['fr'] = {
 			closeText: 'Fermer',
 			prevText: '&#x3c;Pr?c',
@@ -90,7 +90,7 @@ function editerOperation(numeroCompte, operationId){
 				$('#montant').val(json[0].tabResult[0].montant.replace(',',''));
 				$('#fluxId').val(json[0].tabResult[0].fluxId);
 				$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
-				$('#date').val(json[0].tabResult[0].date);
+				$('#dateOperation').val(json[0].tabResult[0].dateOperation);
 
 				$("div#divOpeRec").hide();
 				var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
@@ -179,7 +179,7 @@ function parseListeJson(json) {
 	for(i=0; i<nb; i++) {
 		var row = $('<tr typetr="operation"/>');
 		row.append($('<td/>').text(tabJson[i].noReleve));
-		row.append($('<td/>').text(tabJson[i].date));
+		row.append($('<td/>').text(tabJson[i].dateOperation));
 		row.append($('<td/>').text(tabJson[i].libelle));
 		var classeMontant='';
 		if(Number(tabJson[i].montant.replace(',','')) >= 0) {
@@ -188,7 +188,7 @@ function parseListeJson(json) {
 			classeMontant='negatif';
 		}
 
-		row.append($('<td class="text-right '+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',','')))));
+		row.append($('<td class="text-end '+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',','')))));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="oi oi-pencil"/></a>'));
