@@ -113,9 +113,9 @@ function parseListeJson(json) {
 	var i=0;
 	for(i=0; i<nb; i++) {
 		var row = $('<tr typetr="operation"/>');
-		row.append($('<td/>').text(tabJson[i].date));
+		row.append($('<td/>').text(tabJson[i].dateOperation));
 		row.append($('<td/>').text(tabJson[i].libelle));
-		row.append($('<td class="text-right"/>').text(tabJson[i].montant.replace(',','')));
+		row.append($('<td class="text-end"/>').text(tabJson[i].montant.replace(',','')));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		$("#tbodylisteoperation").append(row);
 	}
