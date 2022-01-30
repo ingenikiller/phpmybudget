@@ -334,7 +334,7 @@ function genereTableau(idTableau, ajax) {
 	
 	//mois en cours
 	let date = new Date()
-	let moisEnCours = date.getFullYear()+'-'+(date.getMonth()+1);
+	let moisEnCours = date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0');
 	
 	//génération des colonnes
 	$('table#'+idTableau).append('<colgroup/>')
@@ -352,10 +352,10 @@ function genereTableau(idTableau, ajax) {
 	var entete = $('<tr/>');
 	entete.append('<th>Flux</th>');
 	for (let mois of listeMois) {
-		entete.append('<th>'+mois.periode+'</th>');
+		entete.append('<th class="text-center">'+mois.periode+'</th>');
 	}
-	entete.append('<th>'+listeMois[0].annee+'</th>');
-	entete.append('<th>AS</th>');
+	entete.append('<th class="text-center">'+listeMois[0].annee+'</th>');
+	entete.append('<th class="text-center">AS</th>');
 	$('table#'+idTableau).append($('<thead/>').append(entete));
 
 	

@@ -178,8 +178,8 @@ function parseListeJson(json) {
 	var i=0;
 	for(i=0; i<nb; i++) {
 		var row = $('<tr typetr="operation"/>');
-		row.append($('<td/>').text(tabJson[i].noReleve));
-		row.append($('<td/>').text(tabJson[i].dateOperation));
+		row.append($('<td class="text-center"/>').text(tabJson[i].noReleve));
+		row.append($('<td class="text-center"/>').text(tabJson[i].dateOperation));
 		row.append($('<td/>').text(tabJson[i].libelle));
 		var classeMontant='';
 		if(Number(tabJson[i].montant.replace(',','')) >= 0) {
