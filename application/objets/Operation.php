@@ -26,5 +26,11 @@ class Operation extends SavableObject {
 	
 	public $numeroCompteOri;
 	
+	public $datecre;
+	
+	public $datemod;
+	
+	public $utimod;
+	
 }
 ?>

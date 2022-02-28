@@ -32,5 +32,11 @@ class Flux extends SavableObject {
 	
 	public $fluxMaitreId;
 	
+	public $datecre;
+	
+	public $datemod;
+	
+	public $utimod;
+	
 }
 ?>

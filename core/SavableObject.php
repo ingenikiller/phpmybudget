@@ -92,6 +92,12 @@ abstract class SavableObject extends Objects {
 	public function create(){
 		$champs = null;
         $values = null;
+		
+		//ajout des colonnes techniques
+		$this->datecre='CURRENT_DATE';
+		$this->utimod=$_SESSION['userid'];
+		$this->datemod='CURRENT_DATE';
+		
         foreach ($this->fetchPublicMembers() as $col => $val) {
             if ($col != 'associatedObjet') {
 				$champDefinition = $this->champsDef[$col];
@@ -109,8 +115,17 @@ abstract class SavableObject extends Objects {
 						//type DATE
 						if($val=='') {
 							$values[] = 'null';
+						} else if($val=='CURRENT_DATE') {
+							$values[] = $val;
 						} else {
 							$values[] = trim(self::$_pdo->quote($val));
+						}
+					} else if(stripos($champDefinition['Type'], 'int') === 0) {
+						//type int
+						if($val=='') {
+							$values[]=0;
+						} else {
+							$values[] = $val;
 						}
 					} else {
 						//type AUTRE
@@ -121,6 +136,7 @@ abstract class SavableObject extends Objects {
 				}
             }
         }
+		
 		$query = sprintf("INSERT INTO %s (%s) VALUES (%s)", strtolower($this->_tableName), implode(',', $champs), implode(',', $values));
 		
 		try {
@@ -137,9 +153,14 @@ abstract class SavableObject extends Objects {
 	public function update(){
 		$primaryKey = implode(' AND ', $this->getPrimaryKeyValorisee());
 		$set = null;
+		
+		$this->utimod=$_SESSION['userid'];
+		$this->datemod='CURRENT_DATE';
+		
         $tabKey = explode(',', $this->getPrimaryKey());
         foreach ($this->fetchPublicMembers() as $col => $val) {
-            if ($col != 'associatedObjet') {
+            $this->logger->debug('colonne:' . $col);
+			if ($col != 'associatedObjet') {
 				if (array_search($col, $tabKey) === false) {
                     $champDefinition = $this->champsDef[$col];
 					$this->logger->debug('type:' . $champDefinition['Type']);
@@ -153,9 +174,14 @@ abstract class SavableObject extends Objects {
 						//type DATE
 						if($val=='') {
 							$set[] = sprintf("%s=%s", $col, 'null');
+						} else if($val=='CURRENT_DATE') {
+							$set[] = sprintf("%s=%s", $col, $val);;
 						} else {
 							$set[] = sprintf("%s=%s", $col, trim(self::$_pdo->quote($val)));
 						}
+					} else if(stripos($champDefinition['Type'], 'int') === 0) {
+						//type int
+						$set[] = sprintf("%s=%s", $col, $val=='' ? 0 : $val);
 					} else {
 						//type AUTRE
 						$this->logger->debug('Type non géré en update:' . $champDefinition['Type']);
@@ -164,6 +190,9 @@ abstract class SavableObject extends Objects {
                 }
             }
         }
+		
+		
+		
 		$query = sprintf("UPDATE %s SET %s WHERE %s", strtolower($this->_tableName), implode(',', $set), $primaryKey);
 		
 		try {

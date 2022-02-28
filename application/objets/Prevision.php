@@ -22,5 +22,11 @@ class Prevision extends SavableObject {
 	
 	public $mois;
 	
+	public $datecre;
+	
+	public $datemod;
+	
+	public $utimod;
+	
 }
 ?>
