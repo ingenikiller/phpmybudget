@@ -67,7 +67,7 @@ class OperationCommun {
                     $logger->debug('Operation inexistante');
                     $l_operation = new Operation();
                     $l_operation->libelle = $p_operation->libelle;
-                    $l_operation->date = $p_operation->date;
+                    $l_operation->dateOperation = $p_operation->dateOperation;
                     $l_operation->noCompte = $l_flux->compteDest;
                     $l_operation->fluxId = $p_operation->fluxId;
                     $l_operation->modePaiementId = $p_operation->modePaiementId;
