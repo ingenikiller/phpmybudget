@@ -89,6 +89,11 @@ function editerOperation(numeroCompte, operationId){
 				$('#libelle').val(json[0].tabResult[0].libelle);
 				$('#montant').val(json[0].tabResult[0].montant.replace(',',''));
 				$('#fluxId').val(json[0].tabResult[0].fluxId);
+				if($('#fluxId').find(':selected').attr('compteid') == numeroCompte) {
+					$('#fluxId').prop('disabled', false);
+				} else {
+					$('#fluxId').prop('disabled', true);
+				}
 				$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
 				$('#dateOperation').val(json[0].tabResult[0].dateOperation);
 

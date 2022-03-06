@@ -72,7 +72,9 @@ function afficheFluxSelect(nomChamp, compte, chaineParams, valeur) {
 			var tabJson = resultat[0].tabResult;
 			var i=0;
 			for(i=0; i<nb; i++) {
-				$('#'+nomChamp).append(new Option(tabJson[i].flux, tabJson[i].fluxId, false, false));
+				var option = new Option(tabJson[i].flux, tabJson[i].fluxId, false, false);
+				option.setAttribute('compteId', tabJson[i].compteId);
+				$('#'+nomChamp).append(option);
 			}
 			$('#'+nomChamp).val(valeur);
 		}
