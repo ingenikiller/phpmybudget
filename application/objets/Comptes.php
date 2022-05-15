@@ -12,5 +12,11 @@ class Comptes extends SavableObject {
 	
 	public $userId;
 	
+	public $datecre;
+	
+	public $datemod;
+	
+	public $utimod;
+	
 }
 ?>

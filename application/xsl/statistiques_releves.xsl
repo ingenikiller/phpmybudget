@@ -74,7 +74,7 @@
 								<xsl:for-each select="/root/data/ListeReleves/Dynamic">
 									<xsl:variable name="noreleve" select="noreleve"/>
 									<xsl:variable name="valeur" select="/root/data/ListeFlux/Dynamic[fluxId=$fluxId]/associatedObjet/ListeFluxFils/Dynamic[fluxId=$fluxFils]/associatedObjet/MontantFluxFils/Dynamic[noreleve=$noreleve]/total"/>
-									<td class="text-right">
+									<td class="text-end">
 										<xsl:if test="$valeur!=''">
 											<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=releve&amp;recFlux={$fluxFils}&amp;recNoReleve={noreleve}')">
 											<xsl:value-of select="format-number($valeur,$FORMAT_MNT)"/>
@@ -92,7 +92,7 @@
 						<xsl:value-of select="$LBL.TOTALCREDITS"/>
 					</th>
 					<xsl:for-each select="/root/data/ListeReleves/Dynamic">
-						<td class="text-right">
+						<td class="text-end">
 							<xsl:value-of select="format-number(associatedObjet/TotalCredit/Dynamic[total&gt;0]/total, $FORMAT_MNT)"/>
 						</td>
 					</xsl:for-each>
@@ -103,7 +103,7 @@
 						<xsl:value-of select="$LBL.TOTALDEBITS"/>
 					</th>
 					<xsl:for-each select="/root/data/ListeReleves/Dynamic">
-						<td class="text-right">
+						<td class="text-end">
 							<xsl:value-of select="format-number(associatedObjet/TotalDebit/Dynamic/total, $FORMAT_MNT)"/>
 						</td>
 					</xsl:for-each>
@@ -118,10 +118,10 @@
 						<td>
 							<xsl:choose>
 								<xsl:when test="$difference&gt;0">
-									<xsl:attribute name="class">text-right positif</xsl:attribute>
+									<xsl:attribute name="class">text-end positif</xsl:attribute>
 								</xsl:when>
 								<xsl:otherwise>
-									<xsl:attribute name="class">text-right negatif</xsl:attribute>
+									<xsl:attribute name="class">text-end negatif</xsl:attribute>
 								</xsl:otherwise>
 							</xsl:choose>
 							<xsl:value-of select="format-number($difference, $FORMAT_MNT)"/>
@@ -135,7 +135,7 @@
 		<xsl:param name="fluxId"/>
 		<xsl:for-each select="/root/data/ListeReleves/Dynamic">
 			<xsl:variable name="noreleve" select="noreleve"/>
-			<td class="text-right">
+			<td class="text-end">
 				<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=releve&amp;recFlux={$fluxId}&amp;recNoReleve={$noreleve}')">
 					<xsl:if test="/root/data/ListeReleves/Dynamic[noreleve=$noreleve]/associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total">
 						<xsl:value-of select="format-number(/root/data/ListeReleves/Dynamic[noreleve=$noreleve]/associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total,$FORMAT_MNT)"/>

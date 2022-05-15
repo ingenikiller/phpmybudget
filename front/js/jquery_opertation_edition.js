@@ -18,7 +18,7 @@ function initFormCreation() {
 	//
 	var champNoReleve = document.operation.noReleve;
 	//champ date
-	var champDate = document.operation.date;
+	var champDate = document.operation.dateOperation;
 	//si le champs est vide
 	if(champNoReleve.value=='') {
 		var date = new Date();
@@ -46,7 +46,7 @@ function soumettre(form) {
 			"noCompte": form.noCompte.value,
 			"operationId": form.operationId.value,
 			"noReleve": form.noReleve.value,
-			"date": form.date.value,
+			"dateOperation": form.dateOperation.value,
 			"libelle": form.libelle.value,
 			"fluxId": form.fluxId.value,
 			'modePaiementId': form.modePaiementId.value,

@@ -100,7 +100,7 @@
                     <th>op recurr</th>
                     <xsl:for-each select="/root/data/ListeMois/Dynamic">
                         <xsl:variable name="valeur" select="associatedObjet/ListeMontantOpeRecurrente/Dynamic/total"/>
-                        <td class="text-right">
+                        <td class="text-end">
                             <xsl:if test="$valeur!=''">
                                 <xsl:value-of select="format-number($valeur,$FORMAT_MNT)"/>
                             </xsl:if>
@@ -113,7 +113,7 @@
                         <xsl:value-of select="$LBL.EPARGNE"/>
                     </th>
                     <xsl:for-each select="/root/data/ListeMois/Dynamic">
-                        <td class="text-right">
+                        <td class="text-end">
                             <xsl:value-of
                                     select="format-number(associatedObjet/ListeMontantEpargne/Dynamic/total,$FORMAT_MNT)"/>
                         </td>
@@ -125,7 +125,7 @@
                         <xsl:value-of select="$LBL.TOTALCREDITS"/>
                     </th>
                     <xsl:for-each select="/root/data/ListeMois/Dynamic">
-                        <td class="text-right">
+                        <td class="text-end">
                             <xsl:value-of
                                     select="format-number(sum(associatedObjet/ListeMontantFlux/Dynamic[total&gt;0]/total), $FORMAT_MNT)"/>
                         </td>
@@ -137,7 +137,7 @@
                         <xsl:value-of select="$LBL.TOTALDEBITS"/>
                     </th>
                     <xsl:for-each select="/root/data/ListeMois/Dynamic">
-                        <td class="text-right">
+                        <td class="text-end">
                             <xsl:value-of
                                     select="format-number(sum(associatedObjet/ListeMontantFlux/Dynamic[total&lt;0]/total), $FORMAT_MNT)"/>
                         </td>
@@ -153,10 +153,10 @@
                         <td>
                             <xsl:choose>
                                 <xsl:when test="$difference&gt;0">
-                                    <xsl:attribute name="class">text-right positif</xsl:attribute>
+                                    <xsl:attribute name="class">text-end positif</xsl:attribute>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:attribute name="class">text-right negatif</xsl:attribute>
+                                    <xsl:attribute name="class">text-end negatif</xsl:attribute>
                                 </xsl:otherwise>
                             </xsl:choose>
                             <xsl:value-of select="format-number($difference, $FORMAT_MNT)"/>

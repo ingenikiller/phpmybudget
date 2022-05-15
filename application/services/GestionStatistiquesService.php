@@ -68,7 +68,7 @@ class GestionStatistiquesService extends ServiceStub {
 		$requeteMontantFils='SELECT sum(montant) AS total, noreleve, fluxId
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
-						AND noreleve  between \''.$premierReleve.'\' and \''.$dernierReleve.'\' group by noreleve, fluxId, substr(date, 1, 7)';
+						AND noreleve  between \''.$premierReleve.'\' and \''.$dernierReleve.'\' group by noreleve, fluxId, substr(dateOperation, 1, 7)';
 		$montantFluxFils = new ListDynamicObject();
 		$montantFluxFils->name='MontantFluxFils';
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
@@ -108,7 +108,7 @@ class GestionStatistiquesService extends ServiceStub {
         
         $listReleves = new ListDynamicObject();
         $listReleves->name = 'ListeAnnee';
-        $listReleves->request("SELECT DISTINCT substr( date, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee desc");
+        $listReleves->request("SELECT DISTINCT substr( dateOperation, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee desc");
         $p_contexte->addDataBlockRow($listReleves);
     }
 	
@@ -129,7 +129,7 @@ class GestionStatistiquesService extends ServiceStub {
 						FROM operation 
 						LEFT JOIN flux ON flux.fluxId = operation.fluxId  
 						WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked'" .
-                'AND date like concat(\'$parent->mois\',\'%\')';
+                'AND dateOperation like concat(\'$parent->mois\',\'%\')';
         $listMontantTotaux = new ListDynamicObject();
         $listMontantTotaux->name = 'ListeMontantOpeRecurrente';
         $listMontantTotaux->setAssociatedRequest(null, $requeteTotaux);
@@ -139,7 +139,7 @@ class GestionStatistiquesService extends ServiceStub {
 						FROM operation 
 						LEFT JOIN flux ON flux.fluxId = operation.fluxId  
 						WHERE operation.nocompte='$numeroCompte' and entreeEpargne='checked'" .
-                'AND date like concat(\'$parent->mois\',\'%\')';
+                'AND dateOperation like concat(\'$parent->mois\',\'%\')';
         $listMontantEpargne = new ListDynamicObject();
         $listMontantEpargne->name = 'ListeMontantEpargne';
         $listMontantEpargne->setAssociatedRequest(null, $requeteEpargne);
@@ -153,7 +153,7 @@ class GestionStatistiquesService extends ServiceStub {
         }
         $p_contexte->m_dataRequest->getData('dernierReleve');
         //requête principale
-        $l_requete = "SELECT distinct substr(date,1,7) AS mois FROM operation WHERE date between '$premierMois' and '$dernierReleve' and nocompte='$numeroCompte' order by mois";
+        $l_requete = "SELECT distinct substr(dateOperation,1,7) AS mois FROM operation WHERE dateOperation between '$premierMois' and '$dernierReleve' and nocompte='$numeroCompte' order by mois";
 
         $listeReleves = new ListDynamicObject();
         $listeReleves->name = 'ListeMois';
@@ -164,10 +164,10 @@ class GestionStatistiquesService extends ServiceStub {
         $p_contexte->addDataBlockRow($listeReleves);
 
 		
-		$requeteMontantFils='SELECT sum(montant) AS total, substr(date, 1, 7) as date, fluxId
+		$requeteMontantFils='SELECT sum(montant) AS total, substr(dateOperation, 1, 7) as date, fluxId
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
-						AND date  between \''.$premierMois.'\' and \''.$dernierReleve.'\' group by substr(date, 1, 7)';
+						AND dateOperation  between \''.$premierMois.'\' and \''.$dernierReleve.'\' group by substr(dateOperation, 1, 7)';
 		$montantFluxFils = new ListDynamicObject();
 		$montantFluxFils->name='MontantFluxFils';
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
@@ -202,7 +202,7 @@ class GestionStatistiquesService extends ServiceStub {
         
         $listReleves = new ListDynamicObject();
         $listReleves->name = 'ListeAnnee';
-        $listReleves->request("SELECT DISTINCT substr( date, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee desc");
+        $listReleves->request("SELECT DISTINCT substr( dateOperation, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee desc");
         $p_contexte->addDataBlockRow($listReleves);
     }
 	
@@ -231,7 +231,7 @@ class GestionStatistiquesService extends ServiceStub {
 						FROM operation 
 						LEFT JOIN flux ON flux.fluxId = operation.fluxId  
 						WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked'" .
-                'AND date like concat(\'$parent->annee\',\'%\')';
+                'AND dateOperation like concat(\'$parent->annee\',\'%\')';
         $listMontantTotaux = new ListDynamicObject();
         $listMontantTotaux->name = 'ListeMontantOpeRecurrente';
         $listMontantTotaux->setAssociatedRequest(null, $requeteTotaux);
@@ -241,7 +241,7 @@ class GestionStatistiquesService extends ServiceStub {
 						FROM operation 
 						LEFT JOIN flux ON flux.fluxId = operation.fluxId  
 						WHERE operation.nocompte='$numeroCompte' and entreeEpargne='checked'" .
-                'AND date like concat(\'$parent->annee\',\'%\')';
+                'AND dateOperation like concat(\'$parent->annee\',\'%\')';
         $listMontantEpargne = new ListDynamicObject();
         $listMontantEpargne->name = 'ListeMontantEpargne';
         $listMontantEpargne->setAssociatedRequest(null, $requeteEpargne);
@@ -256,7 +256,7 @@ class GestionStatistiquesService extends ServiceStub {
         $premiereAnnee.='-01-01';
         //$p_contexte->m_dataRequest->getData('dernierReleve');
         //requête principale
-        $l_requete = "SELECT distinct substr(date,1,4) AS annee FROM operation WHERE date between '$premiereAnnee' and '$derniereAnnee' and nocompte='$numeroCompte' order by annee";
+        $l_requete = "SELECT distinct substr(dateOperation,1,4) AS annee FROM operation WHERE dateOperation between '$premiereAnnee' and '$derniereAnnee' and nocompte='$numeroCompte' order by annee";
 
         $listeReleves = new ListDynamicObject();
         $listeReleves->name = 'ListeAnnees';
@@ -267,10 +267,10 @@ class GestionStatistiquesService extends ServiceStub {
         $p_contexte->addDataBlockRow($listeReleves);
 
 		
-		$requeteMontantFils='SELECT sum(montant) AS total, substr(date, 1, 4) as date, fluxId
+		$requeteMontantFils='SELECT sum(montant) AS total, substr(dateOperation, 1, 4) as date, fluxId
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
-						AND date  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\' group by substr(date, 1, 4)';
+						AND dateOperation  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\' group by substr(dateOperation, 1, 4)';
 		$montantFluxFils = new ListDynamicObject();
 		$montantFluxFils->name='MontantFluxFils';
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
@@ -306,7 +306,7 @@ class GestionStatistiquesService extends ServiceStub {
         
         $listReleves = new ListDynamicObject();
         $listReleves->name = 'ListeAnnee';
-        $listReleves->request("SELECT DISTINCT substr( date, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee asc");
+        $listReleves->request("SELECT DISTINCT substr( dateOperation, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee asc");
         $p_contexte->addDataBlockRow($listReleves);
 		
 		$lisFlux = new ListDynamicObject();
@@ -358,7 +358,7 @@ class GestionStatistiquesService extends ServiceStub {
 		$requeteMontantFils='SELECT sum(montant) AS total, fluxId
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
-						AND date  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\';// and fluxId IN ('.$fluxAjax.')';
+						AND dateOperation  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\';// and fluxId IN ('.$fluxAjax.')';
 		$montantFluxFils = new ListDynamicObject();
 		$montantFluxFils->name='MontantFluxFils';
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);

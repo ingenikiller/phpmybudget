@@ -18,5 +18,11 @@ class Segment extends SavableObject {
 	
 	public $vcar2;
 	
+	public $datecre;
+	
+	public $datemod;
+	
+	public $utimod;
+	
 }
 ?>

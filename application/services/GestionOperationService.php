@@ -13,7 +13,7 @@ class GestionOperationService extends ServiceStub{
         	$page=$numeroPage;
         }
 
-        $requete='SELECT operation.operationId, operation.noReleve, operation.date, operation.libelle, operation.fluxId, operation.modePaiementId, flux.flux, operation.modePaiementId,
+        $requete='SELECT operation.operationId, operation.noReleve, operation.dateOperation, operation.libelle, operation.fluxId, operation.modePaiementId, flux.flux, operation.modePaiementId,
         format(operation.montant,2) as montant, operation.nocompte, operation.verif FROM operation LEFT JOIN flux ON operation.fluxid = flux.fluxid WHERE ';
         $requete.=" operation.nocompte='$numeroCompte'";
         if($operationId!=null){
@@ -26,13 +26,13 @@ class GestionOperationService extends ServiceStub{
 
 		$recDate = $p_contexte->m_dataRequest->getData('recDate');
 		if($recDate	!=null){
-			$requete.=" AND operation.date like concat('$recDate','%')";
+			$requete.=" AND operation.dateOperation like concat('$recDate','%')";
         }
 		
         $recIntervalle = $p_contexte->m_dataRequest->getData('recIntervalle');
 		if($recIntervalle	!=null){
 			$intervalle = explode('_', $recIntervalle);
-			$requete.=" AND operation.date between '". $intervalle[0] . "' AND '" . $intervalle[1] . "' ";	
+			$requete.=" AND operation.dateOperation between '". $intervalle[0] . "' AND '" . $intervalle[1] . "' ";	
         }
 		
         $recNoReleve = $p_contexte->m_dataRequest->getData('recNoReleve');
@@ -43,7 +43,7 @@ class GestionOperationService extends ServiceStub{
         if($recMontant!=null){
 			$requete.=" AND ROUND(operation.montant)=ROUND($recMontant)";        	
         }
-        $requete.=" ORDER BY date desc, operationid desc";
+        $requete.=" ORDER BY dateOperation desc, operationid desc";
 
         $listeOperations = new ListDynamicObject();
         $listeOperations->name = 'ListeMontantFlux';
@@ -119,8 +119,8 @@ class GestionOperationService extends ServiceStub{
 				FROM operation 
 				WHERE 1=1 
 					AND nocompte='$numeroCompte' 
-					AND (date = '$operation->date' 
-					AND operationid<$operationId OR date < '$operation->date')";
+					AND (dateOperation = '$operation->dateOperation' 
+					AND operationid<$operationId OR dateOperation < '$operation->dateOperation')";
 		$dyn = new ListDynamicObject();
 		$dyn->name = 'SommeOperations';
 		$dyn->request($requete);

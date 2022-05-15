@@ -10,7 +10,7 @@ class Operation extends SavableObject {
 	
 	public $noReleve;
 	
-	public $date;
+	public $dateOperation;
 	
 	public $libelle;
 	
@@ -25,6 +25,12 @@ class Operation extends SavableObject {
 	public $operationIdOri;
 	
 	public $numeroCompteOri;
+	
+	public $datecre;
+	
+	public $datemod;
+	
+	public $utimod;
 	
 }
 ?>

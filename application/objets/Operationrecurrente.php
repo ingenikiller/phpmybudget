@@ -16,5 +16,11 @@ class Operationrecurrente extends SavableObject {
 	
 	public $montant;
 	
+	public $datecre;
+	
+	public $datemod;
+	
+	public $utimod;
+	
 }
 ?>

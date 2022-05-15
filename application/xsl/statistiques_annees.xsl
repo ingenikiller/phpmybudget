@@ -78,7 +78,7 @@
 					<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
 						<xsl:variable name="annee" select="annee"/>
 						<xsl:variable name="valeur" select="/root/data/ListeFlux/Dynamic[fluxId=$fluxId]/associatedObjet/ListeFluxFils/Dynamic[fluxId=$fluxFils]/associatedObjet/MontantFluxFils/Dynamic[date=$annee]/total"/>
-						<td class="text-right">
+						<td class="text-end">
 							<xsl:if test="$valeur!=''">
 								<a href="javascript:afficheDetail('numeroCompte={$NUMEROCOMPTE}&amp;mode=annee&amp;recFlux={$fluxFils}&amp;recDate={annee}')">
 								<xsl:value-of select="format-number($valeur,$FORMAT_MNT)"/>
@@ -102,7 +102,7 @@
 				<xsl:value-of select="$LBL.EPARGNE"/>
 			</th>
 			<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
-				<td class="text-right">
+				<td class="text-end">
 					<xsl:value-of select="format-number(associatedObjet/ListeMontantEpargne/Dynamic/total,$FORMAT_MNT)"/>
 				</td>
 			</xsl:for-each>
@@ -113,7 +113,7 @@
 				<xsl:value-of select="$LBL.TOTALCREDITS"/>
 			</th>
 			<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
-				<td class="text-right">
+				<td class="text-end">
 					<xsl:value-of select="format-number(sum(associatedObjet/ListeMontantFlux/Dynamic[total&gt;0]/total), $FORMAT_MNT)"/>
 				</td>
 			</xsl:for-each>
@@ -124,7 +124,7 @@
 				<xsl:value-of select="$LBL.TOTALDEBITS"/>
 			</th>
 			<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
-				<td class="text-right">
+				<td class="text-end">
 					<xsl:value-of select="format-number(sum(associatedObjet/ListeMontantFlux/Dynamic[total&lt;0]/total), $FORMAT_MNT)"/>
 				</td>
 			</xsl:for-each>
@@ -136,13 +136,13 @@
 			</th>
 			<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
 				<xsl:variable name="difference" select="sum(associatedObjet/ListeMontantFlux/Dynamic/total)"/>
-				<td class="text-right">
+				<td class="text-end">
 					<xsl:choose>
 						<xsl:when test="$difference&gt;0">
-							<xsl:attribute name="class">text-right positif</xsl:attribute>
+							<xsl:attribute name="class">text-end positif</xsl:attribute>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:attribute name="class">text-right negatif</xsl:attribute>
+							<xsl:attribute name="class">text-end negatif</xsl:attribute>
 						</xsl:otherwise>
 					</xsl:choose>
 					<xsl:value-of select="format-number($difference, $FORMAT_MNT)"/>
@@ -153,7 +153,7 @@
 	<xsl:template name="case">
 		<xsl:param name="fluxId"/>
 		<xsl:for-each select="/root/data/ListeAnnees/Dynamic">
-			<td class="text-right">
+			<td class="text-end">
 				<!--<xsl:if test="associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total">
 					<xsl:value-of select="format-number(associatedObjet/ListeMontantFlux/Dynamic[fluxId=$fluxId]/total,$FORMAT_MNT)"/>
 				</xsl:if>-->
