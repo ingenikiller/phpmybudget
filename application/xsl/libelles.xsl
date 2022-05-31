@@ -5,6 +5,7 @@
 	<xsl:variable name="LBL.AFFICHER">Afficher</xsl:variable>
 	<xsl:variable name="LBL.ANNEE">Année</xsl:variable>
 	<xsl:variable name="LBL.ANNEES">Années</xsl:variable>
+	<xsl:variable name="LBL.BUDGET">Budget</xsl:variable>
 	<xsl:variable name="LBL.CLE">Clé</xsl:variable>
 	<xsl:variable name="LBL.COMPTE">Compte</xsl:variable>
 	<xsl:variable name="LBL.COMPTEDESTINATION">Compte destination</xsl:variable>
