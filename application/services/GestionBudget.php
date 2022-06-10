@@ -71,7 +71,7 @@ class GestionBudget extends ServiceStub{
     }
 
     public function create(ContextExecution $p_contexte){
-        $ligne = new LigneBudget();
+        $ligne = new Lignebudget();
         $ligne->userid=$p_contexte->getUser()->userId;
         $ligne->annee=$p_contexte->m_dataRequest->getData('annee');
         $ligne->compteid=$p_contexte->m_dataRequest->getData('numeroCompte');
@@ -84,7 +84,7 @@ class GestionBudget extends ServiceStub{
     }
 
     public function getOne(ContextExecution $p_contexte){
-        $ligne = new LigneBudget();
+        $ligne = new Lignebudget();
         $ligne->lignebudgetid=$p_contexte->m_dataRequest->getData('lignebudgetid');
         $ligne->load();
         
@@ -95,7 +95,7 @@ class GestionBudget extends ServiceStub{
     }
 
     public function update(ContextExecution $p_contexte){
-        $ligne = new LigneBudget();
+        $ligne = new Lignebudget();
         $ligne->lignebudgetid=$p_contexte->m_dataRequest->getData('lignebudgetid');
         $ligne->load();
         $ligne->montant=$p_contexte->m_dataRequest->getData('montant');
