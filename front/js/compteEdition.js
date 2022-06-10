@@ -31,14 +31,15 @@ function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
 	$('tr[typetr=compte]').remove();
 	
-	var total = json[0].tabResult.nbLineTotal;
-	var nbpage = Math.ceil(total/json[0].nbLine);
-	document.getElementById('numeroPage').value=json[0].page;
-	document.getElementById('rch_page').value=json[0].page;
-	document.getElementById('max_page').value=json[0].totalPage;
+	var tabJson = json.racine.ListeComptes.data;
+	var total = json.racine.ListeComptes.totalLigne;
+	var nbPage = json.racine.ListeComptes.totalPage;
+	document.getElementById('numeroPage').value=json.racine.ListeComptes.page;
+	document.getElementById('rch_page').value=json.racine.ListeComptes.page;
+	document.getElementById('max_page').value=nbPage;
 		
-	var nb=json[0].nbLine;
-	var tabJson = json[0].tabResult;
+	var nb=total;
+	
 	var i=0;
 	for(i=0; i<nb; i++) {
 		var row = $('<tr typetr="compte"/>');
@@ -46,7 +47,7 @@ function parseListeJson(json) {
 		row.append($("<td/>").text(tabJson[i].libelle));
 		row.append($('<td class="text-end"/>').text(formatMonetaire(tabJson[i].solde)));
 		var solde = tabJson[i].solde;
-		var sommeOpe  = tabJson[i].associatedObjet[0].tabResult[0].somme;
+		var sommeOpe  = tabJson[i].SommeOperation.data[0].somme;
 		var calcul = Number(solde) + Number(sommeOpe);
 		var numeroCompte = tabJson[i].numeroCompte;
 		row.append($('<td class="text-end"/>').text(formatMonetaire(calcul)));
@@ -65,7 +66,9 @@ function parseListeJson(json) {
 		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=prevision&amp;numeroCompte='+ numeroCompte +'">'
 					+'<span class="oi oi-signal"/>'
 					+'</a>'));
-		
+		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=budget&amp;numeroCompte='+ numeroCompte +'">'
+					+'<span class="oi oi-clock"/>'
+					+'</a>'));
 		$("#tbodyResultat").append(row);
 	}
 }
@@ -81,10 +84,10 @@ function editerCompte(numeroCompte){
 			data=params,
 			function(json){
 				$('#service').val('update');
-				$('#numeroCompte').val(json[0].numeroCompte);
+				$('#numeroCompte').val(json.racine.Comptes.numeroCompte);
 				$('#numeroCompte').attr('readonly', 'readonly');
-				$('#libelle').val(json[0].libelle);
-				$('#solde').val(json[0].solde.replace(',',''));
+				$('#libelle').val(json.racine.Comptes.libelle);
+				$('#solde').val(json.racine.Comptes.solde.replace(',',''));
 			}
 		);
 	} else {

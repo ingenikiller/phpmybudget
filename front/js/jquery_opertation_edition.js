@@ -63,7 +63,6 @@ function soumettre(form) {
 				form.montant.value='';
 				form.libelle.focus();
 			} else {
-				//$("div#boiteOperation").dialog('close');
 				$('#boiteOperation').modal('hide');
 			}
 			
@@ -84,8 +83,8 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
 	   "index.php?domaine=compte&service=soldecompte",
 	    data=params,
 		function(json) {
-			compte=json[0].solde;
-			somme=json[1].tabResult[0].total;
+			compte=json.racine.Comptes.solde;
+			somme=json.racine.SommeOperations.data[0].total;
 			total=Number(compte)+Number(somme);
 			$('#'+nomChampSolde).val(total.toFixed(2));
 		}
@@ -93,8 +92,8 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
 }
 
 /*********************************************************
-	récupère l'ope sélectionnée et alimente les champs de 
-	saisie à partir d'un appel ajax
+	rÃ©cupÃ¨re l'ope sÃ©lectionnÃ©e et alimente les champs de 
+	saisie Ã  partir d'un appel ajax
  *********************************************************/
 function getInfoOpeRec(obj) {
 	var opeId=$(obj).val();
@@ -104,10 +103,11 @@ function getInfoOpeRec(obj) {
 			"index.php?domaine=operationrecurrente&service=getone",
 			data=params,
 			function(json){
-				$('#libelle').val(json[0].tabResult[0].libelle);
-				$('#fluxId').val(json[0].tabResult[0].fluxId);
-				$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
-				$('#montant').val(json[0].tabResult[0].montant.replace(',',''));
+				var ope = json.racine.ListeOperationsRecurrentes.data[0];
+				$('#libelle').val(ope.libelle);
+				$('#fluxId').val(ope.fluxId);
+				$('#modePaiementId').val(ope.modePaiementId);
+				$('#montant').val(ope.montant.replace(',',''));
 			}
 		);
 	}

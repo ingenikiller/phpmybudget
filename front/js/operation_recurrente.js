@@ -7,9 +7,10 @@ $(document).ready(function() {
 	listerObjects();
 });
 
-/*
-	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
-*/
+/**********************************************
+	réinitialise le formulaire de recherche 
+	pour lancer une nouvelle recherche
+ **********************************************/
 function rechercherOperations(form){
 	listerObjects();
 	return false;
@@ -40,24 +41,20 @@ function listerObjects(){
 	return false;
 }
 
-/*
+/**********************************************
 	parse le tableau Json et génère le tableau
-*/
+ **********************************************/
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
 	$('tr[typetr=operation]').remove();
 
-	var total = json[0].nbLineTotal;
-	var nbpage = Math.ceil(total/json[0].nbLine);
-
-	$('#numeroPage').val(json[0].page);
-	$('#rch_page').val(json[0].page);
-	$('#max_page').val(json[0].totalPage);
+	var tabJson = json.racine.ListeOperationsRecurrentes.data;
 	
-	var nb=json[0].nbLine;
-	var tabJson = json[0].tabResult;
-	var i=0;
-	for(i=0; i<nb; i++) {
+	$('#numeroPage').val(json.racine.ListeOperationsRecurrentes.page);
+	$('#rch_page').val(json.racine.ListeOperationsRecurrentes.page);
+	$('#max_page').val(json.racine.ListeOperationsRecurrentes.totalPage);
+	
+	for(var i=0; i<tabJson.length; i++) {
 		var row = $('<tr typetr="operation"/>');
 		row.append($('<td/>').text(tabJson[i].libelle));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
@@ -69,7 +66,6 @@ function parseListeJson(json) {
 		}
 
 		row.append($('<td class="text-right '+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',','')))));
-		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationrecurrenteId +')"><span class="oi oi-pencil"/></a>'));
 		
 		$("#tbodyResultat").append(row);
@@ -88,12 +84,13 @@ function editerOperation(numeroCompte, operationrecurrenteId){
 			"index.php?domaine=operationrecurrente&service=getone",
 			data=params,
 			function(json){
+				var opeRec = json.racine.ListeOperationsRecurrentes.data[0];
 				$('#service').val('update');
-				$('#operationrecurrenteId').val(json[0].tabResult[0].operationrecurrenteId);
-				$('#libelle').val(json[0].tabResult[0].libelle);
-				$('#fluxId').val(json[0].tabResult[0].fluxId);
-				$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
-				$('#montant').val(json[0].tabResult[0].montant.replace(',',''));
+				$('#operationrecurrenteId').val(opeRec.operationrecurrenteId);
+				$('#libelle').val(opeRec.libelle);
+				$('#fluxId').val(opeRec.fluxId);
+				$('#modePaiementId').val(opeRec.modePaiementId);
+				$('#montant').val(opeRec.montant.replace(',',''));
 				
 				$('#boiteOperation').modal({
 					backdrop: 'static',

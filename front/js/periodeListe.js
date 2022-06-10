@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 
 /*
-	édition d'une opération
+	Ã©dition d'une opÃ©ration
 */
 function editerOperation(numeroCompte, operationId){
 	
@@ -61,7 +61,7 @@ function editerOperation(numeroCompte, operationId){
 }
 
 /*
-	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
+	rÃ©initialise le formulaire de recherche pour lancer une nouvelle recherche
 */
 function rechercherOperations(form){
 	//$('#numeroPage').val(1);
@@ -71,7 +71,7 @@ function rechercherOperations(form){
 }
 
 /*
-	exécute une requete Json et alimente le tableau des tésultats
+	exÃ©cute une requete Json et alimente le tableau des rÃ©sultats
 */
 function listerObjects(){
 	//appel synchrone de l'ajax
@@ -86,20 +86,20 @@ function listerObjects(){
 }
 
 /*
-	parse le tableau Json et génère le tableau
+	parse le tableau Json et gÃ©nÃ¨re le tableau
 */
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
 	$('tr[typetr=periode]').remove();
 	
-	var total = json[0].nbLineTotal;
-	var nbpage = Math.ceil(total/json[0].nbLine);
+	var tabJson = json.racine.ListeAnnee.data;
+	//var total = json[0].nbLineTotal;
+	//var nbpage = Math.ceil(total/json[0].nbLine);
 	
 	
-	var nb=json[0].nbLine;
-	var tabJson = json[0].tabResult;
-	var i=0;
-	for(i=0; i<nb; i++) {
+	//var nb=json[0].nbLine;
+	
+	for(var i=0; i<tabJson.length; i++) {
 		var row = $('<tr typetr="periode"/>');
 		row.append($('<td/>').text(tabJson[i].annee));
 		row.append($('<td  class="text-center"/>').text(tabJson[i].nbmois));

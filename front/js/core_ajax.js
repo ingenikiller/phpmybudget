@@ -1,9 +1,9 @@
 
 function traiteRetourAjax(retour) {
-	if(retour[0].status=='OK'){
+	if(retour.racine.status=='OK'){
 		return true;
 	} else {
-		alert(retour[0].message);
+		alert(retour.racine.message);
 		return false;
 	}
 }

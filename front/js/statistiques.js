@@ -78,7 +78,7 @@ function afficheDetail(params){
 }
 
 /************************
- * 	affichege des r�sultats
+ * 	affichege des résultats
  ************************/
 function listerObjects(){
 	var params = $('#params').val();
@@ -96,22 +96,19 @@ function listerObjects(){
 
 
 /************************
- * parse le tableau Json et g�n�re le tableau
+ * parse le tableau Json et génère le tableau
  ************************/
 function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
 	$('tr[typetr=operation]').remove();
 	
-	var total = json[0].nbLineTotal;
-	var nbpage = Math.ceil(total/json[0].nbLine);
-	document.getElementById('numeroPage').value=json[0].page;
-	document.getElementById('rch_page').value=json[0].page;
-	document.getElementById('max_page').value=json[0].totalPage;
+	var tabJson = json.racine.ListeOperations.data;
+	document.getElementById('numeroPage').value=json.racine.ListeOperations.page;
+	document.getElementById('rch_page').value=json.racine.ListeOperations.page;
+	document.getElementById('max_page').value=json.racine.ListeOperations.totalPage;
 	
-	var nb=json[0].nbLine;
-	var tabJson = json[0].tabResult;
-	var i=0;
-	for(i=0; i<nb; i++) {
+	
+	for(var i=0; i<tabJson.length; i++) {
 		var row = $('<tr typetr="operation"/>');
 		row.append($('<td/>').text(tabJson[i].dateOperation));
 		row.append($('<td/>').text(tabJson[i].libelle));
@@ -122,7 +119,7 @@ function parseListeJson(json) {
 }
 
 /************************
- * g�re le d�pliage et repliage des d�tails
+ * gère le dépliage et repliage des détails
  ************************/
 function deplieDetail(lien){
 	var attrReplie=lien.getAttribute('replie');

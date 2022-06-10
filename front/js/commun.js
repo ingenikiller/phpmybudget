@@ -13,7 +13,7 @@ $(function() {
 
 });
 
-/* Supprime les espaces de début d'une chaine de caractères */
+/* Supprime les espaces de dï¿½but d'une chaine de caractï¿½res */
 function ltrim (s)
 {
 	s2 = s;
@@ -28,7 +28,7 @@ function ltrim (s)
 	return s2;
 }
 
-/* Supprime les espaces de fin d'une chaine de caractères */
+/* Supprime les espaces de fin d'une chaine de caractï¿½res */
 function rtrim (s)
 {
   s2 = s;
@@ -50,7 +50,7 @@ function rtrim (s)
 	return s2;
 }
 
-/* Supprime les espace de début et de fin de chaine */
+/* Supprime les espace de dï¿½but et de fin de chaine */
 function trim (s)
 {
 	return ltrim(rtrim(s));
@@ -58,7 +58,7 @@ function trim (s)
 
 /*********************************************************
  fonction de validation des formulaire
-	- pForm: formulaire à valider
+	- pForm: formulaire ï¿½ valider
  *********************************************************/
 function validForm(pForm) {
 	for (var i=0; i < pForm.elements.length; i++) {
@@ -82,7 +82,7 @@ function validForm(pForm) {
 }*/
 
 /*********************************************************
- fonction gérant la navigation vers une page
+ fonction gï¿½rant la navigation vers une page
 	- form: formulaire de recherche
  *********************************************************/
 function pagination(form) {
@@ -98,7 +98,7 @@ function pagination(form) {
 }
 
 /*********************************************************
- fonction gérant le passage de page en page
+ fonction gï¿½rant le passage de page en page
 	- form: formulaire de recherche
 	- nbPage: sens de navigation
  *********************************************************/
@@ -118,7 +118,7 @@ function changePage(form, nbPage){
 	document.forms[form].onsubmit();
 	return false;
 }
-
+/*
 Number.prototype.nombreFormate = function (decimales, signe, separateurMilliers) {
 var _sNombre = String(this), i, _sRetour = "", _sDecimales = "";
 if (decimales == undefined) decimales = 2;
@@ -157,7 +157,7 @@ _sRetour = separeMilliers(_sNombre.substr(0, _sNombre.indexOf('.')))+String(sign
 }
 return _sRetour;
 }
-
+*/
 
 function formatMonetaire(montant) {
 	return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(montant);

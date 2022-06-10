@@ -54,15 +54,15 @@ class GestionPrevisionService extends ServiceStub {
         
         $p_contexte->addDataBlockRow($liste);
 		
-		$p_contexte->addDataBlockRow($this->getFluxGroupe($annee, 'O', $clausePinel, $numeroCompte));
-		$p_contexte->addDataBlockRow($this->getFluxGroupe($annee, 'N', $clausePinel, $numeroCompte));
+		$p_contexte->addDataBlockRow($this->getFluxGroupe('Depense', $annee, 'O', $clausePinel, $numeroCompte));
+		$p_contexte->addDataBlockRow($this->getFluxGroupe('Recette', $annee, 'N', $clausePinel, $numeroCompte));
     }
 
 	/**
 	 * 
 	 * 
 	 */
-	private function getFluxGroupe($annee, $typeFlux, $clausePinel, $numeroCompte) {
+	private function getFluxGroupe($type, $annee, $typeFlux, $clausePinel, $numeroCompte) {
 		$requeteOperation='select distinct p.periode ,  sum(operation.montant) as total from periode p
 		left join operation on operation.dateOperation between p.debut and p.fin and nocompte=\'$parent->noCompte\' and fluxid=\'$parent->fluxId\'
 		 where annee=\''.$annee.'\' 
@@ -82,7 +82,7 @@ class GestionPrevisionService extends ServiceStub {
 		
 		//liste des flux dépense
         $listeFlux = new ListDynamicObject();
-        $listeFlux->name = 'ListeFluxDepense';
+        $listeFlux->name = 'ListeFlux'.$type;
 		$listeFlux->setAssociatedKey($listePrevision);
 		$listeFlux->setAssociatedKey($listeOperation);
 		$listeFlux->request($this->getRequeteFlux($typeFlux,$clausePinel, $annee,$numeroCompte));
@@ -232,7 +232,8 @@ class GestionPrevisionService extends ServiceStub {
 		// solde du compte + somme des opérations du compte + somme des prévisions du mois - somme des opérations correspondant à des prévisions
 		$solde = $compte->solde + $soldeOpe + $soldePre - $sommeOpe;
 		$tab=array();
-		$tab[1]=number_format($solde, 2,'.', '');
+		$tab['estimationReste']=number_format($solde, 2,'.', '');
+		//$tab[1]=number_format($solde, 2,'.', '');
 		
         $p_contexte->addDataBlockRow($tab);
 	}

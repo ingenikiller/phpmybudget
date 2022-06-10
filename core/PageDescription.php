@@ -75,14 +75,18 @@ class PageDescription {
             $p_contexte->addError($fe->getMessage());
         }
         //lance l'affichage si le rendu est xsl
-        if($this->m_render==null || $this->m_render=='xsl'){
-            $this->parse($p_contexte);
-        } else if($this->m_render=='json'){
-            echo json_encode($p_contexte->m_dataResponse);
-        } else {
-			$parser = new ParserJson2();
-			echo $parser->parse($p_contexte);
-		}
+        switch($this->m_render) {
+            case 'jsonphp':
+                echo json_encode($p_contexte->m_dataResponse);
+                break;
+            case 'json':
+                $parser = new ParserJson();
+			    echo $parser->parse($p_contexte);
+                break;
+            case 'xsl':
+            default:
+                $this->parse($p_contexte);
+        }
     }
 
     public function setXslFile($p_xslFile) {
@@ -189,7 +193,7 @@ class PageDescription {
     private function addBlockRow($p_noeud, $p_dataRow) {
         $group = $p_noeud->addChild($p_dataRow->m_name);
         $group->addAttribute('total', count($p_dataRow->getData()));
-        //on parcourt les différents enregistrements
+        //on parcourt les diffÃ©rents enregistrements
         foreach ($p_dataRow->getData() as $key => $row) {
             $element = $group->addChild($p_dataRow->m_nameElement);
             $element->addAttribute('index', $key);
@@ -220,16 +224,16 @@ class PageDescription {
     }
 
     /**
-     * Fonction de génération du flux xml
+     * Fonction de gï¿½nï¿½ration du flux xml
      * @param ContextExecution $p_contexte
      */
     public function parse(ContextExecution $p_contexte) {
         $this->logger->debug('xsl:' . $this->m_xsl);
 
-        //création flux xml
+        //crï¿½ation flux xml
         $doc = new SimpleXMLElement('<?xml version="1.0" encoding="ISO-8859-1"?><root></root>');
 
-        //traitement de la requête html
+        //traitement de la requï¿½te html
         $request = $doc->addChild('request');
         $this->addBlock($request, $p_contexte->m_dataRequest->getDataTab());
         
@@ -255,10 +259,10 @@ class PageDescription {
             $this->addBlock($user, $p_contexte->getUser()->fetchPublicMembers());
         }
 
-        //flux paramétrage
+        //flux paramï¿½trage
         $this->addFluxParametrage($doc);
 
-        //données
+        //donnï¿½es
         $data = $doc->addChild('data');
         $this->parseData($data, $p_contexte->m_dataResponse);
 
@@ -268,14 +272,11 @@ class PageDescription {
 
         //instanciation xsl processor
         $proc = new XSLTProcessor;
-        $proc->importStyleSheet($xsl); // attachement des règles xsl
+        $proc->importStyleSheet($xsl); // attachement des rï¿½gles xsl
         $proc->registerPHPFunctions();
         $fp = fopen('./logs/' . $this->m_nomClasse .'-'. $this->m_methode . '.xml', "w");
         fwrite($fp, @$doc->asXML());
         fclose($fp);
-        //header( 'content-type: text/html; charset=ISO-8859-1' );
-        //header( 'content-type: text/html' );
-        //echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">';
         echo $proc->transformToXML($doc);
     }
 }

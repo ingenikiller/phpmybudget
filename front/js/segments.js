@@ -45,23 +45,24 @@ function afficheListe(cleseg, idTableau) {
 }
 
 /*
-	parse le tableau Json et génère le tableau
+	parse le tableau Json et gï¿½nï¿½re le tableau
 */
 function parseListeJson(json, cleseg, idTableau) {
 	tab = document.getElementById(idTableau);
 	$('tr[typetr='+idTableau+']').remove();
 	
-	var total = json[0].nbLineTotal;
-	var nbpage = Math.ceil(total/json[0].nbLine);
+
+	//var total = json[0].nbLineTotal;
+	//var nbpage = Math.ceil(total/json[0].nbLine);
 	/*document.getElementById('numeroPage').value=json[0].page;
 	document.getElementById('rch_page').value=json[0].page;
 	document.getElementById('max_page').value=json[0].totalPage;*/
 	//alert(cleseg);
 	
-	var nb=json[0].nbLine;
-	var tabJson = json[0].tabResult;
-	var i=0;
-	for(i=0; i<nb; i++) {
+	//var nb=json[0].nbLine;
+	var tabJson = json.racine.Segments.data;
+	
+	for(var i=0; i<tabJson.length; i++) {
 
 		var row = $('<tr typetr="'+idTableau+'"/>');
 		row.append($('<td/>').text(tabJson[i].codseg));
@@ -85,20 +86,15 @@ function soumettreDetail(form, tabElement) {
 	if(!validForm(form)) {
 		return false;
 	}
-	//
-	//récupération du tableau de chaine
-	//var tabElement = form.elements['champs'].value.split(',');
-	
+		
 	//constitution de la hashmap
-	var params = contitueParams(form, tabElement);
+	var params = constitueParams(form, tabElement);
 	//var params = "cle=toto";
 	$.ajax({ 
 	    url: "index.php?domaine=segment",
 	    data: params,
-	    //data: {"edition":"edition"},
 	    dataType: "text",
 	    success: function(retour) { 
-			//afficheDetail(form.elements['Ncleseg'].value, tableau);
 			if(form.cleseg.value=='CONF'){
 				afficheListe('CONF', tabListe);
 			} else {
@@ -118,11 +114,11 @@ function enregistreSegment(tableau, form) {
 	if(!validForm(form)) {
 		return false;
 	}
-	//récupération du tableau de chaine
+	//rÃ©cupÃ©ration du tableau de chaine
 	var tabElement = form.elements['champs'].value.split(',');
 	
 	//constitution de la hashmap
-	var params = contitueParamsListe(form, tabElement);
+	var params = constitueParamsListe(form, tabElement);
 	//var params = "cle=toto";
 	$.ajax({ 
 	    url: "index.php?page=SEGMENT_D&cinematic=update",
@@ -130,13 +126,7 @@ function enregistreSegment(tableau, form) {
 	    //data: {"edition":"edition"},
 	    dataType: "text",
 	    success: function(retour) { 
-			//alert('OK');
-			//alert(retour);
-			//$("detail_segment").html=retour;
-			//document.getElementById('detail_segment').innerHTML=retour;
-			//$('table#'+idTableau).html(retour);
-			
-	      return false;
+			return false;
 	    }
 	});
 	return false;
@@ -145,7 +135,7 @@ function enregistreSegment(tableau, form) {
 /******************************
 	
 *******************************/
-function contitueParamsListe(formulaire, tabElement) {
+function constitueParamsListe(formulaire, tabElement) {
 	var params='';
 	
 	for	(var i in tabElement) {
@@ -158,7 +148,7 @@ function contitueParamsListe(formulaire, tabElement) {
 	return params
 }
 
-function contitueParams(formulaire, tabElement) {
+function constitueParams(formulaire, tabElement) {
 	var params='';
 	
 	//for	(var i in tabElement) {
@@ -187,11 +177,12 @@ function editionDetail(cleseg, codseg){
 			"index.php?domaine=segment&service=getone",
 			data=params,
 			function(json){
+				var objet = json.racine.Segment;
 				document.segmentDetailForm.service.value='update';
-				document.segmentDetailForm.cleseg.value=json[0].cleseg;
-				document.segmentDetailForm.codseg.value=json[0].codseg;
-				document.segmentDetailForm.libcourt.value=json[0].libcourt;
-				document.segmentDetailForm.liblong.value=json[0].liblong;
+				document.segmentDetailForm.cleseg.value=objet.cleseg;
+				document.segmentDetailForm.codseg.value=objet.codseg;
+				document.segmentDetailForm.libcourt.value=objet.libcourt;
+				document.segmentDetailForm.liblong.value=objet.liblong;
 				
 				$("div#boiteSegmentDetail").dialog({
 					resizable: false,
@@ -215,6 +206,5 @@ function editionDetail(cleseg, codseg){
 			modal: true
 		});
 	}
-	//initFormOperation();
 	return false;
 }

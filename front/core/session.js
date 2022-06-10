@@ -12,10 +12,10 @@ function connexion() {
 		dataType: 'json',
 		data		: params,
 		success : function(retour, statut, erreur){
-			if(retour[0].status=='OK'){
+			if(retour.racine.status=='OK'){
 				document.location.href='index.php?domaine=compte&service=getpage';
 			} else {
-				alert(retour[0].message);
+				alert(retour.racine.message);
 				return false;
 			}
 		}

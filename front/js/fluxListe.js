@@ -25,10 +25,9 @@ function alimenteListesCompte() {
  *********************************************************/
 function alimenteObjetSelectCompte(objetListe, compteDefaut, fluxJson){
  	objetListe.append(new Option('','',true,true));
- 	var nb=fluxJson[0].nbLine;
-	var tabJson = fluxJson[0].tabResult;
-	var i=0;
-	for(i=0; i<nb; i++) {
+ 	var tabJson = fluxJson.racine.ListeComptes.data;
+		
+	for(var i=0; i<tabJson.length; i++) {
 		objetListe.append(new Option(tabJson[i].libelle, tabJson[i].numeroCompte, false, false));
 	}
 }
@@ -72,14 +71,15 @@ function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
 	$('tr[typetr=flux]').remove();
 	
-	var total = json[0].nbLineTotal;
-	var nbpage = Math.ceil(total/json[0].nbLine);
-	$('#numeroPage').val(json[0].page);
-	$('#rch_page').val(json[0].page);
-	$('#max_page').val(json[0].totalPage);
+	var tabJson = json.racine.ListeFlux.data;
+	//var total = json[0].nbLineTotal;
+	//var nbpage = Math.ceil(total/json[0].nbLine);
+	$('#numeroPage').val(json.racine.ListeFlux.page);
+	$('#rch_page').val(json.racine.ListeFlux.page);
+	$('#max_page').val(json.racine.ListeFlux.totalPage);
 	
-	var nb=json[0].nbLine;
-	var tabJson = json[0].tabResult;
+	var nb=tabJson.length;
+	
 	var i=0;
 	for(i=0; i<nb; i++) {
 		var row = $('<tr typetr="flux"/>');
@@ -114,36 +114,37 @@ function editerFlux(fluxId){
 		$('#service').val('update');
 		var params = '&fluxId='+fluxId;
 		var fonctionSuccess = function(resultat) {
-			$('#flux').val(resultat[0].flux);
-			$('#fluxId').val(resultat[0].fluxId);
-			$('#description').val(resultat[0].description);
-			$('#modePaiementId').val(resultat[0].modePaiementId);
-			$('#compteId').val(resultat[0].compteId);
+			var flux = resultat.racine.Flux;
+			$('#flux').val(flux.flux);
+			$('#fluxId').val(flux.fluxId);
+			$('#description').val(flux.description);
+			$('#modePaiementId').val(flux.modePaiementId);
+			$('#compteId').val(flux.compteId);
 
 			//numéro de compte en dur car compte principal
-			afficheFluxSelect('fluxMaitreId', resultat[0].compteId, 'fluxMaitre=O', resultat[0].fluxMaitreId);
+			afficheFluxSelect('fluxMaitreId', flux.compteId, 'fluxMaitre=O', flux.fluxMaitreId);
 
-			$('#compteDest').val(resultat[0].compteDest);
-			if(resultat[0].entreeEpargne=='') {
+			$('#compteDest').val(flux.compteDest);
+			if(flux.entreeEpargne=='') {
 				$('#entreeEpargne').prop('checked', false);
 			} else {	
 				$('#entreeEpargne').prop('checked', true);
 			}
 
-			if(resultat[0].sortieEpargne=='') {
+			if(flux.sortieEpargne=='') {
 				$('#sortieEpargne').prop('checked', false);
 			} else {	
 				$('#sortieEpargne').prop('checked', true);
 			}
 
-			if(resultat[0].fluxMaitre=='N') {
+			if(flux.fluxMaitre=='N') {
 				$('#fluxMaitre').prop('checked', false);
 			} else {	
 				$('#fluxMaitre').prop('checked', true);
 			}
 
-			$('#fluxMaitreId').val(resultat[0].fluxMaitreId);
-			$('#depense').val(resultat[0].depense);
+			$('#fluxMaitreId').val(flux.fluxMaitreId);
+			$('#depense').val(flux.depense);
 		}
 		getFlux(params, fonctionSuccess);
 	}

@@ -46,18 +46,18 @@ $(document).ready(function() {
 */
 $(function() {
 	$('#libelle').autocomplete({
-		source : function(requete, reponse){ // les deux arguments repr�sentent les donn�es n�cessaires au plugin
+		source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
 		$.ajax({
 			url : 'index.php?domaine=operation&service=reclibelle', // on appelle le script JSON
-				dataType : 'json', // on sp�cifie bien que le type de donn�es est en JSON
+				dataType : 'json', // on spécifie bien que le type de données est en JSON
 				data : {
-				debLibelle : $('#libelle').val(), // on donne la cha�ne de caract�re tap�e dans le champ de recherche
+				debLibelle : $('#libelle').val(), // on donne la chaîne de caractère tapée dans le champ de recherche
 				mode : 'libelleOperation',
 				numeroCompte : document.getElementById('numeroCompte').value,
 				maxRows : 15
 			},
 			success : function(donnee){
-				reponse($.map(donnee[0].tabResult, function(objet){
+				reponse($.map(donnee.racine.ListeLibelles.data, function(objet){
 					return objet.libelle; // on retourne cette forme de suggestion
 				}));
 			}
@@ -69,7 +69,7 @@ $(function() {
 
 
 /*
-	Edition d'une op�ration
+	Edition d'une opération
 */
 function editerOperation(numeroCompte, operationId){
 
@@ -83,19 +83,20 @@ function editerOperation(numeroCompte, operationId){
 			"index.php?domaine=operation&service=getone",
 			data=params,
 			function(json){
+				var operation = json.racine.ListeOperations.data[0];
 				$('#service').val('update');
-				$('#operationId').val(json[0].tabResult[0].operationId);
-				$('#noReleve').val(json[0].tabResult[0].noReleve);
-				$('#libelle').val(json[0].tabResult[0].libelle);
-				$('#montant').val(json[0].tabResult[0].montant.replace(',',''));
-				$('#fluxId').val(json[0].tabResult[0].fluxId);
+				$('#operationId').val(operation.operationId);
+				$('#noReleve').val(operation.noReleve);
+				$('#libelle').val(operation.libelle);
+				$('#montant').val(operation.montant.replace(',',''));
+				$('#fluxId').val(operation.fluxId);
 				if($('#fluxId').find(':selected').attr('compteid') == numeroCompte) {
 					$('#fluxId').prop('disabled', false);
 				} else {
 					$('#fluxId').prop('disabled', true);
 				}
-				$('#modePaiementId').val(json[0].tabResult[0].modePaiementId);
-				$('#dateOperation').val(json[0].tabResult[0].dateOperation);
+				$('#modePaiementId').val(operation.modePaiementId);
+				$('#dateOperation').val(operation.dateOperation);
 
 				$("div#divOpeRec").hide();
 				var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
@@ -126,7 +127,7 @@ function editerOperation(numeroCompte, operationId){
 }
 
 /*
-	r?initialise le formulaire de recherche pour lancer une nouvelle recherche
+	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
 */
 function rechercherOperations(form){
 	listerObjects();
@@ -134,7 +135,7 @@ function rechercherOperations(form){
 }
 
 /*
-	ex?cute une requ?te Json et alimente le tableau des r?sultats
+	exécute une requête Json et alimente le tableau des résultats
 */
 function listerObjects(){
 
@@ -171,17 +172,15 @@ function parseListeJson(json) {
 	tab = document.getElementById('tableauResultat');
 	$('tr[typetr=operation]').remove();
 
-	var total = json[0].nbLineTotal;
-	var nbpage = Math.ceil(total/json[0].nbLine);
-
-	$('#numeroPage').val(json[0].page);
-	$('#rch_page').val(json[0].page);
-	$('#max_page').val(json[0].totalPage);
+	var tabJson = json.racine.ListeOperations.data;
 	
-	var nb=json[0].nbLine;
-	var tabJson = json[0].tabResult;
-	var i=0;
-	for(i=0; i<nb; i++) {
+	var nbpage = json.racine.ListeOperations.totalPage;
+
+	$('#numeroPage').val(json.racine.ListeOperations.page);
+	$('#rch_page').val(json.racine.ListeOperations.page);
+	$('#max_page').val(nbpage);
+	
+	for(var i=0; i<tabJson.length; i++) {
 		var row = $('<tr typetr="operation"/>');
 		row.append($('<td class="text-center"/>').text(tabJson[i].noReleve));
 		row.append($('<td class="text-center"/>').text(tabJson[i].dateOperation));
@@ -233,11 +232,10 @@ function getListeOpeRecurrente(numeroCompte) {
 		dataType: 'json',
 		data: params,
 		success: function(json) {
-			var nb=json[0].nbLine;
-			var tabJson = json[0].tabResult;
+			var tabJson = json.racine.ListeOperationsRecurrentes.data;
 			var i=0;
 			$('#operationrecurrenteId').append(new Option("", false,false));
-			for(i=0; i<nb; i++) {
+			for(var i=0; i<tabJson.length; i++) {
 				$('#operationrecurrenteId').append(new Option(tabJson[i].libelle + " " +tabJson[i].montant, tabJson[i].operationrecurrenteId, false, false));
 			}
 		}

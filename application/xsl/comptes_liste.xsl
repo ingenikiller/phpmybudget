@@ -48,6 +48,9 @@
                             <th class="text-center">
                                 <xsl:value-of select="$LBL.PREVISIONS"/>
                             </th>
+                            <th class="text-center">
+                                <xsl:value-of select="$LBL.BUDGET"/>
+                            </th>
                         </tr>
                     </thead>
                     <tbody id="tbodyResultat"/>

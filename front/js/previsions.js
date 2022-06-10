@@ -12,7 +12,6 @@ $(document).ready(function() {
 		
 	//
 	refreshWindow();
-	
 });
 
 
@@ -28,13 +27,10 @@ function affichePrevisions(idTableau, periode, numeroCompte) {
 			"flagPinel": $('input:radio[name="radioChoixType"]:checked').val()
 		}, 
 	    success: function(retour) { 
-			//var xml = $.parseXML(retour)
-			//$('table#'+idTableau).html(retour);
 			genereTableau(idTableau, retour);
 			return false;
 	    }
 	});
-	
 }
 
 /*********************************************************
@@ -66,10 +62,9 @@ function afficheListePeriode() {
 		function(json){
 			$('#mois').empty();
 
-			var nb=json[0].nbLine;
-			var tabJson = json[0].tabResult;
-			var i=0;
-			for(i=0; i<nb; i++) {
+			var tabJson = json.racine.ListePeriodeMois.data;
+			
+			for(var i=0; i<tabJson.length; i++) {
 				$('#mois').append(new Option(tabJson[i].periode, tabJson[i].periode, false, false));
 			}
 		}
@@ -222,10 +217,10 @@ function parseListePrevisionJson(json){
 	tab = document.getElementById('tabListeEntete');
 	$('tr[typetr=prevision]').remove();
 	
-	var nb=json[0].nbLine;
-	var tabJson = json[0].tabResult;
-	var i=0;
-	for(i=0; i<nb; i++) {
+	//var nb=json[0].nbLine;
+	var tabJson = json.racine.PrevisionListe.data;
+	
+	for(var i=0; i<tabJson.length; i++) {
 		var row = $('<tr typetr="prevision"/>');
 		row.append($('<td/>').text(tabJson[i].mois));
 		row.append($('<td/>').append('<input class="form-control numerique" type="text" id="montant-'+(i+1)+'" ligneid="'+tabJson[i].ligneId+'" onblur="return isDouble(this);" value="'+tabJson[i].montant+'" size="10" />'));
@@ -299,7 +294,7 @@ function afficheEstimation(champs, nocompte){
 		dataType: 'json',
 		data: params,
 		success: function(resultat) {
-			$('#estimation').text(resultat[0][1]);
+			$('#estimation').text(resultat.racine.estimationReste);
 		}
 	});
 }
@@ -314,10 +309,10 @@ function reporterAnneeSuivante(nocompte, flux, anneeAReporter){
 		dataType: 'json',
 		data: params,
 		success: function(resultat) {
-			if(resultat[0].status=='OK') {
+			if(resultat.racine.status=='OK') {
 				alert('Prévisions créées!');
 			} else {
-				alert(resultat[0].message);
+				alert(resultat.racine.message);
 			}
 		}
 	});
@@ -338,7 +333,7 @@ function genereTableau(idTableau, ajax) {
 	
 	//génération des colonnes
 	$('table#'+idTableau).append('<colgroup/>')
-	let listeMois=ajax[0].tabResult;
+	let listeMois=ajax.racine.Periodes.data;
 	for (let mois of listeMois) {
 		if(mois.periode == moisEnCours) {
 			$('table#'+idTableau).append('<colgroup class="colonnemoisencours"/>')
@@ -362,9 +357,9 @@ function genereTableau(idTableau, ajax) {
 	// corps du tableau
 	let tbody=$('<tbody/>');
 	//dépenses
-	let tabRelle=genereGroupe(tbody,ajax[1].tabResult, listeMois,'dépenses');
+	let tabRelle=genereGroupe(tbody,ajax.racine.ListeFluxDepense.data, listeMois,'dépenses');
 	//recettes
-	let tabCredit=genereGroupe(tbody,ajax[2].tabResult, listeMois, 'recettes');
+	let tabCredit=genereGroupe(tbody,ajax.racine.ListeFluxRecette.data, listeMois, 'recettes');
 
 	//ligne des totaux
 	let ligne=$('<tr/>');
@@ -390,7 +385,7 @@ function genereTableau(idTableau, ajax) {
  * @param {*} libelle 
  * @returns tableau de sommes de réelles
  */
-function genereGroupe(tbody, listeFlux, listeMois,libelle) {
+function genereGroupe(tbody, listeFlux, listeMois, libelle) {
 	let tabPrevisions=Array();
 	let tabRelles=Array();
 	let tabTotal=Array();
@@ -407,25 +402,25 @@ function genereGroupe(tbody, listeFlux, listeMois,libelle) {
 		let ligne = $('<tr/>');
 		ligne.append($('<th/>').append('<a href="#" onclick="afficheListeGroupe(\''+flux.fluxId+'\')"><span class="oi oi-arrow-thick-right"/> '+flux.flux+'</a>'));
 
-		let listePrevision = flux.associatedObjet[0];
-		let listeRelle = flux.associatedObjet[1];
+		let listePrevision = flux.ListePrevision;
+		let listeRelle = flux.ListeOperation;
 		
 		let nocompte=$('#nocompte').val();
 
 		let sommePrevision=0;
 		//génération d'une ligne de prévision
-		for(let prevision of listePrevision.tabResult) {
+		for(let prevision of listePrevision.data) {
 			let montant = prevision.total == null ? '' : prevision.total;
 			if(montant!=''){
 				sommePrevision+=Number(montant);
 				
 				let lien='';
 				//s'il existe une dépense pour le flux/mois en cours
-				if(listeRelle.tabResult[Number(prevision.periode.substr(5))-1]!=null) {
-					let relleMois = listeRelle.tabResult[Number(prevision.periode.substr(5)) -1].total;
+				if(listeRelle.data[Number(prevision.periode.substr(5))-1]!=null) {
+					let reelleMois = listeRelle.data[Number(prevision.periode.substr(5)) -1].total;
 				
-					//si 
-					if(relleMois!=null && Number(relleMois)!=Number(montant)) {
+					//si le rélisé est différent de la prévision
+					if(reelleMois!='' && Number(reelleMois)!=Number(montant)) {
 						lien= '<a href="#"'+
 							'onclick="javascript:equilibrerPrevision(\''+nocompte+'\',\''+prevision.ligneid+'\')">'+
 							'<img border="0" src="front/images/icone_balance_agee_detail.gif" alt="Equilibrer" title="Equilibrer"/>'+
@@ -446,9 +441,9 @@ function genereGroupe(tbody, listeFlux, listeMois,libelle) {
 		//génération ligne réelle
 		ligne = $('<tr/>');
 		ligne.append('<th>'+'</th>');
-		listeRelle = flux.associatedObjet[1];
+		listeRelle = flux.ListeOperation;
 		sommeRelle=0;
-		for(let reelle of listeRelle.tabResult) {
+		for(let reelle of listeRelle.data) {
 			let montant = reelle.total == null ? '' : reelle.total;
 			sommeRelle+=Number(montant);
 			if(montant!='') {
@@ -501,10 +496,5 @@ function genereGroupe(tbody, listeFlux, listeMois,libelle) {
 	}
 	ligneDifference.append('<td class="text-end recap">'+recapDifference.toFixed(2)+'</td>');
 	tbody.append(ligneDifference);
-
-
 	return tabTotal;
 }
-
-
-

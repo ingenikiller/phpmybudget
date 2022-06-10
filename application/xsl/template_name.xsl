@@ -61,21 +61,21 @@
             </xsl:if>
             <option/>
             <option value="01">Janvier</option>
-            <option value="02">Février</option>
+            <option value="02">Fï¿½vrier</option>
             <option value="03">Mars</option>
             <option value="04">Avril</option>
             <option value="05">Mai</option>
             <option value="06">Juin</option>
             <option value="07">Juillet</option>
-            <option value="08">Aoùt</option>
+            <option value="08">Aoï¿½t</option>
             <option value="09">Septembre</option>
             <option value="10">Octobre</option>
             <option value="11">Novembre</option>
-            <option value="12">Décembre</option>
+            <option value="12">Dï¿½cembre</option>
         </select>
     </xsl:template>
     <!--
-        Edition d'une opération
+        Edition d'une opÃ©ration
     -->
     <xsl:template name="operationEdition">
         <xsl:param name="numeroCompte"/>
@@ -176,7 +176,7 @@
     </xsl:template>
 
     <!--
-        édition d'un compte
+        Ã©dition d'un compte
     -->
     <xsl:template name="compteEdition">
         <div class="modal fade bd-example-modal-lg" tabindex="-1" id="boiteCompte" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -227,7 +227,7 @@
     </xsl:template>
 
     <!--
-        édition d'un segment
+        Ã©dition d'un segment
     -->
     <xsl:template name="segmentDetailEdition">
         <div id="boiteSegmentDetail" title="{$LBL.EDITIONSEGMENT}" style="display: none;">
@@ -288,7 +288,7 @@
     </xsl:template>
 	
 	<!--
-        édition d'une opération récurrente
+        Ã©dition d'une opÃ©ration rÃ©currente
     -->
     <xsl:template name="operationRecurrenteEdition">
         <xsl:param name="numeroCompte"/>
@@ -319,7 +319,7 @@
 											<xsl:value-of select="$LBL.FLUX"/>
 										</label>
 										<div class="col-sm-6">
-											<select class="form-select form-select-lg mb-3 obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
+											<select class="form-select form-select-sm obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
 										</div>
 									</div>
 									<div class="form-group row">

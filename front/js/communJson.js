@@ -15,7 +15,7 @@ function getListeComptes(fonctionSuccess){
 /*********************************************************
 	alimente une combo avec la liste des compte
  *********************************************************/
-function alimenteListeCompte(objetListe, compteDefaut){
+/*function alimenteListeCompte(objetListe, compteDefaut){
  	var json = getListeComptes();
  	
  	//objetListe.options[objetListe.length] = new Option('','',true,true);
@@ -27,7 +27,7 @@ function alimenteListeCompte(objetListe, compteDefaut){
 		objetListe.append(new Option(tabJson[i].libelle, tabJson[i].numeroCompte, false, false));
 	}
  	
-}
+}*/
 
 /*********************************************************
 	récupère la liste des flux sous format Json
@@ -68,10 +68,10 @@ function afficheFluxSelect(nomChamp, compte, chaineParams, valeur) {
 			$('#'+nomChamp).append(new Option('','',true,true));
 			
 			//var liste = getListeFlux(params);
-			var nb=resultat[0].nbLine;
-			var tabJson = resultat[0].tabResult;
-			var i=0;
-			for(i=0; i<nb; i++) {
+			var tabJson = resultat.racine.ListeFlux.data;
+			var nb=tabJson.length;
+			
+			for(var i=0; i<nb; i++) {
 				var option = new Option(tabJson[i].flux, tabJson[i].fluxId, false, false);
 				option.setAttribute('compteId', tabJson[i].compteId);
 				$('#'+nomChamp).append(option);
@@ -93,13 +93,10 @@ function afficheFluxSelectMulti(nomChamp, compte, chaineParams, valeur) {
 		success: function(resultat) {
 			var taille = $('#'+nomChamp+'>option').length;
 			$('#'+nomChamp).empty();
-			//$('#'+nomChamp).append(new Option('','',true,true));
 			
-			//var liste = getListeFlux(params);
-			var nb=resultat[0].nbLine;
-			var tabJson = resultat[0].tabResult;
-			var i=0;
-			for(i=0; i<nb; i++) {
+			var tabJson = resultat.racine.ListeFlux.data;
+			var nb=tabJson.length;
+			for(var i=0; i<nb; i++) {
 				$('#'+nomChamp).append(new Option(tabJson[i].flux, tabJson[i].fluxId, false, false));
 			}
 			
@@ -131,8 +128,8 @@ function afficheFluxSelectMulti(nomChamp, compte, chaineParams, valeur) {
 
 function traiteRetourJSON(retour){
 	retour = $.parseJSON(retour);
-	if(retour[0].status=="KO"){
-		alert(retour[0].message);
+	if(retour.racine.status=="KO"){
+		alert(retour.racine.message);
 	}
 	return false;
 }
@@ -143,7 +140,7 @@ function traiteRetourJSON(retour){
 function getModeReglementDefaut(flux, modePaiement){
 	var params = '&fluxId='+flux.value;
 	var fonctionSuccess = function(resultat) {
-		modePaiement.value = resultat[0].modePaiementId;
+		modePaiement.value = resultat.racine.Flux.modePaiementId;
 	}
 	getFlux(params, fonctionSuccess);
 }

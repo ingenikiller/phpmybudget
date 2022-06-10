@@ -46,7 +46,7 @@ class GestionOperationService extends ServiceStub{
         $requete.=" ORDER BY dateOperation desc, operationid desc";
 
         $listeOperations = new ListDynamicObject();
-        $listeOperations->name = 'ListeMontantFlux';
+        $listeOperations->name = 'ListeOperations';
         $listeOperations->request($requete,$page);
         $p_contexte->addDataBlockRow($listeOperations);
 	}
