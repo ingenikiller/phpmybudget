@@ -172,7 +172,7 @@ function creerEntete(form) {
 		}, 
 		success: function(retour) { 
 			if(traiteRetourAjax(retour)){
-				form.ligneId.value = retour[0].ligneId;
+				//form.ligneId.value = retour[0].ligneId;
 				$("div#boiteEntete").modal('hide');
 				affichePrevisions('liste', $('#annee').val(), $('#numeroCompte').val());
 			}

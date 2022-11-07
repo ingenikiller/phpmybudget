@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <!--
@@ -61,17 +61,17 @@
             </xsl:if>
             <option/>
             <option value="01">Janvier</option>
-            <option value="02">F�vrier</option>
+            <option value="02">Février</option>
             <option value="03">Mars</option>
             <option value="04">Avril</option>
             <option value="05">Mai</option>
             <option value="06">Juin</option>
             <option value="07">Juillet</option>
-            <option value="08">Ao�t</option>
+            <option value="08">Aoùt</option>
             <option value="09">Septembre</option>
             <option value="10">Octobre</option>
             <option value="11">Novembre</option>
-            <option value="12">D�cembre</option>
+            <option value="12">Décembre</option>
         </select>
     </xsl:template>
     <!--
