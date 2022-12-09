@@ -237,6 +237,19 @@ abstract class SavableObject extends Objects {
             //}
         }
     }
+
+    public function fieldObjectJson( $objet, $prefix='', $separator='', $indice='') {
+        $reflect = new ReflectionObject($this);
+        //chaque champs de la classe
+        foreach ($reflect->getProperties(ReflectionProperty::IS_PUBLIC) as $prop) {
+            if (isset($objet[$prop->getName()])) {
+                $this->logger->debug('champs:' . $prop->getName() . '->' . $objet[$prop->getName()]);
+                $prop->setValue($this, $objet[$prop->getName()]);
+            } else {
+                $this->logger->debug('champs:' . $prefix. $prop->getName() . ' vide');
+            }
+        }
+    }
     
     abstract public function getPrimaryKey();
     

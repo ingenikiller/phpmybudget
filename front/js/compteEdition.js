@@ -110,13 +110,21 @@ function soumettre(form) {
 	if(!validForm(form)) {
 		return false;
 	}
-	
+	//var dataJson= { numeroCompte: form.numeroCompte.value,libelle:form.libelle.value,solde:form.solde.value };
+	var dataJson=new Object();
+	dataJson.numeroCompte= form.numeroCompte.value;
+	dataJson.libelle=form.libelle.value;
+	dataJson.solde=form.solde.value;
+
 	$.ajax({ 
 		url: "index.php?domaine=compte&service="+$('#service').val(),
-		data: { "numeroCompte": form.numeroCompte.value,
+		contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+		data: {compte: JSON.stringify(dataJson)}
+		/*{ "numeroCompte": form.numeroCompte.value,
 				"libelle": form.libelle.value,
 				"solde": form.solde.value
-		}, 
+		}*/, 
 		success: function(retour) { 
 			$("div#boiteCompte").modal('hide');
 			listerObjects()

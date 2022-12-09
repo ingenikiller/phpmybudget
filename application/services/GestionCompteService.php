@@ -28,22 +28,21 @@ class GestionCompteService extends ServiceStub {
 
 	public function create(ContextExecution $p_contexte){
         $userid = $p_contexte->getUser()->userId;
-        $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
+        $compteJson=$p_contexte->m_dataRequest->getDataJson('compte');
         $compte = new Comptes();
-        $compte->numeroCompte = $numeroCompte;
+        $compte->fieldObjectJson($compteJson);
         $compte->userId = $userid;
-        $compte->fieldObject($p_contexte->m_dataRequest);
         $compte->create();
     }
 
     public function update(ContextExecution $p_contexte){
         $userid = $p_contexte->getUser()->userId;
-        $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
-        $compte = new Comptes();
-        $compte->numeroCompte = $numeroCompte;
+        $compteJson=$p_contexte->m_dataRequest->getDataJson('compte');
+		$compte = new Comptes();
+        $compte->numeroCompte = $compteJson['numeroCompte'];
         $compte->userId = $userid;
         $compte->load();
-        $compte->fieldObject($p_contexte->m_dataRequest);
+        $compte->fieldObjectJson($compteJson);
         $compte->update();
 		$p_contexte->addDataBlockRow($compte);
     }
@@ -58,6 +57,5 @@ class GestionCompteService extends ServiceStub {
 		$p_contexte->addDataBlockRow($compte);
 		$p_contexte->addDataBlockRow(ComptesCommun::calculSommeOperations($numeroCompte));
 	}
-
 }
 ?>
