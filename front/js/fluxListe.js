@@ -165,21 +165,24 @@ function enregistreFlux(form){
 	if(validForm(form)!=true){
 		return false;
 	}
-	
+	var dataJson=new Object();
+	dataJson.fluxId= form.fluxId.value;
+	dataJson.flux= form.flux.value;
+	dataJson.description= form.description.value;
+	dataJson.modePaiementId= form.modePaiementId.value;
+	dataJson.compteId= form.compteId.value;
+	dataJson.compteDest= form.compteDest.value;
+	dataJson.entreeEpargne= $('#entreeEpargne').is(':checked')?'O':'';
+	dataJson.sortieEpargne= $('#sortieEpargne').is(':checked')?'O':'';
+	dataJson.fluxMaitreId= form.fluxMaitreId.value;
+	dataJson.fluxMaitre= $('#fluxMaitre').is(':checked')?'O':'N';
+	dataJson.depense= form.depense.value;
+
 	$.ajax({ 
 		url: "index.php?domaine=flux&service="+$('#service').val(),
-		data: { "fluxId": form.fluxId.value,
-				"flux": form.flux.value,
-				"description": form.description.value,
-				"modePaiementId": form.modePaiementId.value,
-				"compteId": form.compteId.value,
-				"compteDest": form.compteDest.value,
-				"entreeEpargne": $('#entreeEpargne').is(':checked')?'O':'',
-				"sortieEpargne": $('#sortieEpargne').is(':checked')?'O':'',
-				"fluxMaitreId": form.fluxMaitreId.value,
-				"fluxMaitre": $('#fluxMaitre').is(':checked')?'O':'N',
-				"depense": form.depense.value
-		}, 
+		contentType: 'application/json; charset=utf-8',
+		dataType: 'json',
+		data: {flux: JSON.stringify(dataJson)}, 
 		success: function(retour) { 
 			$("div#boiteFlux").modal('hide');
 			listerObjects();

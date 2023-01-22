@@ -67,9 +67,10 @@ class GestionFluxService extends ServiceStub {
      * @param ContextExecution $p_contexte
      */
 	public function create(ContextExecution $p_contexte){
+		$fluxJson=$p_contexte->m_dataRequest->getDataJson('flux');
 		$flux = new Flux();
 		$userid = $p_contexte->getUser()->userId;
-		$flux->fieldObject($p_contexte->m_dataRequest);
+		$flux->fieldObjectJson($fluxJson);
 		$flux->userId = $userid;
 		$flux->create();
 	}
@@ -80,10 +81,12 @@ class GestionFluxService extends ServiceStub {
 	 * @param ContextExecution $p_contexte
 	 */
 	public function update(ContextExecution $p_contexte){
+		$fluxJson=$p_contexte->m_dataRequest->getDataJson('flux');
 		$flux = new Flux();
-		$flux->fluxId = $p_contexte->m_dataRequest->getData('fluxId');
+		//$compte->flu = 
+		$flux->fluxId = $fluxJson['fluxId'];
 		$flux->load();
-		$flux->fieldObject($p_contexte->m_dataRequest);
+		$flux->fieldObjectJson($fluxJson);
 		$flux->update();
 	}
 }
