@@ -62,13 +62,14 @@ class GestionPrevisionEnteteService extends ServiceStub {
 
 
 	public function update(ContextExecution $p_contexte){
-		$numeroCompte = $p_contexte->m_dataRequest->getData('noCompte');
-		$nb = $p_contexte->m_dataRequest->getData('nbligne');
-		for($i=1;$i<=$nb;$i++){
+		$tabJson=$p_contexte->m_dataRequest->getDataJson('operationRecurrente');
+		$nb = count($tabJson);
+		$this->logger->debug('nb ligne:'.$nb);
+		for($i=0;$i<$nb;$i++){
 			$prevision= new Prevision();
-			$prevision->ligneId=$p_contexte->m_dataRequest->getData('ligneId-'.$i);
+			$prevision->ligneId=$tabJson[$i]['ligneId'];
 			$prevision->load();
-			$prevision->fieldObject($p_contexte->m_dataRequest, '', '-', $i);
+			$prevision->fieldObjectJson($tabJson[$i]);
 			$prevision->update();
 		}
 		$p_contexte->ajoutReponseAjaxOK();

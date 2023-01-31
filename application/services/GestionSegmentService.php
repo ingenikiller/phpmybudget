@@ -30,8 +30,9 @@ class GestionSegmentService extends ServiceStub {
 	}
 	
 	public function create(ContextExecution $p_contexte){
+        $segmentJson=$p_contexte->m_dataRequest->getDataJson('segment');
         $segment = new Segment();
-        $segment->fieldObject($p_contexte->m_dataRequest);
+        $segment->fieldObjectJson($segmentJson);
         $segment->create();
         $reponse = new ReponseAjax();
         $reponse->status='OK';
@@ -39,13 +40,12 @@ class GestionSegmentService extends ServiceStub {
     }
 	
 	public function update(ContextExecution $p_contexte){
-        $cleseg=$p_contexte->m_dataRequest->getData('cleseg');
-        $codseg=$p_contexte->m_dataRequest->getData('codseg');
+        $segmentJson=$p_contexte->m_dataRequest->getDataJson('segment');
         $segment = new Segment();
-        $segment->cleseg=$cleseg;
-        $segment->codseg=$codseg;
+        $segment->cleseg=$segmentJson['cleseg'];
+        $segment->codseg=$segmentJson['codseg'];
         $segment->load();
-        $segment->fieldObject($p_contexte->m_dataRequest);
+        $segment->fieldObjectJson($segmentJson);
         $segment->update();
         
         $reponse= new ReponseAjax();

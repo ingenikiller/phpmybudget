@@ -3,9 +3,9 @@
 class DataRequest {
 
     private $m_data = Array();
-
+    private $logger;
     public function __construct() {
-        $logger = Logger::getRootLogger();
+        $this->logger = Logger::getRootLogger();
         foreach ($_POST as $key => $value) {
             $this->m_data[$key] = htmlspecialchars($value);
             //$logger->debug("cle post: $key");
@@ -27,8 +27,10 @@ class DataRequest {
 
     public function getDataJson($p_key) {
         if (isset($this->m_data[$p_key])) {
+            $this->logger->debug("cle trouvée: $p_key");
             return json_decode(htmlspecialchars_decode($this->m_data[$p_key]),true);
         } else {
+            $this->logger->debug("cle non trouvée: $p_key");
             return null;
         }
     }

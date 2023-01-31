@@ -109,18 +109,24 @@ function modifierPrevision(form) {
 	if(!validForm(form)) {
 		return false;
 	}
-	
+	var dataJson=new Object();
+	dataJson.ligneId= form.ligneId.value;
+	dataJson.noCompte= form.numeroCompte.value;
+	dataJson.fluxId= form.fluxId.value;
+	dataJson.mois= form.mois.value;
+	dataJson.typenr= form.typenr.value;
+	dataJson.montant= form.montant.value;
+	dataJson.annee= $('#annee').val();
+
 	var service = form.service.value;
 	
 	$.ajax({ 
 		url: "index.php?domaine=prevision&service="+service,
-		data: { "ligneId": form.ligneId.value,
-				"noCompte": form.numeroCompte.value,
-				"fluxId": form.fluxId.value,
-				"mois": form.mois.value,
-				"typenr": form.typenr.value,
-				'montant': form.montant.value,
-				'annee': $('#annee').val()
+		type: "POST",
+		contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+		data: { 
+			prevision: JSON.stringify(dataJson)
 		}, 
 		success: function(retour) { 
 			affichePrevisions('liste',$('#annee').val(), form.numeroCompte.value);
@@ -267,17 +273,26 @@ function propagerMontant(btn){
  * permet d'enregistrer les modifications d'une liste de prévisions
  ***********************************************************************/
 function enregistreListeLignes(form){
-	var params = "";
-	var i = 1;
+	
+	var dataJson=[];
+	
+	var i = 1 ;
 	while($('#montant-'+i).length) {
-		params+='&ligneId-'+i+'='+$('#montant-'+i).attr('ligneid')+'&montant-'+i+'='+$('#montant-'+i).val();
+		var ligne = new Object();
+		ligne.ligneId=$('#montant-'+i).attr('ligneid');
+		ligne.montant=$('#montant-'+i).val();
+		dataJson[i-1]=ligne;
 		i+=1;
 	}
 	params+='&nbligne='+(i-1)+"&render=json";
 	$.ajax({
 		url: "index.php?domaine=previsionentete&service=update",
-		dataType: 'json',
-		data: params
+		type: "POST",
+		contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+		data: { 
+			operationRecurrente: JSON.stringify(dataJson)
+		}
 	});
 	$("div#boiteListeEntete").modal('hide');
 	affichePrevisions('liste',$('#annee').val(), form.numeroCompte.value);

@@ -52,8 +52,9 @@ class GestionOperationService extends ServiceStub{
 	}
 
 	public function create(ContextExecution $p_contexte){
-        $operation = new Operation();
-        $operation->fieldObject($p_contexte->m_dataRequest);
+        $operationJson=$p_contexte->m_dataRequest->getDataJson('operation');
+		$operation = new Operation();
+        $operation->fieldObjectJson($operationJson);
         $operation->create();
         $operation->operationId = $operation->lastInsertId();
         $this->logger->debug('last insert:' . $operation->lastInsertId());
@@ -66,12 +67,13 @@ class GestionOperationService extends ServiceStub{
     }
 
 	public function update(ContextExecution $p_contexte){
-        $operationId=$p_contexte->m_dataRequest->getData('operationId');
+        $userid = $p_contexte->getUser()->userId;
+		$operationJson=$p_contexte->m_dataRequest->getDataJson('operation');
         $operation = new Operation();
-        $operation->operationId=$operationId;
+		$operation->operationId = $operationJson['operationId'];
         $operation->load();
-        $operation->fieldObject($p_contexte->m_dataRequest);
-        $operation->update();
+        $operation->fieldObjectJson($operationJson);
+		$operation->update();
         OperationCommun::operationLiee($operation);
 
         $reponse= new ReponseAjax();

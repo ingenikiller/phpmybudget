@@ -23,7 +23,7 @@ class GestionBudget extends ServiceStub{
 
         $recFlux="select f.fluxid, f.flux
         from flux f
-        join lignebudget l on l.userid =f.userId and l.compteid = f.compteId and l.annee ='2022' and l.fluxid =f.fluxId 
+        join lignebudget l on l.userid =f.userId and l.compteid = f.compteId and l.annee ='$annee' and l.fluxid =f.fluxId 
         where f.userid='2' and f.compteId ='$numeroCompte' 
         order by f.flux";
 

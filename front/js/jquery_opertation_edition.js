@@ -37,24 +37,30 @@ function initFormCreation() {
 function soumettre(form) {
 	if(!validForm(form)) {
 		return false;
-	}
+	} 
+
+	var dataJson=new Object();
+	dataJson.noCompte= form.noCompte.value;
+	dataJson.operationId= form.operationId.value;
+	dataJson.noReleve= form.noReleve.value;
+	dataJson.dateOperation= form.dateOperation.value;
+	dataJson.libelle= form.libelle.value;
+	dataJson.fluxId= form.fluxId.value;
+	dataJson.modePaiementId= form.modePaiementId.value;
+	dataJson.montant= form.montant.value;
 
 	var service = form.service.value;
 	$.ajax({
 		url: "index.php?domaine=operation&service="+service,
+		type: "POST",
+		contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
 		data: {
-			"noCompte": form.noCompte.value,
-			"operationId": form.operationId.value,
-			"noReleve": form.noReleve.value,
-			"dateOperation": form.dateOperation.value,
-			"libelle": form.libelle.value,
-			"fluxId": form.fluxId.value,
-			'modePaiementId': form.modePaiementId.value,
-			'montant': form.montant.value
-		}, 
+			operation: JSON.stringify(dataJson)
+		}, 	
 		success: function(retour) {
 			getSoldeCompte(form.noCompte.value, 'solde');
-			//si on est en cr?ation, on garde la popup ouverte, sinon, on la ferme
+			//si on est en création, on garde la popup ouverte, sinon, on la ferme
 			if(service=='create') {
 				$('#operationrecurrenteId').val('');
 				form.libelle.value='';

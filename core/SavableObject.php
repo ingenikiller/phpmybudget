@@ -32,7 +32,6 @@ abstract class SavableObject extends Objects {
 		$l_requete = 'SHOW COLUMNS FROM ' . strtolower($this->_tableName);
 		$l_result = $pdo->query ( $l_requete );
 		while ( $l_champs = $l_result->fetch ( PDO::FETCH_ASSOC ) ) {
-			//$this->logger->debug($l_champs ['Field']);
 			$table[$l_champs ['Field']] = $l_champs;
 		}
 		return $table;
@@ -81,7 +80,6 @@ abstract class SavableObject extends Objects {
             default :
                 echo 'BOUH';
         }
-
         $stmt->setFetchMode(PDO::FETCH_INTO, $this);
         $stmt->fetch(PDO::FETCH_INTO);
     }
@@ -191,8 +189,6 @@ abstract class SavableObject extends Objects {
             }
         }
 		
-		
-		
 		$query = sprintf("UPDATE %s SET %s WHERE %s", strtolower($this->_tableName), implode(',', $set), $primaryKey);
 		
 		try {
@@ -219,8 +215,9 @@ abstract class SavableObject extends Objects {
     /**
      *
      * @param DataRequest $request 
+     * @deprecated
      */
-    public function fieldObject(DataRequest $request, $prefix='', $separator='', $indice='') {
+    /*public function fieldObject(DataRequest $request, $prefix='', $separator='', $indice='') {
         $reflect = new ReflectionObject($this);
         //chaque champs de la classe
         foreach ($reflect->getProperties(ReflectionProperty::IS_PUBLIC) as $prop) {
@@ -236,9 +233,13 @@ abstract class SavableObject extends Objects {
                 }
             //}
         }
-    }
+    }*/
 
-    public function fieldObjectJson( $objet, $prefix='', $separator='', $indice='') {
+    /**
+     * 
+     */
+    public function fieldObjectJson($objet) {
+        $this->logger->debug('Repmplissage objet');
         $reflect = new ReflectionObject($this);
         //chaque champs de la classe
         foreach ($reflect->getProperties(ReflectionProperty::IS_PUBLIC) as $prop) {
@@ -246,7 +247,7 @@ abstract class SavableObject extends Objects {
                 $this->logger->debug('champs:' . $prop->getName() . '->' . $objet[$prop->getName()]);
                 $prop->setValue($this, $objet[$prop->getName()]);
             } else {
-                $this->logger->debug('champs:' . $prefix. $prop->getName() . ' vide');
+                $this->logger->debug('champs:' . $prop->getName() . ' vide');
             }
         }
     }

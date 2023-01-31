@@ -248,18 +248,19 @@ class GestionPrevisionService extends ServiceStub {
     }
 	
 	public function create(ContextExecution $p_contexte) {
-        $prevision = new Prevision();
-        $prevision->fieldObject($p_contexte->m_dataRequest);
+        $previsionJson=$p_contexte->m_dataRequest->getDataJson('prevision');
+		$prevision = new Prevision();
+        $prevision->fieldObjectJson($previsionJson);
         $prevision->create();
 		$p_contexte->ajoutReponseAjaxOK();
     }
 	
 	public function update(ContextExecution $p_contexte){
-		$ligneId = $p_contexte->m_dataRequest->getData('ligneId');
+		$previsionJson=$p_contexte->m_dataRequest->getDataJson('prevision');
 		$prevision = new Prevision();
-		$prevision->ligneId=$ligneId;
+		$prevision->ligneId=$operationRecurrenteJson['ligneId'];
 		$prevision->load();
-		$prevision->fieldObject($p_contexte->m_dataRequest);
+		$prevision->fieldObjectJson($previsionJson);
 		$prevision->update();
 		$p_contexte->ajoutReponseAjaxOK();
     }

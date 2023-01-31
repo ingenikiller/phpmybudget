@@ -60,8 +60,10 @@ class GestionOperationRecurrenteService extends ServiceStub{
 	 * 
 	 */
 	public function create(ContextExecution $p_contexte){
-        $operation = new Operationrecurrente();
-        $operation->fieldObject($p_contexte->m_dataRequest);
+        $operationRecurrenteJson=$p_contexte->m_dataRequest->getDataJson('operationRecurrente');
+
+		$operation = new Operationrecurrente();
+        $operation->fieldObjectJson($operationRecurrenteJson);
         $operation->create();
         
         $p_contexte->ajoutReponseAjaxOK();
@@ -71,13 +73,14 @@ class GestionOperationRecurrenteService extends ServiceStub{
 	 * 
 	 */
 	public function update(ContextExecution $p_contexte){
-        $operationRecurrenteId=$p_contexte->m_dataRequest->getData('operationRecurrenteId');
-        $operation = new Operationrecurrente();
-        $operation->operationRecurrenteId=$operationRecurrenteId;
-        $operation->load();
-        $operation->fieldObject($p_contexte->m_dataRequest);
-        $operation->update();
-        
+        $operationRecurrenteJson=$p_contexte->m_dataRequest->getDataJson('operationRecurrente');
+		
+		$operationRecurrente = new Operationrecurrente();
+		$operationRecurrente->operationRecurrenteId = $operationRecurrenteJson['operationRecurrenteId'];
+        $operationRecurrente->load();
+        $operationRecurrente->fieldObjectJson($operationRecurrenteJson);
+        $operationRecurrente->update();
+		
         $p_contexte->ajoutReponseAjaxOK();
     }
 	

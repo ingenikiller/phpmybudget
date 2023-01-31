@@ -91,9 +91,11 @@ function soumettreDetail(form, tabElement) {
 	var params = constitueParams(form, tabElement);
 	//var params = "cle=toto";
 	$.ajax({ 
-	    url: "index.php?domaine=segment",
-	    data: params,
-	    dataType: "text",
+	    url: "index.php?domaine=segment&service="+form.service.value,
+	    data: {
+			segment: JSON.stringify(params)
+		},
+	    dataType: 'json',
 	    success: function(retour) { 
 			if(form.cleseg.value=='CONF'){
 				afficheListe('CONF', tabListe);
@@ -135,30 +137,35 @@ function enregistreSegment(tableau, form) {
 /******************************
 	
 *******************************/
-function constitueParamsListe(formulaire, tabElement) {
+/*function constitueParamsListe(formulaire, tabElement) {
+	var dataJson=[];
 	var params='';
 	
 	for	(var i in tabElement) {
 		var j=1;
+		var ligne = new Object();
 		while( typeof(formulaire.elements[tabElement[i]+'-' +j]) != "undefined") {
 			params += tabElement[i]+'-' +j +'='+ formulaire.elements[tabElement[i]+'-' +j].value+'&';
+			ligne[tabElement[i]]=formulaire.elements[tabElement[i]+'-' +j].value;
 			j++;
 		}
+		dataJson[i]=ligne;
 	}
-	return params
-}
+	return dataJson;
+}*/
 
 function constitueParams(formulaire, tabElement) {
-	var params='';
-	
+	//var params='';
+	var ligne = new Object();
 	//for	(var i in tabElement) {
 	for (var i=0; i < formulaire.elements.length; i++) {
 		
 		if( typeof(formulaire.elements[i]) != "undefined") {
-			params += formulaire.elements[i].id +'='+ formulaire.elements[i].value+'&';
+			//params += formulaire.elements[i].id +'='+ formulaire.elements[i].value+'&';
+			ligne[formulaire.elements[i].id]=formulaire.elements[i].value;
+		}
 	}
-	}
-	return params
+	return ligne
 }
 
 

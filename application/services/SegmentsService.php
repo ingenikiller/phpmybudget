@@ -38,7 +38,7 @@ class SegmentsService {
             $segment->codseg=$p_contexte->m_dataRequest->getData('codseg-'.$indice);
             $segment->cleseg=$p_contexte->m_dataRequest->getData('cleseg-'.$indice);
             $segment->load();
-            $segment->fieldObject($p_contexte->m_dataRequest,'', '-', $indice);
+            //$segment->fieldObjectJson($p_contexte->m_dataRequest,'', '-', $indice);
             $segment->update();
             $indice++;
         }
@@ -52,19 +52,12 @@ class SegmentsService {
         $segment = new Segment();
         $segment->cleseg=$p_contexte->m_dataRequest->getData('Ncleseg');
         $segment->codseg=$p_contexte->m_dataRequest->getData('Ncodseg');
-        $segment->fieldObject($p_contexte->m_dataRequest,'N');
-        //$segment->libCourt=$p_contexte->m_dataRequest->getData('Nlibcourt');
-        //$segment->libLong=$p_contexte->m_dataRequest->getData('Nliblong');
+        //$segment->fieldObjectJson($p_contexte->m_dataRequest,'N');
         $segment->numord=$p_contexte->m_dataRequest->getData('Nnumord');
         $segment->create();
-//        $liste = new ListObject();
-//        $liste->name ='Segments';
-//        $liste->request('Segment', "cleseg='".$p_contexte->m_dataRequest->getData('NCleseg')."'");
-//        $p_contexte->addDataBlockRow($liste);
     }
     
     public function delete(ContextExecution $p_contexte){
-        
         $cleseg=$p_contexte->m_dataRequest->getData('cleseg');
         $codseg=$p_contexte->m_dataRequest->getData('codseg');
         if($codseg!=null){
@@ -78,12 +71,7 @@ class SegmentsService {
                 $pdo = ConnexionPDO::getInstance();
                 $stmt = $pdo->query($requete);
             }
-            
         }
-//        $cleseg=$p_contexte->m_dataRequest->getData('dcodseg');
-//        if($cleseg!=null){
-//            
-//        }
     }
     
     

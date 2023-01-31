@@ -125,16 +125,22 @@ function soumettre(form) {
 		return false;
 	}
 
+	var dataJson=new Object();
+	dataJson.noCompte= form.noCompte.value;
+	dataJson.operationRecurrenteId= form.operationrecurrenteId.value;
+	dataJson.libelle= form.libelle.value;
+	dataJson.fluxId= form.fluxId.value;
+	dataJson.modePaiementId= form.modePaiementId.value;
+	dataJson.montant= form.montant.value;
+
 	var service = form.service.value;
 	$.ajax({
 		url: "index.php?domaine=operationrecurrente&service="+service,
+		type: "POST",
+		contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
 		data: { 
-			"noCompte": form.noCompte.value,
-			"operationRecurrenteId": form.operationrecurrenteId.value,
-			"libelle": form.libelle.value,
-			"fluxId": form.fluxId.value,
-			'modePaiementId': form.modePaiementId.value,
-			'montant': form.montant.value
+			operationRecurrente: JSON.stringify(dataJson)
 		}, 
 		success: function(retour) {
 			//si on est en création, on garde la popup ouverte, sinon, on la ferme

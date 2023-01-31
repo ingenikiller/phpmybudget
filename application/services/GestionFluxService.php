@@ -83,7 +83,6 @@ class GestionFluxService extends ServiceStub {
 	public function update(ContextExecution $p_contexte){
 		$fluxJson=$p_contexte->m_dataRequest->getDataJson('flux');
 		$flux = new Flux();
-		//$compte->flu = 
 		$flux->fluxId = $fluxJson['fluxId'];
 		$flux->load();
 		$flux->fieldObjectJson($fluxJson);
