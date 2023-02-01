@@ -287,7 +287,7 @@ function enregistreListeLignes(form){
 	params+='&nbligne='+(i-1)+"&render=json";
 	$.ajax({
 		url: "index.php?domaine=previsionentete&service=update",
-		type: "POST",
+		//type: "POST",
 		contentType: 'application/json; charset=utf-8',
     	dataType: 'json',
 		data: { 

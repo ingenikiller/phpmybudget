@@ -52,7 +52,7 @@ function soumettre(form) {
 	var service = form.service.value;
 	$.ajax({
 		url: "index.php?domaine=operation&service="+service,
-		type: "POST",
+		//type: "POST",
 		contentType: 'application/json; charset=utf-8',
     	dataType: 'json',
 		data: {

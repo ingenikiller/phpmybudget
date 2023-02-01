@@ -182,6 +182,7 @@ function enregistreFlux(form){
 		url: "index.php?domaine=flux&service="+$('#service').val(),
 		contentType: 'application/json; charset=utf-8',
 		dataType: 'json',
+		//type: "POST",
 		data: {flux: JSON.stringify(dataJson)}, 
 		success: function(retour) { 
 			$("div#boiteFlux").modal('hide');
