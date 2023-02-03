@@ -136,9 +136,9 @@ function soumettre(form) {
 	var service = form.service.value;
 	$.ajax({
 		url: "index.php?domaine=operationrecurrente&service="+service,
-		//type: "POST",
-		contentType: 'application/json; charset=utf-8',
-    	dataType: 'json',
+		type: "POST",
+		//contentType: 'application/json; charset=utf-8',
+    	dataType: 'text',
 		data: { 
 			operationRecurrente: JSON.stringify(dataJson)
 		}, 

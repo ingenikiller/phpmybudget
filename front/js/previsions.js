@@ -123,8 +123,8 @@ function modifierPrevision(form) {
 	$.ajax({ 
 		url: "index.php?domaine=prevision&service="+service,
 		type: "POST",
-		contentType: 'application/json; charset=utf-8',
-    	dataType: 'json',
+		//contentType: 'application/json; charset=utf-8',
+    	dataType: 'text',
 		data: { 
 			prevision: JSON.stringify(dataJson)
 		}, 
@@ -287,9 +287,9 @@ function enregistreListeLignes(form){
 	params+='&nbligne='+(i-1)+"&render=json";
 	$.ajax({
 		url: "index.php?domaine=previsionentete&service=update",
-		//type: "POST",
-		contentType: 'application/json; charset=utf-8',
-    	dataType: 'json',
+		type: "POST",
+		//contentType: 'application/json; charset=utf-8',
+    	dataType: 'text',
 		data: { 
 			operationRecurrente: JSON.stringify(dataJson)
 		}

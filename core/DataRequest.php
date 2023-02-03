@@ -6,9 +6,11 @@ class DataRequest {
     private $logger;
     public function __construct() {
         $this->logger = Logger::getRootLogger();
+        //$this->logger->debug("analyse data post");
+        //print_r($_POST);
         foreach ($_POST as $key => $value) {
             $this->m_data[$key] = htmlspecialchars($value);
-            //$logger->debug("cle post: $key");
+            //$this->logger->debug("cle post: $key");
         }
 
         foreach ($_GET as $key => $value) {
