@@ -16,8 +16,7 @@ class OperationCommun {
 	public static function rechercherOperationLiee($flux, $p_operation){
 		$logger = Logger::getRootLogger();
 		
-		$listOpe = new ListObject();
-        $listOpe->name='ListeOperations';
+		$listOpe = new ListObject('ListeOperations');
         //recherche d'une opération ayant les références de l'opération en cours
         $listOpe->request('Operation', "numeroCompteOri='$p_operation->noCompte' AND operationIdOri=$p_operation->operationId");
 		$tab = $listOpe->tabResult;
@@ -56,8 +55,7 @@ class OperationCommun {
         	if($l_flux->compteDest != $p_operation->noCompte) {
                 $logger->debug('Operation liée');
                 //recherche d'une opération existante
-                $listOpe = new ListObject();
-                $listOpe->name='ListeOperations';
+                $listOpe = new ListObject('ListeOperations');
                 $listOpe->request('Operation', "operationIdOri=$p_operation->operationId AND (numeroCompteOri is not null AND numeroCompteOri<>'')");
 
                 $tab = $listOpe->tabResult;

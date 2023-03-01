@@ -15,13 +15,11 @@ class SegmentsService {
     public function display(ContextExecution $p_contexte) {
         $cleseg=$p_contexte->m_dataRequest->getData('cleseg');
         if($cleseg!=null){
-            $liste = new ListObject();
-            $liste->name ='Segments';
+            $liste = new ListObject('Segments');
             $liste->request('Segment', "cleseg='$cleseg' order by numord");
             $p_contexte->addDataBlockRow($liste);
         }else {
-            $liste = new ListObject();
-            $liste->name ='Segments';
+            $liste = new ListObject('Segments');
             $liste->request('Segment', "cleseg='CONF' order by codseg");
             $p_contexte->addDataBlockRow($liste);
         }
@@ -38,7 +36,6 @@ class SegmentsService {
             $segment->codseg=$p_contexte->m_dataRequest->getData('codseg-'.$indice);
             $segment->cleseg=$p_contexte->m_dataRequest->getData('cleseg-'.$indice);
             $segment->load();
-            //$segment->fieldObjectJson($p_contexte->m_dataRequest,'', '-', $indice);
             $segment->update();
             $indice++;
         }
@@ -52,7 +49,6 @@ class SegmentsService {
         $segment = new Segment();
         $segment->cleseg=$p_contexte->m_dataRequest->getData('Ncleseg');
         $segment->codseg=$p_contexte->m_dataRequest->getData('Ncodseg');
-        //$segment->fieldObjectJson($p_contexte->m_dataRequest,'N');
         $segment->numord=$p_contexte->m_dataRequest->getData('Nnumord');
         $segment->create();
     }

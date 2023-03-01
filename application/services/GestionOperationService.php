@@ -45,8 +45,7 @@ class GestionOperationService extends ServiceStub{
         }
         $requete.=" ORDER BY dateOperation desc, operationid desc";
 
-        $listeOperations = new ListDynamicObject();
-        $listeOperations->name = 'ListeOperations';
+        $listeOperations = new ListDynamicObject('ListeOperations');
         $listeOperations->request($requete,$page);
         $p_contexte->addDataBlockRow($listeOperations);
 	}
@@ -89,8 +88,7 @@ class GestionOperationService extends ServiceStub{
 					WHERE 1=1 
 						AND operation.nocompte='$numeroCompte' 
 						AND libelle LIKE concat('$debLibelle', '%')";
-		$listeLibelles = new ListDynamicObject();
-		$listeLibelles->name = 'ListeLibelles';
+		$listeLibelles = new ListDynamicObject('ListeLibelles');
 		$listeLibelles->request($requete, 1);
 		$p_contexte->addDataBlockRow($listeLibelles);
 	}
@@ -123,8 +121,7 @@ class GestionOperationService extends ServiceStub{
 					AND nocompte='$numeroCompte' 
 					AND (dateOperation = '$operation->dateOperation' 
 					AND operationid<$operationId OR dateOperation < '$operation->dateOperation')";
-		$dyn = new ListDynamicObject();
-		$dyn->name = 'SommeOperations';
+		$dyn = new ListDynamicObject('SommeOperations');
 		$dyn->request($requete);
 		$tab = $dyn->getData();
 		 

@@ -20,9 +20,10 @@ class GestionFluxService extends ServiceStub {
                 
 		$numeroPage=$p_contexte->m_dataRequest->getData('numeroPage');
 		
-		$listFlux = new ListObject();
-		$listFlux->name='ListeFlux';
-		$requete="userId='$userid'";
+		//$listFlux = new ListObject('ListeFlux');
+		$listFlux = new ListDynamicObject('ListeFlux');
+		$requete="SELECT fluxId, flux, description, compteId, compteDest FROM flux WHERE ";
+		$requete.="userId='$userid'";
 		
 		if($recFluxOperations!=null && $recFluxOperations=='O'){
 			$requete.= " AND (compteid='$comptePrincipal' OR compteDest='$comptePrincipal')";
@@ -45,7 +46,8 @@ class GestionFluxService extends ServiceStub {
 			$requete.= " AND fluxMaitreId!='$fluxMaitreExclu' ";
 		}
 		
-		$listFlux->request('Flux', $requete.' order by flux', $numeroPage);
+		//$listFlux->request('Flux', $requete.' order by flux', $numeroPage);
+		$listFlux->request( $requete.' order by flux', $numeroPage);
 		$p_contexte->addDataBlockRow($listFlux);
 	
     }

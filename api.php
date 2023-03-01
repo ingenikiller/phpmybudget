@@ -12,12 +12,12 @@ require 'config/bdd.php';
 define('CHEMIN_LOGERREUR', './logs/');
 
 define('LIGNE_PAR_PAGE', 20);
-//define('RACINE_DATA', 'data/projets');
+define('RACINE_DATA', 'data/projets');
 
-//header('Access-Control-Allow-Origin: *');
-//header('Access-Control-Allow-Methods: GET, POST');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: *');
 
-$pageControl = new PageControl(FALSE);
+$pageControl = new PageControl(TRUE);
 $pageControl->process();
 $fin = microtime(true);
 

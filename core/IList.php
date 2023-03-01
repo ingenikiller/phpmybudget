@@ -19,6 +19,10 @@ interface IList {
     public function getNbLineTotal();
     
     public function getNbLine();
+	
+	public function getTotalPage();
+	
+	public function getPage();
     
 }
 

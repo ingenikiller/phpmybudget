@@ -4,8 +4,12 @@ class PageControl {
 
 	private $logger;
 	
-	public function __construct() {
+	private $gestionToken;
+	
+	public function __construct($gestionToken) {
 		$this->logger = Logger::getRootLogger();
+		
+		$this->gestionToken = $gestionToken;
 	}
 
 	public function process() {
@@ -39,11 +43,25 @@ class PageControl {
 		$this->logger->debug('classe:' . $classe->getNom());
 		
 		if($classe->isPrivee()) {
-			$auten = new AuthentificateurStandard();
+			$auten = null;
+			if($this->gestionToken==TRUE) {
+				//
+				$auten = new AuthentificateurToken();
+			} else {
+				$auten = new AuthentificateurStandard();
+			}
 			try {
 				$auten->authenticate($contexte);
-			} catch (Exception $e){
-				header('Location: index.php');
+			} catch (FunctionalException $e){
+				if($this->gestionToken==TRUE || $classe->getRender()=='json') {
+					$reponse = new ReponseAjax();
+					$reponse->status='KO';
+					$reponse->message=$e->getMessage();
+					$reponse->codeerr=$e->getCodeErr();
+					echo json_encode($reponse);
+				} else {
+					header('Location: index.php');
+				}
 				die();
 			}
 		}

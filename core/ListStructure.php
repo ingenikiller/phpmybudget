@@ -11,15 +11,24 @@
  * @author ingeni
  */
 abstract class ListStructure extends Objects {
-    //put your code here
-    protected $associatedKey= array();
-    //public $associatedObjet = array();
     
-	private $logger;
+	protected $logger;
+    
+	protected $name='';
+    
+    protected $tabResult=null;
+    
+    protected $nbLine;
+    protected $nbLineTotal;
+	protected $ligneParPage;
+    
+    protected $page;
+    protected $totalPage;
 	
+    protected $associatedKey= array();
+		
 	public function __construct(){
 		parent::__construct();
-		//$this->logger = Logger::getRootLogger();
 	}
 	protected function getLogger() {
 		if($this->logger==null) {
@@ -66,7 +75,7 @@ abstract class ListStructure extends Objects {
      */
     private function execAssociatedRequest($parent){
         $this->getLogger()->debug('clause av:'.$this->associatedClause);
-        $this->getLogger()->debug('name:'.$this->name);
+        $this->getLogger()->debug('name:'.$this->getName());
         $retour=null;
         $clause=null;
         eval("\$clause=\"$this->associatedClause\";");
@@ -78,7 +87,35 @@ abstract class ListStructure extends Objects {
         }
     }
     
-   abstract public function request($st1, $st2=null,$st3=null);
+	public function getName() {
+        return $this->name;
+    }
+    
+    public function getData(){
+        return $this->tabResult;
+    }
+    
+    public function getNbLineTotal(){
+        return $this->nbLineTotal;
+    }
+    
+    public function getNbLine(){
+        return count($this->tabResult);
+    }
+	
+	public function getTotalPage() {
+		return $this->totalPage;
+	}
+	
+	public function getPage() {
+		return $this->page;
+	}
+	
+	public function setLigneParPage($nbLignes) {
+		$this->ligneParPage = $nbLignes;
+	}
+	
+	abstract public function request($st1, $st2=null,$st3=null);
     
 }
 ?>

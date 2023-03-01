@@ -50,8 +50,7 @@ class GestionOperationRecurrenteService extends ServiceStub{
         }
         $requete.=" ORDER BY libelle ASC";
 
-        $listeOperations = new ListDynamicObject();
-        $listeOperations->name = 'ListeOperationsRecurrentes';
+        $listeOperations = new ListDynamicObject('ListeOperationsRecurrentes');
         $listeOperations->request($requete,$page);
         $p_contexte->addDataBlockRow($listeOperations);
 	}

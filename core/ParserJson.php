@@ -21,42 +21,22 @@ final class ParserJson
 	
 	private function addBlock($p_data) {
 		$chaine='{';
-        //$p_noeud->addAttribute('total', count($p_data));
+        
 		$tab=array();
 		
         foreach ($p_data as $key => $value) {
             if ($key == 'associatedObjet') {
-                /*if (count($value) != 0) {
-                    $asso = $p_noeud->addChild('associatedObjet');
-                    foreach($value as $key2 => $data) {
-                        $this->parseListObject($asso, $data);
+                if (count($value) != 0) {
+					foreach($value as $key2 => $data) {
+                    	$tab[]=$this->parseListObject($data);
                     }
-                }*/
-				if (count($value) != 0) {
-					//$tabData=array();
-                    //$asso = $p_noeud->addChild('associatedObjet');
-                    foreach($value as $key2 => $data) {
-                        //$this->parseListObject($asso, $data);
-						$tab[]=$this->parseListObject($data);
-                    }
-					//$tab[]="\"$key\":".'"'.htmlspecialchars($value).'"';
 				}
             } else if (is_array($value)){
-                /*$this->logger->debug('addBlock tableau');
-                $tab = $p_noeud->addChild($key);
-                $this->parseData($tab, $value);*/
             } else {
                 $tab[]="\"$key\":".'"'.htmlspecialchars($value).'"';
             }
         }
 		return '{'.implode($tab,',').'}';
-    }
-
-    private function addBlockForce($p_noeud, $p_data, $force) {
-        $p_noeud->addAttribute('total', count($p_data));
-        foreach ($p_data as $key => $value) {
-            $p_noeud->addChild($force, $value);
-        }
     }
 
     /**
@@ -98,9 +78,9 @@ final class ParserJson
     private function parseListObject(IList $liste) {
         $index = 1;
 		$chaine='"'.$liste->getName().'":{';
-		$chaine.='"totalPage":"'.$liste->totalPage.'",';
-		$chaine.='"totalLigne":'.$liste->getNbLine().',';
-		$chaine.='"page":"'.$liste->page.'",';
+		$chaine.='"totalPage":"'.$liste->getTotalPage().'",';
+		$chaine.='"totalLigne":"'.$liste->getNbLineTotal().'",';
+		$chaine.='"page":"'.$liste->getPage().'",';
 		$chaine.='"data":[';
 		$tab=array();
         foreach ($liste->getData() as $indice => $object) {

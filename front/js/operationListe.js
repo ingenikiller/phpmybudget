@@ -196,28 +196,42 @@ function parseListeJson(json) {
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="oi oi-pencil"/></a>'));
-		row.append($('<td class="text-center"/>').append('<div href="#" class="soldeoperation" ><span class="oi oi-question-mark" noCompte="'+ tabJson[i].nocompte +'" operationId="'+ tabJson[i].operationId +'" soldeoperation="O"/></div>'));
+		row.append($('<td class="text-center"/>').append('<div href="#" class="operationsolde"><span class="oi oi-question-mark" noCompte="'+ tabJson[i].nocompte +'" operationId="'+ tabJson[i].operationId +'" soldeoperation="O"/></div>'));
 		
 		$("#tbodyResultat").append(row);
 	}
 	
-	$( ".soldeoperation span" ).tooltip({
-		track:true,
+	$('.operationsolde span').tooltip({
+		track: true,
+		content: '... waiting on ajax ...',
 		open: function(evt, ui) {
 			var elem = $(this);
-			var numeroCompte = $(elem).attr('noCompte');
-			var operationId = $(elem).attr('operationId');
-			
-			$.getJSON('index.php?domaine=operation&service=getsoldeoperation&numeroCompte='+numeroCompte+'&operationId='+operationId).always(function(resultat) {
+			//var numeroCompte = $(elem).attr('noCompte');
+			//var operationId = $(elem).attr('operationId');
+			//console.log('open');
+			elem.tooltip('option', 'content', 'Ajax call complete rrrrr');
+			/*$.getJSON('index.php?domaine=operation&service=getsoldeoperation&numeroCompte='+numeroCompte+'&operationId='+operationId).always(function(resultat) {
 				elem.tooltip('option', 'content', 'Solde= '+resultat[0].valeur.toFixed(2)+' ?');
-			 });
+			 });*/
 		}
     });
 	
-	$(".soldeoperation span").mouseout(function(){
-	   $(this).attr('title','Please wait...');
+	
+	
+	$(".operationsolde span").mouseout(function(){
+	   console.log('Out');
+	   $(this).attr('title','Out');
 	   $(this).tooltip();
 	   $('.ui-tooltip').hide();
+	   
+	   /*var elem = $(this);
+		var numeroCompte = $(elem).attr('noCompte');
+		var operationId = $(elem).attr('operationId');
+		
+		$.getJSON('index.php?domaine=operation&service=getsoldeoperation&numeroCompte='+numeroCompte+'&operationId='+operationId).always(function(resultat) {
+			//resultat.racine.valeur.toFixed(2);
+			elem.tooltip('option', 'content', 'Solde= '+Number(resultat.racine.valeur).toFixed(2)+' ?');
+		 });*/
 	 });
 }
 

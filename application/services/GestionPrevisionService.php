@@ -17,8 +17,7 @@ class GestionPrevisionService extends ServiceStub {
 		$p_contexte->addDataBlockRow($l_compte);
         
         $requete = 'SELECT DISTINCT annee from periode WHERE TRIM(annee) IS NOT NULL ORDER BY annee DESC limit 0,6';
-		$listeAnnees = new ListDynamicObject();
-        $listeAnnees->name = 'ListeAnnees';
+		$listeAnnees = new ListDynamicObject('ListeAnnees');
         $listeAnnees->request($requete);
         $p_contexte->addDataBlockRow($listeAnnees);
 		
@@ -48,8 +47,7 @@ class GestionPrevisionService extends ServiceStub {
 		}
 		
 		//liste des périodes
-        $liste = new ListObject();
-        $liste->name='Periodes';
+        $liste = new ListObject('Periodes');
         $liste->request('Periode', "annee='$annee' order by periode");
         
         $p_contexte->addDataBlockRow($liste);
@@ -68,21 +66,18 @@ class GestionPrevisionService extends ServiceStub {
 		 where annee=\''.$annee.'\' 
 		 group by p.periode';
 
-		$listeOperation = new ListDynamicObject();
-        $listeOperation->name = 'ListeOperation';
+		$listeOperation = new ListDynamicObject('ListeOperation');
 		$listeOperation->setAssociatedRequest(null, $requeteOperation);
 
 		$requetePrevision='select distinct p.periode, ligneid, prevision.montant as total from periode p
 		left join prevision on prevision.mois = p.periode and prevision.nocompte=\'$parent->noCompte\' and prevision.fluxid=\'$parent->fluxId\'
 		 where p.annee=\''.$annee.'\' ORDER BY p.periode asc';
 
-		$listePrevision = new ListDynamicObject();
-        $listePrevision->name = 'ListePrevision';
+		$listePrevision = new ListDynamicObject('ListePrevision');
 		$listePrevision->setAssociatedRequest(null, $requetePrevision);
 		
 		//liste des flux dépense
-        $listeFlux = new ListDynamicObject();
-        $listeFlux->name = 'ListeFlux'.$type;
+        $listeFlux = new ListDynamicObject('ListeFlux'.$type);
 		$listeFlux->setAssociatedKey($listePrevision);
 		$listeFlux->setAssociatedKey($listeOperation);
 		$listeFlux->request($this->getRequeteFlux($typeFlux,$clausePinel, $annee,$numeroCompte));
@@ -124,8 +119,7 @@ class GestionPrevisionService extends ServiceStub {
 		
         $clausePrevisions = "noCompte='$numeroCompte' and typenr='L' and annee='$annee' $clausePinel";
         
-        $previsions = new ListObject();
-        $previsions->name='Previsions';
+        $previsions = new ListObject('Previsions');
         $previsions->request('Prevision', $clausePrevisions);
 		$p_contexte->addDataBlockRow($previsions);
 		
@@ -144,14 +138,12 @@ class GestionPrevisionService extends ServiceStub {
 				AND EXISTS (SELECT 1 FROM prevision WHERE prevision.noCOmpte='$numeroCompte'
 				AND prevision.fluxid=operation.fluxid AND operation.dateOperation LIKE concat( substring(prevision.mois,1,4), '%'))
 			GROUP BY fluxid, mois";
-        $listMontantTotaux = new ListDynamicObject();
-        $listMontantTotaux->name = 'ListeMontantFlux';
+        $listMontantTotaux = new ListDynamicObject('ListeMontantFlux');
         $listMontantTotaux->request($requete);
         $p_contexte->addDataBlockRow($listMontantTotaux);
 		
 		//liste des périodes
-        $liste = new ListObject();
-        $liste->name='Periodes';
+        $liste = new ListObject('Periodes');
         //$liste->setAssociatedKey($previsions);
         //$liste->setAssociatedKey($listMontantTotaux);
         $liste->request('Periode', "periode between '$dateDeb' and '$dateFin' order by periode");
@@ -159,8 +151,7 @@ class GestionPrevisionService extends ServiceStub {
         $p_contexte->addDataBlockRow($liste);
         
         //liste des flux
-        $listeFlux = new ListDynamicObject();
-        $listeFlux->name = 'ListeFlux';
+        $listeFlux = new ListDynamicObject('ListeFlux');
         $listeFlux->request(
 			"SELECT DISTINCT flux.fluxId, flux, depense
 			FROM prevision 
@@ -199,8 +190,7 @@ class GestionPrevisionService extends ServiceStub {
 				AND flux.fluxid=prevision.fluxid
 				AND depense='O'";
         
-		$dyn = new ListDynamicObject();
-		$dyn->name = 'SommePrevisions';
+		$dyn = new ListDynamicObject('SommePrevisions');
 		$dyn->request($l_requete);
 		$tab = $dyn->getData();
         $soldePre = $tab[0];
@@ -220,8 +210,7 @@ class GestionPrevisionService extends ServiceStub {
 				WHERE nocompte='$numeroCompte' 
 				AND mois='$mois' 
 				AND operation.fluxid=prevision.fluxid)";
-		$dyn = new ListDynamicObject();
-		$dyn->name = 'SommePrevisions';
+		$dyn = new ListDynamicObject('SommePrevisions');
 		$dyn->request($l_requeteOpe);
 		$tab = $dyn->getData();
         $sommeOpe = $tab[0];
@@ -277,8 +266,7 @@ class GestionPrevisionService extends ServiceStub {
 				AND nocompte='$prevision->noCompte' 
 				AND dateOperation like concat('$prevision->mois','%') 
 				AND fluxid='$prevision->fluxId'";
-		$listMontantTotaux = new ListDynamicObject();
-		$listMontantTotaux->name = 'ListeMontantFlux';
+		$listMontantTotaux = new ListDynamicObject('ListeMontantFlux');
 		$listMontantTotaux->request($requeteTotaux);
 		$tab=$listMontantTotaux->getData();
 		$total=$tab[0];

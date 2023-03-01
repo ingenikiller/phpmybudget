@@ -65,7 +65,7 @@ function parseListeJson(json) {
 			classeMontant='negatif';
 		}
 
-		row.append($('<td class="text-right '+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',','')))));
+		row.append($('<td class="text-end '+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',','')))));
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationrecurrenteId +')"><span class="oi oi-pencil"/></a>'));
 		
 		$("#tbodyResultat").append(row);

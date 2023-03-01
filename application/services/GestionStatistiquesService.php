@@ -11,8 +11,7 @@ class GestionStatistiquesService extends ServiceStub {
 	public function affFormReleves(ContextExecution $p_contexte) {
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
         
-        $listReleves = new ListDynamicObject();
-        $listReleves->name = 'ListeReleves';
+        $listReleves = new ListDynamicObject('ListeReleves');
         $listReleves->request("select distinct noreleve from operation where nocompte='$numeroCompte' order by noreleve DESC");
         $p_contexte->addDataBlockRow($listReleves);
     }
@@ -28,8 +27,7 @@ class GestionStatistiquesService extends ServiceStub {
         $requeteAsso = 'SELECT fluxId, sum(total) as total
 					FROM stat_flux_releve
 					WHERE nocompte=' . $numeroCompte . ' and noreleve = \'$parent->noreleve\' GROUP BY fluxid';
-        $listMontantFlux= new ListDynamicObject();
-        $listMontantFlux->name='ListeMontantFlux';
+        $listMontantFlux= new ListDynamicObject('ListeMontantFlux');
         $listMontantFlux->setAssociatedRequest(null, $requeteAsso);
         
         $premierReleve = $p_contexte->m_dataRequest->getData('premierReleve');
@@ -44,20 +42,17 @@ class GestionStatistiquesService extends ServiceStub {
         $requeteCredit = 'SELECT noReleve, SUM( montant) AS total
 					FROM operation 
 					WHERE nocompte='.$numeroCompte.' and noReleve=\'$parent->noreleve\' and montant > 0 GROUP BY noReleve';
-        $totalCredit= new ListDynamicObject();
-        $totalCredit->name='TotalCredit';
+        $totalCredit= new ListDynamicObject('TotalCredit');
         $totalCredit->setAssociatedRequest(null, $requeteCredit);
         
         //requete de calcul des totaux débit
         $requeteDebit = 'SELECT noReleve, SUM( montant) AS total
 					FROM operation 
 					WHERE nocompte='.$numeroCompte.' and noReleve=\'$parent->noreleve\' and montant < 0 GROUP BY noReleve';
-        $totalDebit= new ListDynamicObject();
-        $totalDebit->name='TotalDebit';
+        $totalDebit= new ListDynamicObject('TotalDebit');
         $totalDebit->setAssociatedRequest(null, $requeteDebit);
         
-        $listeReleves = new ListDynamicObject();
-        $listeReleves->name='ListeReleves';
+        $listeReleves = new ListDynamicObject('ListeReleves');
         $listeReleves->setAssociatedKey($listMontantFlux);
         $listeReleves->setAssociatedKey($totalCredit);
         $listeReleves->setAssociatedKey($totalDebit);
@@ -69,22 +64,19 @@ class GestionStatistiquesService extends ServiceStub {
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
 						AND noreleve  between \''.$premierReleve.'\' and \''.$dernierReleve.'\' group by noreleve, fluxId, substr(dateOperation, 1, 7)';
-		$montantFluxFils = new ListDynamicObject();
-		$montantFluxFils->name='MontantFluxFils';
+		$montantFluxFils = new ListDynamicObject('MontantFluxFils');
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
 		
 		
 		//flux fils
 		$requeteFlux = "SELECT fluxId, flux FROM flux WHERE compteId='$numeroCompte'". ' AND fluxMaitreId=$parent->fluxId ORDER BY flux';
-		$listFluxFils = new ListDynamicObject();
-		$listFluxFils->name = 'ListeFluxFils';
+		$listFluxFils = new ListDynamicObject('ListeFluxFils');
 		$listFluxFils->setAssociatedKey($montantFluxFils);
         $listFluxFils->setAssociatedRequest(null, $requeteFlux);
 		
 		
 		
-        $listeFlux = new ListDynamicObject();
-        $listeFlux->name='ListeFlux';
+        $listeFlux = new ListDynamicObject('ListeFlux');
 		$listeFlux->setAssociatedKey($listFluxFils);
         /*$listeFlux->request("SELECT DISTINCT flux.fluxId, flux FROM operation 
 						LEFT JOIN flux ON flux.fluxId = operation.fluxId 
@@ -106,8 +98,7 @@ class GestionStatistiquesService extends ServiceStub {
 	public function affFormAnnees(ContextExecution $p_contexte) {
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
         
-        $listReleves = new ListDynamicObject();
-        $listReleves->name = 'ListeAnnee';
+        $listReleves = new ListDynamicObject('ListeAnnee');
         $listReleves->request("SELECT DISTINCT substr( dateOperation, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee desc");
         $p_contexte->addDataBlockRow($listReleves);
     }
@@ -120,8 +111,7 @@ class GestionStatistiquesService extends ServiceStub {
 					FROM stat_flux 
 					WHERE nocompte=' . $numeroCompte . ' and mois like concat(\'$parent->mois\',\'%\') GROUP BY fluxid';
 
-        $listMontantFlux = new ListDynamicObject();
-        $listMontantFlux->name = 'ListeMontantFlux';
+        $listMontantFlux = new ListDynamicObject('ListeMontantFlux');
         $listMontantFlux->setAssociatedRequest(null, $requeteAsso);
         
         //requête des opérations récurrentes
@@ -130,8 +120,7 @@ class GestionStatistiquesService extends ServiceStub {
 						LEFT JOIN flux ON flux.fluxId = operation.fluxId  
 						WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked'" .
                 'AND dateOperation like concat(\'$parent->mois\',\'%\')';
-        $listMontantTotaux = new ListDynamicObject();
-        $listMontantTotaux->name = 'ListeMontantOpeRecurrente';
+        $listMontantTotaux = new ListDynamicObject('ListeMontantOpeRecurrente');
         $listMontantTotaux->setAssociatedRequest(null, $requeteTotaux);
 
         //requête des calculs concernant l'épargne
@@ -140,8 +129,8 @@ class GestionStatistiquesService extends ServiceStub {
 						LEFT JOIN flux ON flux.fluxId = operation.fluxId  
 						WHERE operation.nocompte='$numeroCompte' and entreeEpargne='checked'" .
                 'AND dateOperation like concat(\'$parent->mois\',\'%\')';
-        $listMontantEpargne = new ListDynamicObject();
-        $listMontantEpargne->name = 'ListeMontantEpargne';
+		
+        $listMontantEpargne = new ListDynamicObject('ListeMontantEpargne');
         $listMontantEpargne->setAssociatedRequest(null, $requeteEpargne);
 
         $premierMois = $p_contexte->m_dataRequest->getData('premiereAnnee') . '-' . $p_contexte->m_dataRequest->getData('premierMois') . '-01';
@@ -155,8 +144,7 @@ class GestionStatistiquesService extends ServiceStub {
         //requête principale
         $l_requete = "SELECT distinct substr(dateOperation,1,7) AS mois FROM operation WHERE dateOperation between '$premierMois' and '$dernierReleve' and nocompte='$numeroCompte' order by mois";
 
-        $listeReleves = new ListDynamicObject();
-        $listeReleves->name = 'ListeMois';
+        $listeReleves = new ListDynamicObject('ListeMois');
         $listeReleves->setAssociatedKey($listMontantFlux);
         $listeReleves->setAssociatedKey($listMontantTotaux);
         $listeReleves->setAssociatedKey($listMontantEpargne);
@@ -168,22 +156,20 @@ class GestionStatistiquesService extends ServiceStub {
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
 						AND dateOperation  between \''.$premierMois.'\' and \''.$dernierReleve.'\' group by substr(dateOperation, 1, 7)';
-		$montantFluxFils = new ListDynamicObject();
-		$montantFluxFils->name='MontantFluxFils';
+		
+		$montantFluxFils = new ListDynamicObject('MontantFluxFils');
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
 		
 		
 		//flux fils
 		$requeteFlux = "SELECT fluxId, flux FROM flux WHERE compteId='$numeroCompte'". ' AND fluxMaitreId=$parent->fluxId ORDER BY flux';
-		$listFluxFils = new ListDynamicObject();
-		$listFluxFils->name = 'ListeFluxFils';
+		$listFluxFils = new ListDynamicObject('ListeFluxFils');
 		$listFluxFils->setAssociatedKey($montantFluxFils);
         $listFluxFils->setAssociatedRequest(null, $requeteFlux);
 		
 		
         //liste des flux
-        $listeFlux = new ListDynamicObject();
-        $listeFlux->name = 'ListeFlux';
+        $listeFlux = new ListDynamicObject('ListeFlux');
 		$listeFlux->setAssociatedKey($listFluxFils);
         $listeFlux->request("SELECT DISTINCT flux.fluxId, flux, operationRecurrente , flux.fluxMaitre FROM stat_flux 
 						LEFT JOIN flux ON flux.fluxId = stat_flux.fluxId 
@@ -200,8 +186,7 @@ class GestionStatistiquesService extends ServiceStub {
 	public function affFormMois(ContextExecution $p_contexte) {
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
         
-        $listReleves = new ListDynamicObject();
-        $listReleves->name = 'ListeAnnee';
+        $listReleves = new ListDynamicObject('ListeAnnee');
         $listReleves->request("SELECT DISTINCT substr( dateOperation, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee desc");
         $p_contexte->addDataBlockRow($listReleves);
     }
@@ -217,8 +202,7 @@ class GestionStatistiquesService extends ServiceStub {
 					FROM stat_flux
 					WHERE nocompte=\'' . $numeroCompte . '\' and mois like concat(\'$parent->annee\',\'%\') GROUP BY fluxid, substr(mois, 1, 4 ), fluxMaitre';
 					
-        $listMontantFlux = new ListDynamicObject();
-        $listMontantFlux->name = 'ListeMontantFlux';
+        $listMontantFlux = new ListDynamicObject('ListeMontantFlux');
         $listMontantFlux->setAssociatedRequest(null, $requeteAsso);
 
 			
@@ -232,8 +216,7 @@ class GestionStatistiquesService extends ServiceStub {
 						LEFT JOIN flux ON flux.fluxId = operation.fluxId  
 						WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked'" .
                 'AND dateOperation like concat(\'$parent->annee\',\'%\')';
-        $listMontantTotaux = new ListDynamicObject();
-        $listMontantTotaux->name = 'ListeMontantOpeRecurrente';
+        $listMontantTotaux = new ListDynamicObject('ListeMontantOpeRecurrente');
         $listMontantTotaux->setAssociatedRequest(null, $requeteTotaux);
 
         //requête des calculs concernant l'épargne
@@ -242,8 +225,7 @@ class GestionStatistiquesService extends ServiceStub {
 						LEFT JOIN flux ON flux.fluxId = operation.fluxId  
 						WHERE operation.nocompte='$numeroCompte' and entreeEpargne='checked'" .
                 'AND dateOperation like concat(\'$parent->annee\',\'%\')';
-        $listMontantEpargne = new ListDynamicObject();
-        $listMontantEpargne->name = 'ListeMontantEpargne';
+        $listMontantEpargne = new ListDynamicObject('ListeMontantEpargne');
         $listMontantEpargne->setAssociatedRequest(null, $requeteEpargne);
         
         $premiereAnnee = $p_contexte->m_dataRequest->getData('premiereAnnee');
@@ -258,8 +240,7 @@ class GestionStatistiquesService extends ServiceStub {
         //requête principale
         $l_requete = "SELECT distinct substr(dateOperation,1,4) AS annee FROM operation WHERE dateOperation between '$premiereAnnee' and '$derniereAnnee' and nocompte='$numeroCompte' order by annee";
 
-        $listeReleves = new ListDynamicObject();
-        $listeReleves->name = 'ListeAnnees';
+        $listeReleves = new ListDynamicObject('ListeAnnees');
         $listeReleves->setAssociatedKey($listMontantFlux);
         $listeReleves->setAssociatedKey($listMontantTotaux);
         $listeReleves->setAssociatedKey($listMontantEpargne);
@@ -271,21 +252,18 @@ class GestionStatistiquesService extends ServiceStub {
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
 						AND dateOperation  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\' group by substr(dateOperation, 1, 4)';
-		$montantFluxFils = new ListDynamicObject();
-		$montantFluxFils->name='MontantFluxFils';
+		$montantFluxFils = new ListDynamicObject('MontantFluxFils');
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
 		
 		
 		//flux fils
 		$requeteFlux = "SELECT fluxId, flux FROM flux WHERE compteId='$numeroCompte'". ' AND fluxMaitreId=$parent->fluxId ORDER BY flux';
-		$listFluxFils = new ListDynamicObject();
-		$listFluxFils->name = 'ListeFluxFils';
+		$listFluxFils = new ListDynamicObject('ListeFluxFils');
 		$listFluxFils->setAssociatedKey($montantFluxFils);
         $listFluxFils->setAssociatedRequest(null, $requeteFlux);
 		
         //liste des flux
-        $listeFlux = new ListDynamicObject();
-        $listeFlux->name = 'ListeFlux';
+        $listeFlux = new ListDynamicObject('ListeFlux');
 		$listeFlux->setAssociatedKey($listFluxFils);
         $listeFlux->request("SELECT DISTINCT flux.fluxId, flux, operationRecurrente , flux.fluxMaitre FROM stat_flux 
 						LEFT JOIN flux ON flux.fluxId = stat_flux.fluxId 
@@ -304,13 +282,11 @@ class GestionStatistiquesService extends ServiceStub {
 	public function affFormCumul(ContextExecution $p_contexte) {
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
         
-        $listReleves = new ListDynamicObject();
-        $listReleves->name = 'ListeAnnee';
+        $listReleves = new ListDynamicObject('ListeAnnee');
         $listReleves->request("SELECT DISTINCT substr( dateOperation, 1, 4 ) as annee FROM operation WHERE nocompte = '$numeroCompte' order by annee asc");
         $p_contexte->addDataBlockRow($listReleves);
 		
-		$lisFlux = new ListDynamicObject();
-        $lisFlux->name = 'ListeFlux';
+		$lisFlux = new ListDynamicObject('ListeFlux');
         $lisFlux->request("select distinct fluxid, flux from flux where compteId='$numeroCompte' order by flux ASC");
         $p_contexte->addDataBlockRow($lisFlux);
 		
@@ -341,13 +317,11 @@ class GestionStatistiquesService extends ServiceStub {
 					GROUP BY fluxid, fluxMaitre';
 					//and fluxId IN ('.$fluxAjax.') 
 					
-        $listMontantFlux = new ListDynamicObject();
-        $listMontantFlux->name = 'ListeMontantFlux';
+        $listMontantFlux = new ListDynamicObject('ListeMontantFlux');
         $listMontantFlux->setAssociatedRequest(null, $requeteAsso);
 		
         $l_requete = "SELECT CONCAT('$premiereAnnee', '_', '$derniereAnnee') AS annee";
-		$listeReleves = new ListDynamicObject();
-        $listeReleves->name = 'ListeAnnees';
+		$listeReleves = new ListDynamicObject('ListeAnnees');
         $listeReleves->setAssociatedKey($listMontantFlux);
         //$listeReleves->setAssociatedKey($listMontantTotaux);
         //$listeReleves->setAssociatedKey($listMontantEpargne);
@@ -358,22 +332,19 @@ class GestionStatistiquesService extends ServiceStub {
 		$requeteMontantFils='SELECT sum(montant) AS total, fluxId
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
-						AND dateOperation  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\';// and fluxId IN ('.$fluxAjax.')';
-		$montantFluxFils = new ListDynamicObject();
-		$montantFluxFils->name='MontantFluxFils';
+						AND dateOperation  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\' // and fluxId IN ('.$fluxAjax.')';
+		$montantFluxFils = new ListDynamicObject('MontantFluxFils');
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
 		
 		
 		//flux fils
 		$requeteFlux = "SELECT fluxId, flux FROM flux WHERE compteId='$numeroCompte'". ' AND fluxMaitreId=$parent->fluxId ORDER BY flux';
-		$listFluxFils = new ListDynamicObject();
-		$listFluxFils->name = 'ListeFluxFils';
+		$listFluxFils = new ListDynamicObject('ListeFluxFils');
 		$listFluxFils->setAssociatedKey($montantFluxFils);
         $listFluxFils->setAssociatedRequest(null, $requeteFlux);
 		
         //liste des flux
-        $listeFlux = new ListDynamicObject();
-        $listeFlux->name = 'ListeFlux';
+        $listeFlux = new ListDynamicObject('ListeFlux');
 		$listeFlux->setAssociatedKey($listFluxFils);
         $listeFlux->request("SELECT DISTINCT flux.fluxId, flux, operationRecurrente , flux.fluxMaitre FROM stat_flux 
 						LEFT JOIN flux ON flux.fluxId = stat_flux.fluxId 

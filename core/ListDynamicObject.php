@@ -7,32 +7,14 @@
  */
 class ListDynamicObject extends ListStructure implements IList{
     
-    
-    public $name='';
-
-    public $tabResult=null;
-    
-    public $nbLineTotal;
-    public $nbLine;
-    
-    public $totalPage;
-    public $page;
-	
-	private $logger;
-	
-	private $ligneParPage;
-	
-	final public function __construct(){
+    final public function __construct($name){
 		parent::__construct();
+		$this->name=$name;
 		$this->logger = Logger::getRootLogger();
 		$this->ligneParPage = LIGNE_PAR_PAGE;
 	}
-    
-//    public function getData() {
-//        return $this->tabData;
-//    }
-    
-     /**
+        
+    /**
      * fonction de requêtage
      * @param unknown_type $st1 requête
      * @param unknown_type $st2 numero de page
@@ -76,30 +58,6 @@ class ListDynamicObject extends ListStructure implements IList{
         //exécute les requêtes associées
         $this->callAssoc();
     }
-    
-    public function getName() {
-        return $this->name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see IList::getData()
-     */
-    public function getData(){
-        return $this->tabResult;
-    }
-    
-    public function getNbLineTotal(){
-        return $this->nbLineTotal;
-    }
-    
-    public function getNbLine(){
-        return count($this->tabResult);
-    }
-	
-	public function setLigneParPage($nbLignes) {
-		$this->ligneParPage = $nbLignes;
-	}
-	
+
 }
 ?>

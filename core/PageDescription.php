@@ -130,8 +130,7 @@ class PageDescription {
         $this->logger->debug('parse data');
         foreach ($p_tabDataRow as $key => $dataRow) {
             if ($dataRow instanceof IList) {
-                //$this->logger->debug('List:' . $dataRow->name);
-				$this->parseListObject($p_noeud, $dataRow);
+                $this->parseListObject($p_noeud, $dataRow);
             } else if ($dataRow instanceof SavableObject) {
                 //$this->logger->debug('parseobjet: ');
                 $group = $p_noeud->addChild($dataRow->getName());
@@ -161,7 +160,7 @@ class PageDescription {
      */
     private function parseListObject($p_noeud, IList $liste) {
         $noeudListe = $p_noeud->addChild($liste->getName());
-        $noeudListe->addAttribute('totalPage', $liste->totalPage);
+        $noeudListe->addAttribute('totalPage', $liste->getTotalPage());
         $noeudListe->addAttribute('total', $liste->getNbLine());
         $index = 1;
         foreach ($liste->getData() as $indice => $object) {
@@ -215,8 +214,8 @@ class PageDescription {
             $tab = explode(',', $this->m_paramFlow);
             foreach ($tab as $value) {
                 //$this->logger->debug('flux:' . $value);
-                $segment = new ListObject();
-                $segment->name = $value;
+                $segment = new ListObject($value);
+                //$segment->name = $value;
                 $segment->request('Segment', "cleseg='$value' order by numord");
                 $this->parseListObject($param, $segment);
             }
@@ -259,10 +258,10 @@ class PageDescription {
             $this->addBlock($user, $p_contexte->getUser()->fetchPublicMembers());
         }
 
-        //flux param�trage
+        //flux paramétrage
         $this->addFluxParametrage($doc);
 
-        //donn�es
+        //données
         $data = $doc->addChild('data');
         $this->parseData($data, $p_contexte->m_dataResponse);
 
@@ -272,7 +271,7 @@ class PageDescription {
 
         //instanciation xsl processor
         $proc = new XSLTProcessor;
-        $proc->importStyleSheet($xsl); // attachement des r�gles xsl
+        $proc->importStyleSheet($xsl); // attachement des règles xsl
         $proc->registerPHPFunctions();
         $fp = fopen('./logs/' . $this->m_nomClasse .'-'. $this->m_methode . '.xml', "w");
         fwrite($fp, @$doc->asXML());

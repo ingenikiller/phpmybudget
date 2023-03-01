@@ -86,6 +86,7 @@
 			<service name="connexion" classe="Login" methode="connexion" isPrivee="false" render="json"/>
 			<service name="deconnexion" classe="Login" methode="deconnexion" isPrivee="false" render="jsonphp"/>
 			<service name="gentables" classe="GenerateurService" methode="create" isPrivee="true"  xsl="xsl/login.xsl"/>
+			<service name="gettoken" classe="Login" methode="getToken" isPrivee="false" render="json"/>
 		</domaine>
 		<domaine name="defaut">
 			<service name="defaut" classe="Login" methode="fictive" isPrivee="false"  xsl="xsl/login.xsl"/>

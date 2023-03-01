@@ -81,8 +81,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
      * @param ContexteExecution $p_contexte
      */
     public function getListeEntete(ContextExecution $p_contexte){
-    	$liste = new ListDynamicObject();
-    	$liste->name='ListeEntete';
+    	$liste = new ListDynamicObject('ListeEntete');
     	$annee=$p_contexte->m_dataRequest->getData('annee');
     	$numeroCompte=$p_contexte->m_dataRequest->getData('noCompte');
     	
@@ -98,8 +97,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
     	$fluxId=$p_contexte->m_dataRequest->getData('fluxId');
     	$annee=$p_contexte->m_dataRequest->getData('annee');
     	
-    	$liste = new ListObject();
-    	$liste->name='PrevisionListe';
+    	$liste = new ListObject('PrevisionListe');
     	$liste->request('Prevision', "noCompte='$numeroCompte' AND fluxId='$fluxId' AND annee='$annee' AND typenr='L'  ORDER BY mois");
     	
     	$p_contexte->addDataBlockRow($liste);
