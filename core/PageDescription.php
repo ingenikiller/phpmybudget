@@ -99,7 +99,7 @@ class PageDescription {
             if ($key == 'associatedObjet') {
                 if (count($value) != 0) {
                     $asso = $p_noeud->addChild('associatedObjet');
-                    foreach($value as $key2 => $data) {
+                    foreach($value as $data) {
                         $this->parseListObject($asso, $data);
                     }
                 }
@@ -115,7 +115,7 @@ class PageDescription {
 
     private function addBlockForce($p_noeud, $p_data, $force) {
         $p_noeud->addAttribute('total', count($p_data));
-        foreach ($p_data as $key => $value) {
+        foreach ($p_data as $value) {
             $p_noeud->addChild($force, $value);
         }
     }
@@ -123,12 +123,12 @@ class PageDescription {
     /**
      * 
      * Enter description here ...
-     * @param unknown_type $p_noeud
-     * @param unknown_type $p_tabDataRow
+     * @param object $p_noeud
+     * @param array $p_tabDataRow
      */
     public function parseData($p_noeud, $p_tabDataRow) {
         $this->logger->debug('parse data');
-        foreach ($p_tabDataRow as $key => $dataRow) {
+        foreach ($p_tabDataRow as $dataRow) {
             if ($dataRow instanceof IList) {
                 $this->parseListObject($p_noeud, $dataRow);
             } else if ($dataRow instanceof SavableObject) {
@@ -148,14 +148,14 @@ class PageDescription {
                 $this->addBlock($group, $tab);
             } else {
                 //$this->logger->debug('parse ligne');
-                $ligne = $p_noeud->addChild($key, $dataRow);
+                //$ligne = $p_noeud->addChild($key, $dataRow);
             }
         }
     }
 
     /**
      *
-     * @param type $p_noeud
+     * @param object $p_noeud
      * @param ListObject $liste 
      */
     private function parseListObject($p_noeud, IList $liste) {
@@ -186,8 +186,8 @@ class PageDescription {
     /**
      * 
      * Enter description here ...
-     * @param unknown_type $p_noeud
-     * @param unknown_type $p_dataRow
+     * @param object $p_noeud
+     * @param array $p_dataRow
      */
     private function addBlockRow($p_noeud, $p_dataRow) {
         $group = $p_noeud->addChild($p_dataRow->m_name);
@@ -206,7 +206,7 @@ class PageDescription {
     /**
      * 
      * Enter description here ...
-     * @param unknown_type $p_noeud
+     * @param object $p_noeud
      */
     private function addFluxParametrage($p_noeud) {
         $param = $p_noeud->addChild('paramFlow');
@@ -237,7 +237,7 @@ class PageDescription {
         $this->addBlock($request, $p_contexte->m_dataRequest->getDataTab());
         
         //date
-        $baliseDate = $doc->addChild('date', date('Y-m-d'));
+        $doc->addChild('date', date('Y-m-d'));
 
         //titre
         $doc->addChild('titre', $p_contexte->getTitrePage());

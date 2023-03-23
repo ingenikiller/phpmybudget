@@ -1,4 +1,5 @@
 <?php
+//namespace core;
 // http://localhost/phpmybudget/index.php?domaine=prevision&service=getlisteannee2&edition=edition&periode=2021&numeroCompte=90063454011&flagPinel=complet
 // http://json.parser.online.fr/
 /*
@@ -20,14 +21,12 @@ final class ParserJson
     }
 	
 	private function addBlock($p_data) {
-		$chaine='{';
-        
 		$tab=array();
 		
         foreach ($p_data as $key => $value) {
             if ($key == 'associatedObjet') {
                 if (count($value) != 0) {
-					foreach($value as $key2 => $data) {
+					foreach($value as $data) {
                     	$tab[]=$this->parseListObject($data);
                     }
 				}
@@ -42,13 +41,13 @@ final class ParserJson
     /**
      * 
      * Enter description here ...
-     * @param unknown_type $p_tabDataRow
+     * @param array $p_tabDataRow
      */
     public function parseData($p_tabDataRow) {
         $this->logger->debug('parse data');
 		$json='"racine":{';
 		$tab=array();
-        foreach ($p_tabDataRow as $key => $dataRow) {
+        foreach ($p_tabDataRow as $dataRow) {
             if ($dataRow instanceof IList) {
                 $tab[]=$this->parseListObject($dataRow);
             } else if ($dataRow instanceof SavableObject) {
@@ -64,7 +63,7 @@ final class ParserJson
                 }
 				$tab[]=implode($tabReponse,',');
             } else {
-                $ligne = $p_noeud->addChild($key, $dataRow);
+                //$ligne = $p_noeud->addChild($key, $dataRow);
             }
         }
 		return $json.implode($tab,',').'}';
@@ -72,18 +71,16 @@ final class ParserJson
 
     /**
      *
-     * @param type $p_noeud
      * @param ListObject $liste 
      */
     private function parseListObject(IList $liste) {
-        $index = 1;
-		$chaine='"'.$liste->getName().'":{';
+        $chaine='"'.$liste->getName().'":{';
 		$chaine.='"totalPage":"'.$liste->getTotalPage().'",';
 		$chaine.='"totalLigne":"'.$liste->getNbLineTotal().'",';
 		$chaine.='"page":"'.$liste->getPage().'",';
 		$chaine.='"data":[';
 		$tab=array();
-        foreach ($liste->getData() as $indice => $object) {
+        foreach ($liste->getData() as $object) {
             //classe dynamique
             if ($object instanceof stdClass) {
                 $tabData = array();
@@ -103,8 +100,7 @@ final class ParserJson
     /**
      * 
      * Enter description here ...
-     * @param unknown_type $p_noeud
-     * @param unknown_type $p_dataRow
+     * @param array $p_dataRow
      */
     private function addBlockRow($p_dataRow) {
         $tab=array();

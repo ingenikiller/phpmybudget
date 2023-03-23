@@ -78,7 +78,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
     /**
      * 
      * Enter description here ...
-     * @param ContexteExecution $p_contexte
+     * @param ContextExecution $p_contexte
      */
     public function getListeEntete(ContextExecution $p_contexte){
     	$liste = new ListDynamicObject('ListeEntete');
@@ -104,7 +104,6 @@ class GestionPrevisionEnteteService extends ServiceStub {
     }
 	
 	public function reporter(ContextExecution $p_contexte) {
-		$userid = $p_contexte->getUser()->userId;
 		$numeroCompte = $p_contexte->m_dataRequest->getData('noCompte');
 		$fluxid = $p_contexte->m_dataRequest->getData('fluxid');
 		$anneeSource = $p_contexte->m_dataRequest->getData('anneeAReporter');
@@ -115,7 +114,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
 		//vérification de l'existence de prévisions pour l'année suivante
 		$listePrevFutur = new ListObject();
 		$listePrevFutur->request('Prevision', "nocompte='$numeroCompte' AND typenr='L' AND fluxid='$fluxid' AND mois like '$anneeCible%'");
-		$tabFutur = $listePrevFutur->tabResult;
+		$tabFutur = $listePrevFutur->getData();
 		if(count($tabFutur)) {
 			$ajax = new ReponseAjax();
 			$ajax->status='KO';
@@ -127,7 +126,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
 		//recherche des préviions de l'année source
 		$listePrev = new ListObject();
 		$listePrev->request('Prevision', "nocompte='$numeroCompte' AND typenr='L' AND fluxid='$fluxid' AND mois like '$anneeSource%'");
-		$tab = $listePrev->tabResult;
+		$tab = $listePrev->getData();
 		//pour chaque ligne, on crée l'année suivante
 		ConnexionPDO::beginTransaction();
 		

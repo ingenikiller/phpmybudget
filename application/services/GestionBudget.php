@@ -15,8 +15,7 @@ class GestionBudget extends ServiceStub{
 	 * 
 	 */
 	public function getListe(ContextExecution $p_contexte){
-		$userid = $p_contexte->getUser()->userId;
-        $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
+		$numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
         $annee = $p_contexte->m_dataRequest->getData('annee');
 
         $recFlux="select f.fluxid, f.flux

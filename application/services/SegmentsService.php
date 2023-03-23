@@ -31,7 +31,6 @@ class SegmentsService {
         $this->logger->debug("cleseg-$indice:".$p_contexte->m_dataRequest->getData('cleseg-'.$indice));
         
         while($p_contexte->m_dataRequest->getData('cleseg-'.$indice)!=null) {
-            $codseg = '';
             $segment= new Segment();
             $segment->codseg=$p_contexte->m_dataRequest->getData('codseg-'.$indice);
             $segment->cleseg=$p_contexte->m_dataRequest->getData('cleseg-'.$indice);
@@ -63,9 +62,9 @@ class SegmentsService {
             $segment->delete();
 
             if($cleseg=='CONF'){
-                $requete = "DELETE   FROM segment WHERE cleseg='$codseg'";
+                $requete = "DELETE FROM segment WHERE cleseg='$codseg'";
                 $pdo = ConnexionPDO::getInstance();
-                $stmt = $pdo->query($requete);
+                $pdo->query($requete);
             }
         }
     }

@@ -14,7 +14,6 @@ class GestionOperationRecurrenteService extends ServiceStub{
 	 * 
 	 */
 	public function getListe(ContextExecution $p_contexte){
-		$userid = $p_contexte->getUser()->userId;
 		$operationrecurrenteId=$p_contexte->m_dataRequest->getData('operationrecurrenteId');
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
 		$numeroPage=$p_contexte->m_dataRequest->getData('numeroPage');

@@ -11,10 +11,6 @@ class CommunUser {
 	}
 	
 	public static function getUserLogin($p_user, $p_mdp) {
-		$l_requete = "SELECT * FROM users WHERE 
-							nom='". $p_user ."' AND 
-							motDePasse='". $p_mdp . "'";
-		
 		$list = new ListObject('User');
 		$clause="nom='". $p_user ."' AND motDePasse='". $p_mdp . "'";
 		$list->request('Users', $clause);

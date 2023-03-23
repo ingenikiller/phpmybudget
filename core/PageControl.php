@@ -52,12 +52,12 @@ class PageControl {
 			}
 			try {
 				$auten->authenticate($contexte);
-			} catch (FunctionalException $e){
+			} catch (Exception $e){
 				if($this->gestionToken==TRUE || $classe->getRender()=='json') {
 					$reponse = new ReponseAjax();
 					$reponse->status='KO';
 					$reponse->message=$e->getMessage();
-					$reponse->codeerr=$e->getCodeErr();
+					$reponse->codeerr=$e->getMessage();
 					echo json_encode($reponse);
 				} else {
 					header('Location: index.php');

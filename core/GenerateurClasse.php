@@ -23,10 +23,10 @@ class GenerateurClasse {
 	 * @param type $p_connexion 
 	 */
 	public function generer() {
-		//récupération de la liste des tables
+		//rï¿½cupï¿½ration de la liste des tables
 		$l_requete = 'SHOW full tables WHERE Table_Type = \'BASE TABLE\'';
 		$pdo = ConnexionPDO::getInstance ();
-		$l_result = $stmt = $pdo->query ( $l_requete );
+		$l_result = $pdo->query ( $l_requete );
 		while ( $l_table = $l_result->fetch ( PDO::FETCH_ASSOC ) ) {
 			//recherche des champs de la table
 			$this->tabPrimary = array ();

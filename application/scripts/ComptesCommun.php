@@ -7,7 +7,7 @@ abstract class ComptesCommun {
 		
 		$dyn = new ListDynamicObject('SommeOperations');
 		$dyn->request($l_requete);
-		$tab = $dyn->getData();
+		//$dyn->getData();
 		
 		return $dyn;
 		

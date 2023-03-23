@@ -31,8 +31,6 @@ class GestionPrevisionService extends ServiceStub {
         
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
         
-        $dateDeb=$annee.'-01';
-        $dateFin=$annee.'-12';
         
 		$clausePinel='';
 		switch($flagPinel){
@@ -124,13 +122,13 @@ class GestionPrevisionService extends ServiceStub {
 		$p_contexte->addDataBlockRow($previsions);
 		
         //requête des opérations récurrentes
-        $requeteTotaux = 
+        /*$requeteTotaux = 
 			"SELECT ROUND(sum(montant),2) AS total
 			FROM operation 
 				LEFT JOIN flux ON flux.fluxId = operation.fluxId $clausePinel
 				LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.dateOperation LIKE concat( prevision.periode,'%')
 			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked' AND dateOperation like concat('$annee','%') ";
-		
+		*/
         $requete=
 			"SELECT ROUND(SUM( montant),2) AS total , fluxId, substring(operation.dateOperation,1,7) as mois
 			FROM operation 
@@ -247,7 +245,7 @@ class GestionPrevisionService extends ServiceStub {
 	public function update(ContextExecution $p_contexte){
 		$previsionJson=$p_contexte->m_dataRequest->getDataJson('prevision');
 		$prevision = new Prevision();
-		$prevision->ligneId=$operationRecurrenteJson['ligneId'];
+		$prevision->ligneId=$previsionJson['ligneId'];
 		$prevision->load();
 		$prevision->fieldObjectJson($previsionJson);
 		$prevision->update();

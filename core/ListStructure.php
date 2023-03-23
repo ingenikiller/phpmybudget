@@ -41,7 +41,7 @@ abstract class ListStructure extends Objects {
         $this->associatedKey[]=$list;
     }
     
-    //contient les données de la requête associée
+    //contient les donnï¿½es de la requï¿½te associï¿½e
     private $associatedClasse;
     private $associatedClause;
     public function setAssociatedRequest($classe, $clause){
@@ -51,16 +51,16 @@ abstract class ListStructure extends Objects {
     }
     
     /**
-     * fonction exécutant les requêtes associéesà l'objet en cours
+     * fonction exï¿½cutant les requï¿½tes associï¿½esï¿½ l'objet en cours
      * 
      */
     public function callAssoc() {
         if(count($this->associatedKey)!=0){
         	//pour chaque row de la requete principale
             foreach ($this->getData() as $element) {
-            	//on exécute chaque requête associée
+            	//on exï¿½cute chaque requï¿½te associï¿½e
                 foreach ($this->associatedKey as $sousrequete) {
-                	//on clone la clé pour la garder intacte pour les autres rows
+                	//on clone la clï¿½ pour la garder intacte pour les autres rows
                     $nsous = clone $sousrequete;
                     $nsous->execAssociatedRequest($element);
                     $element->associatedObjet[]=$nsous;
@@ -70,20 +70,20 @@ abstract class ListStructure extends Objects {
     }
     
     /**
-     * Execute une requête associée
-     * @param unknown_type $parent objet parent dans la structure de données
+     * Execute une requï¿½te associï¿½e
+     * @param object $parent objet parent dans la structure de donnï¿½es
      */
     private function execAssociatedRequest($parent){
         $this->getLogger()->debug('clause av:'.$this->associatedClause);
         $this->getLogger()->debug('name:'.$this->getName());
-        $retour=null;
+        
         $clause=null;
         eval("\$clause=\"$this->associatedClause\";");
         $this->logger->debug('clause:'.$clause);
         if($this->associatedClasse!=null){
-            $retour=$this->request($this->associatedClasse, $clause);
+            $this->request($this->associatedClasse, $clause);
         } else {
-            $retour=$this->request($clause);
+            $this->request($clause);
         }
     }
     

@@ -15,10 +15,10 @@ class ListDynamicObject extends ListStructure implements IList{
 	}
         
     /**
-     * fonction de requêtage
-     * @param unknown_type $st1 requête
-     * @param unknown_type $st2 numero de page
-     * @param unknown_type $st3 inutilisée
+     * fonction de requï¿½tage
+     * @param string $st1 requï¿½te
+     * @param integer $st2 numero de page
+     * @param object $st3 inutilisï¿½e
      */
     public function request($p_requete, $p_numPage=null, $dummy=null){
         $this->logger->debug('requete dynamique origine:'.$p_requete);
@@ -31,7 +31,7 @@ class ListDynamicObject extends ListStructure implements IList{
 				throw new TechnicalException($e);
 			}
 			
-        	$l_tab = $stmt->fetch(PDO::FETCH_ASSOC);
+        	//$l_tab = $stmt->fetch(PDO::FETCH_ASSOC);
         	$this->nbLineTotal = $stmt->rowCount();
         	
         	
@@ -55,7 +55,7 @@ class ListDynamicObject extends ListStructure implements IList{
         $this->totalPage = ceil($this->nbLineTotal / $this->ligneParPage);
         $this->page=($p_numPage==null)? 1 : $p_numPage;
         
-        //exécute les requêtes associées
+        //exï¿½cute les requï¿½tes associï¿½es
         $this->callAssoc();
     }
 

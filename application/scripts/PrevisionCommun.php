@@ -8,11 +8,11 @@ class PrevisionCommun {
     
     /**
      * Génère les prévisions
-     * @param $entete entête de rattachement
+     * @param $entete Prevision entête de rattachement
      * @param $identete
-     * @param $periodicite périodicité des prévisions
-     * @param $decalage décalage au début de la période
-     * @param $montant montant de la prévision
+     * @param $periodicite string périodicité des prévisions
+     * @param $decalage integer décalage au début de la période
+     * @param $montant number montant de la prévision
      */
     public static function genereLignes(Prevision $entete, $identete, $periodicite, $decalage, $montant){
         $mois=$decalage;

@@ -3,7 +3,7 @@
 class GestionOperationService extends ServiceStub{
 
 	public function getListe(ContextExecution $p_contexte){
-		$userid = $p_contexte->getUser()->userId;
+		
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
 
         $operationId=$p_contexte->m_dataRequest->getData('operationId');
@@ -66,8 +66,7 @@ class GestionOperationService extends ServiceStub{
     }
 
 	public function update(ContextExecution $p_contexte){
-        $userid = $p_contexte->getUser()->userId;
-		$operationJson=$p_contexte->m_dataRequest->getDataJson('operation');
+        $operationJson=$p_contexte->m_dataRequest->getDataJson('operation');
         $operation = new Operation();
 		$operation->operationId = $operationJson['operationId'];
         $operation->load();

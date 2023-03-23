@@ -67,14 +67,14 @@ class FabriqueClasse {
 		$this->ajouteInsert($l_handle, $p_template, 'insertFirst', $this->m_primaryKey);
 		
 		$l_first=true;
-		foreach($this->m_tabChamps as $l_key=>$l_nomChamps) {
+		foreach($this->m_tabChamps as $l_nomChamps) {
 			
-			//ajout déclaration et accesseurs
+			//ajout dï¿½claration et accesseurs
 			$this->ajouteChamps($l_handle, $p_template, $l_nomChamps);
 			//ajout partie insert de la requete
 			$this->ajouteInsert($l_handle, $p_template, 'insert', $l_nomChamps);
 
-			//suivant si c'est le premier champs écrit
+			//suivant si c'est le premier champs ï¿½crit
 			if($l_first) {
 				$this->ajouteInsert($l_handle, $p_template, 'updateFirst', $l_nomChamps);
 				$l_first=false;
@@ -85,7 +85,7 @@ class FabriqueClasse {
 		}
 		
 		//print_r($this->m_tabForeignKey);
-		foreach($this->m_tabForeignKey as $l_key=>$l_nomChamps) {
+		foreach($this->m_tabForeignKey as $l_nomChamps) {
 			$this->ajouteForeignKey($l_handle, $p_template, $l_nomChamps);
 			$this->ajouteInsert($l_handle, $p_template, 'insert', $l_nomChamps.'Id');
 			$this->ajouteInsert($l_handle, $p_template, 'update', $l_nomChamps.'Id');

@@ -41,7 +41,7 @@ abstract class SavableObject extends Objects {
 	
     /**
      * retourne les éléments de la clé primaire valorisée pour requete
-     * @return type tableau
+     * @return array tableau
      */
     private function getPrimaryKeyValorisee() {
         $tab = array();
@@ -49,7 +49,7 @@ abstract class SavableObject extends Objects {
 
         $reflect = new ReflectionObject($this);
 
-        foreach ($primaryKey as $key => $value) {
+        foreach ($primaryKey as $value) {
             $property = $reflect->getProperty($value);
             $tab[] = $value . '=' . self::$_pdo->quote($property->getValue($this)); //'=\'' . $property->getValue($this) . '\'';
         }
@@ -139,7 +139,7 @@ abstract class SavableObject extends Objects {
 		
 		try {
             $this->logger->debug('requete create:' . $query);
-            $stmt = self::$_pdo->exec($query);
+            self::$_pdo->exec($query);
         } catch (PDOException $e) {
             throw new TechnicalException($e);
         }
@@ -193,7 +193,7 @@ abstract class SavableObject extends Objects {
 		
 		try {
             $this->logger->debug('requete update:' . $query);
-            $stmt = self::$_pdo->exec($query);
+            self::$_pdo->exec($query);
         } catch (PDOException $e) {
             throw new TechnicalException($e);
         }
@@ -206,7 +206,7 @@ abstract class SavableObject extends Objects {
         $requete = 'DELETE FROM '.strtolower($this->_tableName). ' WHERE ' . implode(' AND ', $this->getPrimaryKeyValorisee());
         $this->logger->debug('delete:' . $requete);
         try {
-            $stmt = self::$_pdo->query($requete);
+            self::$_pdo->query($requete);
         } catch (PDOException $e) {
             throw new TechnicalException($e);
         }

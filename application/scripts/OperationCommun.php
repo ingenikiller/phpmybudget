@@ -10,8 +10,8 @@ class OperationCommun {
 
 	/**
 	 * Recherche une opération fille
-	 * @param unknown_type $flux
-	 * @param unknown_type $p_operation
+	 * @param Flux $flux
+	 * @param Operation $p_operation
 	 */
 	public static function rechercherOperationLiee($flux, $p_operation){
 		$logger = Logger::getRootLogger();
@@ -19,7 +19,7 @@ class OperationCommun {
 		$listOpe = new ListObject('ListeOperations');
         //recherche d'une opération ayant les références de l'opération en cours
         $listOpe->request('Operation', "numeroCompteOri='$p_operation->noCompte' AND operationIdOri=$p_operation->operationId");
-		$tab = $listOpe->tabResult;
+		$tab = $listOpe->getData();
         $logger->debug('Total ope '.count($tab));
         if($tab==null || count($tab)==0){
         	return null;
@@ -58,8 +58,10 @@ class OperationCommun {
                 $listOpe = new ListObject('ListeOperations');
                 $listOpe->request('Operation', "operationIdOri=$p_operation->operationId AND (numeroCompteOri is not null AND numeroCompteOri<>'')");
 
-                $tab = $listOpe->tabResult;
-                $logger->debug('Total ope '.count($tab));
+                
+                //$logger->debug('Total ope '.count($tab));
+                $logger->debug('Total ope '.$listOpe->getNbLine());
+                $tab= $listOpe->getData();
 				//pas d'opération, on en crée une nouvelle
                 if($tab==null || count($tab)==0) {
                     $logger->debug('Operation inexistante');
@@ -104,7 +106,7 @@ class OperationCommun {
                     //mise à jour de l'opération d'origine
                     $listOpeRec = new ListObject();
                     $listOpe->request('Operation', "noCompte='$l_flux->compteDest' AND noCompte='$p_operation->numeroCompteOri' AND operationId=$p_operation->operationIdOri");
-                    $tab = $listOpeRec->tabResult;
+                    $tab = $listOpeRec->getData();
                     $logger->debug('Total ope '.count($tab));
                     if($tab==null || count($tab)==0) {
                         $l_operation = $tab[0];

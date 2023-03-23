@@ -8,7 +8,7 @@ class TokenCommun {
 		
 		//suppression des tokens de plus d'une demi heure
 		$pdo = ConnexionPDO::getInstance ();
-		$l_result = $stmt = $pdo->query ( $requete );
+		$pdo->query ( $requete );
     }
     
 }

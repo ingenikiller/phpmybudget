@@ -31,7 +31,8 @@ class AuthentificateurToken {
 			$user->load();
 			$p_contexte->setUser($user);
 		} else {
-			throw new FunctionalException(Constantes::SESSION_CLOSE, 'Session close');
+			//throw new Exception(Constantes::SESSION_CLOSE, 'Session close');
+			throw new Exception('SESSION_CLOSE');
 		}
 	}
 }
