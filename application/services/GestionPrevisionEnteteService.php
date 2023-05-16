@@ -112,7 +112,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
 		//vérification de l'existence de périodes sur l'année suivante
 		
 		//vérification de l'existence de prévisions pour l'année suivante
-		$listePrevFutur = new ListObject();
+		$listePrevFutur = new ListObject('Prevision');
 		$listePrevFutur->request('Prevision', "nocompte='$numeroCompte' AND typenr='L' AND fluxid='$fluxid' AND mois like '$anneeCible%'");
 		$tabFutur = $listePrevFutur->getData();
 		if(count($tabFutur)) {
@@ -124,7 +124,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
 		}
 		
 		//recherche des préviions de l'année source
-		$listePrev = new ListObject();
+		$listePrev = new ListObject('Prevision');
 		$listePrev->request('Prevision', "nocompte='$numeroCompte' AND typenr='L' AND fluxid='$fluxid' AND mois like '$anneeSource%'");
 		$tab = $listePrev->getData();
 		//pour chaque ligne, on crée l'année suivante
