@@ -27,8 +27,8 @@ class GestionPeriodeService extends ServiceStub{
 		
 		//$listFlux->setAssociatedKey($comptePrincipal);
 		$listePeriode->request('Periode', $requete);
-		$this->logger->debug('nb periode:' . $listePeriode->getNbRows());
-		if ($listePeriode->getNbRows()!=0){
+		$this->logger->debug('nb periode:' . $listePeriode->getNbLineTotal());
+		if ($listePeriode->getNbLineTotal()!=0){
 			$reponse = new ReponseAjax();
 			$reponse->status='KO';
 			$reponse->message="Annee déjà créée";
