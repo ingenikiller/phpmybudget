@@ -94,13 +94,13 @@ function getClasseMontant(montant) {
 		classeMontant='';
 	}else {
 		if(montant<0){
-			if(montant>300){
+			if(montant<-300){
 				classeMontant='positif';
 			} else {
 				classeMontant='positifproche';
 			}
 		} else {
-			if(montant>-300){
+			if(montant<300){
 				classeMontant='negatifproche';
 			} else {
 				classeMontant='negatif';
