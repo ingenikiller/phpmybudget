@@ -69,7 +69,7 @@ function affichageLignesBudget(json) {
         var totalAnneeEnCours=Number(tabAnnee[2].total);
         
         //
-        var classeMontant= getClasseMontant(totalAnneeEnCours-actuelle);
+        var classeMontant= getClasseMontantInverse(totalAnneeEnCours-actuelle);
         ligne.append('<td class="text-end '+classeMontant+'">'+(totalAnneeEnCours-actuelle).toFixed(2)+'</td>');
         //
         ligne.append('<td class="text-end">'+totalAnneeEnCours.toFixed(2)+'</td>');
@@ -111,6 +111,29 @@ function getClasseMontant(montant) {
 	return classeMontant;
 }
 
+function getClasseMontantInverse(montant) {
+	var classeMontant= '';
+	
+	if(montant==0){
+		classeMontant='';
+	}else {
+		if(montant>0){
+			if(montant>300){
+				classeMontant='positif';
+			} else {
+				classeMontant='positifproche';
+			}
+		} else {
+			if(montant>-300){
+				classeMontant='negatifproche';
+			} else {
+				classeMontant='negatif';
+			}
+		}
+	}
+	
+	return classeMontant;
+}
 
 function alimenteListeFluxNontraites(){
     var annee = $('#annee').val();
