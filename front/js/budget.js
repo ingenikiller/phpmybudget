@@ -135,6 +135,7 @@ function getClasseMontantInverse(montant) {
 	return classeMontant;
 }
 
+
 function alimenteListeFluxNontraites(){
     var annee = $('#annee').val();
     var numeroCompte = $('#numeroCompte').val();
