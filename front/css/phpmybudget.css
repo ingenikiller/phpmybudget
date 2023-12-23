@@ -61,6 +61,16 @@ p {
 	color:red;
 }
 
+.positifproche
+{
+	color:#01DF01;
+}
+
+.negatifproche
+{
+	color:orange;
+}
+
 /************************************************
  * colonne hover
  ************************************************/

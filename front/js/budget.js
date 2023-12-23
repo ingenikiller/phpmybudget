@@ -58,7 +58,7 @@ function affichageLignesBudget(json) {
         var actuelle = Number(tabFlux[i].ListeActuelle.data[0].montant);
         var diffEncours=totalAnneePassee-actuelle;
         
-        var classeMontant= diffEncours<=0?'positif':'negatif';
+        var classeMontant= getClasseMontant(diffEncours);
         ligne.append('<td class="text-end '+classeMontant+'">'+(diffEncours).toFixed(2)+'</td>');
         totalEncours+=diffEncours;
         
@@ -69,13 +69,10 @@ function affichageLignesBudget(json) {
         var totalAnneeEnCours=Number(tabAnnee[2].total);
         
         //
-        var classeMontant= (totalAnneeEnCours-actuelle)>=0?'positif':'negatif';
+        var classeMontant= getClasseMontant(totalAnneeEnCours-actuelle);
         ligne.append('<td class="text-end '+classeMontant+'">'+(totalAnneeEnCours-actuelle).toFixed(2)+'</td>');
         //
         ligne.append('<td class="text-end">'+totalAnneeEnCours.toFixed(2)+'</td>');
-        
-        
-        //
         
         total+=totalAnneeEnCours-actuelle;
         
@@ -88,6 +85,30 @@ function affichageLignesBudget(json) {
     pied.append('<td class="text-end">'+total.toFixed(2)+'</td>');
     pied.append('<td/>');
     tableau.append(pied);
+}
+
+function getClasseMontant(montant) {
+	var classeMontant= '';
+	
+	if(montant==0){
+		classeMontant='';
+	}else {
+		if(montant<0){
+			if(montant>300){
+				classeMontant='positif';
+			} else {
+				classeMontant='positifproche';
+			}
+		} else {
+			if(montant>-300){
+				classeMontant='negatifproche';
+			} else {
+				classeMontant='negatif';
+			}
+		}
+	}
+	
+	return classeMontant;
 }
 
 
