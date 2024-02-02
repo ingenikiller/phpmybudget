@@ -192,7 +192,7 @@ function parseListeJson(json) {
 			classeMontant='negatif';
 		}
 
-		row.append($('<td class="text-end '+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',','')))));
+		row.append($('<td class="text-end"/>').append($('<span class="'+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',',''))))));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="oi oi-pencil"/></a>'));
