@@ -310,6 +310,7 @@ function afficheEstimation(champs, nocompte){
 		data: params,
 		success: function(resultat) {
 			$('#estimation').text(resultat.racine.estimationReste);
+			$('#restePrevision').text(resultat.racine.previsionReste);
 		}
 	});
 }

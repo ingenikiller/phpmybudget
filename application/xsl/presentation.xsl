@@ -59,7 +59,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</title>
-			
+			<link id="dynamic-favicon" rel="shortcut icon" href="./favicon.ico" />
 			<link href="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/css/bootstrap.min.css" rel="stylesheet"/>
 			<!--link href="front/bootstrap/bootstrap-{$BOOTSTRAP-VERSION}-dist/css/bootstrap-theme.min.css" rel="stylesheet"/-->
 			<link href="front/font/css/open-iconic-bootstrap.css" rel="stylesheet" type="text/css"/>

@@ -42,18 +42,22 @@ function affichageLignesBudget(json) {
     var total=0;
     var totalEncours=0;
     var tabFlux=json.racine.ListeFlux.data;
+
+    var anneeEncours=Number($('#annee').val());
+    var numeroCompte = $('#numeroCompte').val();
+    
     for(var i=0; i<tabFlux.length; i++) {
         var ligne=$('<tr/>');
         ligne.append('<th>'+tabFlux[i].flux+'</th>');
-        
+        var fluxId=tabFlux[i].fluxid;
         //
         var tabAnnee=tabFlux[i].ListeAnnees.data
-        ligne.append('<td class="text-end">'+tabAnnee[0].total+'</td>');
-
+        //ligne.append('<td class="text-end">'+tabAnnee[0].total+'</td>');
+        ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours-2)+"')\">"+tabAnnee[0].total+'</a></td>');
         //
         var totalAnneePassee=Number(tabAnnee[1].total);
-        ligne.append('<td class="text-end">'+tabAnnee[1].total+'</td>');
-        
+        //ligne.append('<td class="text-end">'+tabAnnee[1].total+'</td>');
+        ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours-1)+"')\">"+tabAnnee[1].total+'</a></td>');
         //
         var actuelle = Number(tabFlux[i].ListeActuelle.data[0].montant);
         var diffEncours=totalAnneePassee-actuelle;
@@ -72,8 +76,8 @@ function affichageLignesBudget(json) {
         var classeMontant= getClasseMontantInverse(totalAnneeEnCours-actuelle);
         ligne.append('<td class="text-end '+classeMontant+'">'+(totalAnneeEnCours-actuelle).toFixed(2)+'</td>');
         //
-        ligne.append('<td class="text-end">'+totalAnneeEnCours.toFixed(2)+'</td>');
-        
+        //ligne.append('<td class="text-end">'+totalAnneeEnCours.toFixed(2)+'</td>');
+        ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours)+"')\">"+totalAnneeEnCours.toFixed(2)+'</a></td>');
         total+=totalAnneeEnCours-actuelle;
         
 

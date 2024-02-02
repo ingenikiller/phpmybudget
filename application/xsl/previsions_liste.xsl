@@ -70,6 +70,14 @@
                             <xsl:value-of select="format-number(number(/root/data/SommeOperations/Dynamic/total) + number(/root/data/Comptes/solde), $FORMAT_MNT)"/> €
                         </td>
                     </tr>
+					<tr>
+                        <th>
+							Reste prévision
+						</th>
+                        <td class="text-end">
+                            <span id="restePrevision">&#160;</span> €
+                        </td>
+                    </tr>
                     <tr>
                         <th>
 							<xsl:value-of select="$LBL.ESTIMATION"/>

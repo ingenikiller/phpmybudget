@@ -219,6 +219,7 @@ class GestionPrevisionService extends ServiceStub {
 		// solde du compte + somme des opérations du compte + somme des prévisions du mois - somme des opérations correspondant à des prévisions
 		$solde = $compte->solde + $soldeOpe + $soldePre - $sommeOpe;
 		$tab=array();
+		$tab['previsionReste']=number_format($soldePre - $sommeOpe, 2,'.', '');
 		$tab['estimationReste']=number_format($solde, 2,'.', '');
 		//$tab[1]=number_format($solde, 2,'.', '');
 		

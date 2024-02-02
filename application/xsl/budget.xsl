@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:import href="template_name.xsl"/>
     <xsl:import href="commun.xsl"/>
+    <xsl:import href="statistiques_commun.xsl"/>
     <xsl:param name="ANNEE">
         <xsl:choose>
             <xsl:when test="not(/root/request/annee)">
@@ -14,8 +15,10 @@
     </xsl:param>
     <xsl:template name="js.module.sheet">
         <script src="front/js/budget.js">&#160;</script>
+        <script type="text/javascript" src="front/js/statistiques.js" charset="iso-8859-1">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
+        <xsl:call-template name="boiteDetail"/>
 		<br/>
 		<div class="row justify-content-md-center">
 			<div class="col">
@@ -46,12 +49,12 @@
             <thead>
                 <tr>
                      <th>Flux</th>
-                     <th>Année n-2</th>
-                     <th>Année n-1</th>
-                     <th>Diff</th>
-                     <th>Prévu</th>
-                     <th>Diff</th>
-                     <th>Année en cours</th>
+                     <th class="text-center">Année n-2</th>
+                     <th class="text-center">Année n-1</th>
+                     <th class="text-center">Diff</th>
+                     <th class="text-center">Prévu</th>
+                     <th class="text-center">Diff</th>
+                     <th class="text-center">Année en cours</th>
                 </tr>
             </thead>
             <tbody id="tabListeBudget"/>
