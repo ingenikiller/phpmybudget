@@ -64,8 +64,6 @@ function editerOperation(numeroCompte, operationId){
 	réinitialise le formulaire de recherche pour lancer une nouvelle recherche
 */
 function rechercherOperations(form){
-	//$('#numeroPage').val(1);
-	//alert('toto');
 	listerObjects();
 	return false;
 }
@@ -93,11 +91,6 @@ function parseListeJson(json) {
 	$('tr[typetr=periode]').remove();
 	
 	var tabJson = json.racine.ListeAnnee.data;
-	//var total = json[0].nbLineTotal;
-	//var nbpage = Math.ceil(total/json[0].nbLine);
-	
-	
-	//var nb=json[0].nbLine;
 	
 	for(var i=0; i<tabJson.length; i++) {
 		var row = $('<tr typetr="periode"/>');
@@ -112,7 +105,6 @@ function creerPeriode(form){
 		return false;
 	}
 	
-	//var service = form.service.value;
 	$.ajax({ 
 		url: "index.php?domaine=periode&service=create",
 		data: { "annee": form.nouvelleannee.value

@@ -110,7 +110,7 @@ function soumettre(form) {
 	if(!validForm(form)) {
 		return false;
 	}
-	//var dataJson= { numeroCompte: form.numeroCompte.value,libelle:form.libelle.value,solde:form.solde.value };
+	
 	var dataJson=new Object();
 	dataJson.numeroCompte= form.numeroCompte.value;
 	dataJson.libelle=form.libelle.value;
@@ -120,11 +120,7 @@ function soumettre(form) {
 		url: "index.php?domaine=compte&service="+$('#service').val(),
 		contentType: 'application/json; charset=utf-8',
     	dataType: 'json',
-		data: {compte: JSON.stringify(dataJson)}
-		/*{ "numeroCompte": form.numeroCompte.value,
-				"libelle": form.libelle.value,
-				"solde": form.solde.value
-		}*/, 
+		data: {compte: JSON.stringify(dataJson)}, 
 		success: function(retour) { 
 			$("div#boiteCompte").modal('hide');
 			listerObjects()

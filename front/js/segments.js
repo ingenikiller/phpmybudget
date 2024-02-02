@@ -51,15 +51,6 @@ function parseListeJson(json, cleseg, idTableau) {
 	tab = document.getElementById(idTableau);
 	$('tr[typetr='+idTableau+']').remove();
 	
-
-	//var total = json[0].nbLineTotal;
-	//var nbpage = Math.ceil(total/json[0].nbLine);
-	/*document.getElementById('numeroPage').value=json[0].page;
-	document.getElementById('rch_page').value=json[0].page;
-	document.getElementById('max_page').value=json[0].totalPage;*/
-	//alert(cleseg);
-	
-	//var nb=json[0].nbLine;
 	var tabJson = json.racine.Segments.data;
 	
 	for(var i=0; i<tabJson.length; i++) {
@@ -89,7 +80,7 @@ function soumettreDetail(form, tabElement) {
 		
 	//constitution de la hashmap
 	var params = constitueParams(form, tabElement);
-	//var params = "cle=toto";
+	
 	$.ajax({ 
 	    url: "index.php?domaine=segment&service="+form.service.value,
 	    data: {
@@ -121,11 +112,10 @@ function enregistreSegment(tableau, form) {
 	
 	//constitution de la hashmap
 	var params = constitueParamsListe(form, tabElement);
-	//var params = "cle=toto";
+	
 	$.ajax({ 
 	    url: "index.php?page=SEGMENT_D&cinematic=update",
 	    data: params,
-	    //data: {"edition":"edition"},
 	    dataType: "text",
 	    success: function(retour) { 
 			return false;

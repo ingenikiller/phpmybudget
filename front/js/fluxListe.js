@@ -106,7 +106,6 @@ function editerFlux(fluxId){
 		$('#compteId').val('');
 		$('#compteDest').val('');
 		$('#fluxMaitre').val('');
-		//$('#fluxMaitreId').val('');
 		$('#fluxMaitreId').empty();
 		
 	} else {
