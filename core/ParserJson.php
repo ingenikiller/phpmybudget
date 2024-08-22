@@ -32,10 +32,10 @@ final class ParserJson
 				}
             } else if (is_array($value)){
             } else {
-                $tab[]="\"$key\":".'"'.htmlspecialchars($value).'"';
+                $tab[]="\"$key\":".'"'.htmlspecialchars($value."").'"';
             }
         }
-		return '{'.implode($tab,',').'}';
+		return '{'.implode(',', $tab).'}';
     }
 
     /**
@@ -61,12 +61,12 @@ final class ParserJson
 				foreach ($reflect->getProperties(ReflectionProperty::IS_PUBLIC) as $var) {
                     $tabReponse[] = '"'.$var->getName().'":"'.$dataRow->{$var->getName()}.'"';
                 }
-				$tab[]=implode($tabReponse,',');
+				$tab[]=implode(',', $tabReponse);
             } else {
                 //$ligne = $p_noeud->addChild($key, $dataRow);
             }
         }
-		return $json.implode($tab,',').'}';
+		return $json.implode(',', $tab).'}';
     }
 
     /**
@@ -94,7 +94,7 @@ final class ParserJson
             }
         }
 		
-		return $chaine.implode($tab,',').']}';
+		return $chaine.implode(',',$tab).']}';
     }
 
     /**
@@ -107,7 +107,7 @@ final class ParserJson
         foreach ($p_dataRow as $key => $row) {
 			$tab[]="\"$key\":\"$row\"";
         }
-		return implode($tab,',');
+		return implode(',', $tab);
     }
 
     /**

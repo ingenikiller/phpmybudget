@@ -119,7 +119,8 @@ function soumettre(form) {
 	$.ajax({ 
 		url: "index.php?domaine=compte&service="+$('#service').val(),
 		contentType: 'application/json; charset=utf-8',
-    	dataType: 'json',
+    	dataType: 'text',
+		type: "POST",
 		data: {compte: JSON.stringify(dataJson)}, 
 		success: function(retour) { 
 			$("div#boiteCompte").modal('hide');

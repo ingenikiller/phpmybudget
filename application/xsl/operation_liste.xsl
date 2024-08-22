@@ -61,9 +61,6 @@
 					<thead>
 						<tr>
 							<th class="text-center">
-								<xsl:value-of select="$LBL.NUMERORELEVE"/>
-							</th>
-							<th class="text-center">
 								<xsl:value-of select="$LBL.DATE"/>
 							</th>
 							<th class="text-center">
