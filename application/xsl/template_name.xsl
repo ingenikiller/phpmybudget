@@ -155,13 +155,27 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="fluxId" class="col-sm-6 form-control-label">
+                                        <label for="montant" class="col-sm-6 form-control-label">
                                             <xsl:value-of select="$LBL.MONTANT"/>
                                         </label>
                                         <div class="col-sm-6">
                                             <input class="form-control obligatoire numerique" size="7" name="montant" id="montant" onblur="return isDouble(this);" tabindex="60"/>
                                         </div>
                                     </div>
+									<xsl:choose>
+										<xsl:when test="$NUMEROCOMPTE='23135361844'">
+											<div class="form-group row">
+												<label for="montanttva" class="col-sm-6 form-control-label">
+													<xsl:value-of select="$LBL.MONTANTTVA"/>
+												</label>
+												<div class="col-sm-6">
+													<input class="form-control obligatoire numerique" size="7" name="montanttva" id="montanttva" onblur="return isDouble(this);" tabindex="60"/>
+												</div>
+											</div>
+										</xsl:when>
+										<xsl:otherwise>
+										</xsl:otherwise>
+									</xsl:choose>
                                     <div class="modal-footer">
 										<button type="submit" class="btn btn-primary">Valider</button>
 										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

@@ -57,6 +57,7 @@
 	<xsl:variable name="LBL.MODIFIER">Modifier</xsl:variable>
 	<xsl:variable name="LBL.MOIS">Mois</xsl:variable>
 	<xsl:variable name="LBL.MONTANT">Montant</xsl:variable>
+	<xsl:variable name="LBL.MONTANTTVA">Montant TVA</xsl:variable>
 	<xsl:variable name="LBL.MOTDEPASSE">Mot de passe</xsl:variable>
 	<xsl:variable name="LBL.NBMOIS">Nombre mois</xsl:variable>
 	<xsl:variable name="LBL.NOM">Nom</xsl:variable>
