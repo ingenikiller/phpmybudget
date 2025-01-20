@@ -20,6 +20,8 @@ class Operation extends SavableObject {
 	
 	public $montant;
 	
+	public $montanttva;
+	
 	public $verif;
 	
 	public $operationIdOri;

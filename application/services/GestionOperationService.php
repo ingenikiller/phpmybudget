@@ -14,7 +14,7 @@ class GestionOperationService extends ServiceStub{
         }
 
         $requete='SELECT operation.operationId, operation.noReleve, operation.dateOperation, operation.libelle, operation.fluxId, operation.modePaiementId, flux.flux, operation.modePaiementId,
-        format(operation.montant,2) as montant, operation.nocompte, operation.verif FROM operation LEFT JOIN flux ON operation.fluxid = flux.fluxid WHERE ';
+        format(operation.montant,2) as montant, format(operation.montanttva,2) as montanttva,operation.nocompte, operation.verif FROM operation LEFT JOIN flux ON operation.fluxid = flux.fluxid WHERE ';
         $requete.=" operation.nocompte='$numeroCompte'";
         if($operationId!=null){
 			$requete.=" AND operationId=$operationId";

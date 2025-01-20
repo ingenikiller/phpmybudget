@@ -89,6 +89,7 @@ function editerOperation(numeroCompte, operationId){
 				$('#noReleve').val(operation.noReleve);
 				$('#libelle').val(operation.libelle);
 				$('#montant').val(operation.montant.replace(',',''));
+				$('#montanttva').val(operation.montanttva.replace(',',''));
 				$('#fluxId').val(operation.fluxId);
 				if($('#fluxId').find(':selected').attr('compteid') == numeroCompte) {
 					$('#fluxId').prop('disabled', false);
@@ -113,6 +114,7 @@ function editerOperation(numeroCompte, operationId){
 		$('#noReleve').val('');
 		$('#libelle').val('');
 		$('#montant').val('');
+		$('#montanttva').val('');
 		$('#fluxId').val('');
 		$('#modePaiementId').val('');
 		$("div#divOpeRec").show();
