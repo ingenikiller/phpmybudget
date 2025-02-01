@@ -48,8 +48,7 @@ function soumettre(form) {
 	dataJson.fluxId= form.fluxId.value;
 	dataJson.modePaiementId= form.modePaiementId.value;
 	dataJson.montant= form.montant.value;
-	dataJson.montanttva= form.montanttva.value;
-
+	
 	var service = form.service.value;
 	$.ajax({
 		url: "index.php?domaine=operation&service="+service,
@@ -68,7 +67,6 @@ function soumettre(form) {
 				form.fluxId.value='';
 				form.modePaiementId.value='';
 				form.montant.value='';
-				form.montanttva.value='';
 				form.libelle.focus();
 			} else {
 				$('#boiteOperation').modal('hide');

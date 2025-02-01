@@ -27,12 +27,14 @@
 		</domaine>
 		<domaine name="operation">
 			<service name="getpage" classe="GestionOperationService" methode="getPage" isPrivee="true" xsl="xsl/operation_liste.xsl" paramFlow="MODPAI"/>
+			<service name="getpagepro" classe="GestionOperationService" methode="getPage" isPrivee="true" xsl="xsl/operation_liste_pro.xsl" paramFlow="MODPAI"/>
 			<service name="getsoldeoperation" classe="GestionOperationService" methode="getSoldeOperation" isPrivee="true" render="json"/>
 			<service name="reclibelle" classe="GestionOperationService" methode="recLibelle" render="json" isPrivee="true"/>
 			<service name="getliste" classe="GestionOperationService" methode="getListe" render="json" isPrivee="true"/>
 			<service name="getone" classe="GestionOperationService" methode="getListe" render="json" isPrivee="true"/>
 			<service name="create" classe="GestionOperationService" methode="create" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionOperationService" methode="update" render="json" isPrivee="true"/>
+			<service name="gettvamois" classe="GestionOperationService" methode="getTvaMois" render="json" isPrivee="true"/>
 		</domaine>
 		<domaine name="operationrecurrente">
 			<service name="getpage" classe="GestionOperationRecurrenteService" methode="getPage" isPrivee="true" xsl="xsl/operation_recurrente_liste.xsl" paramFlow="MODPAI"/>

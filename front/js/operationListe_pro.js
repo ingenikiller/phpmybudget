@@ -89,6 +89,7 @@ function editerOperation(numeroCompte, operationId){
 				$('#noReleve').val(operation.noReleve);
 				$('#libelle').val(operation.libelle);
 				$('#montant').val(operation.montant.replace(',',''));
+				$('#montanttva').val(operation.montanttva.replace(',',''));
 				$('#fluxId').val(operation.fluxId);
 				if($('#fluxId').find(':selected').attr('compteid') == numeroCompte) {
 					$('#fluxId').prop('disabled', false);
@@ -97,7 +98,7 @@ function editerOperation(numeroCompte, operationId){
 				}
 				$('#modePaiementId').val(operation.modePaiementId);
 				$('#dateOperation').val(operation.dateOperation);
-
+				$('#noncomptabilisee').prop('checked', operation.noncomptabilisee==1?true:false);
 				$("div#divOpeRec").hide();
 				var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
 					backdrop: 'static',
@@ -113,8 +114,10 @@ function editerOperation(numeroCompte, operationId){
 		$('#noReleve').val('');
 		$('#libelle').val('');
 		$('#montant').val('');
+		$('#montanttva').val('');
 		$('#fluxId').val('');
 		$('#modePaiementId').val('');
+		$('#noncomptabilisee').prop('checked', false);
 		$("div#divOpeRec").show();
 		var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
 			backdrop: 'static',
@@ -162,6 +165,8 @@ function listerObjects(){
 			parseListeJson(resultat);
 		}
 	});
+
+	afficheTVA();
 	return false;
 }
 
@@ -181,7 +186,10 @@ function parseListeJson(json) {
 	$('#max_page').val(nbpage);
 	
 	for(var i=0; i<tabJson.length; i++) {
-		var row = $('<tr typetr="operation"/>');
+		
+		var style=tabJson[i].noncomptabilisee==1?'style="background-color:yellow"':'';
+		
+		var row = $('<tr typetr="operation" '+style+'/>');
 		//row.append($('<td class="text-center"/>').text(tabJson[i].noReleve));
 		row.append($('<td class="text-center"/>').text(tabJson[i].dateOperation));
 		row.append($('<td/>').text(tabJson[i].libelle));
@@ -193,12 +201,44 @@ function parseListeJson(json) {
 		}
 
 		row.append($('<td class="text-end"/>').append($('<span class="'+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montant.replace(',',''))))));
+		row.append($('<td class="text-end"/>').append($('<span class="'+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].montanttva.replace(',',''))))));
 		row.append($('<td class="text-center"/>').text(tabJson[i].flux));
 		
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerOperation(\''+ tabJson[i].nocompte +'\','+ tabJson[i].operationId +')"><span class="oi oi-pencil"/></a>'));
 		
 		$("#tbodyResultat").append(row);
 	}
+}
+
+function afficheTVA() {
+	tab = document.getElementById('tbodyTva');
+	$('tr[typetr=lignetva]').remove();
+
+	var params = "numeroCompte="+$('#numeroCompte').val();
+	
+	//appel synchrone du service
+	$.ajax({
+		url: "index.php?domaine=operation&service=gettvamois",
+		dataType: 'json',
+		data: params,
+		success: function(json) {
+			//parseListeJson(resultat);
+			var tabJson = json.racine.LigneTvaMois.data;
+			for(var i=0; i<tabJson.length; i++) {
+				var row = $('<tr typetr="lignetva"/>');
+				row.append($('<td class="text-center"/>').text(tabJson[i].periode));
+				var classeMontant='';
+				row.append($('<td class="text-end"/>').append($('<span class="'+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].payee.replace(',',''))))));
+				row.append($('<td class="text-end"/>').append($('<span class="'+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].collectee.replace(',',''))))));
+
+				var diff = Number(tabJson[i].collectee.replace(',',''))-Number(tabJson[i].payee.replace(',',''));
+				row.append($('<td class="text-end"/>').append($('<span class="'+classeMontant+'"/>').text( formatNumerique(diff))));
+				$("#tbodyTva").append(row);
+			}
+
+		}
+	});
+	return false;	
 }
 
 /*********************************************************

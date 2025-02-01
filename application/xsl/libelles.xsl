@@ -62,6 +62,7 @@
 	<xsl:variable name="LBL.NBMOIS">Nombre mois</xsl:variable>
 	<xsl:variable name="LBL.NOM">Nom</xsl:variable>
 	<xsl:variable name="LBL.NON">Non</xsl:variable>
+	<xsl:variable name="LBL.NONCOMPTABILISEE">Non comptabilisée</xsl:variable>
 	<xsl:variable name="LBL.NORELEVE">No relevé</xsl:variable>
 	<xsl:variable name="LBL.NOUVEAU">Nouveau</xsl:variable>
 	<xsl:variable name="LBL.NUMEROCOMPTE">Numéro de compte</xsl:variable>

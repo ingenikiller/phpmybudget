@@ -6,14 +6,16 @@
         <xsl:value-of select="/root/request/recNoReleve"/>
     </xsl:param>
     <xsl:template name="js.module.sheet">
-        <script src="front/js/operationListe.js">&#160;</script>
-		<script src="front/js/jquery_opertation_edition.js">&#160;</script>
+        <script src="front/js/operationListe_pro.js">&#160;</script>
+		<script src="front/js/jquery_opertation_edition_pro.js">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
 		<br/>
 		<div class="row">
 			<input type="hidden" id="retour" name="retour"/>
-			<aside class="col formulaire">
+			<div class="col-9">
+			<div class="row">
+			<aside class="col-3 formulaire">
 				<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
 					<xsl:call-template name="formulaireJson"/>
 					<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
@@ -56,7 +58,7 @@
 					<br/>
 				</form>
 			</aside>
-			<div class="col-10">
+			<div class="col-9">
 				<table class="table table-striped table-bordered" id="tableauResultat">
 					<thead>
 						<tr>
@@ -70,11 +72,15 @@
 								<xsl:value-of select="$LBL.MONTANT"/>
 							</th>
 							<th class="text-center">
+								<xsl:value-of select="$LBL.MONTANTTVA"/>
+							</th>
+							<th class="text-center">
 								<xsl:value-of select="$LBL.FLUX"/>
 							</th>
 							<th class="text-center">
 								<xsl:value-of select="$LBL.ACTION"/>
 							</th>
+							
 						</tr>
 					</thead>
 					<tbody id="tbodyResultat"/>
@@ -84,8 +90,26 @@
 					<xsl:with-param name="formulairePrincipal" select="'recherche'"/>
 				</xsl:call-template>
 			</div>
+			</div>
+			</div>
+			<div class="col-3">
+				<table class="table table-stripped table-bordered">
+			  	<thead>
+			 		<tr>
+			  			<th colspan="4" class="text-center">TVA</th>
+					</tr>
+				<tr>
+					<th class="text-center">Mois</th>
+					<th class="text-center">Payée</th>
+					<th class="text-center">Perçue</th>
+					<th class="text-center">Différence</th>
+				</tr>
+				</thead>
+				<tbody id="tbodyTva"/>
+			  </table>
+			</div>
 		</div>
-		<xsl:call-template name="operationEdition">
+		<xsl:call-template name="operationEditionPro">
 			<xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
 		</xsl:call-template>
     </xsl:template>

@@ -27,6 +27,8 @@ class Operation extends SavableObject {
 	public $operationIdOri;
 	
 	public $numeroCompteOri;
+
+	public $noncomptabilisee;
 	
 	public $datecre;
 	

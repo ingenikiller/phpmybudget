@@ -14,7 +14,7 @@ class GestionOperationService extends ServiceStub{
         }
 
         $requete='SELECT operation.operationId, operation.noReleve, operation.dateOperation, operation.libelle, operation.fluxId, operation.modePaiementId, flux.flux, operation.modePaiementId,
-        format(operation.montant,2) as montant, format(operation.montanttva,2) as montanttva,operation.nocompte, operation.verif FROM operation LEFT JOIN flux ON operation.fluxid = flux.fluxid WHERE ';
+        format(operation.montant,2) as montant, format(operation.montanttva,2) as montanttva,operation.nocompte, operation.verif, operation.noncomptabilisee FROM operation LEFT JOIN flux ON operation.fluxid = flux.fluxid WHERE ';
         $requete.=" operation.nocompte='$numeroCompte'";
         if($operationId!=null){
 			$requete.=" AND operationId=$operationId";
@@ -130,6 +130,32 @@ class GestionOperationService extends ServiceStub{
 		$p_contexte->addDataBlockRow($reponse);
 	}
 	
+	public function getTvaMois(ContextExecution $p_contexte){
+		$userid = $p_contexte->getUser()->userId;
+		$numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
+				
+		$requete = "with periode as(
+			select periode, debut, fin from periode
+			where periode <=date_format(curdate(),'%Y-%m')
+			order by periode desc
+			limit 0,12
+			)
+			select periode.periode, 
+				nvl(sum(case when montanttva<0 then montanttva else 0 end),0) as payee,
+				nvl(sum(case when montanttva>=0 then montanttva else 0 end),0) as collectee
+			from periode
+			left join operation on noCompte ='$numeroCompte' and dateOperation between periode.debut and periode.fin and noncomptabilisee=0
+			
+			group by periode.periode
+			order by periode.periode desc";
+		$dyn = new ListDynamicObject('LigneTvaMois');
+		$dyn->request($requete);
+		
+		 
+		$p_contexte->addDataBlockRow($dyn);
+	}
+
+
 }
 
 ?>

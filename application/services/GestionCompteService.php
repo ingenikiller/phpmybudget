@@ -5,7 +5,7 @@ class GestionCompteService extends ServiceStub {
 	public function gesListe(ContextExecution $p_contexte){
 		$userid = $p_contexte->getUser()->userId;
 		$listSolde = new ListDynamicObject('SommeOperation');
-		$listSolde->setAssociatedRequest(null, 'SELECT SUM(montant) AS somme, noCompte FROM operation where noCompte=\'$parent->numeroCompte\'');
+		$listSolde->setAssociatedRequest(null, 'SELECT SUM(montant) AS somme, noCompte FROM operation where noCompte=\'$parent->numeroCompte\' and noncomptabilisee=0');
 
 		$list = new ListDynamicObject('ListeComptes');
 		$list->setAssociatedKey($listSolde);

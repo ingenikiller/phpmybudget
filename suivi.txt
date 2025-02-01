@@ -38,34 +38,3 @@ Paramétrage->
 Periode ->
 
 
-
---
--- Structure de la table `operationrecurrente`
---
-
-CREATE TABLE `operationrecurrente` (
-  `operationRecurrenteId` int(11) NOT NULL,
-  `libelle` varchar(40) NOT NULL,
-  `noCompte` varchar(20) NOT NULL,
-  `fluxId` int(11) NOT NULL,
-  `modePaiementId` int(11) NOT NULL,
-  `montant` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `operationrecurrente`
---
-
-INSERT INTO `operationrecurrente` (`operationRecurrenteId`, `libelle`, `noCompte`, `fluxId`, `modePaiementId`, `montant`) VALUES
-(1, 'EDF', '90063454011', 24, 6, -40.46),
-(2, 'Prédica', '90063454011', 7, 6, -50);
-
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `operationrecurrente`
---
-ALTER TABLE `operationrecurrente`
-  ADD PRIMARY KEY (`operationRecurrenteId`);
