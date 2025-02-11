@@ -280,7 +280,7 @@
                                             <xsl:value-of select="$LBL.MONTANTTVA"/>
                                         </label>
                                         <div class="col-sm-6">
-                                            <input class="form-control obligatoire numerique" size="7" name="montanttva" id="montanttva" onblur="return isDouble(this);" tabindex="60"/>
+                                            <input class="form-control obligatoire numerique" size="7" name="montanttva" id="montanttva" onblur="return isDouble(this);" tabindex="60" value="0"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">

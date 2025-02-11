@@ -9,7 +9,7 @@ class GestionCompteService extends ServiceStub {
 
 		$list = new ListDynamicObject('ListeComptes');
 		$list->setAssociatedKey($listSolde);
-		$requete = "SELECT * FROM comptes WHERE userId=$userid";
+		$requete = "SELECT * FROM comptes WHERE userId=$userid AND ordreaffichage<>0 ORDER BY ordreaffichage ASC";
 		$list->request($requete, 1);
 		$p_contexte->addDataBlockRow($list);
 	}

@@ -9,6 +9,8 @@ class Comptes extends SavableObject {
 	public $libelle;
 	
 	public $solde;
+
+	public $ordreaffichage;
 	
 	public $userId;
 	

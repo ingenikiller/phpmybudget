@@ -114,7 +114,7 @@ function editerOperation(numeroCompte, operationId){
 		$('#noReleve').val('');
 		$('#libelle').val('');
 		$('#montant').val('');
-		$('#montanttva').val('');
+		$('#montanttva').val('0');
 		$('#fluxId').val('');
 		$('#modePaiementId').val('');
 		$('#noncomptabilisee').prop('checked', false);
@@ -231,7 +231,7 @@ function afficheTVA() {
 				row.append($('<td class="text-end"/>').append($('<span class="'+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].payee.replace(',',''))))));
 				row.append($('<td class="text-end"/>').append($('<span class="'+classeMontant+'"/>').text( formatNumerique(Number(tabJson[i].collectee.replace(',',''))))));
 
-				var diff = Number(tabJson[i].collectee.replace(',',''))-Number(tabJson[i].payee.replace(',',''));
+				var diff = Number(tabJson[i].collectee.replace(',',''))+Number(tabJson[i].payee.replace(',',''));
 				row.append($('<td class="text-end"/>').append($('<span class="'+classeMontant+'"/>').text( formatNumerique(diff))));
 				$("#tbodyTva").append(row);
 			}

@@ -61,12 +61,12 @@ function parseListeJson(json) {
 				+'</a>'));
 		} else {
 			row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=operation&amp;service=getpage&amp;numeroCompte='+ numeroCompte +'">'
-						+'<span class="oi oi-list"/>'
-						+'</a>'));
+				+'<span class="oi oi-list"/>'
+				+'</a>'));
 		}
-					row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=operationrecurrente&amp;service=getpage&amp;numeroCompte='+ numeroCompte +'">'
-					+'<span class="oi oi-box"/>'
-					+'</a>'));
+		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=operationrecurrente&amp;service=getpage&amp;numeroCompte='+ numeroCompte +'">'
+			+'<span class="oi oi-box"/>'
+			+'</a>'));
 		row.append($('<td class="text-center"/>').append('<a href="index.php?domaine=statistique&amp;service=menu&amp;numeroCompte='+ numeroCompte +'">'
 					+'<span class="oi oi-bar-chart"/>'
 					+'</a>'));
@@ -125,7 +125,7 @@ function soumettre(form) {
 
 	$.ajax({ 
 		url: "index.php?domaine=compte&service="+$('#service').val(),
-		contentType: 'application/json; charset=utf-8',
+		//contentType: 'application/json; charset=utf-8',
     	dataType: 'text',
 		type: "POST",
 		data: {compte: JSON.stringify(dataJson)}, 
