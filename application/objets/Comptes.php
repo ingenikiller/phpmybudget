@@ -16,6 +16,8 @@ class Comptes extends SavableObject {
 	
 	public $datecre;
 	
+	public $comptepro;
+	
 	public $datemod;
 	
 	public $utimod;

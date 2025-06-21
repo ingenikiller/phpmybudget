@@ -20,8 +20,8 @@ class GestionBudget extends ServiceStub{
 
         $recFlux="select f.fluxid, f.flux
         from flux f
-        join lignebudget l on l.userid =f.userId and l.compteid = f.compteId and l.annee ='$annee' and l.fluxid =f.fluxId 
-        where f.userid='2' and f.compteId ='$numeroCompte' 
+        join lignebudget l on l.userid =f.userId and (l.compteid = f.compteId or l.compteid = f.compteDest) and l.annee ='$annee' and l.fluxid =f.fluxId 
+        where f.userid='2' and (f.compteId ='$numeroCompte' or f.compteDest ='$numeroCompte' )
         order by f.flux";
 
         $anneeBase=$annee-3;
@@ -54,7 +54,7 @@ class GestionBudget extends ServiceStub{
         from flux f
         join operation o on o.noCompte = f.compteId and o.fluxId =f.fluxId and o.dateOperation like '$anneePrecedente%' 
         left join lignebudget l on l.userid =f.userId and l.compteid = f.compteId and l.annee ='$annee' and l.fluxid =f.fluxId
-        where f.userid='$userid' and f.compteId ='$numeroCompte' and l.fluxid is null
+        where f.userid='$userid' and (f.compteId ='$numeroCompte'  or f.compteDest ='$numeroCompte' ) and l.fluxid is null
         group by f.fluxId, f.flux 
         order by f.flux ";
 

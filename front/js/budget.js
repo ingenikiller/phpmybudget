@@ -23,14 +23,7 @@ function afficheListeFluxBudget() {
 		{"annee": annee,
          "numeroCompte": numeroCompte },
 		function(json){
-			/*$('#mois').empty();
-
-			var tabJson = json.racine.ListePeriodeMois.data;
-			
-			for(var i=0; i<tabJson.length; i++) {
-				$('#mois').append(new Option(tabJson[i].periode, tabJson[i].periode, false, false));
-			}*/
-            affichageLignesBudget(json);
+			affichageLignesBudget(json);
 		}
 	);    
 }
@@ -39,8 +32,12 @@ function affichageLignesBudget(json) {
     var tableau=$('#tabListeBudget');
     tableau.empty();
 
-    var total=0;
-    var totalEncours=0;
+    var totalPrevu=0;
+	var bilanAnnee2=0;
+	var bilanAnnee1=0;
+	var bilanAnnee=0;
+	var diff2=0;
+	var anneeEncours=0;
     var tabFlux=json.racine.ListeFlux.data;
 
     var anneeEncours=Number($('#annee').val());
@@ -50,44 +47,52 @@ function affichageLignesBudget(json) {
         var ligne=$('<tr/>');
         ligne.append('<th>'+tabFlux[i].flux+'</th>');
         var fluxId=tabFlux[i].fluxid;
-        //
-        var tabAnnee=tabFlux[i].ListeAnnees.data
-        //ligne.append('<td class="text-end">'+tabAnnee[0].total+'</td>');
-        ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours-2)+"')\">"+tabAnnee[0].total+'</a></td>');
-        //
-        var totalAnneePassee=Number(tabAnnee[1].total);
-        //ligne.append('<td class="text-end">'+tabAnnee[1].total+'</td>');
-        ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours-1)+"')\">"+tabAnnee[1].total+'</a></td>');
-        //
-        var actuelle = Number(tabFlux[i].ListeActuelle.data[0].montant);
-        var diffEncours=totalAnneePassee-actuelle;
         
+		
+		//Annee -2
+        var tabAnnee=tabFlux[i].ListeAnnees.data
+        ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours-2)+"')\">"+tabAnnee[0].total+'</a></td>');
+        bilanAnnee2+=Number(tabAnnee[0].total);
+        
+		
+		var totalAnneePassee=Number(tabAnnee[1].total);
+        
+        ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours-1)+"')\">"+tabAnnee[1].total+'</a></td>');
+        bilanAnnee1+=totalAnneePassee;
+		
+		
+		
+		//diff en cours
+        var actuelle = Number(tabFlux[i].ListeActuelle.data[0].montant);
+        var diffEncours=actuelle-totalAnneePassee;
+        bilanAnnee+=actuelle;
         var classeMontant= getClasseMontant(diffEncours);
         ligne.append('<td class="text-end '+classeMontant+'">'+(diffEncours).toFixed(2)+'</td>');
-        totalEncours+=diffEncours;
+        bilanAnnee+=diffEncours;
         
-        //
+		
+		
+        //prévu
         ligne.append('<td class="text-end"><a href="#" onclick="editerLigne('+(tabFlux[i].ListeActuelle.data[0].lignebudgetid)+')" >'+(actuelle).toFixed(2)+'</a></td>');
-
-        //
         var totalAnneeEnCours=Number(tabAnnee[2].total);
-        
-        //
+		totalPrevu+=actuelle;
+		
+        //diff 2
         var classeMontant= getClasseMontantInverse(totalAnneeEnCours-actuelle);
         ligne.append('<td class="text-end '+classeMontant+'">'+(totalAnneeEnCours-actuelle).toFixed(2)+'</td>');
-        //
-        //ligne.append('<td class="text-end">'+totalAnneeEnCours.toFixed(2)+'</td>');
-        ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours)+"')\">"+totalAnneeEnCours.toFixed(2)+'</a></td>');
-        total+=totalAnneeEnCours-actuelle;
+		diff2+=(totalAnneeEnCours-actuelle);
         
-
+		//Année en cours
+        ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours)+"')\">"+totalAnneeEnCours.toFixed(2)+'</a></td>');
+        anneeEncours+=totalAnneeEnCours;
+        
         tableau.append(ligne);
     }
 
     var pied=$('<tr/>');
-    pied.append('<th>Total</th><td colspan=2/><td class="text-end">'+totalEncours.toFixed(2)+'</td><td/>');
-    pied.append('<td class="text-end">'+total.toFixed(2)+'</td>');
-    pied.append('<td/>');
+    pied.append('<th>Total</th><td class="text-end">'+bilanAnnee2.toFixed(2)+'</td><td class="text-end">'+bilanAnnee1.toFixed(2)+'</td><td class="text-end">'+bilanAnnee.toFixed(2)+'</td>');
+    pied.append('<td class="text-end">'+totalPrevu.toFixed(2)+'</td>');
+    pied.append('<td class="text-end" >'+diff2.toFixed(2)+'</td><td class="text-end">'+anneeEncours+'</td>');
     tableau.append(pied);
 }
 
@@ -97,14 +102,14 @@ function getClasseMontant(montant) {
 	if(montant==0){
 		classeMontant='';
 	}else {
-		if(montant<0){
-			if(montant<-300){
+		if(montant>0){
+			if(montant>300){
 				classeMontant='positif';
 			} else {
 				classeMontant='positifproche';
 			}
 		} else {
-			if(montant<300){
+			if(montant>-300){
 				classeMontant='negatifproche';
 			} else {
 				classeMontant='negatif';
@@ -115,6 +120,10 @@ function getClasseMontant(montant) {
 	return classeMontant;
 }
 
+/**
+ * Afichage de couleur suivant le montant
+ *
+ */
 function getClasseMontantInverse(montant) {
 	var classeMontant= '';
 	
