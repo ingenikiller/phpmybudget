@@ -35,7 +35,7 @@
 						</label>
 						<input type="text" id="solde" name="solde" class="form-control numerique" readonly="readonly" size="8"/>
 					</div>
-					<div class="row mb-3">
+					<div class="mb-3">
 						<label for="recDate" class="form-label">
 							<xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
 						</label>
@@ -45,7 +45,7 @@
 						<label for="recFlux" class="form-label">
 							<xsl:value-of select="$LBL.FLUX"/>
 						</label>
-						<select id="recFlux" multiple="multiple"/>
+						<select id="recFlux" class="form-select" data-clearable="true" data-searchable="true" data-creatable-text="Add &lt;b&gt;{value}&lt;/b&gt;..."/>
 					</div>
 					<div class="mb-3">
 						<label for="recMontant" class="form-label">

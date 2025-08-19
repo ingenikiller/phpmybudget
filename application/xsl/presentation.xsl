@@ -79,10 +79,15 @@
 			<script src="front/js/core_ajax.js">&#160;</script>
 			
 			<!-- plugins -->
-			<!--link href="front/css/jquery.multiselect.css" rel="stylesheet" type="text/css"/-->
-			<!--script src="front/js/jquery.multiselect.js">&#160;</script-->
-			<script src="front/js/bootstrap-multiselect.js">&#160;</script>
-			<link href="front/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
+			<!-- 
+				combo search
+				https://use-bootstrap-select.js.org/#/
+			-->
+			<link href="front/css/use-bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
+			<script src="front/js/use-bootstrap-select.min.js">&#160;</script>
+			
+
+
 
 			<link href="front/css/bootstrap-force.css" rel="stylesheet" type="text/css"/>
 			<link href="front/css/phpmybudget.css" rel="stylesheet" type="text/css"/>

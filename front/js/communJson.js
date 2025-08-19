@@ -96,11 +96,12 @@ function afficheFluxSelectMulti(nomChamp, compte, chaineParams, valeur) {
 			
 			var tabJson = resultat.racine.ListeFlux.data;
 			var nb=tabJson.length;
+			$('#'+nomChamp).append(new Option("", "", false, false));
 			for(var i=0; i<nb; i++) {
 				$('#'+nomChamp).append(new Option(tabJson[i].flux, tabJson[i].fluxId, false, false));
 			}
 			
-			$('#'+nomChamp).multiselect(
+			/*$('#'+nomChamp).multiselect(
 				{
 					includeSelectAllOption: true,
 					enableFiltering: true,
@@ -110,7 +111,8 @@ function afficheFluxSelectMulti(nomChamp, compte, chaineParams, valeur) {
 					widthSynchronizationMode: 'always',
 					buttonWidth: '175px'
 				}
-			);
+			);*/
+			new UseBootstrapSelect(document.getElementById('recFlux'));
 
 			/*{
 				columns: 1,

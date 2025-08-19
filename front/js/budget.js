@@ -37,7 +37,7 @@ function affichageLignesBudget(json) {
 	var bilanAnnee1=0;
 	var bilanAnnee=0;
 	var diff2=0;
-	var anneeEncours=0;
+	var totalAnneeEncours=0;
     var tabFlux=json.racine.ListeFlux.data;
 
     var anneeEncours=Number($('#annee').val());
@@ -84,7 +84,7 @@ function affichageLignesBudget(json) {
         
 		//Année en cours
         ligne.append("<td class=\"text-end\"><a href=\"javascript:afficheDetail('numeroCompte="+numeroCompte+"&amp;mode=annee&amp;recFlux="+fluxId+"&amp;recDate="+(anneeEncours)+"')\">"+totalAnneeEnCours.toFixed(2)+'</a></td>');
-        anneeEncours+=totalAnneeEnCours;
+        totalAnneeEncours+=totalAnneeEnCours;
         
         tableau.append(ligne);
     }
@@ -92,7 +92,7 @@ function affichageLignesBudget(json) {
     var pied=$('<tr/>');
     pied.append('<th>Total</th><td class="text-end">'+bilanAnnee2.toFixed(2)+'</td><td class="text-end">'+bilanAnnee1.toFixed(2)+'</td><td class="text-end">'+bilanAnnee.toFixed(2)+'</td>');
     pied.append('<td class="text-end">'+totalPrevu.toFixed(2)+'</td>');
-    pied.append('<td class="text-end" >'+diff2.toFixed(2)+'</td><td class="text-end">'+anneeEncours+'</td>');
+    pied.append('<td class="text-end" >'+diff2.toFixed(2)+'</td><td class="text-end">'+totalAnneeEncours.toFixed(2)+'</td>');
     tableau.append(pied);
 }
 
