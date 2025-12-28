@@ -48,6 +48,7 @@ function soumettre(form) {
 	dataJson.fluxId= form.fluxId.value;
 	dataJson.modePaiementId= form.modePaiementId.value;
 	dataJson.montant= form.montant.value;
+	dataJson.noncomptabilisee= $('#noncomptabilisee').is(':checked')?'1':'0';
 	
 	var service = form.service.value;
 	$.ajax({
@@ -91,8 +92,11 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
 		function(json) {
 			compte=json.racine.Comptes.solde;
 			somme=json.racine.SommeOperations.data[0].total;
+			previ=json.racine.SommeOperationsNonComptabilisees.data[0].total;
 			total=Number(compte)+Number(somme);
+			previsionel=total+Number(previ); 
 			$('#'+nomChampSolde).val(total.toFixed(2));
+			$('#soldeprevisionnel').val(previsionel.toFixed(2));
 		}
 	);
 }

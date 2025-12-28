@@ -11,7 +11,7 @@ require 'config/bdd.php';
 
 define('CHEMIN_LOGERREUR', './logs/');
 
-define('LIGNE_PAR_PAGE', 30);
+define('LIGNE_PAR_PAGE', 40);
 //define('RACINE_DATA', 'data/projets');
 
 //header('Access-Control-Allow-Origin: *');

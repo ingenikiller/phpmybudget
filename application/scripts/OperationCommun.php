@@ -75,6 +75,7 @@ class OperationCommun {
                     $l_operation->verif = $p_operation->verif;
                     $l_operation->operationIdOri = $p_operation->operationId;
                     $l_operation->numeroCompteOri =  $p_operation->noCompte;
+                    $l_operation->noncomptabilisee = $p_operation->noncomptabilisee;
                     $l_operation->create();
                 } else {
                     //operation existante
@@ -88,6 +89,7 @@ class OperationCommun {
 	                    $l_operation->modePaiementId = $p_operation->modePaiementId;
 	                    $l_operation->montant = - $p_operation->montant;
 	                    $l_operation->verif = $p_operation->verif;
+                        $l_operation->noncomptabilisee = $p_operation->noncomptabilisee;
 	                    $l_operation->update();
                     } else {
                     	//sinon, on modifie le numéro de compte
@@ -98,14 +100,15 @@ class OperationCommun {
 	                    $l_operation->noCompte=$l_flux->compteDest;
 	                    $l_operation->montant = - $p_operation->montant;
 	                    $l_operation->verif = $p_operation->verif;
+                        $l_operation->noncomptabilisee = $p_operation->noncomptabilisee;
 	                    $l_operation->update();
                     }
                 }
             } else {
                 if($l_flux->compteDest == $p_operation->noCompte){
                     //mise à jour de l'opération d'origine
-                    $listOpeRec = new ListObject();
-                    $listOpe->request('Operation', "noCompte='$l_flux->compteDest' AND noCompte='$p_operation->numeroCompteOri' AND operationId=$p_operation->operationIdOri");
+                    $listOpeRec = new ListObject('ListeOperations');
+                    $listOpeRec->request('Operation', "noCompte='$l_flux->compteDest' AND noCompte='$p_operation->numeroCompteOri' AND operationId=$p_operation->operationIdOri");
                     $tab = $listOpeRec->getData();
                     $logger->debug('Total ope '.count($tab));
                     if($tab==null || count($tab)==0) {
@@ -114,6 +117,7 @@ class OperationCommun {
                         $l_operation->modePaiementId = $p_operation->modePaiementId;
                         $l_operation->montant = - $p_operation->montant;
                         $l_operation->verif = $p_operation->verif;
+                        $l_operation->noncomptabilisee = $p_operation->noncomptabilisee;
                         $l_operation->update();
                     }
                 } else {

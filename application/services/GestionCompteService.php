@@ -54,6 +54,7 @@ class GestionCompteService extends ServiceStub {
 		$compte->load();
 		$p_contexte->addDataBlockRow($compte);
 		$p_contexte->addDataBlockRow(ComptesCommun::calculSommeOperations($numeroCompte));
+		$p_contexte->addDataBlockRow(ComptesCommun::calculSommeOperationsNonComptabilisees($numeroCompte));
 	}
 }
 ?>

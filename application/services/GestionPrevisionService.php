@@ -60,7 +60,7 @@ class GestionPrevisionService extends ServiceStub {
 	 */
 	private function getFluxGroupe($type, $annee, $typeFlux, $clausePinel, $numeroCompte) {
 		$requeteOperation='select distinct p.periode ,  sum(operation.montant) as total from periode p
-		left join operation on operation.dateOperation between p.debut and p.fin and nocompte=\'$parent->noCompte\' and fluxid=\'$parent->fluxId\'
+		left join operation on operation.dateOperation between p.debut and p.fin and nocompte=\'$parent->noCompte\' and fluxid=\'$parent->fluxId\' and operation.noncomptabilisee=\'0\'
 		 where annee=\''.$annee.'\' 
 		 group by p.periode';
 
@@ -202,6 +202,7 @@ class GestionPrevisionService extends ServiceStub {
 			AND nocompte='$numeroCompte' 
 			AND dateOperation LIKE concat('$mois','%') 
 			AND flux.fluxid=operation.fluxid AND depense='O' 
+			AND noncomptabilisee='0'
 			AND EXISTS(
 				SELECT 1 
 				FROM prevision 

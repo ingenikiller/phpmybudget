@@ -213,30 +213,7 @@ abstract class SavableObject extends Objects {
     }
 
     /**
-     *
-     * @param DataRequest $request 
-     * @deprecated
-     */
-    /*public function fieldObject(DataRequest $request, $prefix='', $separator='', $indice='') {
-        $reflect = new ReflectionObject($this);
-        //chaque champs de la classe
-        foreach ($reflect->getProperties(ReflectionProperty::IS_PUBLIC) as $prop) {
-            //if (!stripos($this->getPrimaryKey(), $prop->getName())) {
-                $requestElement = $request->getDataObject($prefix . $prop->getName() . $separator . $indice);
-                //si le champs est 
-
-                if ($requestElement != null) {
-                    $this->logger->debug('champs:' . $prop->getName() . '->' . $requestElement->value);
-                    $prop->setValue($this, $requestElement->value);
-                } else {
-                    $this->logger->debug('champs:' . $prefix. $prop->getName() . ' vide');
-                }
-            //}
-        }
-    }*/
-
-    /**
-     * 
+     * @param DataRequest $objet 
      */
     public function fieldObjectJson($objet) {
         $this->logger->debug('Repmplissage objet');

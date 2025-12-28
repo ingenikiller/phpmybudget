@@ -65,7 +65,7 @@ function affichageLignesBudget(json) {
 		//diff en cours
         var actuelle = Number(tabFlux[i].ListeActuelle.data[0].montant);
         var diffEncours=actuelle-totalAnneePassee;
-        bilanAnnee+=actuelle;
+        //bilanAnnee+=actuelle;
         var classeMontant= getClasseMontant(diffEncours);
         ligne.append('<td class="text-end '+classeMontant+'">'+(diffEncours).toFixed(2)+'</td>');
         bilanAnnee+=diffEncours;

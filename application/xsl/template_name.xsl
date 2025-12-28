@@ -162,21 +162,29 @@
                                             <input class="form-control obligatoire numerique" size="7" name="montant" id="montant" onblur="return isDouble(this);" tabindex="60"/>
                                         </div>
                                     </div>
-									<!--xsl:choose>
-										<xsl:when test="$NUMEROCOMPTE='23135361844'">
+									<xsl:choose>
+										<xsl:when test="/root/data/Comptes/comptepro='1'">
 											<div class="form-group row">
-												<label for="montanttva" class="col-sm-6 form-control-label">
-													<xsl:value-of select="$LBL.MONTANTTVA"/>
-												</label>
-												<div class="col-sm-6">
-													<input class="form-control obligatoire numerique" size="7" name="montanttva" id="montanttva" onblur="return isDouble(this);" tabindex="60"/>
-												</div>
-											</div>
+                                                <label for="montanttva" class="col-sm-6 form-control-label">
+                                                    <xsl:value-of select="$LBL.MONTANTTVA"/>
+                                                </label>
+                                                <div class="col-sm-6">
+                                                    <input class="form-control obligatoire numerique" size="7" name="montanttva" id="montanttva" onblur="return isDouble(this);" tabindex="60" value="0"/>
+                                                </div>
+                                            </div>
 										</xsl:when>
 										<xsl:otherwise>
 											<input size="7" name="montanttva" id="montanttva" type="hidden" tabindex="60"/>
 										</xsl:otherwise>
-									</xsl:choose-->
+									</xsl:choose>
+                                    <div class="form-group row">
+                                        <label for="noncomptabilisee" class="col-sm-6 form-control-label">
+                                            <xsl:value-of select="$LBL.NONCOMPTABILISEE"/>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <input class="form-check-input" type="checkbox" size="7" name="noncomptabilisee" id="noncomptabilisee" tabindex="60"/>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
 										<button type="submit" class="btn btn-primary">Valider</button>
 										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

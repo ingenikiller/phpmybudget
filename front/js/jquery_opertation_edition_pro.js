@@ -96,8 +96,11 @@ function getSoldeCompte(numeroCompte, nomChampSolde){
 		function(json) {
 			compte=json.racine.Comptes.solde;
 			somme=json.racine.SommeOperations.data[0].total;
+			previ=json.racine.SommeOperationsNonComptabilisees.data[0].total;
 			total=Number(compte)+Number(somme);
+			previsionel=total+Number(previ); 
 			$('#'+nomChampSolde).val(total.toFixed(2));
+			$('#soldeprevisionnel').val(previsionel.toFixed(2));
 		}
 	);
 }

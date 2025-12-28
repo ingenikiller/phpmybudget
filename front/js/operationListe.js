@@ -89,6 +89,7 @@ function editerOperation(numeroCompte, operationId){
 				$('#noReleve').val(operation.noReleve);
 				$('#libelle').val(operation.libelle);
 				$('#montant').val(operation.montant.replace(',',''));
+				$('#montanttva').val(operation.montanttva.replace(',',''));
 				$('#fluxId').val(operation.fluxId);
 				if($('#fluxId').find(':selected').attr('compteid') == numeroCompte) {
 					$('#fluxId').prop('disabled', false);
@@ -97,7 +98,7 @@ function editerOperation(numeroCompte, operationId){
 				}
 				$('#modePaiementId').val(operation.modePaiementId);
 				$('#dateOperation').val(operation.dateOperation);
-
+				$('#noncomptabilisee').prop('checked', operation.noncomptabilisee==1?true:false);
 				$("div#divOpeRec").hide();
 				var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
 					backdrop: 'static',
@@ -113,8 +114,10 @@ function editerOperation(numeroCompte, operationId){
 		$('#noReleve').val('');
 		$('#libelle').val('');
 		$('#montant').val('');
+		$('#montanttva').val('0');
 		$('#fluxId').val('');
 		$('#modePaiementId').val('');
+		$('#noncomptabilisee').prop('checked', false);
 		$("div#divOpeRec").show();
 		var myModal = new bootstrap.Modal(document.getElementById('boiteOperation'), {
 			backdrop: 'static',
@@ -181,7 +184,10 @@ function parseListeJson(json) {
 	$('#max_page').val(nbpage);
 	
 	for(var i=0; i<tabJson.length; i++) {
-		var row = $('<tr typetr="operation"/>');
+		
+		var style=tabJson[i].noncomptabilisee==1?'style="background-color:yellow"':'';
+		
+		var row = $('<tr typetr="operation" '+style+'/>');
 		//row.append($('<td class="text-center"/>').text(tabJson[i].noReleve));
 		row.append($('<td class="text-center"/>').text(tabJson[i].dateOperation));
 		row.append($('<td/>').text(tabJson[i].libelle));
