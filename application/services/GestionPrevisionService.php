@@ -274,6 +274,5 @@ class GestionPrevisionService extends ServiceStub {
 		$prevision->update();
 		$p_contexte->ajoutReponseAjaxOK();
     }
-	
 }
 ?>

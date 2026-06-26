@@ -9,5 +9,8 @@
     },
 	"require": {
         "monolog/monolog": "^3.9"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1"
     }
 }

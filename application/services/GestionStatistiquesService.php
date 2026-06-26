@@ -338,7 +338,7 @@ class GestionStatistiquesService extends ServiceStub {
 		$requeteMontantFils='SELECT sum(montant) AS total, fluxId
 						FROM operation 
 						WHERE operation.nocompte=\''.$numeroCompte.'\' and fluxId=$parent->fluxId
-						AND dateOperation  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\' and fluxId IN ('.$fluxAjax.')';
+						AND dateOperation  between \''.$premiereAnnee.'\' and \''.$derniereAnnee.'\''; // and fluxId IN ('.$fluxAjax.')';
 		$montantFluxFils = new ListDynamicObject('MontantFluxFils');
 		$montantFluxFils->setAssociatedRequest(null, $requeteMontantFils);
 		

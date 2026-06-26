@@ -120,7 +120,7 @@ class PageDescription {
                 $tab = $p_noeud->addChild($key);
                 $this->parseData($tab, $value);
             } else {
-                $p_noeud->addChild($key, htmlspecialchars($value));
+                $p_noeud->addChild($key, htmlspecialchars($value.""));
             }
         }
     }

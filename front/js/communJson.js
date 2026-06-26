@@ -57,7 +57,7 @@ function getFlux(params, fonctionSuccess){
 	parse le tableau Json et génère le tableau graphique
  *********************************************************/
 function afficheFluxSelect(nomChamp, compte, chaineParams, valeur) {
-	var params = 'comptePrincipal='+compte+'&'+chaineParams;
+	var params = (compte!=''?'comptePrincipal='+compte:'')+'&'+chaineParams;
 	$.ajax({
 		url: "index.php?domaine=flux&service=getliste",
 		dataType: 'json',
