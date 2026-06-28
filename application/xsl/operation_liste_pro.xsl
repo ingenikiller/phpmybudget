@@ -115,7 +115,7 @@
 			  </table>
 			</div>
 		</div>
-		<xsl:call-template name="operationEditionPro">
+		<xsl:call-template name="operationEdition">
 			<xsl:with-param name="numeroCompte" select="$NUMEROCOMPTE"/>
 		</xsl:call-template>
     </xsl:template>

@@ -134,7 +134,7 @@
                                             <xsl:value-of select="$LBL.FLUX"/>
                                         </label>
                                         <div class="col-sm-6">
-                                            <select class="form-select form-select-sm obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40">&#160;</select>
+                                            <select class="form-select form-select-sm obligatoire" name="fluxId" id="fluxId" onblur="return getModeReglementDefaut(this, this.form.modePaiementId)" tabindex="40" required="">&#160;</select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -155,12 +155,18 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="montant" class="col-sm-6 form-control-label">
+                                        <!--label for="montant" class="col-sm-6 form-control-label">
                                             <xsl:value-of select="$LBL.MONTANT"/>
                                         </label>
                                         <div class="col-sm-6">
                                             <input class="form-control obligatoire numerique" size="7" name="montant" id="montant" onblur="return isDouble(this);" tabindex="60"/>
-                                        </div>
+                                        </div-->
+                                        <xsl:call-template name="ChampMontantHoryzontal">
+                                            <xsl:with-param name="nomChamp" select="'montant'"/>
+                                            <xsl:with-param name="libelle" select="$LBL.MONTANT"/>
+                                            <xsl:with-param name="obligatoire" select="'O'"/>
+                                            <xsl:with-param name="tabindex" select="'60'"/>
+                                        </xsl:call-template>
                                     </div>
 									<xsl:choose>
 										<xsl:when test="/root/data/Comptes/comptepro='1'">
@@ -208,7 +214,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-                        <form method="POST" action="#" onsubmit="return soumettre(this);" name="operation" id="operation">
+                        <form method="POST" action="#" onsubmit="return soumettre(this);" name="operation" id="operation" class="needs-validation">
                             <input type="hidden" name="service" id="service"/>
                             <input type="hidden" id="noCompte" name="noCompte" value="{$numeroCompte}"/>
                             <input type="hidden" name="operationId" id="operationId" value=""/>
@@ -495,4 +501,49 @@
 			</div>
 		</div>
     </xsl:template>
+
+
+    <xsl:template name="ChampMontant">
+        <xsl:param name="nomChamp"/>
+        <xsl:param name="libelle"/>
+        <xsl:param name="obligatoire"/>
+
+        <label for="$nomChamp" class="form-label">
+            <xsl:value-of select="$libelle"/>
+        </label>
+        <div class="input-group has-validation">
+            <input type="text" id="{$nomChamp}" name="{$nomChamp}" class="form-control numerique" size="10">
+                <xsl:attribute name="pattern">
+                    <xsl:text disable-output-escaping="yes">-?\d+(\.\d{2})?</xsl:text>
+                </xsl:attribute>
+                <xsl:if test="$obligatoire='O'">
+                    <xsl:attribute name="required"/>
+                </xsl:if>
+            </input>
+            <div class="invalid-feedback">Montant invalide</div>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="ChampMontantHoryzontal">
+        <xsl:param name="nomChamp"/>
+        <xsl:param name="libelle"/>
+        <xsl:param name="obligatoire"/>
+        <xsl:param name="tabindex"/>
+
+        <label for="$nomChamp" class="col-sm-6 form-label">
+            <xsl:value-of select="$libelle"/>
+        </label>
+        <div class="col-sm-6">
+            <input type="text" id="{$nomChamp}" name="{$nomChamp}" class="form-control numerique" size="10" tabindex="{$tabindex}">
+                <xsl:attribute name="pattern">
+                    <xsl:text disable-output-escaping="yes">-?\d+(\.\d{2})?</xsl:text>
+                </xsl:attribute>
+                <xsl:if test="$obligatoire='O'">
+                    <xsl:attribute name="required"/>
+                </xsl:if>
+            </input>
+            <div class="invalid-feedback">Montant invalide</div>
+        </div>
+    </xsl:template>
+
 </xsl:stylesheet>

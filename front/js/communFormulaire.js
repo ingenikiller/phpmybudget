@@ -1,7 +1,29 @@
+(function () {
+  'use strict'
 
-var ERRINTEGER = "Le champ saisi comporte des caractères non numériques, veuillez le ressaisir SVP";
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+	console.log('go');
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
 
-/* Contrôle sur le format chiffre
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+
+
+
+var ERRINTEGER = "Le champ saisi comporte des caractï¿½res non numï¿½riques, veuillez le ressaisir SVP";
+
+/* Contrï¿½le sur le format chiffre
 */
 function isDigit (c) 
 {
@@ -9,7 +31,7 @@ function isDigit (c)
 }
 
 /*
- Contrôle sur le format double avec possiblité de saisir un double négatif
+ Contrï¿½le sur le format double avec possiblitï¿½ de saisir un double nï¿½gatif
 */
 var errDouble = "Le champ saisi comporte des caract&egrave;res non num&eacute;riques, veuillez le ressaisir SVP";
 function isDouble (s)
@@ -42,3 +64,12 @@ function validForm(pForm) {
 	return true;
 }
 
+function controleMontant(element) {
+	var value = $(element).val();
+	console.log ('valeur:'+value);
+	if(value!='' && !$.isNumeric(value)) {
+		$(element).addClass('erreur');
+	} else {
+		$(element).removeClass('erreur');
+	}
+}

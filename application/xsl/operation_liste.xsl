@@ -6,7 +6,8 @@
         <xsl:value-of select="/root/request/recNoReleve"/>
     </xsl:param>
     <xsl:template name="js.module.sheet">
-        <script src="front/js/operationListe.js">&#160;</script>
+        <script src="front/js/communFormulaire.js">&#160;</script>
+		<script src="front/js/operationListe.js">&#160;</script>
 		<script src="front/js/jquery_opertation_edition.js">&#160;</script>
     </xsl:template>
     <xsl:template name="Contenu">
@@ -14,7 +15,7 @@
 		<div class="row">
 			<input type="hidden" id="retour" name="retour"/>
 			<aside class="col formulaire">
-				<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche">
+				<form method="post" action="#" onsubmit="return rechercherOperations(this);" name="recherche" id="recherche" class="needs-validation" >
 					<xsl:call-template name="formulaireJson"/>
 					<input type="hidden" id="numeroCompte" name="numeroCompte" value="{$NUMEROCOMPTE}"/>
 					<br/>
@@ -54,10 +55,21 @@
 						<select id="recFlux" class="form-select" multiple="true" data-clearable="true" data-searchable="true" data-creatable-text="Add &lt;b&gt;{value}&lt;/b&gt;..."/>
 					</div>
 					<div class="mb-3">
-						<label for="recMontant" class="form-label">
+						<!--label for="recMontant" class="form-label">
 							<xsl:value-of select="$LBL.MONTANT"/>
 						</label>
-						<input type="text" id="recMontant" name="recMontant" class="form-control numerique" size="8"/>
+						<div class="input-group has-validation">
+							<input type="text" id="recMontant" name="recMontant" class="form-control numerique" size="10">
+								<xsl:attribute name="pattern">
+									<xsl:text disable-output-escaping="yes">-?\d+(\.\d{2})?</xsl:text>
+								</xsl:attribute>
+							</input>
+							<div class="invalid-feedback">Montant invalide</div>
+						</div-->
+						<xsl:call-template name="ChampMontant">
+							<xsl:with-param name="nomChamp" select="'recMontant'"/>
+							<xsl:with-param name="libelle" select="$LBL.MONTANT"/>
+						</xsl:call-template>
 					</div>
 					<br/>
 				</form>
