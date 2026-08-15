@@ -42,16 +42,12 @@ function parseListeJson(json) {
 	
 	var i=0;
 	for(i=0; i<nb; i++) {
+		var numeroCompte = tabJson[i].numeroCompte;
 		var row = $('<tr typetr="compte"/>');
 		row.append($("<td/>").text(tabJson[i].numeroCompte));
 		row.append($("<td/>").text(tabJson[i].libelle));
 		row.append($('<td class="text-end"/>').text(formatMonetaire(tabJson[i].solde)));
-		var solde = tabJson[i].solde;
-		var sommeOpe  = tabJson[i].SommeOperation.data[0].somme;
-		var calcul = Number(solde) + Number(sommeOpe);
-		var numeroCompte = tabJson[i].numeroCompte;
-		row.append($('<td class="text-end"/>').text(formatMonetaire(calcul)));
-		
+		row.append($('<td class="text-end"/>').text(formatMonetaire(tabJson[i].encours)));
 		row.append($('<td class="text-center"/>').append('<a href="#" onclick="editerCompte(\''+ numeroCompte +'\')"><span class="oi oi-pencil"/></a>'));
 		
 		//

@@ -17,7 +17,9 @@ require 'config/bdd.php';
 define('CHEMIN_LOGERREUR', './logs/');
 define('LIGNE_PAR_PAGE', 40);
 define('RACINE_DATA', 'data/projets');
-
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Authorization, Content-Type, X-Requested-With");
+header("Access-Control-Allow-Headers: Authorization, Content-Type, X-Requested-With");
 $pageControl = new PageControl(TRUE);
 $pageControl->process();
 $fin = microtime(true);

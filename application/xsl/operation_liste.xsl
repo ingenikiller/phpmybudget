@@ -43,6 +43,12 @@
 						<input type="text" id="soldeprevisionnel" name="soldeprevisionnel" class="form-control numerique" readonly="readonly" size="8"/>
 					</div>
 					<div class="mb-3">
+						<label for="recLibelle" class="form-label">
+							<xsl:value-of select="$LBL.LIBELLE"/>
+						</label>
+						<input type="text" id="recLibelle" name="recLibelle" class="form-control" size="30"/>
+					</div>
+					<div class="mb-3">
 						<label for="recDate" class="form-label">
 							<xsl:value-of select="$LBL.DATE"/> - (YYYY-MM-DD)
 						</label>

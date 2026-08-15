@@ -29,6 +29,12 @@ class GestionOperationService extends ServiceStub{
         if($operationId!=null){
 			$requete.=" AND operationId=$operationId";
         }
+
+		$recLibelle = $p_contexte->m_dataRequest->getData('recLibelle');
+		if($recLibelle	!=null){
+			$requete.=" AND operation.libelle like concat('$recLibelle','%')";
+        }
+
         $recFlux = $p_contexte->m_dataRequest->getData('recFlux');
 		if($recFlux!=null){
 			$requete.=" AND (operation.fluxId IN ($recFlux) OR flux.fluxMaitreId IN ($recFlux))";

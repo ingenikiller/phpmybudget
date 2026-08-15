@@ -145,6 +145,11 @@ function listerObjects(){
 	$('#numeroPage').val($.isNumeric($('#numeroPage').val())? $('#numeroPage').val():1);
 
 	var params = "numeroCompte="+$('#numeroCompte').val()+'&numeroPage='+$('#numeroPage').val();
+	
+	if($('#recLibelle').val()!='' && $('#recLibelle').val()!=null) {
+		params+="&recLibelle="+$('#recLibelle').val();
+	}
+	
 	if($('#recFlux').val()!='' && $('#recFlux').val()!=null) {
 		params+="&recFlux="+$('#recFlux').val();
 	}

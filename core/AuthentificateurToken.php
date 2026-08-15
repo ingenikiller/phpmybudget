@@ -22,13 +22,14 @@ class AuthentificateurToken {
 		
 		//suppression des token expirés
 		TokenCommun::suppToken();
-		
+		$this->logger->debug('appel token authenticate');
 		//récupération du token
 		$token = new Tokensession();
 		$token->token = $tokenid;
 		$token->load();
 		
 		if( $token->userid !=null ) {
+			$_SESSION['userid']=$token->userid;
 			//mise à jour de la date
 			$token->startdate='now()';
 			//sauvegarde
@@ -36,6 +37,7 @@ class AuthentificateurToken {
 			//récupération du user
 			$user = new Users();
 			$user->userId = $token->userid;
+			
 			$user->load();
 			$p_contexte->setUser($user);
 		} else {

@@ -60,7 +60,7 @@ abstract class SavableObject extends Objects {
 
         foreach ($primaryKey as $value) {
             $property = $reflect->getProperty($value);
-            $tab[] = $value . '=' . self::$_pdo->quote($property->getValue($this)); //'=\'' . $property->getValue($this) . '\'';
+            $tab[] = $value . '=' . self::$_pdo->quote($property->getValue($this).''); //'=\'' . $property->getValue($this) . '\'';
         }
         return $tab;
     }

@@ -23,7 +23,8 @@ class DataRequest {
     }
 
     public function getData($p_key) {
-        if (isset($this->m_data[$p_key])) {
+        //$this->logger->debug("cle recherchée getdata: $p_key");
+		if (isset($this->m_data[$p_key])) {
             return $this->m_data[$p_key];
         } else {
             return null;
@@ -31,7 +32,8 @@ class DataRequest {
     }
 
     public function getDataJson($p_key) {
-        if (isset($this->m_data[$p_key])) {
+        //$this->logger->debug(print_r($this->m_data, true));
+		if (isset($this->m_data[$p_key])) {
             $this->logger->debug("cle trouvée: $p_key");
             return json_decode(htmlspecialchars_decode($this->m_data[$p_key]),true);
         } else {
