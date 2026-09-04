@@ -47,6 +47,7 @@
 			<service name="defaut" classe="GestionPeriodeService" methode="Fictive" isPrivee="true" xsl="xsl/periode_liste.xsl"/>
 			<service name="create" classe="GestionPeriodeService" methode="create" render="json" isPrivee="true"/>
 			<service name="getliste" classe="GestionPeriodeService" methode="getListe" render="json" isPrivee="true"/>
+			<service name="getlisteannee" classe="GestionPeriodeService" methode="getListeAnnee" render="json" isPrivee="true"/>
 			<service name="getlistemois" classe="GestionPeriodeService" methode="getListeMois" render="json" isPrivee="true"/>
 		</domaine>
 		<domaine name="previsionentete">
