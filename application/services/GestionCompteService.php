@@ -12,9 +12,9 @@ class GestionCompteService extends ServiceStub {
 
 	public function getListe(ContextExecution $p_contexte){
 		$userid = $p_contexte->getUser()->userId;
-		
+		$numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
 		$list = new ListDynamicObject('ListeComptes');
-		$requete = "with req as ( SELECT nocompte, SUM(montant) as total FROM operation where noncomptabilisee=0 group by nocompte ) SELECT comptes.*, solde + req.total as encours FROM comptes join req on req.noCompte=comptes.numerocompte WHERE userId=$userid AND ordreaffichage<>0 ORDER BY ordreaffichage ASC";
+		$requete = "with req as ( SELECT nocompte, SUM(montant) as total FROM operation where noncomptabilisee=0 group by nocompte ) SELECT comptes.*, solde + req.total as encours FROM comptes join req on req.noCompte=comptes.numerocompte WHERE userId=$userid ".($numeroCompte!=null?" AND nocompte='$numeroCompte'":'')."AND ordreaffichage<>0 ORDER BY ordreaffichage ASC";
 		$list->request($requete, 1);
 		$p_contexte->addDataBlockRow($list);
 	}

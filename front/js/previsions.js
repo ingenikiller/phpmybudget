@@ -291,7 +291,7 @@ function enregistreListeLignes(form){
 		//contentType: 'application/json; charset=utf-8',
     	dataType: 'text',
 		data: { 
-			operationRecurrente: JSON.stringify(dataJson)
+			previsions: JSON.stringify(dataJson)
 		}
 	});
 	$("div#boiteListeEntete").modal('hide');

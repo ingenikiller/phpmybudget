@@ -92,6 +92,38 @@ class GestionPrevisionService extends ServiceStub {
 		$listeFlux->request($this->getRequeteFlux($typeFlux,$clausePinel, $annee,$numeroCompte));
 		return $listeFlux;
 	}
+	
+	public function getFluxType(ContextExecution $p_contexte) {
+		$annee=$p_contexte->m_dataRequest->getData('periode');
+        $flagPinel=$p_contexte->m_dataRequest->getData('flagPinel');
+        
+        $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
+        $type = $p_contexte->m_dataRequest->getData('type');
+		
+		$requeteOperation='select distinct p.periode ,  sum(operation.montant) as total from periode p
+		left join operation on operation.dateOperation between p.debut and p.fin and nocompte=\'$parent->noCompte\' and fluxid=\'$parent->fluxId\' and operation.noncomptabilisee=\'0\'
+		 where annee=\''.$annee.'\' 
+		 group by p.periode';
+		 
+		$typeFlux=$type=='Depense'?'O':'N';
+
+		$listeOperation = new ListDynamicObject('ListeOperation');
+		$listeOperation->setAssociatedRequest(null, $requeteOperation);
+
+		$requetePrevision='select distinct p.periode, ligneid, prevision.montant as total from periode p
+		left join prevision on prevision.mois = p.periode and prevision.nocompte=\'$parent->noCompte\' and prevision.fluxid=\'$parent->fluxId\'
+		 where p.annee=\''.$annee.'\' ORDER BY p.periode asc';
+
+		$listePrevision = new ListDynamicObject('ListePrevision');
+		$listePrevision->setAssociatedRequest(null, $requetePrevision);
+		
+		//liste des flux dépense
+        $listeFlux = new ListDynamicObject('ListeFlux'.$type);
+		$listeFlux->setAssociatedKey($listePrevision);
+		$listeFlux->setAssociatedKey($listeOperation);
+		$listeFlux->request($this->getRequeteFlux($typeFlux,'', $annee,$numeroCompte));
+		$p_contexte->addDataBlockRow($listeFlux);
+	}
 
 	/**
 	 * 

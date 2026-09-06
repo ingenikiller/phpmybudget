@@ -61,6 +61,7 @@
 			<service name="estimationreste" classe="GestionPrevisionService" methode="estimationReste" isPrivee="true" render="json"/>
 			<service name="getlisteannee" classe="GestionPrevisionService" methode="getListeAnnee" isPrivee="true" render="json"/>
 			<service name="getone" classe="GestionPrevisionService" methode="getOne" render="json" isPrivee="true"/>
+			<service name="getfluxtype" classe="GestionPrevisionService" methode="getFluxType" render="json" isPrivee="true"/>
 			<service name="create" classe="GestionPrevisionService" methode="create" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionPrevisionService" methode="update" render="json" isPrivee="true"/>
 			<service name="equilibrerprevision" classe="GestionPrevisionService" methode="equilibrerPrevision" render="json" isPrivee="true"/>

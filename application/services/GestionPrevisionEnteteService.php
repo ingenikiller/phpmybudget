@@ -68,7 +68,7 @@ class GestionPrevisionEnteteService extends ServiceStub {
 
 
 	public function update(ContextExecution $p_contexte){
-		$tabJson=$p_contexte->m_dataRequest->getDataJson('operationRecurrente');
+		$tabJson=$p_contexte->m_dataRequest->getDataJson('previsions');
 		$nb = count($tabJson);
 		$this->logger->debug('nb ligne:'.$nb);
 		for($i=0;$i<$nb;$i++){
