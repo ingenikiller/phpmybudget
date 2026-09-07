@@ -9,7 +9,7 @@ class ConnexionPDO {
     
     public static function getInstance(){
         if(self::$instance==null){
-            $arrExtraParam= array(Pdo\Mysql::ATTR_INIT_COMMAND => "SET NAMES utf8");
+            $arrExtraParam= array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
 			//php 8.5: $arrExtraParam= array(Pdo\Mysql::ATTR_INIT_COMMAND  => "SET NAMES utf8"); use PDO\Mysql;
             self::$instance = new PDO('mysql:host='.HOST.';dbname='.DATABASE,USER,PASSWD,$arrExtraParam);
             self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
