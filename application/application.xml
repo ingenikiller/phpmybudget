@@ -80,7 +80,9 @@
 			<service name="affformmois" classe="GestionStatistiquesService" methode="affFormMois" isPrivee="true" xsl="xsl/statistiques_mois_form.xsl"/>
 			<service name="statmois" classe="GestionStatistiquesService" methode="statMois" isPrivee="true" xsl="xsl/statistiques_mois.xsl"/>
 			<service name="affformannees" classe="GestionStatistiquesService" methode="affFormMois" isPrivee="true" xsl="xsl/statistiques_annees_form.xsl"/>
-			<service name="statannees" classe="GestionStatistiquesService" methode="statAnnees" isPrivee="true" xsl="xsl/statistiques_annees.xsl"/>
+			<service name="statannees" classe="GestionStatistiquesService" methode="statAnnees" isPrivee="true" render="xsl" xsl="xsl/statistiques_annees.xsl"/>
+			<service name="statanneesflux" classe="GestionStatistiquesApiService" methode="statAnneesFlux" isPrivee="true" render="json"/>
+			<service name="statanneesmontants" classe="GestionStatistiquesApiService" methode="statAnneesMontants" isPrivee="true" render="json"/>
 			<service name="affformcumul" classe="GestionStatistiquesService" methode="affFormCumul" isPrivee="true" xsl="xsl/statistiques_cumul_form.xsl"/>
 			<service name="statcumul" classe="GestionStatistiquesService" methode="statCumul" isPrivee="true" xsl="xsl/statistiques_cumul.xsl"/>
 			<service name="affformperiode" classe="GestionStatistiquesService" methode="fictive" isPrivee="true" xsl="xsl/statistiques_periode_form.xsl"/>
