@@ -30,7 +30,7 @@ class GestionOperationRecurrenteService extends ServiceStub{
         }
 
         $requete=
-			"SELECT operationrecurrente.nocompte, operationrecurrente.operationrecurrenteId, operationrecurrente.libelle, operationrecurrente.fluxId, operationrecurrente.modePaiementId, flux.flux, format(operationrecurrente.montant,2) as montant 
+			"SELECT operationrecurrente.noCompte, operationrecurrente.operationrecurrenteId, operationrecurrente.libelle, operationrecurrente.fluxId, operationrecurrente.modePaiementId, flux.flux, format(operationrecurrente.montant,2) as montant 
 			FROM operationrecurrente LEFT JOIN flux ON operationrecurrente.fluxid = flux.fluxid 
 			WHERE operationrecurrente.nocompte='$numeroCompte'";
         
