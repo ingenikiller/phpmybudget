@@ -3,7 +3,6 @@
 namespace Core;
 
 use PDO;
-use Core\ConnexionPDO;
 
 class GenerateurClasse {
 	
@@ -12,7 +11,7 @@ class GenerateurClasse {
 	
 	/**
 	 *
-	 * @param type $p_connexion 
+	 *  
 	 */
 	public function generer() {
 		//récupération de la liste des tables
@@ -31,9 +30,8 @@ class GenerateurClasse {
 	
 	/**
 	 *
-	 * @param type $p_connexion
-	 * @param type $p_nomTable
-	 * @return type tableau des champs de la table
+	 * @param \PDO 
+	 * @return string tableau des champs de la table
 	 */
 	private function rechercheChamps($pdo, $p_nomTable) {
 		$l_requete = 'SHOW COLUMNS FROM ' . $p_nomTable;
@@ -50,7 +48,7 @@ class GenerateurClasse {
 	
 	/**
 	 *
-	 * @param type $p_nomTable 
+	 * @param string $p_nomTable 
 	 */
 	private function genererClasseStub($p_nomTable) {
 		$l_code = "<?php\n\nnamespace Application\Objects;\n\nuse Core\SavableObject;\n\nclass $p_nomTable" . " extends SavableObject {\n";

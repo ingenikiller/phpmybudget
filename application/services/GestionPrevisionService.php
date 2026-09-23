@@ -1,6 +1,7 @@
 <?php
 namespace Application\Services;
 
+use Core\ReponseAjax;
 use Core\ServiceStub;
 use Core\ContextExecution;
 use Core\ListDynamicObject;
@@ -9,6 +10,7 @@ use Core\ListObject;
 use Application\Objects\Comptes;
 use Application\Objects\Prevision;
 use Application\Scripts\ComptesCommun;
+use Application\Scripts\PrevisionCommun;
 
 
 class GestionPrevisionService extends ServiceStub {
@@ -93,9 +95,12 @@ class GestionPrevisionService extends ServiceStub {
 		return $listeFlux;
 	}
 	
+	/**
+	 méthode appelée depuis l'API
+	*/
 	public function getFluxType(ContextExecution $p_contexte) {
 		$annee=$p_contexte->m_dataRequest->getData('periode');
-        $flagPinel=$p_contexte->m_dataRequest->getData('flagPinel');
+        //$flagPinel=$p_contexte->m_dataRequest->getData('flagPinel');
         
         $numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
         $type = $p_contexte->m_dataRequest->getData('type');
@@ -110,16 +115,23 @@ class GestionPrevisionService extends ServiceStub {
 		$listeOperation = new ListDynamicObject('ListeOperation');
 		$listeOperation->setAssociatedRequest(null, $requeteOperation);
 
+
+		$anneeSuivante=intval($annee) +1;
 		$requetePrevision='select distinct p.periode, ligneid, prevision.montant as total from periode p
 		left join prevision on prevision.mois = p.periode and prevision.nocompte=\'$parent->noCompte\' and prevision.fluxid=\'$parent->fluxId\'
 		 where p.annee=\''.$annee.'\' ORDER BY p.periode asc';
-
 		$listePrevision = new ListDynamicObject('ListePrevision');
 		$listePrevision->setAssociatedRequest(null, $requetePrevision);
+		
+		$requetePrevisionAnneeSuivante='select count(1) as total from prevision where prevision.mois LIKE \''.$anneeSuivante.'%\' and prevision.nocompte=\'$parent->noCompte\' and prevision.fluxid=\'$parent->fluxId\'';
+
+		$listePrevisionAnneeSuivante = new ListDynamicObject('ListePrevisionAnneeSuivante');
+		$listePrevisionAnneeSuivante->setAssociatedRequest(null, $requetePrevisionAnneeSuivante);
 		
 		//liste des flux dépense
         $listeFlux = new ListDynamicObject('ListeFlux'.$type);
 		$listeFlux->setAssociatedKey($listePrevision);
+		$listeFlux->setAssociatedKey($listePrevisionAnneeSuivante);
 		$listeFlux->setAssociatedKey($listeOperation);
 		$listeFlux->request($this->getRequeteFlux($typeFlux,'', $annee,$numeroCompte));
 		$p_contexte->addDataBlockRow($listeFlux);
@@ -269,11 +281,24 @@ class GestionPrevisionService extends ServiceStub {
     }
 	
 	public function create(ContextExecution $p_contexte) {
-        $previsionJson=$p_contexte->m_dataRequest->getDataJson('prevision');
+	    $previsionJson=$p_contexte->m_dataRequest->getDataJson('prevision');
 		$prevision = new Prevision();
         $prevision->fieldObjectJson($previsionJson);
-        $prevision->create();
-		$p_contexte->ajoutReponseAjaxOK();
+        
+        //on vérifie que la prévision n'existe pas pour cette prévision
+        $retour=PrevisionCommun::existeLignes($prevision->noCompte, $prevision->fluxId, $prevision->annee, Array($prevision->mois));
+        $this->logger->debug('retourrec:'.$retour);
+        //$prevision->create();
+        if($retour!=0) {
+            $this->logger->debug('presision create: KO');
+            $ajax = new ReponseAjax();
+            $ajax->status='KO';
+            $ajax->message='Il existe des prévisions pour ce flux';
+            $p_contexte->addDataBlockRow($ajax);
+        } else {
+            $prevision->create();
+		  $p_contexte->ajoutReponseAjaxOK();
+        }
     }
 	
 	public function update(ContextExecution $p_contexte){

@@ -147,7 +147,6 @@ class GestionOperationService extends ServiceStub{
 	}
 	
 	public function getTvaMois(ContextExecution $p_contexte){
-		$userid = $p_contexte->getUser()->userId;
 		$numeroCompte = $p_contexte->m_dataRequest->getData('numeroCompte');
 				
 		$requete = "with periode as(

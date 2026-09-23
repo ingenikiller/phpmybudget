@@ -9,6 +9,7 @@ use Core\ListDynamicObject;
 use Core\ListObject;
 use Core\ReponseAjax;
 use Application\Objects\Prevision;
+use Application\Scripts\PrevisionCommun;
 
 class GestionPrevisionEnteteService extends ServiceStub {
 	
@@ -19,15 +20,6 @@ class GestionPrevisionEnteteService extends ServiceStub {
         $annee = $p_contexte->m_dataRequest->getData('annee');
         $frequence = $p_contexte->m_dataRequest->getData('periodicite');
         $nomEntete = $p_contexte->m_dataRequest->getData('nomEntete');
-        
-        
-        $entete = new Prevision();
-        $entete->typenr='E';
-        $entete->annee=$annee;
-        $entete->noCompte = $numeroCompte;
-        $entete->nomEntete = $nomEntete;
-        $entete->fluxId = $fluxId;
-        $entete->create();
         
         $init=1;
         $intervalle=1;
@@ -47,22 +39,50 @@ class GestionPrevisionEnteteService extends ServiceStub {
         		break;
         }
         
-        while($init<=12){
-        	$mois=$annee.'-'.sprintf("%02d", $init);
-        	
-        	$prevision = new Prevision();
-        	$prevision->annee=$annee;
-        	$prevision->mois=$mois;
-        	$prevision->montant=$montant;
-        	$prevision->fluxId=$fluxId;
-        	$prevision->typenr='L';
-        	//$prevision->identete=$idEntete;
-        	$prevision->noCompte=$numeroCompte;
-        	$prevision->create();
-        	$this->logger->debug('nouvelle prevision:' . $prevision->lastInsertId());
-        	$init+=$intervalle;
+        $liste=Array();
+        //$mois=$decalage;
+        while( $init <= 12) {
+            $liste[]=$annee.'-'.sprintf("%02d", $init);
+            $init+=$intervalle;
         }
-		$p_contexte->ajoutReponseAjaxOK();
+        $retour = PrevisionCommun::existeLignes($numeroCompte, $fluxId, $annee, $liste);
+        $this->logger->debug('retourrec:'.$retour);
+        
+        
+        if($retour!=0) {
+            $ajax = new ReponseAjax();
+            $ajax->status='KO';
+            $ajax->message='Il existe des prévisions pour ce flux';
+            $p_contexte->addDataBlockRow($ajax);
+        } else {
+            
+            $entete = new Prevision();
+            $entete->typenr='E';
+            $entete->annee=$annee;
+            $entete->noCompte = $numeroCompte;
+            $entete->nomEntete = $nomEntete;
+            $entete->fluxId = $fluxId;
+            $entete->create();
+            
+            $init=1;
+            while($init<=12){
+            	$mois=$annee.'-'.sprintf("%02d", $init);
+            	
+            	$prevision = new Prevision();
+            	$prevision->annee=$annee;
+            	$prevision->mois=$mois;
+            	$prevision->montant=$montant;
+            	$prevision->fluxId=$fluxId;
+            	$prevision->typenr='L';
+            	//$prevision->identete=$idEntete;
+            	$prevision->noCompte=$numeroCompte;
+            	$prevision->create();
+            	$this->logger->debug('nouvelle prevision:' . $prevision->lastInsertId());
+            	$init+=$intervalle;
+            }
+            $p_contexte->ajoutReponseAjaxOK();
+        }
+		
 	}
 
 

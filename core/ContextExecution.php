@@ -34,7 +34,7 @@ class ContextExecution {
 	
 	/**
 	 * Accès à l'utilisateur identifié
-	 * @param Users $p_user
+	 * @param string $p_user
 	 */
 	public function setUser($p_user){
 		$this->m_user = $p_user;

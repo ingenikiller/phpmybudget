@@ -42,7 +42,7 @@ class AuthentificateurToken {
 			$p_contexte->setUser($user);
 		} else {
 			//throw new Exception(Constantes::SESSION_CLOSE, 'Session close');
-			throw new Exception('SESSION_CLOSE');
+			throw new Exception('Session terminée!');
 		}
 	}
 }
