@@ -91,6 +91,7 @@ class OperationCommun {
 	                    $l_operation->modePaiementId = $p_operation->modePaiementId;
 	                    $l_operation->montant = - $p_operation->montant;
 	                    $l_operation->verif = $p_operation->verif;
+	                    $l_operation->dateOperation = $p_operation->dateOperation;
                         $l_operation->noncomptabilisee = $p_operation->noncomptabilisee;
 	                    $l_operation->update();
                     } else {
@@ -102,6 +103,7 @@ class OperationCommun {
 	                    $l_operation->noCompte=$l_flux->compteDest;
 	                    $l_operation->montant = - $p_operation->montant;
 	                    $l_operation->verif = $p_operation->verif;
+	                    $l_operation->dateOperation = $p_operation->dateOperation;
                         $l_operation->noncomptabilisee = $p_operation->noncomptabilisee;
 	                    $l_operation->update();
                     }
@@ -119,6 +121,7 @@ class OperationCommun {
                         $l_operation->modePaiementId = $p_operation->modePaiementId;
                         $l_operation->montant = - $p_operation->montant;
                         $l_operation->verif = $p_operation->verif;
+                        $l_operation->dateOperation = $p_operation->dateOperation;
                         $l_operation->noncomptabilisee = $p_operation->noncomptabilisee;
                         $l_operation->update();
                     }
