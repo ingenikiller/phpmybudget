@@ -18,8 +18,8 @@ class AuthentificateurToken {
 	
 	public function authenticate($p_contexte){
 		//récupération du token dans la requête
-		$tokenid = $p_contexte->m_dataRequest->getData('token');
-		
+		//$tokenid = $p_contexte->m_dataRequest->getData('token');
+	    $tokenid = $p_contexte->m_dataRequest->getHeaderData('Authorization');
 		//suppression des token expirés
 		TokenCommun::suppToken();
 		$this->logger->debug('appel token authenticate');

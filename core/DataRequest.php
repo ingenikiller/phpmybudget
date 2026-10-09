@@ -53,5 +53,11 @@ class DataRequest {
     public function getDataTab() {
         return $this->m_data;
     }
+    
+    public function getHeaderData($p_key) {
+        $headers = apache_request_headers();
+        return $headers[$p_key] ?? '';
+    }
+    
 }
 ?>
